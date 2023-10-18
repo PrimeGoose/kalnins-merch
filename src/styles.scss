@@ -1,0 +1,17 @@
+// In your SCSS file, import Tailwind CSS
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// this is the css fix for the bug in ngx-image-zoom 
+/**
+ *     calculateRatioAndOffset() {
+        this.thumbWidth = this.imageThumbnail.nativeElement.width || []; // js fix in node_modules
+ */
+.ngxImageZoomContainer {
+  width: auto !important;
+  height: auto !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

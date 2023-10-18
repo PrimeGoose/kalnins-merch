@@ -1,0 +1,8 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.excludeGitIgnore": true,
+  "outline.collapseItems": "alwaysExpand",
+  "outline.showArrays": true,
+  "workspaceExplorer.enableCustomIconSearch": true,
+  "workspaceExplorer.workspaceStorageDirectory": "~/workspaces"
+}

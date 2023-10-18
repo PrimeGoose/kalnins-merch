@@ -5,9 +5,9 @@ import { Component } from "@angular/core";
   template: `
     <mat-toolbar>
       <div class="flex flex-row w-full justify-evenly">
-        <a href="/home">Shop</a>
-        <a href="/about">about</a>
-        <a href="/partner">partners</a>
+        <a href="/kalnins-merch">Shop</a>
+        <!-- <a href="/about">about</a> -->
+        <!-- <a href="/partner">partners</a> -->
       </div>
     </mat-toolbar>
 
@@ -20,5 +20,5 @@ import { Component } from "@angular/core";
   styles: [],
 })
 export class AppComponent {
-  title = "metch-shop";
+  title = "kalnins-merch";
 }

@@ -1,10 +1,9 @@
 {
-  "name": "metch-shop",
+  "name": "kalnins-merch",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production --base-href https://PrimeGoose.github.io/kalnins-merch/",
+    "deploy": "ngh --dir=./dist/kalnins-merch/",
     "watch": "ng build --watch --configuration development"
   },
   "private": true,

@@ -6,6 +6,8 @@ import { OrderSuccessComponent } from "./order-success/order-success.component";
 const routes: Routes = [
   { path: "product/:id", component: ProductPageComponent },
   { path: "success", component: OrderSuccessComponent },
+  // about
+  // partners
   { path: "", redirectTo: "", pathMatch: "full" },
   { path: "**", redirectTo: "", pathMatch: "full" },
   { path: "", component: ProductHomeComponent },

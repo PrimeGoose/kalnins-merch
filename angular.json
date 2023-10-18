@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "metch-shop": {
+    "kalnins-merch": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -45,7 +45,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/metch-shop",
+            "outputPath": "dist/kalnins-merch",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,8 +68,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -94,10 +94,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "metch-shop:build:production"
+              "browserTarget": "kalnins-merch:build:production"
             },
             "development": {
-              "browserTarget": "metch-shop:build:development"
+              "browserTarget": "kalnins-merch:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "metch-shop:build"
+            "browserTarget": "kalnins-merch:build"
           }
         }
       }

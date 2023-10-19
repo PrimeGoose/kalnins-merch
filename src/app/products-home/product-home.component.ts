@@ -9,9 +9,9 @@ import { Router } from "@angular/router";
       <!-- Loop through products to display them -->
       <div *ngFor="let product of products" class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect">
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" [routerLink]="['/product', product.id]" />
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 bg-gradient-to-tr to-100% to-rose-100 from-transparent" >
           <div class="font-bold text-xl mb-2">{{ product.name }}</div>
-          <p class="text-gray-700 text-base">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
+          <p class="text-gray-700  text-lg">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
         </div>
       </div>
     </div>

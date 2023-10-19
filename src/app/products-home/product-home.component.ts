@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ProductService, Product } from "../product.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -24,9 +25,10 @@ import { ProductService, Product } from "../product.service";
 })
 export class ProductHomeComponent implements OnInit {
   products: Product[] = [];
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private router:Router) {}
   ngOnInit(): void {
     this.products = this.productService.getAllProducts();
+  
   }
   // Get all products
 }

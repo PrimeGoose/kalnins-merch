@@ -41,7 +41,7 @@ import { Product, ProductService } from "../product.service";
           <!-- swipe container  -->
           <div
             id="images-swipe-container"
-            class="flex flex-row mt-4 justify-around  flex-nowrap swipe-container overflow-hidden h-80 375:h-96 450:h-[27rem] 640:h-[42rem] 768:h-[30rem] 1024:h-[40rem]  ">
+            class="flex flex-row mt-4 justify-around  flex-nowrap swipe-container overflow-hidden h-80 375:h-96 450:h-[27rem] 640:h-[42rem] 768:h-[30rem] 1024:h-[37rem]  ">
             <img
               alt="Product Thumbnail"
               *ngFor="let thumbnail of images; let i = index"
@@ -72,33 +72,30 @@ import { Product, ProductService } from "../product.service";
               <img [src]="currentImage" alt="Product color preview" class="w-16 h-16 " />
             </div>
             <!-- selected size in text -->
-            <!-- <p class="text-sm text-gray-600 mb-4">{{ selectedSize }}</p> -->
+            <p class="text-sm text-gray-600 mb-4">{{ selectedSize }}</p>
           </div>
 
           <!-- size selector -->
           <div
             id="size-selector"
             class=" grid place-items-center gap-1 450:grid 450:grid-cols-3 450:grid-rows-2 640:grid-cols-6 640:grid-rows-1 768:grid-cols-2 768:grid-rows-3 w-[90%]">
-            <ng-container *ngFor="let size of sizes">
+            <ng-container *ngFor="let item of sizes">
               <!-- ng if  -->
-              <button
-               
-                class=" border-x-2 border-y-2 border-slate-400 rounded-none flex flex-col place-items-center justify-center  h-12 w-full 
-                "
-             
-                >
-                {{ size }}
-              </button>
+              <ng-container *ngIf="item.available">
+                <button
+                  (click)="selectSize(item)"
+                  class=" border-x-2 border-y-2 border-slate-400 rounded-none flex flex-col place-items-center justify-center  h-12 w-full">
+                  {{ item.size }}
+                </button>
+              </ng-container>
 
-              <button
-               
-                class="border-x-2 border-y-2 768:flex-row 768:place-content-around  border-slate-300 rounded-none  flex flex-col place-items-center justify-center h-12 w-full  text-slate-300"
-                
-               
-                >
-                {{ size }}
-                <icon *ngIf="size" [name]="size" class="h-6 w-6 text-slate-900"></icon>
-              </button>
+              <ng-container *ngIf="!item.available">
+                <button
+                  class="border-x-2 border-y-2 768:flex-row 768:place-content-around  border-slate-300 rounded-none  flex flex-col place-items-center justify-center h-12 w-full  text-slate-300">
+                  {{ item.size }}
+                  <icon *ngIf="!item.available" [name]="item.size" class="h-6 w-6 text-slate-900"></icon>
+                </button>
+              </ng-container>
             </ng-container>
           </div>
         </div>
@@ -154,9 +151,13 @@ export class ProductPageComponent implements OnInit {
       this.product = [_product];
       this.category = _product.category;
       this.name = _product.name;
-      this.price = _product.price + " " + _product.currency;
       this.color = _product.color_name;
-      this.sizes = _product.sizes
+      this.sizes = _product.sizes;
+      this.price = _product.sizes[0].price;
+      this.selectedSize = _product.sizes[0].size;
+
+      // this.sizes = _product.sizes
+
       this.images = _product.imgages;
     } else {
       // redirect to 404
@@ -166,18 +167,13 @@ export class ProductPageComponent implements OnInit {
   // inputs from other components
   category: string = "";
   name: string = "";
-  price: string = "";
+  price: number = 0;
   color: string = "";
   selectedSize: string = "";
-  sizes:string[]= [];
+
+  sizes: { size: string; price: number; available: boolean }[] = [];
   // product images, this will come from a source, now it is just an static array of images for testing purposes
-  images = [
-    "https://placehold.co/400x450?text=2",
-    "https://placehold.co/400x450?text=3",
-    "https://placehold.co/400x450?text=4",
-    "https://placehold.co/400x450?text=5",
-    "assets/disraik.jpg",
-  ];
+  images = ["https://placehold.co/400x496?text=1"];
   // current image is the image that is displayed in the main image container
   currentImage: string = this.images[0];
   // current image index is the index of the current image in the images array
@@ -192,7 +188,10 @@ export class ProductPageComponent implements OnInit {
     this.currentImage = this.images[index];
   }
 
-
+  selectSize(item: { size: string; price: number; available: boolean }) {
+    this.price = item.price;
+    this.selectedSize = item.size;
+  }
 
   // swipe events
   // swipe event handler functions

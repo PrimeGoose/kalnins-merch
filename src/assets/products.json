@@ -1,0 +1,285 @@
+[
+    {
+        "category": "t-shirt",
+        "id": 1,
+        "name": "Vai TU disraiku jau iepisi?!",
+        "color_name": "blue",
+        "color_hex": "#0000ff",
+        "currency": "EUR",
+        "sizes": [
+            {
+                "size": "S",
+                "price": 8.99,
+                "available":false
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available":false
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available":false
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available":false
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available":false
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available":false
+            },
+            {
+                "size": "4XL",
+                "price": 13.99,
+                "available":true
+            }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/disraik/disraik-blue-L.jpg",
+            "assets/disraik/disraik-blue.jpg"
+        ]
+    },
+    {
+        "category": "t-shirt",
+        "id": 2,
+        "name": "Vai TU disraiku jau iepisi?!",
+        "color_name": "white",
+        "color_hex": "#ffffff",
+        
+        "currency": "EUR",
+        "sizes": [
+            {
+                "size": "S",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available":true
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available":true
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available":true
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available":true
+            },
+            {
+                "size": "4XL",
+                "price": 13.99,
+                "available":true
+            }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/disraik/disraik-white.jpg"
+        ]
+    },
+    {
+        "category": "tool bag",
+        "id": 3,
+        "name": "rēkmīte",
+        "color_name": "blue",
+        "color_hex": "#000000",
+        "currency": "EUR",
+        "sizes": [
+            {
+                "size": "S",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available":true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available":true
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available":true
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available":true
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available":true
+            },
+            {
+                "size": "4XL",
+                "price": 13.99,
+                "available":true
+            }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/bag/eco-tote-bag-black-front.jpg",
+            "assets/bag/eco-tote-bag-black-front-652ede2e092dc.jpg"
+        ]
+    },
+    {
+        "category": "tank top",
+        "id": 4,
+        "name": "Pūtiens",
+        "color_name": "blue",
+        "color_hex": "#008080",
+        "currency": "EUR",
+        "sizes": [
+        {
+            "size": "S",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "M",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "L",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "XL",
+            "price": 9.99,
+            "available":true
+        },
+        {
+            "size": "XXL",
+            "price": 10.99,
+            "available":true
+        },
+        {
+            "size": "2XL",
+            "price": 11.99,
+            "available":true
+        },
+        {
+            "size": "3XL",
+            "price": 12.99,
+            "available":true
+        },
+        {
+            "size": "4XL",
+            "price": 13.99,
+            "available":true
+        }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/tank-top/tank-top-vemj.jpg",
+            "assets/tank-top/tank-top-vemj-2.jpg"
+        ]
+    },
+    {
+        "category": "t-shirt",
+        "id": 5,
+        "name": "Lasa Faktus par sevīm",
+        "color_name": "blue",
+        "color_hex": "#0000ff",
+        
+        "currency": "EUR",
+        "sizes": [
+        {
+            "size": "S",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "M",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "L",
+            "price": 8.99,
+            "available":true
+        },
+        {
+            "size": "XL",
+            "price": 9.99,
+            "available":true
+        },
+        {
+            "size": "XXL",
+            "price": 10.99,
+            "available":true
+        },
+        {
+            "size": "2XL",
+            "price": 11.99,
+            "available":true
+        },
+        {
+            "size": "3XL",
+            "price": 12.99,
+            "available":true
+        },
+        {
+            "size": "4XL",
+            "price": 13.99,
+            "available":true
+        }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/fact/unisex-staple-t-shirt-aqua-front-652edee79cc90.jpg",
+            "assets/fact/unisex-staple-t-shirt-aqua-front-652edee79d676.jpg",
+            "assets/fact/unisex-staple-t-shirt-aqua-front-652edee79d7a7.jpg",
+            "assets/fact/unisex-staple-t-shirt-aqua-right-front-652edee79da2e.jpg"
+        ]
+    }
+]

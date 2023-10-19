@@ -10,7 +10,7 @@ import { ProductService, Product } from "../product.service";
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">{{ product.name }}</div>
-          <p class="text-gray-700 text-base">{{ product.price }} {{ product.currency }}</p>
+          <!-- <p class="text-gray-700 text-base">{{ product.price }} {{ product.currency }}</p> -->
         </div>
         <div class="px-6 pt-4 pb-2">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/product', product.id]">

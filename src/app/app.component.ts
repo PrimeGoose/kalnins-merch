@@ -3,17 +3,13 @@ import { Component } from "@angular/core";
 @Component({
   selector: "app-root",
   template: `
-    <mat-toolbar>
-      <div class="flex flex-row w-full justify-evenly">
-        <a href="/kalnins-merch">Shop</a>
-      </div>
-    </mat-toolbar>
-    <div class="absolute filter  bg-cover top-0 left-0 w-[100vw] h-[100vh] -z-0" Style="background-image: url(assets/d3.png);"></div>
-
-    <h1
-      class="flex z-50 text-white relative flex-row w-full justify-center text-4xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">
-      Kalniņš Merch
-    </h1>
+    <div class="absolute filter  bg-cover top-0 left-0 w-[100vw] h-[100vh] -z-0" Style="background-color: pink;"></div>
+    <div
+      [routerLink]="['/kalnins-merch']"
+      class="flex flex-col leading-[5rem]  z-50 text-white relative  w-full items-center text-center text-6xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">
+      <h1 class="">Kalniņš Merch</h1>
+      <h3 class="text-sm text-sky-400 mt-5 ">Jura Kalniņa merch veikals</h3>
+    </div>
 
     <div class="relative text-center z-50 flex place-content-center">
       <router-outlet></router-outlet>

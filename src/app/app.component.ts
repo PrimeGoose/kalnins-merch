@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "app-root",
   template: `
-    <div class="absolute filter  bg-cover top-0 left-0 w-[100vw] h-[100vh] -z-0" Style="background-color: pink;"></div>
+    <div class="absolute   bg-cover top-0 left-0 w-[100vw] h-[100vh] -z-0" Style="background-color: pink;"></div>
     <div
       [routerLink]="['/kalnins-merch']"
       class="flex flex-col leading-[5rem]  z-50 text-white relative  w-full items-center text-center text-6xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, ProductService } from "../product.service";
+import { RouteStateService } from "../route-state.service";
+
 @Component({
   selector: "app-product-page",
   template: `
@@ -36,7 +38,6 @@ import { Product, ProductService } from "../product.service";
             </div>
           </div>
 
-
           <img
             alt="Product Thumbnail"
             [src]="currentImage"
@@ -54,7 +55,9 @@ import { Product, ProductService } from "../product.service";
             <!-- selected color in text  -->
             <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
               <!-- pruduct title -->
-              <div id="product-title" class="768:flex flex-col  hidden
+              <div
+                id="product-title"
+                class="768:flex flex-col  hidden
                items-center 1024:flex 1024:w-80 1024:pt-3  ">
                 <h1 class="text-2xl font-bold mb-2 flex ">{{ category }}</h1>
                 <h2 class="product-name text-2xl flex ">{{ name }}</h2>
@@ -108,27 +111,42 @@ import { Product, ProductService } from "../product.service";
 
             <!-- order actions -->
             <!-- buyer credentials -->
+
+            <!-- order-actions.component.html -->
+
             <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
-              <!-- order form has email and nickname,if nickname is recognized buyer is getting 15% discount -->
+              <!-- order form has email and nickname, if nickname is recognized buyer is getting 15% discount -->
               <form class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
                 <!-- email label -->
-                <label for="email" class="block text-sm 768:text-xs mb-2">Email: <span class="text-red-600">*</span></label>
-                <!-- email input-->
-                <input id="email" type="email" class="border rounded   py-2 px-3 mb-4" placeholder="Tavs e-pasts pasūtījumu veikšanai.." />
-                <!-- nickname label -->
-                <label for="nickname" class="block 450:text-sm 768:text-xs  mb-2 text-xs">
-                  Rojālā segvārds (ja ir; visiem Rojālajiem <span class="text-red-600">-15% ATLAIDE</span>)</label
-                >
-                <!-- nickname input -->
+                <label for="email" class="block text-sm 768:text-xs mb-2"> Email: <span class="text-red-600">*</span> </label>
+                <!-- email input -->
+                <input
+                  id="email"
+                  type="email"
+                  [(ngModel)]="email"
+                  name="emailInput"
+                  class="border rounded py-2 px-3 mb-4"
+                  placeholder="Tavs e-pasts pasūtījumu veikšanai.."
+                  (input)="validateEmail(email)" />
 
-                <input id="nickname" type="text" class="border rounded  py-2 px-3 mb-4" placeholder="Tavs Rojālais segvārds šeit.." />
-                <!-- order button places the order after email and nickname are validated -->
-                <!-- on success order button goes to order summary message route -->
+                <!-- nickname label -->
+                <label for="nickname" class="block 450:text-sm 768:text-xs mb-2 text-xs">
+                  Rojālā segvārds (ja ir; visiem Rojālajiem <span class="text-red-600">-15% ATLAIDE</span>)
+                </label>
+                <!-- nickname input -->
+                <input
+                  id="nickname"
+                  name="nickname"
+                  type="text"
+                  class="border rounded py-2 px-3 mb-4"
+                  placeholder="Tavs Rojālais segvārds šeit.." />
+
+                <!-- order button -->
                 <button
                   (click)="processOrder()"
                   id="order-button"
-                  class="bg-orange-400 hover:bg-orange-500 text-white  320:py-2 text-xs 320:px-4 rounded 320:h-20  h-12
-               320:text-3xl font-black font-serif ">
+                  [ngClass]="{ 'shake-animation': !emailValidated }"
+                  class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif">
                   Pasūtīt
                 </button>
               </form>
@@ -139,13 +157,37 @@ import { Product, ProductService } from "../product.service";
       </div>
     </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      .shake-animation {
+        animation: shake 0.5s;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        50% {
+          transform: translateX(10px);
+        }
+        75% {
+          transform: translateX(-10px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    `,
+  ],
 })
 export class ProductPageComponent implements OnInit {
   id: number = 0;
   product: Product[] = [];
 
-  constructor(private router: Router, private productService: ProductService) {
+  constructor(private router: Router, private productService: ProductService, private routeStateService: RouteStateService) {
     // ge id from route params and get product by id
   }
   ngOnInit(): void {
@@ -251,22 +293,35 @@ export class ProductPageComponent implements OnInit {
   }
 
   email: string = "";
-  validateEmail(email: string) {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
+  emailValidated: boolean = false;
 
-    if (this.validateEmail(email) == true) {
-      console.log("email is valid");
-    } else {
-      console.log("email is not valid");
-    }
+  // YourComponent.ts
+
+  // YourComponent.ts
+
+  validateEmail(email: string) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // Trim the email string to remove any leading or trailing white spaces
+    const trimmedEmail = email.trim();
+
+    // Log the trimmed email for debugging
+    // console.log("Trimmed email: ", trimmedEmail);
+
+    this.emailValidated = emailPattern.test(trimmedEmail);
+
+    // Log the validation result
+    // console.log("Email validation result: ", this.emailValidated);
   }
 
   processOrder() {
-    console.log("email is valid");
-    // redirect to /order-placed
-    this.router.navigate(["success"]);
+    // When you want to validate email
+    console.log(this.email);
 
     this.validateEmail(this.email);
+
+    if (!this.emailValidated) return;
+    this.routeStateService.allowNavigationToSuccess();
+    this.router.navigate(["/success"]);
   }
 }

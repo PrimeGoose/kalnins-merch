@@ -1,4 +1,4 @@
-import { Injectable, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
 
 // angular material
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";

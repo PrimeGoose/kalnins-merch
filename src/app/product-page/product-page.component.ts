@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Renderer2, ElementRef, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
@@ -116,18 +116,21 @@ import { RouteStateService } from "../route-state.service";
 
             <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
               <!-- order form has email and nickname, if nickname is recognized buyer is getting 15% discount -->
-              <form class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
-                <!-- email label -->
-                <label for="email" class="block text-sm 768:text-xs mb-2"> Email: <span class="text-red-600">*</span> </label>
+              <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
+                <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{ 'invalid-text': !emailValidated && email }">
+                  Email: <span class="text-red-600">* {{ validationMessage }}</span>
+                </label>
                 <!-- email input -->
                 <input
                   id="email"
                   type="email"
                   [(ngModel)]="email"
                   name="emailInput"
+                  [ngClass]="{ 'invalid-border': !emailValidated && email }"
                   class="border rounded py-2 px-3 mb-4"
                   placeholder="Tavs e-pasts pasūtījumu veikšanai.."
                   (input)="validateEmail(email)" />
+                <!-- <span class="text-sm invalid-text">{{ validationMessage }}</span> -->
 
                 <!-- nickname label -->
                 <label for="nickname" class="block 450:text-sm 768:text-xs mb-2 text-xs">
@@ -180,6 +183,13 @@ import { RouteStateService } from "../route-state.service";
           transform: translateX(0);
         }
       }
+
+      .invalid-border {
+        border-color: red;
+      }
+      .invalid-text {
+        color: red;
+      }
     `,
   ],
 })
@@ -187,7 +197,13 @@ export class ProductPageComponent implements OnInit {
   id: number = 0;
   product: Product[] = [];
 
-  constructor(private router: Router, private productService: ProductService, private routeStateService: RouteStateService) {
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private router: Router,
+    private productService: ProductService,
+    private routeStateService: RouteStateService
+  ) {
     // ge id from route params and get product by id
   }
   ngOnInit(): void {
@@ -246,8 +262,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   // swipe events
-  // swipe event handler functions
-
   swipeStart: number = 0;
   swipeEnd: number = 0;
 
@@ -294,32 +308,40 @@ export class ProductPageComponent implements OnInit {
 
   email: string = "";
   emailValidated: boolean = false;
-
-  // YourComponent.ts
-
-  // YourComponent.ts
+  shakeTimeout: any;
+  isShaking: boolean = false;
+  validationMessage: string = "";
 
   validateEmail(email: string) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    // Trim the email string to remove any leading or trailing white spaces
     const trimmedEmail = email.trim();
-
-    // Log the trimmed email for debugging
-    // console.log("Trimmed email: ", trimmedEmail);
-
     this.emailValidated = emailPattern.test(trimmedEmail);
+    this.validationMessage = this.emailValidated ? "" : "Invalid";
+  }
 
-    // Log the validation result
-    // console.log("Email validation result: ", this.emailValidated);
+  shakeButton(invalidEmail: boolean) {
+    const buttonEl = this.el.nativeElement.querySelector("#order-button");
+
+    if (invalidEmail && !this.isShaking) {
+      // Mark the button as currently shaking
+      this.isShaking = true;
+
+      this.renderer.addClass(buttonEl, "shake-animation");
+
+      // Remove the shake class after the animation is done to reset it
+      this.shakeTimeout = setTimeout(() => {
+        this.renderer.removeClass(buttonEl, "shake-animation");
+
+        // Mark the button as no longer shaking
+        this.isShaking = false;
+      }, 1000);
+    }
   }
 
   processOrder() {
-    // When you want to validate email
     console.log(this.email);
-
     this.validateEmail(this.email);
-
+    this.shakeButton(!this.emailValidated);
     if (!this.emailValidated) return;
     this.routeStateService.allowNavigationToSuccess();
     this.router.navigate(["/success"]);

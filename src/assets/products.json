@@ -43,7 +43,7 @@
                 "available":false
             },
             {
-                "size": "4XL",
+                "size": "Juris",
                 "price": 13.99,
                 "available":true
             }
@@ -100,7 +100,7 @@
                 "available":true
             },
             {
-                "size": "4XL",
+                "size": "Juris",
                 "price": 13.99,
                 "available":true
             }
@@ -155,7 +155,7 @@
                 "available":true
             },
             {
-                "size": "4XL",
+                "size": "Juris",
                 "price": 13.99,
                 "available":true
             }
@@ -211,7 +211,7 @@
             "available":true
         },
         {
-            "size": "4XL",
+            "size": "Juris",
             "price": 13.99,
             "available":true
         }
@@ -268,7 +268,7 @@
             "available":true
         },
         {
-            "size": "4XL",
+            "size": "Juris",
             "price": 13.99,
             "available":true
         }

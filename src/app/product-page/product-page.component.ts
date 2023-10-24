@@ -87,21 +87,20 @@ import { RouteStateService } from "../route-state.service";
               </div>
 
               <!-- size selector -->
-              <div
-                id="size-selector"
-                class=" grid place-items-center gap-1 450:grid 450:grid-cols-3 450:grid-rows-2 640:grid-cols-6 640:grid-rows-1 768:grid-cols-2 768:grid-rows-3 w-[90%]">
+              <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
                 <ng-container *ngFor="let item of sizes">
                   <!-- ng if  -->
                   <button
                     *ngIf="item.available"
                     (click)="selectSize(item)"
-                    class=" border-x-2 border-y-2 border-slate-400 rounded-none flex flex-col place-items-center justify-center  h-12 w-full">
+                    [ngClass]="{ 'selected-button': selectedSize === item.size }"
+                    class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 ">
                     {{ item.size }}
                   </button>
 
                   <button
                     *ngIf="!item.available"
-                    class="border-x-2 border-y-2 768:flex-row 768:place-content-around  border-slate-300 rounded-none  flex flex-col place-items-center justify-center h-12 w-full  text-slate-300">
+                    class="border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  text-slate-300  border-slate-300">
                     {{ item.size }}
                     <!-- <icon *ngIf="!item.available" [name]="'envelope-open'" class="h-6 w-6 text-slate-900"></icon> -->
                   </button>
@@ -162,6 +161,22 @@ import { RouteStateService } from "../route-state.service";
   `,
   styles: [
     `
+
+      button {
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s, font-size 0.3s, font-weight 0.3s, opacity 0.3s; /* transition added */
+      }
+
+      .selected-button {
+        background-color: #d45d90; /* deeper shade of pink */
+        color: white;
+        border: 2px solid #d45d90;
+        font-size: x-large;
+        font-weight: bold;
+        opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
+        transform: scale(1.05); /* slightly larger size for a popping effect */
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s, font-size 0.3s, font-weight 0.3s, opacity 0.3s, transform 0.3s; /* transition added */
+      }
+
       .shake-animation {
         animation: shake 0.5s;
       }

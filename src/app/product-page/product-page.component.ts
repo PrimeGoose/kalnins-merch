@@ -2,9 +2,17 @@ import { Component, Renderer2, ElementRef, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
+import { trigger, state, style, animate, transition } from "@angular/animations";
 
 @Component({
   selector: "app-product-page",
+  animations: [
+    trigger("fadeInOut", [
+      state("default", style({ opacity: 1 })),
+      state("out", style({ opacity: 0 })),
+      transition("* <=> *", animate(500)),
+    ]),
+  ],
   template: `
     <!-- product container -->
     <div class="product-container  flex flex-col  justify-center mt-10 768:grid grid-cols-2">
@@ -63,14 +71,31 @@ import { RouteStateService } from "../route-state.service";
                 <h2 class="product-name text-2xl flex ">{{ name }}</h2>
               </div>
 
-              <!-- product tag -->
+              <!-- product image preview group -->
+              <!-- my-component.component.html -->
               <div class="flex flex-row ">
-                <img *ngIf="lastImage" [src]="lastImage" alt="Product color preview" class="w-16 h-16" (click)="forward()" />
+                <!-- last img -->
                 <img
+                  *ngIf="lastImage"
+                  [@fadeInOut]="animationState"
+                  [src]="lastImage"
+                  alt="Product color preview"
+                  class="w-16 h-16"
+                  (click)="forward()" />
+                <!-- current img -->
+                <img
+                  [@fadeInOut]="animationState"
                   [src]="currentImage"
                   alt="Product color preview"
                   class="w-16 h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
-                <img *ngIf="nextImage" [src]="nextImage" alt="Product color preview" class="w-16 h-16" (click)="back()" />
+                <!-- next img -->
+                <img
+                  *ngIf="nextImage"
+                  [@fadeInOut]="animationState"
+                  [src]="nextImage"
+                  alt="Product color preview"
+                  class="w-16 h-16"
+                  (click)="back()" />
               </div>
 
               <!-- product-tag-grid.component.html -->
@@ -321,23 +346,34 @@ export class ProductPageComponent implements OnInit {
       this.back();
     }
   }
+  // Add the animation state variable
+  animationState = "default";
 
   forward() {
+    this.animationState = "out";
+
     let imageCount = this.images.length;
     let forwardIndex = this.currentImageIndex + 1;
     if (forwardIndex >= imageCount) {
       forwardIndex = 0;
     }
     this.changeImage(forwardIndex);
+    setTimeout(() => {
+      this.animationState = "default";
+    }, 300); // Reset the state back to 'default' after 1 second
   }
 
   back() {
+    this.animationState = "out";
     let imageCount = this.images.length;
     let nextIndex = this.currentImageIndex - 1;
     if (nextIndex < 0) {
       nextIndex = imageCount - 1;
     }
     this.changeImage(nextIndex);
+    setTimeout(() => {
+      this.animationState = "default";
+    }, 300); // Reset the state back to 'default' after 1 second
   }
 
   email: string = "";
@@ -380,6 +416,4 @@ export class ProductPageComponent implements OnInit {
     this.routeStateService.allowNavigationToSuccess();
     this.router.navigate(["/success"]);
   }
-
-
 }

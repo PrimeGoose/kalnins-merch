@@ -3,7 +3,6 @@ import { Component } from "@angular/core";
 @Component({
   selector: "app-root",
   template: `
-   
     <div
       [routerLink]="['/kalnins-merch']"
       class="flex flex-col leading-[5rem]  z-50 text-white relative  w-full items-center text-center text-6xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">

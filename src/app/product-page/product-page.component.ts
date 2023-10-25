@@ -64,7 +64,15 @@ import { RouteStateService } from "../route-state.service";
               </div>
 
               <!-- product tag -->
-              <img [src]="currentImage" alt="Product color preview" class="w-16 h-16" />
+              <div class="flex flex-row ">
+                <img *ngIf="lastImage" [src]="lastImage" alt="Product color preview" class="w-16 h-16" (click)="forward()" />
+                <img
+                  [src]="currentImage"
+                  alt="Product color preview"
+                  class="w-16 h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+                <img *ngIf="nextImage" [src]="nextImage" alt="Product color preview" class="w-16 h-16" (click)="back()" />
+              </div>
+
               <!-- product-tag-grid.component.html -->
               <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
                 <!-- Column Headers -->
@@ -257,6 +265,8 @@ export class ProductPageComponent implements OnInit {
   images: string[] = [];
   // current image is the image that is displayed in the main image container
   currentImage: string = this.images[0];
+  lastImage: string = "";
+  nextImage: string = "";
   // current image index is the index of the current image in the images array
   currentImageIndex: number = 0;
 
@@ -267,6 +277,17 @@ export class ProductPageComponent implements OnInit {
   changeImage(index: number): void {
     this.currentImageIndex = index;
     this.currentImage = this.images[index];
+    const imageCount = this.images.length;
+    if (index === 0) {
+      this.lastImage = this.images[imageCount - 1];
+      this.nextImage = this.images[index + 1];
+    } else if (index === imageCount - 1) {
+      this.lastImage = this.images[index - 1];
+      this.nextImage = this.images[0];
+    } else {
+      this.lastImage = this.images[index - 1];
+      this.nextImage = this.images[index + 1];
+    }
   }
 
   selectSize(item: { size: string; price: number; available: boolean }) {
@@ -303,11 +324,11 @@ export class ProductPageComponent implements OnInit {
 
   forward() {
     let imageCount = this.images.length;
-    let nextIndex = this.currentImageIndex + 1;
-    if (nextIndex >= imageCount) {
-      nextIndex = 0;
+    let forwardIndex = this.currentImageIndex + 1;
+    if (forwardIndex >= imageCount) {
+      forwardIndex = 0;
     }
-    this.changeImage(nextIndex);
+    this.changeImage(forwardIndex);
   }
 
   back() {
@@ -359,4 +380,6 @@ export class ProductPageComponent implements OnInit {
     this.routeStateService.allowNavigationToSuccess();
     this.router.navigate(["/success"]);
   }
+
+
 }

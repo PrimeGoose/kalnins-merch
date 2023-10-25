@@ -93,7 +93,7 @@ import { RouteStateService } from "../route-state.service";
                   <button
                     *ngIf="item.available"
                     (click)="selectSize(item)"
-                    [ngClass]="{ 'selected-button': selectedSize === item.size }"
+                    [ngClass]="{ 'selected-button': selectedSize === item.size && item.available }"
                     class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 ">
                     {{ item.size }}
                   </button>
@@ -161,7 +161,6 @@ import { RouteStateService } from "../route-state.service";
   `,
   styles: [
     `
-
       button {
         transition: background-color 0.3s, color 0.3s, border-color 0.3s, font-size 0.3s, font-weight 0.3s, opacity 0.3s; /* transition added */
       }
@@ -236,9 +235,8 @@ export class ProductPageComponent implements OnInit {
       this.color_hex = _product.color_hex;
       this.sizes = _product.sizes;
       this.price = _product.sizes[0].price;
-      this.selectedSize = _product.sizes[0].size;
-
-      // this.sizes = _product.sizes
+      const availableSize = _product.sizes.find((item) => item.available);
+      this.selectedSize = availableSize ? availableSize.size : "";
 
       this.images = _product.imgages;
     } else {

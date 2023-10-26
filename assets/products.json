@@ -1,51 +1,109 @@
 [
     {
-        "category": "t-shirt",
+        "category": "T-krekls",
+        "id": 0,
+        "name": "DOD NAUDU DAUNI",
+        "color_name": "melns",
+        "color_hex": "#000000",
+        "currency": "EUR",
+        "sizes": [
+            {
+                "size": "S",
+                "price": 8.99,
+                "available": false
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available": false
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available": false
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available": false
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available": false
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available": false
+            },
+            {
+                "size": "Juris",
+                "price": 13.99,
+                "available": true
+            }
+        ],
+        "gender": "unisex",
+        "brand": "",
+        "imgages": [
+            "assets/dod-naudu-dauni/1g.png",
+            "assets/dod-naudu-dauni/2g.png",
+            "assets/dod-naudu-dauni/3g.png",
+            "assets/dod-naudu-dauni/4g.png"
+        ]
+    },
+    {
+        "category": "T-krekls",
         "id": 1,
         "name": "Vai TU disraiku jau iepisi?!",
-        "color_name": "blue",
+        "color_name": "zils",
         "color_hex": "#0000ff",
         "currency": "EUR",
         "sizes": [
             {
                 "size": "S",
                 "price": 8.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "M",
                 "price": 8.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "L",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "XL",
                 "price": 9.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "XXL",
                 "price": 10.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "2XL",
                 "price": 11.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "3XL",
                 "price": 12.99,
-                "available":false
+                "available": false
             },
             {
                 "size": "Juris",
                 "price": 13.99,
-                "available":true
+                "available": true
             }
         ],
         "gender": "unisex",
@@ -56,53 +114,52 @@
         ]
     },
     {
-        "category": "t-shirt",
+        "category": "T-krekls",
         "id": 2,
         "name": "Vai TU disraiku jau iepisi?!",
-        "color_name": "white",
+        "color_name": "balta",
         "color_hex": "#ffffff",
-        
         "currency": "EUR",
         "sizes": [
             {
                 "size": "S",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "M",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "L",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "XL",
                 "price": 9.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "XXL",
                 "price": 10.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "2XL",
                 "price": 11.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "3XL",
                 "price": 12.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "Juris",
                 "price": 13.99,
-                "available":true
+                "available": true
             }
         ],
         "gender": "unisex",
@@ -112,52 +169,52 @@
         ]
     },
     {
-        "category": "tool bag",
+        "category": "Soma",
         "id": 3,
         "name": "rēkmīte",
-        "color_name": "blue",
+        "color_name": "zils",
         "color_hex": "#000000",
         "currency": "EUR",
         "sizes": [
             {
                 "size": "S",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "M",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "L",
                 "price": 8.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "XL",
                 "price": 9.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "XXL",
                 "price": 10.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "2XL",
                 "price": 11.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "3XL",
                 "price": 12.99,
-                "available":true
+                "available": true
             },
             {
                 "size": "Juris",
                 "price": 13.99,
-                "available":true
+                "available": true
             }
         ],
         "gender": "unisex",
@@ -168,53 +225,53 @@
         ]
     },
     {
-        "category": "tank top",
+        "category": "krekliņš",
         "id": 4,
         "name": "Pūtiens",
-        "color_name": "blue",
+        "color_name": "zils",
         "color_hex": "#008080",
         "currency": "EUR",
         "sizes": [
-        {
-            "size": "S",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "M",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "L",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "XL",
-            "price": 9.99,
-            "available":true
-        },
-        {
-            "size": "XXL",
-            "price": 10.99,
-            "available":true
-        },
-        {
-            "size": "2XL",
-            "price": 11.99,
-            "available":true
-        },
-        {
-            "size": "3XL",
-            "price": 12.99,
-            "available":true
-        },
-        {
-            "size": "Juris",
-            "price": 13.99,
-            "available":true
-        }
+            {
+                "size": "S",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available": true
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available": true
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available": true
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available": true
+            },
+            {
+                "size": "Juris",
+                "price": 13.99,
+                "available": true
+            }
         ],
         "gender": "unisex",
         "brand": "",
@@ -224,54 +281,53 @@
         ]
     },
     {
-        "category": "t-shirt",
+        "category": "T-krekls",
         "id": 5,
         "name": "Lasa Faktus par sevīm",
-        "color_name": "blue",
+        "color_name": "zils",
         "color_hex": "#0000ff",
-        
         "currency": "EUR",
         "sizes": [
-        {
-            "size": "S",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "M",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "L",
-            "price": 8.99,
-            "available":true
-        },
-        {
-            "size": "XL",
-            "price": 9.99,
-            "available":true
-        },
-        {
-            "size": "XXL",
-            "price": 10.99,
-            "available":true
-        },
-        {
-            "size": "2XL",
-            "price": 11.99,
-            "available":true
-        },
-        {
-            "size": "3XL",
-            "price": 12.99,
-            "available":true
-        },
-        {
-            "size": "Juris",
-            "price": 13.99,
-            "available":true
-        }
+            {
+                "size": "S",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "M",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "L",
+                "price": 8.99,
+                "available": true
+            },
+            {
+                "size": "XL",
+                "price": 9.99,
+                "available": true
+            },
+            {
+                "size": "XXL",
+                "price": 10.99,
+                "available": true
+            },
+            {
+                "size": "2XL",
+                "price": 11.99,
+                "available": true
+            },
+            {
+                "size": "3XL",
+                "price": 12.99,
+                "available": true
+            },
+            {
+                "size": "Juris",
+                "price": 13.99,
+                "available": true
+            }
         ],
         "gender": "unisex",
         "brand": "",

@@ -23,7 +23,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
           <h1 class="text-2xl font-bold mb-2">{{ category }}</h1>
           <h2 class="product-name text-2xl">{{ name }}</h2>
-          <p class="text-lg text-gray-700 mb-2">{{ price }}</p>
+          <p class="text-lg text-gray-700 mb-2">{{ price }}€</p>
         </div>
 
         <!-- // images container -->
@@ -101,9 +101,9 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
               <!-- product-tag-grid.component.html -->
               <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
                 <!-- Column Headers -->
-                <div class="text-center font-semibold uppercase">color</div>
-                <div class="text-center font-semibold uppercase">Size</div>
-                <div class="text-center font-semibold uppercase">Price</div>
+                <div class="text-center font-semibold uppercase">krāsa</div>
+                <div class="text-center font-semibold uppercase">Izmērs</div>
+                <div class="text-center font-semibold uppercase">Cena</div>
 
                 <!-- Product Details -->
                 <div class="text-center">

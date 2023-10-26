@@ -1,9 +1,10 @@
 {
   "name": "kalnins-merch",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "build": "ng build --configuration production --base-href www.kalninsmerch.com",
-    "deploy": "ngh deploy  --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com"
+    "build": "ng build --configuration production --base-href https://PrimeGoose.github.io/kalnins-merch/",
+    "deploy": "ngh deploy  --dir=./dist/kalnins-merch/  --build-target=production",
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {

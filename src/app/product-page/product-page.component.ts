@@ -80,21 +80,21 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   [@fadeInOut]="animationState"
                   [src]="lastImage"
                   alt="Product color preview"
-                  class="w-16 h-16"
+                  class=" h-16"
                   (click)="forward()" />
                 <!-- current img -->
                 <img
                   [@fadeInOut]="animationState"
                   [src]="currentImage"
                   alt="Product color preview"
-                  class="w-16 h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+                  class=" h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
                 <!-- next img -->
                 <img
                   *ngIf="nextImage"
                   [@fadeInOut]="animationState"
                   [src]="nextImage"
                   alt="Product color preview"
-                  class="w-16 h-16"
+                  class=" h-16"
                   (click)="back()" />
               </div>
 

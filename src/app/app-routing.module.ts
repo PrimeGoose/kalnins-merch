@@ -10,10 +10,8 @@ import { OrderSuccessComponent } from "./order-success/order-success.component";
 const routes: Routes = [
   { path: "product/:id", component: ProductPageComponent },
   { path: "success", component: OrderSuccessComponent, canActivate: [RouteGuard] },
-
-  { path: "", redirectTo: "", pathMatch: "full" ,component: ProductHomeComponent},
-  { path: "**", redirectTo: "", pathMatch: "full" },
-  { path: "", component: ProductHomeComponent },
+  { path: "", component: ProductHomeComponent, pathMatch: "full" }, // Default route
+  { path: "**", redirectTo: "", pathMatch: "full" }, // Catch-all route
 ];
 
 @NgModule({

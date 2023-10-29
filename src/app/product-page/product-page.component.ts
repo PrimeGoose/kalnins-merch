@@ -1,4 +1,4 @@
-import { Component, Renderer2, ElementRef, OnInit } from "@angular/core";
+import { Component, Renderer2, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
@@ -14,9 +14,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     ]),
   ],
   template: `
-    <!-- product container -->
-    <div class="product-container  flex flex-col  justify-center mt-10 768:grid grid-cols-2">
-      <!-- image section -->
+    <div #productContainer class="product-container  flex flex-col  justify-center mt-10 768:grid grid-cols-2">
       <div
         class="image-section flex flex-col content-center w-full 768:w-[400px] 1024:w-[550px] 768:justify-center 1024:border-b 1024:border-t 768:mx-1 1024:mx-4">
         <!-- pruduct title -->
@@ -26,13 +24,11 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           <p class="text-lg text-gray-700 mb-2">{{ price }}€</p>
         </div>
 
-        <!-- // images container -->
         <div
           id="product-images"
           (touchend)="onSwipeEnd($event)"
           (touchstart)="onSwipeStart($event)"
           class="product-images flex flex-col  overflow-hidden relative w-full  ">
-          <!-- chevrons for above sm -->
           <div class="chevron-container z-10 w-full h-full absolute    items-center flex  ">
             <div
               (click)="back()"
@@ -53,16 +49,10 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         </div>
       </div>
 
-      <!-- order section -->
-      <div class="order-section flex flex-col items-center justify-between ">
-        <!-- order options -->
-
+      <div class="order-section flex flex-col items-end justify-end ">
         <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4 w-full 768:w-80   768:justify-center">
-          <!-- selected color preview img size -->
           <div id="selected-options" class="flex flex-col items-center">
-            <!-- selected color in text  -->
             <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
-              <!-- pruduct title -->
               <div
                 id="product-title"
                 class="768:flex flex-col  hidden
@@ -71,10 +61,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                 <h2 class="product-name text-2xl flex ">{{ name }}</h2>
               </div>
 
-              <!-- product image preview group -->
-              <!-- my-component.component.html -->
               <div class="flex flex-row ">
-                <!-- last img -->
                 <img
                   *ngIf="lastImage"
                   [@fadeInOut]="animationState"
@@ -82,13 +69,11 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   alt="Product color preview"
                   class=" h-16"
                   (click)="forward()" />
-                <!-- current img -->
                 <img
                   [@fadeInOut]="animationState"
                   [src]="currentImage"
                   alt="Product color preview"
                   class=" h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
-                <!-- next img -->
                 <img
                   *ngIf="nextImage"
                   [@fadeInOut]="animationState"
@@ -98,14 +83,11 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   (click)="back()" />
               </div>
 
-              <!-- product-tag-grid.component.html -->
               <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
-                <!-- Column Headers -->
                 <div class="text-center font-semibold uppercase">krāsa</div>
                 <div class="text-center font-semibold uppercase">Izmērs</div>
                 <div class="text-center font-semibold uppercase">Cena</div>
 
-                <!-- Product Details -->
                 <div class="text-center">
                   <div class="text-center">
                     <span>{{ color_name }}</span>
@@ -119,10 +101,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                 </div>
               </div>
 
-              <!-- size selector -->
               <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
                 <ng-container *ngFor="let item of sizes">
-                  <!-- ng if  -->
                   <button
                     *ngIf="item.available"
                     (click)="selectSize(item)"
@@ -135,24 +115,16 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                     *ngIf="!item.available"
                     class="border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  text-slate-300  border-slate-300">
                     {{ item.size }}
-                    <!-- <icon *ngIf="!item.available" [name]="'envelope-open'" class="h-6 w-6 text-slate-900"></icon> -->
                   </button>
                 </ng-container>
               </div>
             </div>
 
-            <!-- order actions -->
-            <!-- buyer credentials -->
-
-            <!-- order-actions.component.html -->
-
             <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
-              <!-- order form has email and nickname, if nickname is recognized buyer is getting 15% discount -->
               <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
                 <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{ 'invalid-text': !emailValidated && email }">
                   Email: <span class="text-red-600">* {{ validationMessage }}</span>
                 </label>
-                <!-- email input -->
                 <input
                   id="email"
                   type="email"
@@ -162,13 +134,10 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   class="border rounded py-2 px-3 mb-4"
                   placeholder="Tavs e-pasts pasūtījumu veikšanai.."
                   (input)="validateEmail(email)" />
-                <!-- <span class="text-sm invalid-text">{{ validationMessage }}</span> -->
 
-                <!-- nickname label -->
                 <label for="nickname" class="block 450:text-sm 768:text-xs mb-2 text-xs">
                   Rojālā segvārds (ja ir; visiem Rojālajiem <span class="text-red-600">-15% ATLAIDE</span>)
                 </label>
-                <!-- nickname input -->
                 <input
                   id="nickname"
                   name="nickname"
@@ -176,7 +145,6 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   class="border rounded py-2 px-3 mb-4"
                   placeholder="Tavs Rojālais segvārds šeit.." />
 
-                <!-- order button -->
                 <button
                   (click)="processOrder()"
                   id="order-button"
@@ -187,13 +155,63 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
               </form>
             </div>
           </div>
-          <!--  -->
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 450:grid-cols-2 640:grid-cols-3 gap-4 mt-40 max-w-[1164px]">
+      <div
+        *ngFor="let product of otherProducts"
+        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
+        (click)="getOtherProduct(product.id)">
+        <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
+        <div class="px-6 py-4 ">
+          <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
         </div>
       </div>
     </div>
   `,
   styles: [
     `
+      :host {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 90%;
+      }
+      /* other */
+
+      .product-card {
+        font-family: "Arial", sans-serif;
+        background: radial-gradient(circle at center, lightgray, transparent);
+        padding: 15px;
+        border-radius: 5px;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .product-name {
+        color: gray; /* Light gray */
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
+      }
+
+      .product-price {
+        color: #0077b6;
+        font-weight: bold;
+        text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
+      }
+
+      .hover-effect {
+        transition: all 0.3s ease-in-out;
+      }
+
+      .hover-effect:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* other */
       button {
         transition: background-color 0.3s, color 0.3s, border-color 0.3s, font-size 0.3s, font-weight 0.3s, opacity 0.3s; /* transition added */
       }
@@ -240,21 +258,28 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     `,
   ],
 })
-export class ProductPageComponent implements OnInit {
+export class ProductPageComponent implements OnInit, AfterViewInit {
   id: number = 0;
   product: Product[] = [];
-
+  otherProducts: Product[] = [];
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router,
     private productService: ProductService,
     private routeStateService: RouteStateService
-  ) {
-    // ge id from route params and get product by id
+  ) {}
+
+  @ViewChild("productContainer", { static: false }) productContainer: ElementRef | undefined;
+  ngAfterViewInit() {}
+
+  scrollToProductContainer() {
+    const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: yOffset, behavior: "smooth" });
   }
+
   ngOnInit(): void {
-    // ge id from route params and get product by id
+    this.otherProducts = this.productService.getAllProducts();
     this.router.url;
     const _id = this.router.url.split("/")[2];
     this.id = parseInt(_id);
@@ -273,12 +298,33 @@ export class ProductPageComponent implements OnInit {
 
       this.images = _product.imgages;
     } else {
-      // redirect to 404
       this.router.navigate(["404"]);
     }
     this.forward();
   }
-  // inputs from other components
+
+  getOtherProduct(id: number) {
+    this.scrollToProductContainer();
+    this.otherProducts = this.productService.getAllProducts();
+    this.otherProducts = this.otherProducts.filter((item) => item.id !== id);
+    const _product = this.productService.getProductById(id);
+    if (_product) {
+      this.product = [_product];
+      this.category = _product.category;
+      this.name = _product.name;
+      this.color_name = _product.color_name;
+      this.color_hex = _product.color_hex;
+      this.sizes = _product.sizes;
+      this.price = _product.sizes[0].price;
+      const availableSize = _product.sizes.find((item) => item.available);
+      this.selectedSize = availableSize ? availableSize.size : "";
+
+      this.images = _product.imgages;
+    } else {
+      this.router.navigate(["404"]);
+    }
+    this.forward();
+  }
   category: string = "";
   name: string = "";
   price: number = 0;
@@ -286,19 +332,12 @@ export class ProductPageComponent implements OnInit {
   color_hex: string = "";
   selectedSize: string = "";
   sizes: { size: string; price: number; available: boolean }[] = [];
-  // product images, this will come from a source, now it is just an static array of images for testing purposes
   images: string[] = [];
-  // current image is the image that is displayed in the main image container
   currentImage: string = this.images[0];
   lastImage: string = "";
   nextImage: string = "";
-  // current image index is the index of the current image in the images array
   currentImageIndex: number = 0;
 
-  /**
-   * Change the main product image based on thumbnail selection.
-   * @param {number} index - The index of the thumbnail to display.
-   */
   changeImage(index: number): void {
     this.currentImageIndex = index;
     this.currentImage = this.images[index];
@@ -320,7 +359,6 @@ export class ProductPageComponent implements OnInit {
     this.selectedSize = item.size;
   }
 
-  // swipe events
   swipeStart: number = 0;
   swipeEnd: number = 0;
 
@@ -346,7 +384,6 @@ export class ProductPageComponent implements OnInit {
       this.back();
     }
   }
-  // Add the animation state variable
   animationState = "default";
 
   forward() {
@@ -393,16 +430,13 @@ export class ProductPageComponent implements OnInit {
     const buttonEl = this.el.nativeElement.querySelector("#order-button");
 
     if (invalidEmail && !this.isShaking) {
-      // Mark the button as currently shaking
       this.isShaking = true;
 
       this.renderer.addClass(buttonEl, "shake-animation");
 
-      // Remove the shake class after the animation is done to reset it
       this.shakeTimeout = setTimeout(() => {
         this.renderer.removeClass(buttonEl, "shake-animation");
 
-        // Mark the button as no longer shaking
         this.isShaking = false;
       }, 1000);
     }

@@ -10,8 +10,9 @@ import { Component } from "@angular/core";
       <h3 class="text-sm text-sky-400 mt-5 ">Jura Kalniņa merch veikals</h3>
     </div>
 
-    <div class="relative text-center z-50 flex place-content-center">
+    <div class="relative text-center z-50 flex flex-col  items-center">
       <router-outlet></router-outlet>
+      <!-- <app-other-products></app-other-products> -->
     </div>
   `,
   styles: [

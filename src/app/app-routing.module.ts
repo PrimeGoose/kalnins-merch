@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { RouteGuard } from './route.guard';  // Add this import
-
+// import { OtherProductsComponent } from "./product-page/other-products.component";
 
 import { ProductPageComponent } from "./product-page/product-page.component";
 import { ProductHomeComponent } from "./products-home/product-home.component";

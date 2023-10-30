@@ -1,4 +1,4 @@
-import { Component, Renderer2, ElementRef, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, Renderer2, ElementRef,HostListener, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
@@ -272,6 +272,15 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   @ViewChild("productContainer", { static: false }) productContainer: ElementRef | undefined;
   ngAfterViewInit() {}
 
+  @HostListener("window:keydown", ["$event"])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "ArrowRight") {
+      this.forward(); // Forward function to go to next image
+    } else if (event.key === "ArrowLeft") {
+      this.back(); // Back function to go to previous image
+    }
+  }
+
   scrollToProductContainer() {
     const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: yOffset, behavior: "smooth" });
@@ -305,7 +314,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   getOtherProduct(id: number) {
     this.scrollToProductContainer();
     this.otherProducts = this.productService.getAllProducts();
-    this.otherProducts = this.otherProducts.filter((item) => item.id !== id);
+    // this.otherProducts = this.otherProducts.filter((item) => item.id !== id);
     const _product = this.productService.getProductById(id);
     if (_product) {
       this.product = [_product];

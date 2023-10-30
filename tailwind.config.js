@@ -10,6 +10,8 @@ module.exports = {
       '450': '450px', // @media(min - width: 450px) { ... }
       '640': '640px', //	@media(min - width: 640px) { ... }
       '768': '768px', // @media(min - width: 768px) { ... }
+      "860": "860px", // @media(min - width: 860px) { ... }
+      "960": "960px", // @media(min - width: 860px) { ... }
       '1024': '1024px', // @media(min - width: 1024px) { ... }
       '1280': '1280px', // @media(min - width: 1280px) { ... }
       '1536': '1536px', // @media(min - width: 1536px) { ... } // why 

@@ -7,10 +7,10 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-home",
   template: `
-    <div class="grid grid-cols-1   768:grid-cols-2 1024:grid-cols-3 gap-4  768:mx-4">
+    <div class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3 gap-4    max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]">
       <div
         *ngFor="let product of products"
-        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card max-w-[320px]"
+        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
         [routerLink]="['/product', product.id]">
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">

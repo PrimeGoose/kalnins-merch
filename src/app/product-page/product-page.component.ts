@@ -14,9 +14,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     ]),
   ],
   template: `
-    <div #productContainer class="product-container  flex flex-col  justify-center mt-10 768:grid grid-cols-2">
-      <div
-        class="image-section flex flex-col content-center w-full 768:w-[400px] 1024:w-[550px] 768:justify-center 1024:border-b 1024:border-t 768:mx-1 1024:mx-4">
+    <div #productContainer class="product-container flex flex-col justify-center mt-1 768:grid grid-cols-[1fr,320px] ">
+      <div class="image-section flex flex-col content-center 768:justify-center 1024:border-b 1024:border-t ">
         <!-- pruduct title -->
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
           <h1 class="text-2xl font-bold mb-2">{{ category }}</h1>
@@ -49,8 +48,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         </div>
       </div>
 
-      <div class="order-section flex flex-col items-end justify-end ">
-        <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4 w-full 768:w-80   768:justify-center">
+      <div class="order-section flex flex-col items-center justify-center  place-self-center ml-4">
+        <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4     768:justify-center">
           <div id="selected-options" class="flex flex-col items-center">
             <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
               <div

@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-home",
   template: `
-    <div class="grid grid-cols-1 640:grid-cols-2 md:grid-cols-3 768:grid-cols-4 gap-4 max-w-screen-1280">
+    <div class="grid grid-cols-1 640:grid-cols-2 md:grid-cols-3 768:grid-cols-4 gap-4 max-w-[1500px]">
       <div
         *ngFor="let product of products"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"

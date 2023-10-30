@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "ng build --configuration production --base-href /",
-    "deploy": "ngh deploy  --dir=./dist/kalnins-merch/  --build-target=production",
-    "watch": "ng build --watch --configuration development"
+    "deploy": "ngh deploy  --dir=./dist/kalnins-merch/  --build-target=production"
   },
   "private": true,
   "dependencies": {

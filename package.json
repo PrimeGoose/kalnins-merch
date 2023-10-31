@@ -1,7 +1,7 @@
 {
   "name": "kalnins-merch",
   "version": "0.0.1",
-  "type": "module",
+
   "scripts": {
     "build": "ng build --configuration production --base-href /",
     "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com",

@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 
 export type Size = {
   size: string;
@@ -30,12 +31,13 @@ export type Product = {
 export class ProductService {
   products: Product[] = [];
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {
     this.fetchProductsJson();
   }
 
   fetchProductsJson() {
     // assets/products.json
+    if (!isPlatformBrowser(this.platformId)) return;
     fetch("assets/products.json")
       .then((response) => response.json())
       .then((data) => {

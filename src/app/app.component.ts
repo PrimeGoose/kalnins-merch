@@ -51,5 +51,5 @@ import { Component } from "@angular/core";
   ],
 })
 export class AppComponent {
-  title = "kalnins-merch";
+  title = "Kakniņš Merch";
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { Component, OnInit, OnDestroy, HostListener, Inject, PLATFORM_ID } from "@angular/core";
 
 @Component({
   selector: "app-order-success",
@@ -19,14 +20,21 @@ import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
   styles: [``],
 })
 export class OrderSuccessComponent implements OnInit, OnDestroy {
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object)
+  {}
+    
   @HostListener("window:scroll", [])
   onWindowScroll() {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (window.scrollY > 0) {
       window.scrollTo(0, 0);
     }
   }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
     window.scrollTo(0, 0);
   }
 

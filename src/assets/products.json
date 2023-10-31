@@ -11,12 +11,12 @@
             {
                 "size": "S",
                 "price": 8.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "M",
                 "price": 8.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "L",

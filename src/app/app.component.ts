@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: "app-root",
@@ -16,40 +17,38 @@ import { Component } from "@angular/core";
   `,
   styles: [
     `
-      /* styles.css */
-
-      /**
- * @file Styles for the Kalniņš Merch header
- */
-
-      /* Create a subtle shadow effect for depth */
       .h1-shadow {
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
       }
 
-      /* Use a gradient text color to make the text vibrant and inviting */
       .gradient-text {
-        background: linear-gradient(to right, #ffb6c1, #ff69b4, #db7093); /* Pink gradient colors */
+        background: linear-gradient(to right, #ffb6c1, #ff69b4, #db7093); // Pink gradient colors
         -webkit-background-clip: text;
         color: transparent;
       }
 
-      /* Add a slight hover effect for interactivity */
       .h1-hover:hover {
-        transform: scale(1.03); /* Scale up the header slightly on hover */
-        transition: transform 0.2s; /* Transition for a smooth effect */
+        transform: scale(1.03); // Scale up the header slightly on hover
+        transition: transform 0.2s; // Transition for a smooth effect
       }
 
-      /* Combine the above styles for the final look */
       .kalnins-merch-header {
-        font-family: "Serif"; /* Change to your preferred font */
+        font-family: "Serif"; // Change to your preferred font
         font-weight: bold;
-        letter-spacing: 1px; /* Spacing between letters for clarity */
-        text-transform: uppercase; /* Make the text uppercase for a more bold look */
+        letter-spacing: 1px; // Spacing between letters for clarity
+        text-transform: uppercase; // Make the text uppercase for a more bold look
       }
     `,
   ],
 })
 export class AppComponent {
   title = "Kakniņš Merch";
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  someMethod() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Client-only code here
+    }
+  }
 }

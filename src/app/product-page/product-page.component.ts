@@ -292,7 +292,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.otherProducts = this.productService.getAllProducts();
-    this.id = this.productService.getProductID();
+    let _id = this.router.url.split("/")[2];
+    this.id = parseInt(_id);
 
     const _product = this.productService.getProductById(this.id);
     if (_product) {

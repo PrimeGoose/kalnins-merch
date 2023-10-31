@@ -34,12 +34,12 @@
                 "available": false
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": false
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": false
             },
@@ -93,12 +93,12 @@
                 "available": true
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": true
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": true
             },
@@ -150,12 +150,12 @@
                 "available": true
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": false
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": true
             },
@@ -206,12 +206,12 @@
                 "available": true
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": true
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": false
             },
@@ -263,12 +263,12 @@
                 "available": true
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": true
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": true
             },
@@ -320,12 +320,12 @@
                 "available": true
             },
             {
-                "size": "2XL",
+                "size": "3XL",
                 "price": 11.99,
                 "available": true
             },
             {
-                "size": "3XL",
+                "size": "4XL",
                 "price": 12.99,
                 "available": true
             },

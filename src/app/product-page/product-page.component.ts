@@ -30,7 +30,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           id="product-images"
           (touchend)="onSwipeEnd($event)"
           (touchstart)="onSwipeStart($event)"
-          class="product-images flex flex-col  overflow-hidden relative w-full  ">
+          class=" product-images  flex flex-col  overflow-hidden relative w-full  ">
           <div class="chevron-container z-10 w-full h-full absolute    items-center flex  ">
             <div
               (click)="back()"
@@ -47,7 +47,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           <img
             alt="Product Thumbnail"
             [src]="currentImage"
-            class="h-full swipable-image relative   overflow-hidden cursor-pointer   object-cover" />
+            class=" h-full swipable-image relative overflow-hidden cursor-pointer
+          object-cover " />
         </div>
       </div>
 

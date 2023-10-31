@@ -16,7 +16,7 @@ export type Product = {
 
   gender: string;
   brand: string;
-  imgages: string[];
+  images: string[];
   available?: boolean;
   preorder?: boolean;
   description?: string;

@@ -1,6 +1,6 @@
 // product-home.component.ts
 
-import { Component, OnInit, Inject,PLATFORM_ID } from "@angular/core";
+import { Component, OnInit, Inject, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { Product } from "../product.service";
 import { ProductService } from "../product.service";
@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
         [routerLink]="['/product', product.id]"
         (click)="storeProductID(product.id)">
-        <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
+        <img class="w-full" [src]="product.images[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
           <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
@@ -62,11 +62,7 @@ import { Router } from "@angular/router";
 export class ProductHomeComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private productService: ProductService,
-    private router: Router
-  ) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     // The following code will only execute in the browser and not during server-side rendering
@@ -79,9 +75,3 @@ export class ProductHomeComponent implements OnInit {
     this.productService.storeProductID(id);
   }
 }
-
-
-
-
-
-

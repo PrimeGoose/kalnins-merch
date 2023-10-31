@@ -6,7 +6,7 @@
         "color_name": "melns",
         "color_hex": "#000000",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -51,7 +51,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/dod-naudu-dauni/1g_1000x1000.png",
             "assets/dod-naudu-dauni/2g_1000x1000.png",
             "assets/dod-naudu-dauni/3g_1000x1000.png",
@@ -65,7 +65,7 @@
         "color_name": "zils",
         "color_hex": "#0000ff",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -110,7 +110,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/disraik/disraik-blue-L.png",
             "assets/disraik/disraik-blue.png"
         ]
@@ -122,7 +122,7 @@
         "color_name": "balta",
         "color_hex": "#ffffff",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -167,7 +167,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/disraik/disraik-white.png"
         ]
     },
@@ -178,7 +178,7 @@
         "color_name": "zils",
         "color_hex": "#000000",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -223,7 +223,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/bag/eco-tote-bag-black-front.png",
             "assets/bag/eco-tote-bag-black-front-652ede2e092dc.png"
         ]
@@ -235,7 +235,7 @@
         "color_name": "zils",
         "color_hex": "#008080",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -280,7 +280,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/tank-top/tank-top-vemj.png",
             "assets/tank-top/tank-top-vemj-2.png"
         ]
@@ -292,7 +292,7 @@
         "color_name": "zils",
         "color_hex": "#0000ff",
         "currency": "EUR",
-        "description":" Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
         "sizes": [
             {
                 "size": "S",
@@ -337,7 +337,7 @@
         ],
         "gender": "unisex",
         "brand": "",
-        "imgages": [
+        "images": [
             "assets/fact/unisex-staple-t-shirt-aqua-front-652edee79cc90.png",
             "assets/fact/unisex-staple-t-shirt-aqua-front-652edee79d676.png",
             "assets/fact/unisex-staple-t-shirt-aqua-right-front-652edee79da2e.png"

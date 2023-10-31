@@ -1,10 +1,10 @@
-import { Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { PLATFORM_ID, Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { Product, Size } from "../product.service";
 import { ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
 import { trigger, state, style, animate, transition } from "@angular/animations";
-
+import { isPlatformBrowser } from "@angular/common";
 @Component({
   selector: "app-product-page",
   animations: [
@@ -167,7 +167,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         *ngFor="let product of otherProducts"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card "
         (click)="getOtherProduct(product.id)">
-        <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
+        <img class="w-full" [src]="product.images[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
         </div>
@@ -261,81 +261,12 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     `,
   ],
 })
+// ProductPage.component.ts
 export class ProductPageComponent implements OnInit, AfterViewInit {
   id: number = 0;
   product: Product[] = [];
   otherProducts: Product[] = [];
-  constructor(
-    private renderer: Renderer2,
-    private el: ElementRef,
-    private router: Router,
-    private productService: ProductService,
-    private routeStateService: RouteStateService
-  ) {}
 
-  @ViewChild("productContainer", { static: false }) productContainer: ElementRef | undefined;
-  ngAfterViewInit() {}
-
-  @HostListener("window:keydown", ["$event"])
-  handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "ArrowRight") {
-      this.forward(); // Forward function to go to next image
-    } else if (event.key === "ArrowLeft") {
-      this.back(); // Back function to go to previous image
-    }
-  }
-
-  scrollToProductContainer() {
-    const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: yOffset, behavior: "smooth" });
-  }
-
-  ngOnInit(): void {
-    this.otherProducts = this.productService.getAllProducts();
-    let _id = this.router.url.split("/")[2];
-    this.id = parseInt(_id);
-
-    const _product = this.productService.getProductById(this.id);
-    if (_product) {
-      this.product = [_product];
-      this.category = _product.category;
-      this.name = _product.name;
-      this.color_name = _product.color_name;
-      this.color_hex = _product.color_hex;
-      this.sizes = _product.sizes;
-      this.price = _product.sizes[0].price;
-      const availableSize = _product.sizes.find((item: Size) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : "";
-
-      this.images = _product.imgages;
-    } else {
-      this.router.navigate(["404"]);
-    }
-    this.forward();
-  }
-
-  getOtherProduct(id: number) {
-    this.scrollToProductContainer();
-    this.otherProducts = this.productService.getAllProducts();
-    // this.otherProducts = this.otherProducts.filter((item) => item.id !== id);
-    const _product = this.productService.getProductById(id);
-    if (_product) {
-      this.product = [_product];
-      this.category = _product.category;
-      this.name = _product.name;
-      this.color_name = _product.color_name;
-      this.color_hex = _product.color_hex;
-      this.sizes = _product.sizes;
-      this.price = _product.sizes[0].price;
-      const availableSize = _product.sizes.find((item) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : "";
-
-      this.images = _product.imgages;
-    } else {
-      this.router.navigate(["404"]);
-    }
-    this.forward();
-  }
   category: string = "";
   name: string = "";
   price: number = 0;
@@ -349,7 +280,123 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   nextImage: string = "";
   currentImageIndex: number = 0;
 
+  email: string = "";
+  emailValidated: boolean = false;
+  shakeTimeout: any;
+  isShaking: boolean = false;
+  validationMessage: string = "";
+
+  swipeStart: number = 0;
+  swipeEnd: number = 0;
+  swipeTreshold: number = 50;
+
+  animationState = "default";
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private router: Router,
+    private productService: ProductService,
+    private routeStateService: RouteStateService
+  ) {}
+
+  @ViewChild("productContainer", { static: false }) productContainer: ElementRef | undefined;
+
+  ngAfterViewInit() {}
+
+  @HostListener("window:keydown", ["$event"])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "ArrowRight") {
+      this.forward();
+    } else if (event.key === "ArrowLeft") {
+      this.back();
+    }
+  }
+
+  ngOnInit(): void {
+    // if (isPlatformBrowser(this.platformId)) {
+      this.initializeProduct();
+    // }
+  }
+
+  initializeProduct(): void {
+
+    this.otherProducts = this.productService.getAllProducts();
+    let _id = this.router.url.split("/")[2];
+    this.id = parseInt(_id);
+
+    const _product = this.productService.getProductById(this.id);
+    if (_product) {
+      this.setProductDetails(_product);
+    } else {
+      this.router.navigate(["404"]);
+    }
+    this.forward();
+  }
+
+  setProductDetails(product: Product): void {
+    this.product = [product];
+    this.category = product.category;
+    this.name = product.name;
+    this.color_name = product.color_name;
+    this.color_hex = product.color_hex;
+    this.sizes = product.sizes;
+    this.price = product.sizes[0].price;
+
+    const availableSize = product.sizes.find((item) => item.available);
+    this.selectedSize = availableSize ? availableSize.size : "";
+    this.images = product.images;
+  }
+
+  scrollToProductContainer(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: yOffset, behavior: "smooth" });
+  }
+
+  getOtherProduct(id: number): void {
+    this.scrollToProductContainer();
+    const _product = this.productService.getProductById(id);
+    if (_product) {
+      this.setProductDetails(_product);
+    } else {
+      this.router.navigate(["404"]);
+    }
+    this.forward();
+  }
+
+  forward() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.animationState = "out";
+
+    let imageCount = this.images.length;
+    let forwardIndex = this.currentImageIndex + 1;
+    if (forwardIndex >= imageCount) {
+      forwardIndex = 0;
+    }
+    this.changeImage(forwardIndex);
+    setTimeout(() => {
+      this.animationState = "default";
+    }, 300);
+  }
+
+  back() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.animationState = "out";
+    let imageCount = this.images.length;
+    let nextIndex = this.currentImageIndex - 1;
+    if (nextIndex < 0) {
+      nextIndex = imageCount - 1;
+    }
+    this.changeImage(nextIndex);
+    setTimeout(() => {
+      this.animationState = "default";
+    }, 300);
+  }
+
   changeImage(index: number): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.currentImageIndex = index;
     this.currentImage = this.images[index];
     const imageCount = this.images.length;
@@ -366,21 +413,13 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   }
 
   selectSize(item: Size) {
+    if (!isPlatformBrowser(this.platformId)) return;
     this.price = item.price;
     this.selectedSize = item.size;
   }
 
-  swipeStart: number = 0;
-  swipeEnd: number = 0;
-
-  swipeTreshold: number = 50;
-  onSwipeStart(e: TouchEvent) {
-    console.log("swipe start");
-    const touch = e.changedTouches[0];
-    this.swipeStart = touch.clientX;
-  }
-
   onSwipeEnd(e: TouchEvent) {
+    if (!isPlatformBrowser(this.platformId)) return;
     if (!this.images) return;
     const touch = e.changedTouches[0];
     this.swipeEnd = touch.clientX;
@@ -395,49 +434,34 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.back();
     }
   }
-  animationState = "default";
 
-  forward() {
-    this.animationState = "out";
-
-    let imageCount = this.images.length;
-    let forwardIndex = this.currentImageIndex + 1;
-    if (forwardIndex >= imageCount) {
-      forwardIndex = 0;
-    }
-    this.changeImage(forwardIndex);
-    setTimeout(() => {
-      this.animationState = "default";
-    }, 300); // Reset the state back to 'default' after 1 second
+  onSwipeStart(e: TouchEvent) {
+    if (!isPlatformBrowser(this.platformId)) return;
+    console.log("swipe start");
+    const touch = e.changedTouches[0];
+    this.swipeStart = touch.clientX;
   }
-
-  back() {
-    this.animationState = "out";
-    let imageCount = this.images.length;
-    let nextIndex = this.currentImageIndex - 1;
-    if (nextIndex < 0) {
-      nextIndex = imageCount - 1;
-    }
-    this.changeImage(nextIndex);
-    setTimeout(() => {
-      this.animationState = "default";
-    }, 300); // Reset the state back to 'default' after 1 second
-  }
-
-  email: string = "";
-  emailValidated: boolean = false;
-  shakeTimeout: any;
-  isShaking: boolean = false;
-  validationMessage: string = "";
 
   validateEmail(email: string) {
+    if (!isPlatformBrowser(this.platformId)) return;
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const trimmedEmail = email.trim();
     this.emailValidated = emailPattern.test(trimmedEmail);
     this.validationMessage = this.emailValidated ? "" : "lūdzu ievadi derīgu e-pastu";
   }
 
+  processOrder() {
+    if (!isPlatformBrowser(this.platformId)) return;
+    console.log(this.email);
+    this.validateEmail(this.email);
+    this.shakeButton(!this.emailValidated);
+    if (!this.emailValidated) return;
+    this.routeStateService.allowNavigationToSuccess();
+    this.router.navigate(["/success"]);
+  }
+
   shakeButton(invalidEmail: boolean) {
+    if (!isPlatformBrowser(this.platformId)) return;
     const buttonEl = this.el.nativeElement.querySelector("#order-button");
 
     if (invalidEmail && !this.isShaking) {
@@ -451,14 +475,5 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
         this.isShaking = false;
       }, 1000);
     }
-  }
-
-  processOrder() {
-    console.log(this.email);
-    this.validateEmail(this.email);
-    this.shakeButton(!this.emailValidated);
-    if (!this.emailValidated) return;
-    this.routeStateService.allowNavigationToSuccess();
-    this.router.navigate(["/success"]);
   }
 }

@@ -70,12 +70,12 @@
             {
                 "size": "S",
                 "price": 8.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "M",
                 "price": 8.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "L",
@@ -85,22 +85,22 @@
             {
                 "size": "XL",
                 "price": 9.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "XXL",
                 "price": 10.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "2XL",
                 "price": 11.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "3XL",
                 "price": 12.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "Juris",
@@ -152,7 +152,7 @@
             {
                 "size": "2XL",
                 "price": 11.99,
-                "available": true
+                "available": false
             },
             {
                 "size": "3XL",
@@ -213,7 +213,7 @@
             {
                 "size": "3XL",
                 "price": 12.99,
-                "available": true
+                "available": false
             },
             {
                 "size": "Juris",

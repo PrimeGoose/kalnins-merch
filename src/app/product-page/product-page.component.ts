@@ -15,11 +15,10 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     ]),
   ],
   template: `
- 
     <div
       #productContainer
       class="product-container flex flex-col justify-center mt-1 768:grid grid-cols-[1fr,320px] shadow-2xl shadow-pink-300 ">
-      <div class="image-section flex flex-col content-center 768:justify-center  ">
+      <div class="image-section flex flex-col content-center 768:justify-center max-w-[480px] 768:max-w-none   ">
         <!-- pruduct title -->
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
           <h1 class="text-2xl font-bold mb-2">{{ category }}</h1>
@@ -52,14 +51,14 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         </div>
       </div>
 
-      <div class="order-section flex flex-col items-center justify-center  place-self-center ml-4">
-        <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4     768:justify-center">
-          <div id="selected-options" class="flex flex-col items-center">
+      <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
+        <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4    768:justify-center">
+          <div id="selected-options" class="flex flex-col items-center w-full ">
             <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
               <div
                 id="product-title"
                 class="768:flex flex-col  hidden
-               items-center 1024:flex 1024:w-80 1024:pt-3  ">
+               items-center 1024:flex w-80 pt-3  ">
                 <h1 class="text-2xl font-bold mb-2 flex ">{{ category }}</h1>
                 <h2 class="product-name text-2xl flex ">{{ name }}</h2>
               </div>
@@ -126,7 +125,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
             <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
               <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
                 <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{ 'invalid-text': !emailValidated && email }">
-                  Email: <span class="text-red-600">* {{ validationMessage }}</span>
+                  <span class="text-red-600"> &nbsp;{{ validationMessage }}</span>
                 </label>
                 <input
                   id="email"
@@ -138,8 +137,8 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
                   placeholder="Tavs e-pasts pasūtījumu veikšanai.."
                   (input)="validateEmail(email)" />
 
-                <label for="nickname" class="block 450:text-sm 768:text-xs mb-2 text-xs">
-                  Rojālā segvārds (ja ir; visiem Rojālajiem <span class="text-red-600">-15% ATLAIDE</span>)
+                <label for="nickname" class="block  mb-2 text-lg text-black">
+                  Visiem Rojālajiem <span class="text-red-600 ">-15% ATLAIDE</span>
                 </label>
                 <input
                   id="nickname"
@@ -434,7 +433,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const trimmedEmail = email.trim();
     this.emailValidated = emailPattern.test(trimmedEmail);
-    this.validationMessage = this.emailValidated ? "" : "Invalid";
+    this.validationMessage = this.emailValidated ? "" : "lūdzu ievadi derīgu e-pastu";
   }
 
   shakeButton(invalidEmail: boolean) {

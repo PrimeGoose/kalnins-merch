@@ -45,7 +45,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/kalnins-merch",
+            "outputPath": "dist/kalnins-merch/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -107,6 +107,61 @@
           "options": {
             "browserTarget": "kalnins-merch:build"
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/kalnins-merch/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "kalnins-merch:build:development",
+              "serverTarget": "kalnins-merch:server:development"
+            },
+            "production": {
+              "browserTarget": "kalnins-merch:build:production",
+              "serverTarget": "kalnins-merch:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "kalnins-merch:build:production",
+              "serverTarget": "kalnins-merch:server:production"
+            },
+            "development": {
+              "browserTarget": "kalnins-merch:build:development",
+              "serverTarget": "kalnins-merch:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

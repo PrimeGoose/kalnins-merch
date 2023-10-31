@@ -12,7 +12,7 @@ import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
           Ar Tevi pavisam drīz sazināsies
           <strong class="text-pink-600">MERCH SHOP</strong> apkalpošanas speciālists, lai konkretizētu piegādes un apmaksas detaļas!
         </p>
-        <!-- <app-social-share></app-social-share> -->
+        <app-social-share></app-social-share>
       </div>
     </div>
   `,

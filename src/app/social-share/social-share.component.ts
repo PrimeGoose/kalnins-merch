@@ -56,7 +56,7 @@ export class SocialShareComponent {
   }
 
   shareOnTwitter() {
-    const text = "Tikko ieķēru @kalninsjuris7 Merch "; // Message you want to share
+    const text = "Tikko ieķēru @kalninsjuris7 Merch #jk7Merch "; // Message you want to share
     const url = "https://www.kalninsmerch.com/"; // URL you want to share
     this.openShareWindow(`https://twitter.com/share?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
   }

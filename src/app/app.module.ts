@@ -40,7 +40,6 @@ import { ProductHomeComponent } from "./products-home/product-home.component";
 // import { PinchZoomModule } from "@mtnair/ngx-pinch-zoom";
 import { IconsModule, ICONS_OUTLINE, ICONS_SOLID, ICONS_MINI } from "@amithvns/ng-heroicons";
 import { OrderSuccessComponent } from "./order-success/order-success.component";
-import { OtherProductsComponent } from "./product-page/other-products.component";
 import { SocialShareComponent } from "./social-share/social-share.component";
 
 // // HammerJS must be imported separately
@@ -58,7 +57,6 @@ import { SocialShareComponent } from "./social-share/social-share.component";
     ProductPageComponent,
     ProductHomeComponent,
     OrderSuccessComponent,
-    OtherProductsComponent,
     SocialShareComponent,
   ],
   imports: [

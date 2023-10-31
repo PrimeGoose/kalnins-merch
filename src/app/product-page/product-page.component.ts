@@ -15,6 +15,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     ]),
   ],
   template: `
+ 
     <div
       #productContainer
       class="product-container flex flex-col justify-center mt-1 768:grid grid-cols-[1fr,320px] shadow-2xl shadow-pink-300 ">
@@ -161,10 +162,11 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
       </div>
     </div>
 
-    <div class="grid grid-cols-1   768:grid-cols-2 1024:grid-cols-3 gap-4  768:mx-4 mt-20 shadow-2xl shadow-red-700">
+    <div
+      class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3  max-w-[320px] 640:max-w-[640px] 960:max-w-[960px] gap-4  768:mx-4 mt-20">
       <div
         *ngFor="let product of otherProducts"
-        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card max-w-[320px]"
+        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card "
         (click)="getOtherProduct(product.id)">
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">

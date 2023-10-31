@@ -12,7 +12,6 @@ import { Component } from "@angular/core";
 
     <div class="relative text-center z-50 flex flex-col  items-center">
       <router-outlet></router-outlet>
-      <!-- <app-other-products></app-other-products> -->
     </div>
   `,
   styles: [

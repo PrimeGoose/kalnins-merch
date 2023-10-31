@@ -1,6 +1,5 @@
-// share-on-twitter.component.ts
-
-import { Component } from "@angular/core";
+import { Component, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: "app-social-share",
@@ -34,11 +33,11 @@ import { Component } from "@angular/core";
   styles: [``],
 })
 export class SocialShareComponent {
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   // Define a helper method to detect mobile
   private isMobileDevice(): boolean {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return isPlatformBrowser(this.platformId) && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
   private openShareWindow(url: string) {

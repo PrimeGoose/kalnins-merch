@@ -1,6 +1,7 @@
-import { Component, Renderer2, ElementRef,HostListener, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Product, ProductService } from "../product.service";
+import { Product, Size } from "../product.service";
+import { ProductService } from "../product.service";
 import { RouteStateService } from "../route-state.service";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 
@@ -290,9 +291,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.otherProducts = this.productService.getAllProducts();
-    this.router.url;
-    const _id = this.router.url.split("/")[2];
-    this.id = parseInt(_id);
+    this.id = this.productService.getProductID();
 
     const _product = this.productService.getProductById(this.id);
     if (_product) {
@@ -303,7 +302,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.color_hex = _product.color_hex;
       this.sizes = _product.sizes;
       this.price = _product.sizes[0].price;
-      const availableSize = _product.sizes.find((item) => item.available);
+      const availableSize = _product.sizes.find((item: Size) => item.available);
       this.selectedSize = availableSize ? availableSize.size : "";
 
       this.images = _product.imgages;
@@ -364,7 +363,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectSize(item: { size: string; price: number; available: boolean }) {
+  selectSize(item: Size) {
     this.price = item.price;
     this.selectedSize = item.size;
   }

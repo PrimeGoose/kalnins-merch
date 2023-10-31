@@ -1,7 +1,8 @@
 // product-home.component.ts
 
 import { Component, OnInit } from "@angular/core";
-import { ProductService, Product } from "../product.service";
+import { Product } from "../product.service";
+import { ProductService } from "../product.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -11,7 +12,8 @@ import { Router } from "@angular/router";
       <div
         *ngFor="let product of products"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
-        [routerLink]="['/product', product.id]">
+        [routerLink]="['/product']"
+        (click)="storeProductID(product.id)">
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
@@ -61,5 +63,9 @@ export class ProductHomeComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
   ngOnInit(): void {
     this.products = this.productService.getAllProducts();
+  }
+
+  storeProductID(id: number) {
+    this.productService.storeProductID(id);
   }
 }

@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
       <div
         *ngFor="let product of products"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
-        [routerLink]="['/product']"
+        [routerLink]="['/product', product.id]"
         (click)="storeProductID(product.id)">
         <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
         <div class="px-6 py-4 ">

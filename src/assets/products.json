@@ -26,12 +26,12 @@
             {
                 "size": "XL",
                 "price": 9.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "XXL",
                 "price": 10.99,
-                "available": false
+                "available": true
             },
             {
                 "size": "3XL",

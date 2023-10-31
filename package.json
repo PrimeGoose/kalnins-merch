@@ -4,8 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "ng build --configuration production --base-href /",
-    "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com",
-    "generate-static": "node generate-static-html.js"
+    "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com"
   },
   "private": true,
   "dependencies": {

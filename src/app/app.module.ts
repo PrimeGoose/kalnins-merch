@@ -38,20 +38,11 @@ import { ProductPageComponent } from "./product-page/product-page.component";
 import { ProductHomeComponent } from "./products-home/product-home.component";
 import { OrderSuccessComponent } from "./order-success/order-success.component";
 import { SocialShareComponent } from "./social-share/social-share.component";
-import { ServiceWorkerModule } from '@angular/service-worker';
-
-
+import { ServiceWorkerModule } from "@angular/service-worker";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProductPageComponent,
-    ProductHomeComponent,
-    OrderSuccessComponent,
-    SocialShareComponent,
-  ],
+  declarations: [AppComponent, ProductPageComponent, ProductHomeComponent, OrderSuccessComponent, SocialShareComponent],
   imports: [
- 
     BrowserModule,
     AppRoutingModule,
     // PinchZoomModule,
@@ -62,11 +53,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: "registerWhenStable:30000",
     }),
     // MatToolbarModule,
     // MatButtonModule,

@@ -5,10 +5,10 @@ import { Component } from "@angular/core";
   template: `
     <div
       [routerLink]="['/kalnins-merch']"
-      class="flex flex-col leading-[5rem]  z-50 text-white relative  text-centeer  items-center text-center text-6xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">
-      <h1 class="w-full">Kalniņš Merch</h1>
-      <h2 class="text-sm text-sky-400 mt-5 ">Jura Kalniņa merch veikals</h2>
-    </div> 
+      class="flex flex-col relative   text-center  font-serif font-black my-10 kalnins-merch-header h1-shadow gradient-text h1-hover">
+      <h1 class="text-6xl leading-[4.5rem]">Kalniņš Merch</h1>
+      <h2 class="text-xl text-sky-400 mt-6">Jura Kalniņa merch veikals</h2>
+    </div>
 
     <div class="relative text-center z-50 flex flex-col  items-center">
       <router-outlet></router-outlet>
@@ -16,13 +16,6 @@ import { Component } from "@angular/core";
   `,
   styles: [
     `
-      /* styles.css */
-
-      /**
- * @file Styles for the Kalniņš Merch header
- */
-
-      /* Create a subtle shadow effect for depth */
       .h1-shadow {
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
       }
@@ -42,6 +35,7 @@ import { Component } from "@angular/core";
 
       /* Combine the above styles for the final look */
       .kalnins-merch-header {
+        transition: transform 0.2s;
         font-family: "Serif"; /* Change to your preferred font */
         font-weight: bold;
         letter-spacing: 1px; /* Spacing between letters for clarity */

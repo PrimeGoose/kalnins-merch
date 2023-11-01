@@ -36,20 +36,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ProductPageComponent } from "./product-page/product-page.component";
 import { ProductHomeComponent } from "./products-home/product-home.component";
-// import { NgxImageZoomModule } from "ngx-image-zoom";
-// import { PinchZoomModule } from "@mtnair/ngx-pinch-zoom";
-import { IconsModule, ICONS_OUTLINE, ICONS_SOLID, ICONS_MINI } from "@amithvns/ng-heroicons";
 import { OrderSuccessComponent } from "./order-success/order-success.component";
 import { SocialShareComponent } from "./social-share/social-share.component";
 
-// // HammerJS must be imported separately
-// @Injectable()
-// export class MyHammerConfig extends HammerGestureConfig {
-//   override overrides = <any>{
-//     swipe: { direction: (window as any).Hammer.DIRECTION_ALL },
 
-//   };
-// }
 
 @NgModule({
   declarations: [
@@ -60,11 +50,7 @@ import { SocialShareComponent } from "./social-share/social-share.component";
     SocialShareComponent,
   ],
   imports: [
-    IconsModule.withIcons({
-      ...ICONS_OUTLINE,
-      ...ICONS_SOLID,
-      ...ICONS_MINI,
-    }),
+ 
     BrowserModule,
     AppRoutingModule,
     // PinchZoomModule,

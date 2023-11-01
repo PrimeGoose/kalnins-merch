@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, isDevMode } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -38,6 +38,7 @@ import { ProductPageComponent } from "./product-page/product-page.component";
 import { ProductHomeComponent } from "./products-home/product-home.component";
 import { OrderSuccessComponent } from "./order-success/order-success.component";
 import { SocialShareComponent } from "./social-share/social-share.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -61,6 +62,12 @@ import { SocialShareComponent } from "./social-share/social-share.component";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     // MatToolbarModule,
     // MatButtonModule,
     // MatIconModule,

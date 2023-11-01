@@ -35,6 +35,9 @@ dependencies:
   '@angular/router':
     specifier: ^16.2.11
     version: 16.2.11(@angular/common@16.2.11)(@angular/core@16.2.11)(@angular/platform-browser@16.2.11)(rxjs@7.8.1)
+  '@angular/service-worker':
+    specifier: ^16.2.11
+    version: 16.2.11(@angular/common@16.2.11)(@angular/core@16.2.11)
   rxjs:
     specifier: ~7.8.1
     version: 7.8.1
@@ -48,7 +51,7 @@ dependencies:
 devDependencies:
   '@angular-devkit/build-angular':
     specifier: ^16.2.8
-    version: 16.2.8(@angular/compiler-cli@16.2.11)(tailwindcss@3.3.5)(typescript@5.1.6)
+    version: 16.2.8(@angular/compiler-cli@16.2.11)(@angular/service-worker@16.2.11)(tailwindcss@3.3.5)(typescript@5.1.6)
   '@angular/cli':
     specifier: ~16.2.8
     version: 16.2.8
@@ -93,7 +96,7 @@ packages:
       - chokidar
     dev: true
 
-  /@angular-devkit/build-angular@16.2.8(@angular/compiler-cli@16.2.11)(tailwindcss@3.3.5)(typescript@5.1.6):
+  /@angular-devkit/build-angular@16.2.8(@angular/compiler-cli@16.2.11)(@angular/service-worker@16.2.11)(tailwindcss@3.3.5)(typescript@5.1.6):
     resolution: {integrity: sha512-PgTaWerhDO3JjHjgJl/VWB1y1awN8eHrm7sqdpIsgKbVpi26oyByjtPS1gKKhinps9Che66lCbnxrkx2X3rWTg==}
     engines: {node: ^16.14.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
@@ -133,6 +136,7 @@ packages:
       '@angular-devkit/build-webpack': 0.1602.8(chokidar@3.5.3)(webpack-dev-server@4.15.1)(webpack@5.88.2)
       '@angular-devkit/core': 16.2.8(chokidar@3.5.3)
       '@angular/compiler-cli': 16.2.11(@angular/compiler@16.2.11)(typescript@5.1.6)
+      '@angular/service-worker': 16.2.11(@angular/common@16.2.11)(@angular/core@16.2.11)
       '@babel/core': 7.22.9
       '@babel/generator': 7.22.9
       '@babel/helper-annotate-as-pure': 7.22.5
@@ -326,7 +330,6 @@ packages:
       '@angular/core': 16.2.11(rxjs@7.8.1)(zone.js@0.13.3)
       rxjs: 7.8.1
       tslib: 2.6.2
-    dev: false
 
   /@angular/compiler-cli@16.2.11(@angular/compiler@16.2.11)(typescript@5.1.6):
     resolution: {integrity: sha512-ZtZCXfkVBH78HUm2Byf+WX3Y6WzQK9EXYXNU/ni1rvSZ1vLNwieLDfWb/xwiO7QojrHZTym1RJ10jTMinTguqw==}
@@ -505,6 +508,18 @@ packages:
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false
+
+  /@angular/service-worker@16.2.11(@angular/common@16.2.11)(@angular/core@16.2.11):
+    resolution: {integrity: sha512-fsfnQq/NbAI4sxz1eSs7o1scB0ezawjj6rwV6uaqPNMvHq8fphauGTkACiIF6SBhD3p54lRzEH5whG6aei1Ofg==}
+    engines: {node: ^16.14.0 || >=18.10.0}
+    hasBin: true
+    peerDependencies:
+      '@angular/common': 16.2.11
+      '@angular/core': 16.2.11
+    dependencies:
+      '@angular/common': 16.2.11(@angular/core@16.2.11)(rxjs@7.8.1)
+      '@angular/core': 16.2.11(rxjs@7.8.1)(zone.js@0.13.3)
+      tslib: 2.6.2
 
   /@assemblyscript/loader@0.10.1:
     resolution: {integrity: sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg==}

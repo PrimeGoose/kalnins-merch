@@ -40,7 +40,6 @@ export class ProductService {
       .then((response) => response.json())
       .then((data) => {
         this.products.push(...data);
-        console.log("Success:", data, "data?");
       });
   }
   /**

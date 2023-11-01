@@ -383,7 +383,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   swipeTreshold: number = 50;
   onSwipeStart(e: TouchEvent) {
-    console.log("swipe start");
     const touch = e.changedTouches[0];
     this.swipeStart = touch.clientX;
   }
@@ -396,10 +395,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
     const abs_swipeDistance = Math.abs(swipe_distance);
     if (swipe_distance > 0 && abs_swipeDistance > this.swipeTreshold) {
-      console.log("right");
       this.forward();
     } else if (swipe_distance < 0 && abs_swipeDistance > this.swipeTreshold) {
-      console.log("left");
       this.back();
     }
   }
@@ -462,7 +459,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   }
 
   processOrder() {
-    console.log(this.email);
     this.validateEmail(this.email);
     this.shakeButton(!this.emailValidated);
     if (!this.emailValidated) return;

@@ -7,8 +7,8 @@ import { Component } from "@angular/core";
       [routerLink]="['/kalnins-merch']"
       class="flex flex-col leading-[5rem]  z-50 text-white relative  text-centeer  items-center text-center text-6xl font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover">
       <h1 class="w-full">Kalniņš Merch</h1>
-      <h3 class="text-sm text-sky-400 mt-5 ">Jura Kalniņa merch veikals</h3>
-    </div>
+      <h2 class="text-sm text-sky-400 mt-5 ">Jura Kalniņa merch veikals</h2>
+    </div> 
 
     <div class="relative text-center z-50 flex flex-col  items-center">
       <router-outlet></router-outlet>

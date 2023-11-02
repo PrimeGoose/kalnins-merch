@@ -4,7 +4,7 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const rootDir = './assets';  // Starting directory
+const rootDir = './src/assets';  // Starting directory
 
 // Ensure directory exists or create it
 const ensureDir = (dirPath) => {

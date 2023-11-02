@@ -1,7 +1,6 @@
 {
   "name": "kalnins-merch",
   "version": "0.0.1",
-  "type": "module",
   "scripts": {
     "build": "ng build --configuration production --base-href /",
     "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com"
@@ -20,6 +19,7 @@
     "@angular/router": "^16.2.11",
     "@angular/service-worker": "^16.2.11",
     "rxjs": "~7.8.1",
+    "sharp": "^0.32.6",
     "tslib": "^2.6.2",
     "zone.js": "~0.13.0"
   },

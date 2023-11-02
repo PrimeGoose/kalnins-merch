@@ -14,7 +14,11 @@ import { Router } from "@angular/router";
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
         [routerLink]="['/product']"
         (click)="storeProductID(product.id)">
-        <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
+        <img
+          class="w-full"
+          [src]="getLowQualityImage(product.imgages[0])"
+          (load)="onImageLoad($event, product.imgages[0])"
+          alt="{{ product.name }}" />
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
           <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
@@ -67,5 +71,20 @@ export class ProductHomeComponent implements OnInit {
 
   storeProductID(id: number) {
     this.productService.storeProductID(id);
+  }
+
+  getLowQualityImage(imagePath: string): string {
+    return imagePath.replace(".png", "-low.png");
+  }
+
+  onImageLoad(event: Event, imagePath: string): void {
+    const imgElement = event.target as HTMLImageElement;
+    const img = new Image();
+
+    img.src = imagePath; // This is the path to the high-quality image
+
+    img.onload = () => {
+      imgElement.src = imagePath;
+    };
   }
 }

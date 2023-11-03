@@ -14,14 +14,21 @@ import { Router } from "@angular/router";
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
         [routerLink]="['/product']"
         (click)="storeProductID(product.id)">
-        <img
-          loading="lazy"
-          height="300px"
-          width="300px"
-          class="w-full"
-          [src]="getLowQualityImage(product.imgages[0])"
-          (load)="onImageLoad($event, product.imgages[0])"
-          alt="{{ product.name }}" />
+        <picture>
+          <!-- AVIF format -->
+          <source [srcset]="product.imgages[0] + '.avif'" type="image/avif" />
+          <!-- WebP format -->
+          <source [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
+
+          <img
+            class="w-full"
+            loading="lazy"
+            height="300px"
+            width="300px"
+            [src]="product.imgages[0] + '.png'"
+            (load)="onImageLoad($event, product.imgages[0])"
+            alt="Product image" />
+        </picture>
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
           <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
@@ -58,12 +65,12 @@ import { Router } from "@angular/router";
         transition: all 0.3s ease-in-out;
       }
 
-      .hover-effect:hover { 
+      .hover-effect:hover {
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
     `,
-  ],
+  ], 
 })
 export class ProductHomeComponent implements OnInit {
   products: Product[] = [];
@@ -76,18 +83,14 @@ export class ProductHomeComponent implements OnInit {
     this.productService.storeProductID(id);
   }
 
-  getLowQualityImage(imagePath: string): string {
-    return imagePath.replace(".png", "-low.png");
-  }
-
   onImageLoad(event: Event, imagePath: string): void {
     const imgElement = event.target as HTMLImageElement;
     const img = new Image();
 
-    img.src = imagePath; // This is the path to the high-quality image
+    img.src = imagePath + ".jpg";
 
     img.onload = () => {
-      imgElement.src = imagePath;
+      imgElement.src = imagePath + ".jpg";
     };
   }
 }

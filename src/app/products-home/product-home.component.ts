@@ -20,14 +20,7 @@ import { Router } from "@angular/router";
           <!-- WebP format -->
           <source [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
 
-          <img
-            class="w-full"
-            loading="lazy"
-            height="300px"
-            width="300px"
-            [src]="product.imgages[0] + '.png'"
-            (load)="onImageLoad($event, product.imgages[0])"
-            alt="Product image" />
+          <img class="w-full" loading="lazy" height="300px" width="300px" [src]="product.imgages[0] + '.png'" alt="Product image" />
         </picture>
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
@@ -70,7 +63,7 @@ import { Router } from "@angular/router";
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
     `,
-  ], 
+  ],
 })
 export class ProductHomeComponent implements OnInit {
   products: Product[] = [];

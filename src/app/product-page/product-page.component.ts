@@ -15,10 +15,9 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
     ]),
   ],
   template: `
-    <div
-      #productContainer
-      class="product-container flex flex-col justify-center mt-1 768:grid grid-cols-[1fr,320px] shadow-2xl shadow-pink-300 ">
-      <div class="image-section flex flex-col content-center 768:justify-center max-w-[480px] 768:max-w-none   ">
+    <div #productContainer class="product-container flex flex-col justify-center mt-1  shadow-2xl shadow-pink-300 ">
+      <div
+        class="image-section flex flex-col 768:grid grid-cols-[1fr,320px] content-center 768:justify-center max-w-[480px] 768:max-w-none   ">
         <!-- pruduct title -->
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
           <h1 class="text-2xl font-bold mb-2">{{ category }}</h1>
@@ -31,7 +30,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           (touchend)="onSwipeEnd($event)"
           (touchstart)="onSwipeStart($event)"
           class=" product-images  flex flex-col  overflow-hidden relative w-full  ">
-          <div class="chevron-container z-10 w-full h-full absolute    items-center flex  ">
+          <div class="chevron-container z-10 w-full h-full absolute    items-center flex">
             <div
               (click)="back()"
               class="chevron-left justify-start hidden 450:flex w-9 h-16 left-0 absolute items-center hover:bg-gradient-to-r from-neutral-50 to-transparent">
@@ -52,129 +51,140 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
             </div>
           </div>
 
-          <img
-            loading="lazy"
-            height="auto"
-            width="auto"
-            class="h-full swipable-image relative overflow-hidden cursor-pointer object-cover"
-            [src]="getLowQualityImage(currentImage)"
-            (load)="onImageLoad($event, currentImage)"
-            alt="Product Thumbnail" />
+          <picture class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover">
+            <!-- AVIF format -->
+            <source [srcset]="currentImage + '.avif'" type="image/avif" />
+            <!-- WebP format -->
+            <source [srcset]="currentImage + '.webp'" type="image/webp" />
+            <!-- Fallback PNG format -->
+            <img
+              loading="lazy"
+              [src]="currentImage + '.png'"
+              alt="Product Thumbnail"
+              class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover" />
+          </picture>
         </div>
-      </div>
 
-      <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
-        <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4    768:justify-center">
-          <div id="selected-options" class="flex flex-col items-center w-full ">
-            <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
-              <div
-                id="product-title"
-                class="768:flex flex-col  hidden
+        <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
+          <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4    768:justify-center">
+            <div id="selected-options" class="flex flex-col items-center w-full ">
+              <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
+                <div
+                  id="product-title"
+                  class="768:flex flex-col  hidden
                items-center 1024:flex w-80 pt-3  ">
-                <h1 class="text-2xl font-bold mb-2 flex ">{{ category }}</h1>
-                <h2 class="product-name text-2xl flex ">{{ name }}</h2>
-              </div>
+                  <h1 class="text-2xl font-bold mb-2 flex ">{{ category }}</h1>
+                  <h2 class="product-name text-2xl flex ">{{ name }}</h2>
+                </div>
 
-              <div class="flex flex-row ">
-                <!-- Last Image -->
-                <img
-                  *ngIf="lastImage"
-                  (click)="forward()"
-                  [@fadeInOut]="animationState"
-                  [src]="getLowQualityImage(lastImage)"
-                  (load)="onImageLoad($event, lastImage)"
-                  alt="Product color preview"
-                  class="h-16" />
+                <div class="flex flex-row ">
+                  <!-- Last Image -->
+                  <picture *ngIf="lastImage">
+                    <source [srcset]="lastImage + '.avif'" type="image/avif" />
+                    <source [srcset]="lastImage + '.webp'" type="image/webp" />
+                    <img
+                      (click)="forward()"
+                      [@fadeInOut]="animationState"
+                      [src]="lastImage + '.png'"
+                      alt="Product color preview"
+                      class="h-16" />
+                  </picture>
 
-                <!-- Current Image -->
-                <img
-                  [@fadeInOut]="animationState"
-                  [src]="getLowQualityImage(currentImage)"
-                  (load)="onImageLoad($event, currentImage)"
-                  alt="Product color preview"
-                  class="h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+                  <!-- Current Image -->
+                  <picture>
+                    <source [srcset]="currentImage + '.avif'" type="image/avif" />
+                    <source [srcset]="currentImage + '.webp'" type="image/webp" />
+                    <img
+                      [@fadeInOut]="animationState"
+                      [src]="currentImage + '.png'"
+                      alt="Product color preview"
+                      class="h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+                  </picture>
 
-                <!-- Next Image -->
-                <img
-                  *ngIf="nextImage"
-                  (click)="back()"
-                  [@fadeInOut]="animationState"
-                  [src]="getLowQualityImage(nextImage)"
-                  (load)="onImageLoad($event, nextImage)"
-                  alt="Product color preview"
-                  class="h-16" />
-              </div>
+                  <!-- Next Image -->
+                  <picture *ngIf="nextImage">
+                    <source [srcset]="nextImage + '.avif'" type="image/avif" />
+                    <source [srcset]="nextImage + '.webp'" type="image/webp" />
+                    <img
+                      (click)="back()"
+                      [@fadeInOut]="animationState"
+                      [src]="nextImage + '.png'"
+                      alt="Product color preview"
+                      class="h-16" />
+                  </picture>
+                </div>
 
-              <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
-                <div class="text-center font-semibold uppercase">krāsa</div>
-                <div class="text-center font-semibold uppercase">Izmērs</div>
-                <div class="text-center font-semibold uppercase">Cena</div>
+                <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
+                  <div class="text-center font-semibold uppercase">krāsa</div>
+                  <div class="text-center font-semibold uppercase">Izmērs</div>
+                  <div class="text-center font-semibold uppercase">Cena</div>
 
-                <div class="text-center">
                   <div class="text-center">
-                    <span>{{ color_name }}</span>
+                    <div class="text-center">
+                      <span>{{ color_name }}</span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <span>{{ selectedSize }}</span>
+                  </div>
+                  <div class="text-center">
+                    <span>{{ price }} €</span>
                   </div>
                 </div>
-                <div class="text-center">
-                  <span>{{ selectedSize }}</span>
-                </div>
-                <div class="text-center">
-                  <span>{{ price }} €</span>
+
+                <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
+                  <ng-container *ngFor="let item of sizes">
+                    <button
+                      *ngIf="item.available"
+                      (click)="selectSize(item)"
+                      [ngClass]="{ 'selected-button': selectedSize === item.size && item.available }"
+                      class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 ">
+                      {{ item.size }}
+                    </button>
+
+                    <button
+                      *ngIf="!item.available"
+                      class="border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  text-slate-300  border-slate-300">
+                      {{ item.size }}
+                    </button>
+                  </ng-container>
                 </div>
               </div>
 
-              <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
-                <ng-container *ngFor="let item of sizes">
-                  <button
-                    *ngIf="item.available"
-                    (click)="selectSize(item)"
-                    [ngClass]="{ 'selected-button': selectedSize === item.size && item.available }"
-                    class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 ">
-                    {{ item.size }}
-                  </button>
+              <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
+                <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
+                  <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{ 'invalid-text': !emailValidated && email }">
+                    <span class="text-red-600"> &nbsp;{{ validationMessage }}</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    [(ngModel)]="email"
+                    name="emailInput"
+                    [ngClass]="{ 'invalid-border': !emailValidated && email }"
+                    class="border rounded py-2 px-3 mb-4"
+                    placeholder="Tavs e-pasts pasūtījumu veikšanai.."
+                    (input)="validateEmail(email)" />
+
+                  <label for="nickname" class="block  mb-2 text-lg text-black">
+                    Visiem Rojālajiem <span class="text-red-600 ">-15% ATLAIDE</span>
+                  </label>
+                  <input
+                    id="nickname"
+                    name="nickname"
+                    type="text"
+                    class="border rounded py-2 px-3 mb-4"
+                    placeholder="Tavs Rojālais segvārds šeit.." />
 
                   <button
-                    *ngIf="!item.available"
-                    class="border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  text-slate-300  border-slate-300">
-                    {{ item.size }}
+                    (click)="processOrder()"
+                    id="order-button"
+                    [ngClass]="{ 'shake-animation': !emailValidated }"
+                    class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif">
+                    Pasūtīt
                   </button>
-                </ng-container>
+                </form>
               </div>
-            </div>
-
-            <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
-              <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
-                <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{ 'invalid-text': !emailValidated && email }">
-                  <span class="text-red-600"> &nbsp;{{ validationMessage }}</span>
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  [(ngModel)]="email"
-                  name="emailInput"
-                  [ngClass]="{ 'invalid-border': !emailValidated && email }"
-                  class="border rounded py-2 px-3 mb-4"
-                  placeholder="Tavs e-pasts pasūtījumu veikšanai.."
-                  (input)="validateEmail(email)" />
-
-                <label for="nickname" class="block  mb-2 text-lg text-black">
-                  Visiem Rojālajiem <span class="text-red-600 ">-15% ATLAIDE</span>
-                </label>
-                <input
-                  id="nickname"
-                  name="nickname"
-                  type="text"
-                  class="border rounded py-2 px-3 mb-4"
-                  placeholder="Tavs Rojālais segvārds šeit.." />
-
-                <button
-                  (click)="processOrder()"
-                  id="order-button"
-                  [ngClass]="{ 'shake-animation': !emailValidated }"
-                  class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif">
-                  Pasūtīt
-                </button>
-              </form>
             </div>
           </div>
         </div>
@@ -187,12 +197,18 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         *ngFor="let product of otherProducts"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card "
         (click)="getOtherProduct(product.id)">
-        <img
-          loading="lazy"
-          class="w-full"
-          [src]="getLowQualityImage(product.imgages[0])"
-          (load)="onImageLoad($event, product.imgages[0])"
-          alt="{{ product.name }}" />
+        <picture>
+          <!-- AVIF format -->
+          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.avif'" type="image/avif" />
+          <!-- WebP format -->
+          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
+          <!-- Fallback PNG format -->
+          <img loading="lazy" [src]="product.imgages[0] + '.png'" alt="{{ product.name }}" />
+        </picture>
+        <div class="px-6 py-4">
+          <!-- The rest of your content -->
+        </div>
+
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
         </div>
@@ -313,21 +329,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   scrollToProductContainer() {
     const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: yOffset, behavior: "smooth" });
-  }
-
-  getLowQualityImage(imagePath: string): string {
-    return imagePath.replace(".png", "-low.png");
-  }
-
-  onImageLoad(event: Event, imagePath: string): void {
-    const imgElement = event.target as HTMLImageElement;
-    const img = new Image();
-
-    img.src = imagePath; // This is the path to the high-quality image
-
-    img.onload = () => {
-      imgElement.src = imagePath;
-    };
   }
 
   ngOnInit(): void {

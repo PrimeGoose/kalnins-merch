@@ -1,57 +1,65 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
 const baseDir = './src/assets/';
 
-function deleteWebPFiles(directory) {
-    fs.readdirSync(directory, { withFileTypes: true }).forEach(entry => {
+async function deleteWebPFiles(directory) {
+    let deletedCount = 0;
+    const entries = await fs.readdir(directory, { withFileTypes: true });
+
+    for (const entry of entries) {
         const fullPath = path.join(directory, entry.name);
         if (entry.isDirectory()) {
             // Recursively delete .webp files in subdirectories
-            deleteWebPFiles(fullPath);
+            const count = await deleteWebPFiles(fullPath);
+            deletedCount += count;
         } else if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.webp') {
             // Delete the .webp file
-            fs.unlinkSync(fullPath);
+            await fs.unlink(fullPath);
             console.log(`Deleted WebP file: ${fullPath}`);
+            deletedCount++;
         }
-    });
+    }
+
+    return deletedCount;
 }
 
-function processDirectory(directory) {
-    deleteWebPFiles(directory); // Delete all .webp files before starting the conversion
+async function processDirectory(directory) {
+    let deletedCount = await deleteWebPFiles(directory);
+    let convertedCount = 0;
 
-    fs.readdir(directory, { withFileTypes: true }, (err, entries) => {
-        if (err) {
-            console.error('Error reading the directory', err);
-            return;
+    const entries = await fs.readdir(directory, { withFileTypes: true });
+
+    for (const entry of entries) {
+        const fullPath = path.join(directory, entry.name);
+        if (entry.isDirectory() && entry.name !== 'icons') {
+            // Recursively process subdirectories, skipping 'icons'
+            const counts = await processDirectory(fullPath);
+            deletedCount += counts.deletedCount;
+            convertedCount += counts.convertedCount;
+        } else if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.png') {
+            // Convert PNG files to WebP
+            const outputFile = path.join(directory, path.basename(entry.name, '.png') + '.webp');
+            await sharp(fullPath)
+                .webp({ quality: 80 })
+                .toFile(outputFile);
+            console.log(`Converted to WebP: ${fullPath}`);
+            convertedCount++;
         }
+    }
 
-        entries.forEach(entry => {
-            const fullPath = path.join(directory, entry.name);
-            if (entry.isDirectory() && entry.name !== 'icons') {
-                // Recursively process subdirectories, skipping 'icons'
-                processDirectory(fullPath);
-            } else if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.png') {
-                // Convert PNG files to WebP
-                const outputFile = path.join(directory, path.basename(entry.name, '.png') + '.webp');
-
-                sharp(fullPath)
-                    .webp({
-                        quality: 80,  // Good for high-quality images without making the file size too large
-                       
-                    })
-                    .toFile(outputFile)
-                    .then(() => {
-                        console.log(`Converted to WebP: ${fullPath}`);
-                    })
-                    .catch(err => {
-                        console.error(`Error processing ${fullPath}:`, err);
-                    });
-            }
-        });
-    });
+    return { deletedCount, convertedCount };
 }
 
 // Start the conversion process
-processDirectory(baseDir);
+(async () => {
+    try {
+        const { deletedCount, convertedCount } = await processDirectory(baseDir);
+        console.log(`Total WebP files deleted: ${deletedCount}`);
+        console.log(`Total PNG files converted to WebP: ${convertedCount}`);
+        console.log('Conversion process completed.');
+    } catch (err) {
+        console.error('An error occurred during the conversion process:', err);
+    }
+})();

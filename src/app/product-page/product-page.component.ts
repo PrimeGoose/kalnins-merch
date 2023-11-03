@@ -29,7 +29,7 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           id="product-images"
           (touchend)="onSwipeEnd($event)"
           (touchstart)="onSwipeStart($event)"
-          class=" product-images  flex flex-col  overflow-hidden relative w-full  ">
+          class=" place-content-center  flex flex-col  overflow-hidden relative w-full  ">
           <div class="chevron-container z-10 w-full h-full absolute    items-center flex">
             <div
               (click)="back()"

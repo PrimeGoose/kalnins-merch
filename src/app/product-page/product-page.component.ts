@@ -77,14 +77,14 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
 
               <div class="flex flex-row ">
                 <!-- Last Image -->
-                  <img
-                    *ngIf="lastImage"
-                    (click)="forward()"
-                    [@fadeInOut]="animationState"
-                    [src]="getLowQualityImage(lastImage)"
-                    (load)="onImageLoad($event, lastImage)"
-                    alt="Product color preview"
-                    class="h-16" />
+                <img
+                  *ngIf="lastImage"
+                  (click)="forward()"
+                  [@fadeInOut]="animationState"
+                  [src]="getLowQualityImage(lastImage)"
+                  (load)="onImageLoad($event, lastImage)"
+                  alt="Product color preview"
+                  class="h-16" />
 
                 <!-- Current Image -->
                 <img
@@ -187,7 +187,12 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
         *ngFor="let product of otherProducts"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card "
         (click)="getOtherProduct(product.id)">
-        <img class="w-full" [src]="product.imgages[0]" alt="{{ product.name }}" />
+        <img
+          loading="lazy"
+          class="w-full"
+          [src]="getLowQualityImage(product.imgages[0])"
+          (load)="onImageLoad($event, product.imgages[0])"
+          alt="{{ product.name }}" />
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
         </div>

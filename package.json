@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "build": "ng build --configuration production --base-href /",
-    "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com"
+    "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com",
+    
+    "convert-png-to-jpg": "node convert-png-to-jpg.mjs",
+    "convert-png-to-avif": "node convert-png-to-avif.mjs"
   },
   "private": true,
   "dependencies": {

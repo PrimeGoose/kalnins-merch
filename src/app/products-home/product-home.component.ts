@@ -58,7 +58,7 @@ import { Router } from "@angular/router";
         transition: all 0.3s ease-in-out;
       }
 
-      .hover-effect:hover {
+      .hover-effect:hover { 
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }

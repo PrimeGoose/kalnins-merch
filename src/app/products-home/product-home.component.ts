@@ -15,6 +15,9 @@ import { Router } from "@angular/router";
         [routerLink]="['/product']"
         (click)="storeProductID(product.id)">
         <img
+          loading="lazy"
+          height="300px"
+          width="300px"
           class="w-full"
           [src]="getLowQualityImage(product.imgages[0])"
           (load)="onImageLoad($event, product.imgages[0])"

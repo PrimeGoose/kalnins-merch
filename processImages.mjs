@@ -36,8 +36,16 @@ const processImages = async () => {
                     const newFilePath = path.join(dirPath, file.replace('.png', '-low.png'));
 
                     try {
+                        if (subDir === 'dod-naudu-dauni') {
+                            continue
+                        }
                         await sharp(filePath)
                             .png({ quality: 1 })
+                            // make it black and white
+                            .modulate({ saturation: 0 })
+                           
+
+                            
                             .toFile(newFilePath);
                     } catch (err) {
                         console.error(`Error processing ${filePath}: ${err.message}`);

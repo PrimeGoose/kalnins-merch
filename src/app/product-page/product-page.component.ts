@@ -53,10 +53,13 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
           </div>
 
           <img
-            alt="Product Thumbnail"
-            [src]="currentImage"
-            class=" h-full swipable-image relative overflow-hidden cursor-pointer
-          object-cover " />
+            loading="lazy"
+            height="auto"
+            width="auto"
+            class="h-full swipable-image relative overflow-hidden cursor-pointer object-cover"
+            [src]="getLowQualityImage(currentImage)"
+            (load)="onImageLoad($event, currentImage)"
+            alt="Product Thumbnail" />
         </div>
       </div>
 
@@ -73,25 +76,33 @@ import { trigger, state, style, animate, transition } from "@angular/animations"
               </div>
 
               <div class="flex flex-row ">
+                <!-- Last Image -->
+                  <img
+                    *ngIf="lastImage"
+                    (click)="forward()"
+                    [@fadeInOut]="animationState"
+                    [src]="getLowQualityImage(lastImage)"
+                    (load)="onImageLoad($event, lastImage)"
+                    alt="Product color preview"
+                    class="h-16" />
+
+                <!-- Current Image -->
                 <img
-                  *ngIf="lastImage"
                   [@fadeInOut]="animationState"
-                  [src]="lastImage"
+                  [src]="getLowQualityImage(currentImage)"
+                  (load)="onImageLoad($event, currentImage)"
                   alt="Product color preview"
-                  class=" h-16"
-                  (click)="forward()" />
-                <img
-                  [@fadeInOut]="animationState"
-                  [src]="currentImage"
-                  alt="Product color preview"
-                  class=" h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+                  class="h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4" />
+
+                <!-- Next Image -->
                 <img
                   *ngIf="nextImage"
+                  (click)="back()"
                   [@fadeInOut]="animationState"
-                  [src]="nextImage"
+                  [src]="getLowQualityImage(nextImage)"
+                  (load)="onImageLoad($event, nextImage)"
                   alt="Product color preview"
-                  class=" h-16"
-                  (click)="back()" />
+                  class="h-16" />
               </div>
 
               <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
@@ -297,6 +308,21 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   scrollToProductContainer() {
     const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: yOffset, behavior: "smooth" });
+  }
+
+  getLowQualityImage(imagePath: string): string {
+    return imagePath.replace(".png", "-low.png");
+  }
+
+  onImageLoad(event: Event, imagePath: string): void {
+    const imgElement = event.target as HTMLImageElement;
+    const img = new Image();
+
+    img.src = imagePath; // This is the path to the high-quality image
+
+    img.onload = () => {
+      imgElement.src = imagePath;
+    };
   }
 
   ngOnInit(): void {

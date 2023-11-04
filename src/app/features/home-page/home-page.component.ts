@@ -6,25 +6,39 @@ import { ProductService } from "../../core/services/product.service";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-home",
+  selector: "app-home-page",
   template: `
-    <div class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3 gap-4    max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]">
+    <div
+      class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3 gap-4    max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]"
+    >
       <div
         *ngFor="let product of products"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
         [routerLink]="['/product']"
-        (click)="storeProductID(product.id)">
+        (click)="storeProductID(product.id)"
+      >
         <picture>
           <!-- AVIF format -->
           <source [srcset]="product.imgages[0] + '.avif'" type="image/avif" />
           <!-- WebP format -->
           <source [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
 
-          <img class="w-full" loading="lazy" height="300px" width="300px" [src]="product.imgages[0] + '.png'" alt="Product image" />
+          <img
+            class="w-full"
+            loading="lazy"
+            height="300px"
+            width="300px"
+            [src]="product.imgages[0] + '.png'"
+            alt="Product image"
+          />
         </picture>
         <div class="px-6 py-4 ">
-          <div class="font-bold text-xl mb-2 product-name ">{{ product.name }}</div>
-          <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
+          <div class="font-bold text-xl mb-2 product-name ">
+            {{ product.name }}
+          </div>
+          <p class="product-price">
+            Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}
+          </p>
         </div>
       </div>
     </div>
@@ -65,7 +79,7 @@ import { Router } from "@angular/router";
     `,
   ],
 })
-export class ProductHomeComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   products: Product[] = [];
   constructor(private productService: ProductService, private router: Router) {}
   ngOnInit(): void {

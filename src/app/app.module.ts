@@ -7,7 +7,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 //feature modules
 import { ProductPageComponent } from "./features/product-page/product-page.component";
-import { ProductHomeComponent } from "./features/products-home/product-home.component";
+import { HomePageComponent } from "./features/home-page/home-page.component";
 //  angular material
 import { AngularMaterialModule } from "./shared/modules/angular-material.module";
 //  service worker
@@ -19,7 +19,7 @@ import { SharedModule } from "./shared/modules/shared.module";
   declarations: [
     AppComponent, 
     ProductPageComponent,
-     ProductHomeComponent, 
+     HomePageComponent, 
     
     ],
   imports: [

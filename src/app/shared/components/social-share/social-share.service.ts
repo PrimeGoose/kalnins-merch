@@ -26,10 +26,10 @@ export class SocialShareService {
   }
 
   shareOnTwitter(text: string = 'Tikko ieķēru @kalninsjuris7 Merch #jk7Merch', url: string = 'https://www.kalninsmerch.com/') {
-    // this.openShareWindow(`https://twitter.com/share?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
+    this.openShareWindow(`https://twitter.com/share?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`);
   }
 
   shareOnFacebook(url: string = 'https://www.kalninsmerch.com/') {
-    // this.openShareWindow(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+    this.openShareWindow(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
   }
 }

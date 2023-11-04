@@ -12,6 +12,7 @@ import {FbShareBtnComponent} from '../components/social-share/fb-share-btn/fb-sh
 import {XShareBtnComponent} from '../components/social-share/x-share-btn/x-share-btn.component';
 import {SvgIconFbComponent} from '../components/svg/svg-icon-fb/svg-icon-fb.component';
 import {SvgIconXComponent} from '../components/svg/svg-icon-x/svg-icon-x.component';
+import {OtherProductsComponent} from '../components/other-products/other-products.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {SvgIconXComponent} from '../components/svg/svg-icon-x/svg-icon-x.compone
     SvgIconFbComponent,
     SvgIconXComponent,
     SocialShareComponent,
+    OtherProductsComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -41,6 +43,7 @@ import {SvgIconXComponent} from '../components/svg/svg-icon-x/svg-icon-x.compone
     SvgIconFbComponent,
     SvgIconXComponent,
     SocialShareComponent,
+    OtherProductsComponent,
   ],
 })
 export class SharedModule {}

@@ -206,33 +206,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
       </div>
     </div>
 
-    <div
-      class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3  max-w-[320px] 640:max-w-[640px] 960:max-w-[960px] gap-4  768:mx-4 mt-20"
-    >
-      <div
-        *ngFor="let product of otherProducts"
-        class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card "
-        (click)="getOtherProduct(product.id)"
-      >
-        <picture>
-          <!-- AVIF format -->
-          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.avif'" type="image/avif" />
-          <!-- WebP format -->
-          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
-          <!-- Fallback PNG format -->
-          <img loading="lazy" [src]="product.imgages[0] + '.png'" alt="{{ product.name }}" />
-        </picture>
-        <div class="px-6 py-4">
-          <!-- The rest of your content -->
-        </div>
-
-        <div class="px-6 py-4 ">
-          <div class="font-bold text-xl mb-2 product-name ">
-            {{ product.name }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-other-products [otherProducts]="otherProducts" (productClick)="getOtherProduct($event)"></app-other-products>
   `,
   styles: [
     `

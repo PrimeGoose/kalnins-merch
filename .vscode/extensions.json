@@ -32,6 +32,7 @@
     "dbaeumer.vscode-eslint",
     "ms-vscode-remote.remote-containers",
     "dangmai.workspace-default-settings",
-    "tomsaunders-code.workspace-explorer"
+    "tomsaunders-code.workspace-explorer",
+    "cyrilletuzi.angular-schematics"
   ]
 }

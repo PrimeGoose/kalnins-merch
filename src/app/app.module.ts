@@ -1,7 +1,7 @@
 import { NgModule, isDevMode } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
+import {MerchHeaderComponent} from "./shared/components/merch-header/merch-header.component"; 
 // angular material
 // import { MatIconModule } from "@angular/material/icon";
 // import { MatButtonModule } from "@angular/material/button";
@@ -39,12 +39,23 @@ import { ProductHomeComponent } from "./features/products-home/product-home.comp
 import { OrderSuccessComponent } from "./shared/components/order-success/order-success.component";
 import { SocialShareComponent } from "./shared/components/social-share/social-share.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [AppComponent, ProductPageComponent, ProductHomeComponent, OrderSuccessComponent, SocialShareComponent],
+  declarations: [
+    AppComponent, 
+    ProductPageComponent,
+     ProductHomeComponent, 
+     OrderSuccessComponent, 
+     SocialShareComponent,
+  //  MerchHeaderComponent is now in shared.module.ts
+    
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
     // PinchZoomModule,
     // NgxImageZoomModule,
     // angular material

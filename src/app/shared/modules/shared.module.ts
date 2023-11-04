@@ -8,6 +8,12 @@ import {ProductCardComponent} from '../components/product-card/product-card.comp
 import {ProductImageComponent} from '../components/product-image/product-image.component';
 import {ProductNameComponent} from '../components/product-name/product-name.component';
 import {ProductPriceComponent} from '../components/product-price/product-price.component';
+import {FbShareBtnComponent} from '../components/fb-share-btn/fb-share-btn.component';
+import {XShareBtnComponent} from '../components/x-share-btn/x-share-btn.component';
+import {SvgIconFbComponent} from '../components/svg-icon-fb/svg-icon-fb.component';
+import {SvgIconXComponent} from '../components/svg-icon-x/svg-icon-x.component';
+import {SocialShareService} from '../components/social-share/social-share.service';
+
 @NgModule({
   declarations: [
     MerchHeaderComponent,
@@ -17,16 +23,25 @@ import {ProductPriceComponent} from '../components/product-price/product-price.c
     ProductImageComponent,
     ProductNameComponent,
     ProductPriceComponent,
+    FbShareBtnComponent,
+    XShareBtnComponent,
+    SvgIconFbComponent,
+    SvgIconXComponent,
+    SocialShareComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
     MerchHeaderComponent,
-    SocialShareComponent,
     OrderSuccessComponent,
     ProductCardComponent,
     ProductImageComponent,
     ProductNameComponent,
     ProductPriceComponent,
+    FbShareBtnComponent,
+    XShareBtnComponent,
+    SvgIconFbComponent,
+    SvgIconXComponent,
+    SocialShareComponent,
   ],
 })
 export class SharedModule {}

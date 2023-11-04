@@ -43,13 +43,16 @@ dependencies:
     version: 16.2.9
   angular-cli-ghpages:
     specifier: ^1.0.7
-    version: 1.0.7(@angular-devkit/architect@0.1601.8)(@angular-devkit/core@16.2.8)(@angular-devkit/schematics@16.2.8)
+    version: 1.0.7(@angular-devkit/architect@0.1601.8)(@angular-devkit/core@16.2.9)(@angular-devkit/schematics@16.2.9)
   imagemin-cli:
     specifier: ^7.0.0
     version: 7.0.0
   imagemin-mozjpeg:
     specifier: ^10.0.0
     version: 10.0.0
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   rxjs:
     specifier: ~7.8.1
     version: 7.8.1
@@ -292,6 +295,7 @@ packages:
       picomatch: 2.3.1
       rxjs: 7.8.1
       source-map: 0.7.4
+    dev: true
 
   /@angular-devkit/core@16.2.9:
     resolution: {integrity: sha512-dcHWjHBNGm3yCeNz19y8A1At4KgyC6XHNnbFL0y+nnZYiaESXjUoXJYKASedI6A+Bpl0HNq2URhH6bL6Af3+4w==}
@@ -321,6 +325,7 @@ packages:
       rxjs: 7.8.1
     transitivePeerDependencies:
       - chokidar
+    dev: true
 
   /@angular-devkit/schematics@16.2.9:
     resolution: {integrity: sha512-lB51CGCILpcSI37CwKUAGDLxMqh7zmuRbiPo9s9mSkCM4ccqxFlaL+VFTq2/laneARD6aikpOHnkVm5myNzQPw==}
@@ -3382,7 +3387,7 @@ packages:
       require-from-string: 2.0.2
       uri-js: 4.4.1
 
-  /angular-cli-ghpages@1.0.7(@angular-devkit/architect@0.1601.8)(@angular-devkit/core@16.2.8)(@angular-devkit/schematics@16.2.8):
+  /angular-cli-ghpages@1.0.7(@angular-devkit/architect@0.1601.8)(@angular-devkit/core@16.2.9)(@angular-devkit/schematics@16.2.9):
     resolution: {integrity: sha512-7uq+NSqmhVBnA1uimVQVoQfXP80aSJc/nZGdRUiADcTeRQFPamaQUbh4bn2EHiC9TJn44lDOEGnzdhAej0wz6w==}
     hasBin: true
     peerDependencies:
@@ -3391,8 +3396,8 @@ packages:
       '@angular-devkit/schematics': ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@angular-devkit/architect': 0.1601.8
-      '@angular-devkit/core': 16.2.8(chokidar@3.5.3)
-      '@angular-devkit/schematics': 16.2.8
+      '@angular-devkit/core': 16.2.9
+      '@angular-devkit/schematics': 16.2.9
       commander: 3.0.2
       fs-extra: 9.1.0
       gh-pages: 3.2.3
@@ -3466,6 +3471,7 @@ packages:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+    dev: true
 
   /aproba@2.0.0:
     resolution: {integrity: sha512-lYe4Gx7QT+MKGbDsA+Z+he/Wtef0BiwDOlK/XkBrdfsh9J/jPPXbX0tE9x9cl27Tmu5gg3QUbUrQYa/y+KOHPQ==}
@@ -3724,6 +3730,7 @@ packages:
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
+    dev: true
 
   /bl@1.2.3:
     resolution: {integrity: sha512-pvcNpa0UU69UT341rO6AYy4FVAIkUHuZXRIWbq+zHnsVcRzDDjIAhGuuYoi0d//cwIwtt4pkpKycWEfjdV+vww==}
@@ -3992,6 +3999,7 @@ packages:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
 
   /chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -5362,6 +5370,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /function-bind@1.1.2:
@@ -6115,6 +6124,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       binary-extensions: 2.2.0
+    dev: true
 
   /is-core-module@2.13.0:
     resolution: {integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==}
@@ -7206,6 +7216,7 @@ packages:
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
@@ -7942,6 +7953,12 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: false
+
   /pretty-bytes@5.6.0:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
@@ -8167,6 +8184,7 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    dev: true
 
   /redent@1.0.0:
     resolution: {integrity: sha512-qtW5hKzGQZqKoh6JNSD+4lfitfPKGz42e6QwiRmPM5mmKtR0N41AbJRYu0xJi7nhOJ4WDgRkKvAk6tw4WIwR4g==}

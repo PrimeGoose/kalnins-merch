@@ -2,6 +2,7 @@
   "name": "kalnins-merch",
   "version": "0.0.1",
   "scripts": {
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.html\" \"src/**/*.scss\" \"src/**/*.css\" \"src/**/*.json\" \"src/**/*.md\" \"src/**/*.js\" \"src/**/*.mjs\" \"src/**/*.yaml\" \"src/**/*.yml\" \"src/**/*.xml\" \"src/**/*.svg\"",
     "start": "ng s",
     "build": "ng build --configuration production --base-href /",
     "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com",
@@ -25,6 +26,7 @@
     "angular-cli-ghpages": "^1.0.7",
     "imagemin-cli": "^7.0.0",
     "imagemin-mozjpeg": "^10.0.0",
+    "prettier": "^3.0.3",
     "rxjs": "~7.8.1",
     "sharp": "^0.32.6",
     "tslib": "^2.6.2",

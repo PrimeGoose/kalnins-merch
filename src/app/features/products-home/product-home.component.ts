@@ -1,8 +1,8 @@
 // product-home.component.ts
 
 import { Component, OnInit } from "@angular/core";
-import { Product } from "../product.service";
-import { ProductService } from "../product.service";
+import { Product } from "../../core/services/product.service";
+import { ProductService } from "../../core/services/product.service";
 import { Router } from "@angular/router";
 
 @Component({

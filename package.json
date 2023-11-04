@@ -2,12 +2,12 @@
   "name": "kalnins-merch",
   "version": "0.0.1",
   "scripts": {
+    "start": "ng s",
     "build": "ng build --configuration production --base-href /",
     "deploy": "ngh  deploy --dir=./dist/kalnins-merch/  --build-target=production -c www.kalninsmerch.com",
-
     "convert-png-to-webp": "node convert-png-to-webp.mjs",
     "convert-png-to-avif": "node convert-png-to-avif.mjs"
-  }, 
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.11",
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.2.11",
     "@angular/router": "^16.2.11",
     "@angular/service-worker": "^16.2.11",
+    "angular-cli-ghpages": "^1.0.7",
     "imagemin-cli": "^7.0.0",
     "imagemin-mozjpeg": "^10.0.0",
     "rxjs": "~7.8.1",

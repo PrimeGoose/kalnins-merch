@@ -34,10 +34,10 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { ProductPageComponent } from "./product-page/product-page.component";
-import { ProductHomeComponent } from "./products-home/product-home.component";
-import { OrderSuccessComponent } from "./order-success/order-success.component";
-import { SocialShareComponent } from "./social-share/social-share.component";
+import { ProductPageComponent } from "./features/product-page/product-page.component";
+import { ProductHomeComponent } from "./features/products-home/product-home.component";
+import { OrderSuccessComponent } from "./shared/components/order-success/order-success.component";
+import { SocialShareComponent } from "./shared/components/social-share/social-share.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 
 @NgModule({

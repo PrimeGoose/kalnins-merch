@@ -16,19 +16,17 @@ import {Product} from 'src/app/core/services/product.service';
   `,
   styles: [
     `
+     
       :host {
-        text-align: center;
-      }
       
-      .product-card {
-        /* display: grid;
+        text-align: center;
+        display: grid; 
         font-family: 'Arial', sans-serif;
-        background: radial-gradient(circle at center, lightgray, transparent);
-        padding: 15px;
+     
         border-radius: 5px;
-        transition: transform 0.3s ease-in-out; */
+        transition: transform 0.3s ease-in-out; 
       }
-
+   
       /* Product name on the card */
       .product-name {
         color: gray; /* Light gray */
@@ -50,6 +48,7 @@ import {Product} from 'src/app/core/services/product.service';
 
       .hover-effect:hover {
         transform: scale(1.05);
+        background: radial-gradient(circle at center, #d3d3d37a, transparent);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
     `,

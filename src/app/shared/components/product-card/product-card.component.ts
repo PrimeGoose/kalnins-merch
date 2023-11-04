@@ -10,23 +10,23 @@ import {Product} from 'src/app/core/services/product.service';
         <div class="font-bold text-xl mb-2 product-name ">
           {{ product.name }}
         </div>
-        <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
+        <p class="product-price">{{ product.sizes[0].price }} {{ product.currency }}</p>
       </div>
     </div>
   `,
   styles: [
     `
       :host {
-        display: grid;
         text-align: center;
       }
-
+      
       .product-card {
+        /* display: grid;
         font-family: 'Arial', sans-serif;
         background: radial-gradient(circle at center, lightgray, transparent);
         padding: 15px;
         border-radius: 5px;
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out; */
       }
 
       /* Product name on the card */

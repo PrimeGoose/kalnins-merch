@@ -19,7 +19,8 @@ import {ProductService} from '../../core/services/product.service';
   styles: [
     `
       :host {
-        display: flex;
+        display: grid;
+        place-items: center;
         flex-direction: column;
         align-items: center;
       }

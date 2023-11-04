@@ -16,17 +16,15 @@ import {Product} from 'src/app/core/services/product.service';
   `,
   styles: [
     `
-     
       :host {
-      
         text-align: center;
-        display: grid; 
+        display: grid;
         font-family: 'Arial', sans-serif;
-     
+
         border-radius: 5px;
-        transition: transform 0.3s ease-in-out; 
+        transition: transform 0.3s ease-in-out;
       }
-   
+
       /* Product name on the card */
       .product-name {
         color: gray; /* Light gray */

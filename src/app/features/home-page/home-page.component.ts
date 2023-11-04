@@ -34,6 +34,11 @@ import {Router} from '@angular/router';
   `,
   styles: [
     `
+      :host {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
       .product-card {
         font-family: 'Arial', sans-serif;
         background: radial-gradient(circle at center, lightgray, transparent);

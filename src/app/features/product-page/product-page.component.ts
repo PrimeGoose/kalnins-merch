@@ -240,7 +240,6 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 90%;
       }
       /* other */
 

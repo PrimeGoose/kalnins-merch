@@ -1,54 +1,25 @@
 import { NgModule, isDevMode } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import {MerchHeaderComponent} from "./shared/components/merch-header/merch-header.component"; 
-// angular material
-// import { MatIconModule } from "@angular/material/icon";
-// import { MatButtonModule } from "@angular/material/button";
-// import { MatToolbarModule } from "@angular/material/toolbar";
-// import { MatCardModule } from "@angular/material/card";
-// import { MatBadgeModule } from "@angular/material/badge";
-// import { MatButtonToggleModule } from "@angular/material/button-toggle";
-// import { MatListModule } from "@angular/material/list";
-// import { MatCheckboxModule } from "@angular/material/checkbox";
-// import { MatChipsModule } from "@angular/material/chips";
-// import { MatDividerModule } from "@angular/material/divider";
-// import { MatExpansionModule } from "@angular/material/expansion";
-// import { MatSelectModule } from "@angular/material/select";
-// import { MatInputModule } from "@angular/material/input";
-// import { MatFormFieldModule } from "@angular/material/form-field";
-// import { MatGridListModule } from "@angular/material/grid-list";
-// import { MatMenuModule } from "@angular/material/menu";
-// import { MatRadioModule } from "@angular/material/radio";
-// import { MatRippleModule } from "@angular/material/core";
-// import { MatSidenavModule } from "@angular/material/sidenav";
-// import { MatSlideToggleModule } from "@angular/material/slide-toggle";
-// import { MatSliderModule } from "@angular/material/slider";
-// import { MatSnackBarModule } from "@angular/material/snack-bar";
-// import { MatTabsModule } from "@angular/material/tabs";
-// import { MatTooltipModule } from "@angular/material/tooltip";
-// import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
-// import { MatDialogModule } from "@angular/material/dialog";
-
 import { BrowserModule } from "@angular/platform-browser";
-
+// aap routing module and component
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+//feature modules
 import { ProductPageComponent } from "./features/product-page/product-page.component";
 import { ProductHomeComponent } from "./features/products-home/product-home.component";
-import { OrderSuccessComponent } from "./shared/components/order-success/order-success.component";
-import { SocialShareComponent } from "./shared/components/social-share/social-share.component";
+//  angular material
+import { AngularMaterialModule } from "./shared/modules/angular-material.module";
+//  service worker
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { SharedModule } from "./shared/shared.module";
+// shared module
+import { SharedModule } from "./shared/modules/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent, 
     ProductPageComponent,
      ProductHomeComponent, 
-     OrderSuccessComponent, 
-     SocialShareComponent,
-  //  MerchHeaderComponent is now in shared.module.ts
     
     ],
   imports: [
@@ -56,11 +27,8 @@ import { SharedModule } from "./shared/shared.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    // PinchZoomModule,
-    // NgxImageZoomModule,
-    // angular material
-    // MatDialogModule,
     FormsModule,
+    AngularMaterialModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -69,31 +37,7 @@ import { SharedModule } from "./shared/shared.module";
       
       registrationStrategy: "registerWhenStable:30000",
     }),
-    // MatToolbarModule,
-    // MatButtonModule,
-    // MatIconModule,
-    // MatCardModule,
-    // MatBadgeModule,
-    // MatListModule,
-    // MatButtonToggleModule,
-    // MatCheckboxModule,
-    // MatChipsModule,
-    // MatDividerModule,
-    // MatExpansionModule,
-    // MatSelectModule,
-    // MatInputModule,
-    // MatFormFieldModule,
-    // MatGridListModule,
-    // MatMenuModule,
-    // MatRadioModule,
-    // MatRippleModule,
-    // MatSidenavModule,
-    // MatSlideToggleModule,
-    // MatSliderModule,
-    // MatSnackBarModule,
-    // MatTabsModule,
-    // MatTooltipModule,
-    // MatBottomSheetModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent],

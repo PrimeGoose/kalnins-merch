@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {SocialShareService} from '../social-share/social-share.service';
+import {SocialShareService} from '../social-share.service';
 @Component({
   selector: 'app-x-share-btn',
   template: `

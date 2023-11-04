@@ -6,9 +6,27 @@ import {SocialShareComponent} from '../components/social-share/social-share.comp
 import {OrderSuccessComponent} from '../components/order-success/order-success.component';
 import {ProductCardComponent} from '../components/product-card/product-card.component';
 import {ProductImageComponent} from '../components/product-image/product-image.component';
+import {ProductNameComponent} from '../components/product-name/product-name.component';
+import {ProductPriceComponent} from '../components/product-price/product-price.component';
 @NgModule({
-  declarations: [MerchHeaderComponent, SocialShareComponent, OrderSuccessComponent, ProductCardComponent, ProductImageComponent],
+  declarations: [
+    MerchHeaderComponent,
+    SocialShareComponent,
+    OrderSuccessComponent,
+    ProductCardComponent,
+    ProductImageComponent,
+    ProductNameComponent,
+    ProductPriceComponent,
+  ],
   imports: [CommonModule, RouterModule],
-  exports: [MerchHeaderComponent, SocialShareComponent, OrderSuccessComponent, ProductCardComponent, ProductImageComponent],
+  exports: [
+    MerchHeaderComponent,
+    SocialShareComponent,
+    OrderSuccessComponent,
+    ProductCardComponent,
+    ProductImageComponent,
+    ProductNameComponent,
+    ProductPriceComponent,
+  ],
 })
 export class SharedModule {}

@@ -15,7 +15,6 @@ import {Component, Input} from '@angular/core';
   styles: [
     `
       :host {
-        @apply w-full;
       }
     `,
   ],

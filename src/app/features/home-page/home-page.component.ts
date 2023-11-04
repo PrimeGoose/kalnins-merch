@@ -1,4 +1,4 @@
-// product-home.component.ts
+// home-page.component.ts
 
 import {Component, OnInit} from '@angular/core';
 import {Product} from '../../core/services/product.service';

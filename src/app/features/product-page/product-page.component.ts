@@ -1,38 +1,17 @@
-import {
-  Component,
-  Renderer2,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-  AfterViewInit,
-} from "@angular/core";
-import { Router } from "@angular/router";
-import { Product, Size } from "../../core/services/product.service";
-import { ProductService } from "../../core/services/product.service";
-import { RouteStateService } from "../../route-state.service";
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from "@angular/animations";
+import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Product, Size} from '../../core/services/product.service';
+import {ProductService} from '../../core/services/product.service';
+import {RouteStateService} from '../../route-state.service';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
-  selector: "app-product-page",
+  selector: 'app-product-page',
   animations: [
-    trigger("fadeInOut", [
-      state("default", style({ opacity: 1 })),
-      state("out", style({ opacity: 0 })),
-      transition("* <=> *", animate(500)),
-    ]),
+    trigger('fadeInOut', [state('default', style({opacity: 1})), state('out', style({opacity: 0})), transition('* <=> *', animate(500))]),
   ],
   template: `
-    <div
-      #productContainer
-      class="product-container flex flex-col justify-center mt-1  shadow-2xl shadow-pink-300 "
-    >
+    <div #productContainer class="product-container flex flex-col justify-center mt-1  shadow-2xl shadow-pink-300 ">
       <div
         class="image-section flex flex-col 768:grid grid-cols-[1fr,320px] content-center 768:justify-center max-w-[480px] 768:max-w-none   "
       >
@@ -49,18 +28,12 @@ import {
           (touchstart)="onSwipeStart($event)"
           class=" place-content-center  flex flex-col  overflow-hidden relative w-full  "
         >
-          <div
-            class="chevron-container z-10 w-full h-full absolute    items-center flex"
-          >
+          <div class="chevron-container z-10 w-full h-full absolute    items-center flex">
             <div
               (click)="back()"
               class="chevron-left justify-start hidden 450:flex w-9 h-16 left-0 absolute items-center hover:bg-gradient-to-r from-neutral-50 to-transparent"
             >
-              <svg
-                class="h-6 w-6 ml-4 text-slate-900 "
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg class="h-6 w-6 ml-4 text-slate-900 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                 <path
                   d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
@@ -71,11 +44,7 @@ import {
               (click)="forward()"
               class="chevron-right justify-end w-9 h-16 right-0 absolute items-center hidden 450:flex hover:bg-gradient-to-r to-neutral-50 from-transparent"
             >
-              <svg
-                class="h-6 w-6 mr-4 text-slate-900"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-              >
+              <svg class="h-6 w-6 mr-4 text-slate-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                 <path
                   d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
@@ -84,9 +53,7 @@ import {
             </div>
           </div>
 
-          <picture
-            class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover"
-          >
+          <picture class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover">
             <!-- AVIF format -->
             <source [srcset]="currentImage + '.avif'" type="image/avif" />
             <!-- WebP format -->
@@ -101,20 +68,10 @@ import {
           </picture>
         </div>
 
-        <div
-          class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]"
-        >
-          <div
-            id="order-options"
-            class="bg-gray-100  flex flex-col items-center  pt-4 pb-4    768:justify-center"
-          >
-            <div
-              id="selected-options"
-              class="flex flex-col items-center w-full "
-            >
-              <div
-                class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4"
-              >
+        <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
+          <div id="order-options" class="bg-gray-100  flex flex-col items-center  pt-4 pb-4    768:justify-center">
+            <div id="selected-options" class="flex flex-col items-center w-full ">
+              <div class="flex  w-full gap-6 flex-col 320:flex-col place-items-center mb-4">
                 <div
                   id="product-title"
                   class="768:flex flex-col  hidden
@@ -140,14 +97,8 @@ import {
 
                   <!-- Current Image -->
                   <picture>
-                    <source
-                      [srcset]="currentImage + '.avif'"
-                      type="image/avif"
-                    />
-                    <source
-                      [srcset]="currentImage + '.webp'"
-                      type="image/webp"
-                    />
+                    <source [srcset]="currentImage + '.avif'" type="image/avif" />
+                    <source [srcset]="currentImage + '.webp'" type="image/webp" />
                     <img
                       [@fadeInOut]="animationState"
                       [src]="currentImage + '.png'"
@@ -170,10 +121,7 @@ import {
                   </picture>
                 </div>
 
-                <div
-                  id="product-tag-grid"
-                  class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded"
-                >
+                <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
                   <div class="text-center font-semibold uppercase">krāsa</div>
                   <div class="text-center font-semibold uppercase">Izmērs</div>
                   <div class="text-center font-semibold uppercase">Cena</div>
@@ -191,17 +139,13 @@ import {
                   </div>
                 </div>
 
-                <div
-                  id="size-selector"
-                  class=" grid place-items-center gap-1  w-[90%]"
-                >
+                <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
                   <ng-container *ngFor="let item of sizes">
                     <button
                       *ngIf="item.available"
                       (click)="selectSize(item)"
                       [ngClass]="{
-                        'selected-button':
-                          selectedSize === item.size && item.available
+                        'selected-button': selectedSize === item.size && item.available
                       }"
                       class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 "
                     >
@@ -218,30 +162,17 @@ import {
                 </div>
               </div>
 
-              <div
-                id="order-actions"
-                class="order-commit-container flex flex-col pt-4 items-center w-full pb-4"
-              >
-                <form
-                  name="emailForm"
-                  #emailForm="ngForm"
-                  class="flex flex-col w-[90%] max-w-[320px] 768:text-xs"
-                >
-                  <label
-                    for="email"
-                    class="block text-sm 768:text-xs mb-2"
-                    [ngClass]="{ 'invalid-text': !emailValidated && email }"
-                  >
-                    <span class="text-red-600">
-                      &nbsp;{{ validationMessage }}</span
-                    >
+              <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
+                <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
+                  <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{'invalid-text': !emailValidated && email}">
+                    <span class="text-red-600"> &nbsp;{{ validationMessage }}</span>
                   </label>
                   <input
                     id="email"
                     type="email"
                     [(ngModel)]="email"
                     name="emailInput"
-                    [ngClass]="{ 'invalid-border': !emailValidated && email }"
+                    [ngClass]="{'invalid-border': !emailValidated && email}"
                     class="border rounded py-2 px-3 mb-4"
                     placeholder="Tavs e-pasts pasūtījumu veikšanai.."
                     (input)="validateEmail(email)"
@@ -262,7 +193,7 @@ import {
                   <button
                     (click)="processOrder()"
                     id="order-button"
-                    [ngClass]="{ 'shake-animation': !emailValidated }"
+                    [ngClass]="{'shake-animation': !emailValidated}"
                     class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif"
                   >
                     Pasūtīt
@@ -285,25 +216,11 @@ import {
       >
         <picture>
           <!-- AVIF format -->
-          <source
-            loading="lazy"
-            class="w-full"
-            [srcset]="product.imgages[0] + '.avif'"
-            type="image/avif"
-          />
+          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.avif'" type="image/avif" />
           <!-- WebP format -->
-          <source
-            loading="lazy"
-            class="w-full"
-            [srcset]="product.imgages[0] + '.webp'"
-            type="image/webp"
-          />
+          <source loading="lazy" class="w-full" [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
           <!-- Fallback PNG format -->
-          <img
-            loading="lazy"
-            [src]="product.imgages[0] + '.png'"
-            alt="{{ product.name }}"
-          />
+          <img loading="lazy" [src]="product.imgages[0] + '.png'" alt="{{ product.name }}" />
         </picture>
         <div class="px-6 py-4">
           <!-- The rest of your content -->
@@ -328,7 +245,7 @@ import {
       /* other */
 
       .product-card {
-        font-family: "Arial", sans-serif;
+        font-family: 'Arial', sans-serif;
         background: radial-gradient(circle at center, lightgray, transparent);
         padding: 15px;
         border-radius: 5px;
@@ -359,8 +276,13 @@ import {
 
       /* other */
       button {
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s,
-          font-size 0.3s, font-weight 0.3s, opacity 0.3s; /* transition added */
+        transition:
+          background-color 0.3s,
+          color 0.3s,
+          border-color 0.3s,
+          font-size 0.3s,
+          font-weight 0.3s,
+          opacity 0.3s; /* transition added */
       }
 
       .selected-button {
@@ -371,8 +293,14 @@ import {
         font-weight: bold;
         opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
         transform: scale(1.05); /* slightly larger size for a popping effect */
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s,
-          font-size 0.3s, font-weight 0.3s, opacity 0.3s, transform 0.3s; /* transition added */
+        transition:
+          background-color 0.3s,
+          color 0.3s,
+          border-color 0.3s,
+          font-size 0.3s,
+          font-weight 0.3s,
+          opacity 0.3s,
+          transform 0.3s; /* transition added */
       }
 
       .shake-animation {
@@ -415,27 +343,24 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private el: ElementRef,
     private router: Router,
     private productService: ProductService,
-    private routeStateService: RouteStateService
+    private routeStateService: RouteStateService,
   ) {}
 
-  @ViewChild("productContainer", { static: false }) productContainer:
-    | ElementRef
-    | undefined;
+  @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
   ngAfterViewInit() {}
 
-  @HostListener("window:keydown", ["$event"])
+  @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "ArrowRight") {
+    if (event.key === 'ArrowRight') {
       this.forward(); // Forward function to go to next image
-    } else if (event.key === "ArrowLeft") {
+    } else if (event.key === 'ArrowLeft') {
       this.back(); // Back function to go to previous image
     }
   }
 
   scrollToProductContainer() {
-    const yOffset =
-      this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: yOffset, behavior: "smooth" });
+    const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({top: yOffset, behavior: 'smooth'});
   }
 
   ngOnInit(): void {
@@ -452,11 +377,11 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.sizes = _product.sizes;
       this.price = _product.sizes[0].price;
       const availableSize = _product.sizes.find((item: Size) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : "";
+      this.selectedSize = availableSize ? availableSize.size : '';
 
       this.images = _product.imgages;
     } else {
-      this.router.navigate(["404"]);
+      this.router.navigate(['404']);
     }
     this.forward();
   }
@@ -475,25 +400,25 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.sizes = _product.sizes;
       this.price = _product.sizes[0].price;
       const availableSize = _product.sizes.find((item) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : "";
+      this.selectedSize = availableSize ? availableSize.size : '';
 
       this.images = _product.imgages;
     } else {
-      this.router.navigate(["404"]);
+      this.router.navigate(['404']);
     }
     this.forward();
   }
-  category: string = "";
-  name: string = "";
+  category: string = '';
+  name: string = '';
   price: number = 0;
-  color_name: string = "";
-  color_hex: string = "";
-  selectedSize: string = "";
-  sizes: { size: string; price: number; available: boolean }[] = [];
+  color_name: string = '';
+  color_hex: string = '';
+  selectedSize: string = '';
+  sizes: {size: string; price: number; available: boolean}[] = [];
   images: string[] = [];
   currentImage: string = this.images[0];
-  lastImage: string = "";
-  nextImage: string = "";
+  lastImage: string = '';
+  nextImage: string = '';
   currentImageIndex: number = 0;
 
   changeImage(index: number): void {
@@ -539,10 +464,10 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.back();
     }
   }
-  animationState = "default";
+  animationState = 'default';
 
   forward() {
-    this.animationState = "out";
+    this.animationState = 'out';
 
     let imageCount = this.images.length;
     let forwardIndex = this.currentImageIndex + 1;
@@ -551,12 +476,12 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }
     this.changeImage(forwardIndex);
     setTimeout(() => {
-      this.animationState = "default";
+      this.animationState = 'default';
     }, 300); // Reset the state back to 'default' after 1 second
   }
 
   back() {
-    this.animationState = "out";
+    this.animationState = 'out';
     let imageCount = this.images.length;
     let nextIndex = this.currentImageIndex - 1;
     if (nextIndex < 0) {
@@ -564,35 +489,33 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }
     this.changeImage(nextIndex);
     setTimeout(() => {
-      this.animationState = "default";
+      this.animationState = 'default';
     }, 300); // Reset the state back to 'default' after 1 second
   }
 
-  email: string = "";
+  email: string = '';
   emailValidated: boolean = false;
   shakeTimeout: any;
   isShaking: boolean = false;
-  validationMessage: string = "";
+  validationMessage: string = '';
 
   validateEmail(email: string) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const trimmedEmail = email.trim();
     this.emailValidated = emailPattern.test(trimmedEmail);
-    this.validationMessage = this.emailValidated
-      ? ""
-      : "lūdzu ievadi derīgu e-pastu";
+    this.validationMessage = this.emailValidated ? '' : 'lūdzu ievadi derīgu e-pastu';
   }
 
   shakeButton(invalidEmail: boolean) {
-    const buttonEl = this.el.nativeElement.querySelector("#order-button");
+    const buttonEl = this.el.nativeElement.querySelector('#order-button');
 
     if (invalidEmail && !this.isShaking) {
       this.isShaking = true;
 
-      this.renderer.addClass(buttonEl, "shake-animation");
+      this.renderer.addClass(buttonEl, 'shake-animation');
 
       this.shakeTimeout = setTimeout(() => {
-        this.renderer.removeClass(buttonEl, "shake-animation");
+        this.renderer.removeClass(buttonEl, 'shake-animation');
 
         this.isShaking = false;
       }, 1000);
@@ -604,6 +527,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.shakeButton(!this.emailValidated);
     if (!this.emailValidated) return;
     this.routeStateService.allowNavigationToSuccess();
-    this.router.navigate(["/success"]);
+    this.router.navigate(['/success']);
   }
 }

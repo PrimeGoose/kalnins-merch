@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
 
 @Component({
-  selector: "app-order-success",
+  selector: 'app-order-success',
 
   template: `
     <div class="grid h-screen place-items-center content-between text-center px-4 md:px-0">
@@ -19,7 +19,7 @@ import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
   styles: [``],
 })
 export class OrderSuccessComponent implements OnInit, OnDestroy {
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     if (window.scrollY > 0) {
       window.scrollTo(0, 0);

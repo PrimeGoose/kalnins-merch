@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from '@angular/core';
 
 export type Size = {
   size: string;
@@ -25,7 +25,7 @@ export type Product = {
   material?: string;
 };
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ProductService {
   products: Product[] = [];
@@ -36,7 +36,7 @@ export class ProductService {
 
   fetchProductsJson() {
     // assets/products.json
-    fetch("assets/products.json")
+    fetch('assets/products.json')
       .then((response) => response.json())
       .then((data) => {
         this.products.push(...data);

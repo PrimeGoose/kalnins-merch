@@ -1,16 +1,15 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { RouteGuard } from "./core/guards/route.guard"; 
-import { ProductPageComponent } from "./features/product-page/product-page.component";
-import { HomePageComponent } from "./features/home-page/home-page.component";
-import { OrderSuccessComponent } from "./shared/components/order-success/order-success.component";
-
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {RouteGuard} from './core/guards/route.guard';
+import {ProductPageComponent} from './features/product-page/product-page.component';
+import {HomePageComponent} from './features/home-page/home-page.component';
+import {OrderSuccessComponent} from './shared/components/order-success/order-success.component';
 
 const routes: Routes = [
-  { path: "product", component: ProductPageComponent },
-  { path: "success", component: OrderSuccessComponent, canActivate: [RouteGuard] },
-  { path: "", component: HomePageComponent, pathMatch: "full" }, // Default route
-  { path: "**", redirectTo: "", pathMatch: "full" }, // Catch-all route
+  {path: 'product', component: ProductPageComponent},
+  {path: 'success', component: OrderSuccessComponent, canActivate: [RouteGuard]},
+  {path: '', component: HomePageComponent, pathMatch: 'full'}, // Default route
+  {path: '**', redirectTo: '', pathMatch: 'full'}, // Catch-all route
 ];
 
 @NgModule({

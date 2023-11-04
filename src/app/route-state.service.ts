@@ -1,9 +1,9 @@
 // route-state.service.ts
 
-import { Injectable } from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class RouteStateService {
   public canNavigateToSuccess: boolean = false;

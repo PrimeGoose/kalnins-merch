@@ -1,16 +1,14 @@
 // product-home.component.ts
 
-import { Component, OnInit } from "@angular/core";
-import { Product } from "../../core/services/product.service";
-import { ProductService } from "../../core/services/product.service";
-import { Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Product} from '../../core/services/product.service';
+import {ProductService} from '../../core/services/product.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: "app-home-page",
+  selector: 'app-home-page',
   template: `
-    <div
-      class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3 gap-4    max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]"
-    >
+    <div class="grid grid-cols-1   640:grid-cols-2 960:grid-cols-3 gap-4    max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]">
       <div
         *ngFor="let product of products"
         class="cursor-pointer rounded overflow-hidden shadow-lg hover-effect product-card"
@@ -23,22 +21,13 @@ import { Router } from "@angular/router";
           <!-- WebP format -->
           <source [srcset]="product.imgages[0] + '.webp'" type="image/webp" />
 
-          <img
-            class="w-full"
-            loading="lazy"
-            height="300px"
-            width="300px"
-            [src]="product.imgages[0] + '.png'"
-            alt="Product image"
-          />
+          <img class="w-full" loading="lazy" height="300px" width="300px" [src]="product.imgages[0] + '.png'" alt="Product image" />
         </picture>
         <div class="px-6 py-4 ">
           <div class="font-bold text-xl mb-2 product-name ">
             {{ product.name }}
           </div>
-          <p class="product-price">
-            Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}
-          </p>
+          <p class="product-price">Cenas sākot no {{ product.sizes[0].price }} {{ product.currency }}</p>
         </div>
       </div>
     </div>
@@ -46,7 +35,7 @@ import { Router } from "@angular/router";
   styles: [
     `
       .product-card {
-        font-family: "Arial", sans-serif;
+        font-family: 'Arial', sans-serif;
         background: radial-gradient(circle at center, lightgray, transparent);
         padding: 15px;
         border-radius: 5px;
@@ -81,7 +70,10 @@ import { Router } from "@angular/router";
 })
 export class HomePageComponent implements OnInit {
   products: Product[] = [];
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+  ) {}
   ngOnInit(): void {
     this.products = this.productService.getAllProducts();
   }
@@ -94,10 +86,10 @@ export class HomePageComponent implements OnInit {
     const imgElement = event.target as HTMLImageElement;
     const img = new Image();
 
-    img.src = imagePath + ".jpg";
+    img.src = imagePath + '.jpg';
 
     img.onload = () => {
-      imgElement.src = imagePath + ".jpg";
+      imgElement.src = imagePath + '.jpg';
     };
   }
 }

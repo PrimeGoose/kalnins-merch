@@ -2,34 +2,34 @@ import {NgModule, isDevMode} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
-// aap routing module and component
+// App routing module and component
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-//feature modules
-import {ProductPageComponent} from './features/product-page/product-page.component';
+// Feature modules
 import {HomePageComponent} from './features/home-page/home-page.component';
-//  angular material
+// Angular material
 import {AngularMaterialModule} from './shared/modules/angular-material.module';
-//  service worker
+// Service worker
 import {ServiceWorkerModule} from '@angular/service-worker';
-// shared module
+// Shared module
 import {SharedModule} from './shared/modules/shared.module';
+import {ProductPageModule} from './features/product-page/product-page/product-page.module';
 
 @NgModule({
-  declarations: [AppComponent, ProductPageComponent, HomePageComponent],
+  declarations: [AppComponent, HomePageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule,
+    SharedModule, // Correct this if it's indicated as an error, ensure SharedModule is error-free
+
     FormsModule,
     AngularMaterialModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+
+    ProductPageModule, // Ensure that ProductPageModule doesn't redeclare SharedModule's components
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],

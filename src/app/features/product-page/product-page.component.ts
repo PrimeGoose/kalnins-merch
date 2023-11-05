@@ -139,12 +139,12 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.selected.price = item.price;
   }
 
-  onSwipeStart(e: TouchEvent) {
+  swipeStart(e: TouchEvent) {
     const touch = e.changedTouches[0];
     this.swipe.start = touch.clientX;
   }
 
-  onSwipeEnd(e: TouchEvent) {
+  swipeEnd(e: TouchEvent) {
     const touch = e.changedTouches[0];
     this.swipe.end = touch.clientX;
     const swipe_distance = this.swipe.end - this.swipe.start;
@@ -156,6 +156,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onForwardClick() {
+    this.forward();
+  }
   forward() {
     this.animation.state = 'out';
     // Ensure there's at least one product and it has images.
@@ -171,6 +174,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }, 300); // Reset the animation state after the transition.
   }
 
+  onBackClick() {
+    this.back();
+  }
   back() {
     this.animation.state = 'out';
 

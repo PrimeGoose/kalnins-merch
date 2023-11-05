@@ -2,7 +2,11 @@ import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-product-category',
-  template: ` <p>product-category works!</p> `,
+  template: `
+    <div class="product-category">
+      <span class="product-category__text">{{ category }}</span>
+    </div>
+  `,
   styles: [],
 })
 export class ProductCategoryComponent {

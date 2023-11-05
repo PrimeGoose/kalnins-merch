@@ -51,7 +51,7 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": [
+    "images": [
       "../assets/dod-naudu-dauni/dod-naudu-dauni-1",
       "../assets/dod-naudu-dauni/dod-naudu-dauni-2",
       "../assets/dod-naudu-dauni/dod-naudu-dauni-3",
@@ -110,7 +110,7 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": ["../assets/disraik/disraik-blue-1", "../assets/disraik/disraik-blue-2"]
+    "images": ["../assets/disraik/disraik-blue-1", "../assets/disraik/disraik-blue-2"]
   },
   {
     "category": "T-krekls",
@@ -164,7 +164,7 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": ["../assets/disraik/disraik-white-1"]
+    "images": ["../assets/disraik/disraik-white-1"]
   },
   {
     "category": "Soma",
@@ -218,7 +218,7 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": ["../assets/bag/eco-tote-bag-black-1", "../assets/bag/eco-tote-bag-black-2"]
+    "images": ["../assets/bag/eco-tote-bag-black-1", "../assets/bag/eco-tote-bag-black-2"]
   },
   {
     "category": "krekliņš",
@@ -272,7 +272,7 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": ["../assets/tank-top/tank-top-vemj-1", "../assets/tank-top/tank-top-vemj-2"]
+    "images": ["../assets/tank-top/tank-top-vemj-1", "../assets/tank-top/tank-top-vemj-2"]
   },
   {
     "category": "T-krekls",
@@ -326,6 +326,6 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "imgages": ["../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-3"]
+    "images": ["../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-3"]
   }
 ]

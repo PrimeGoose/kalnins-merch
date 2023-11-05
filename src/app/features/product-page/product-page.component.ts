@@ -5,6 +5,9 @@ import {Product, Size, ProductService} from '../../core/services/product.service
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
+import { Subject } from 'rxjs';
+
+
 @Component({
   selector: 'app-product-page',
   animations: [
@@ -17,9 +20,9 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
       >
         <!-- pruduct title -->
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
-          <app-product-category [category]="product.category"></app-product-category>
-          <app-product-name [name]="product.name"></app-product-name>
-          <app-product-price [price]="price" [currency]="product.currency"></app-product-price>
+          <app-product-category [category]="selected.category"></app-product-category>
+          <app-product-name [name]="selected.name"></app-product-name>
+          <app-product-price [price]="selected.price" [currency]="selected.currency"></app-product-price>
         </div>
 
         <div
@@ -43,7 +46,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
             </div>
           </div>
 
-          <app-product-image [imagePath]="currentImage"></app-product-image>
+          <app-product-image [imagePath]="selected.currentImage"></app-product-image>
         </div>
 
         <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
@@ -55,16 +58,16 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
                   class="768:flex flex-col  hidden
                items-center 1024:flex w-80 pt-3  "
                 >
-                  <app-product-category [category]="product.category"></app-product-category>
-                  <app-product-name [name]="product.name"></app-product-name>
+                  <app-product-category [category]="selected.category"></app-product-category>
+                  <app-product-name [name]="selected.name"></app-product-name>
                 </div>
 
                 <div class="flex flex-row ">
-                  <app-product-image [imagePath]="lastImage"></app-product-image>
+                  <app-product-image (click)="back()" [imagePath]="selected.previousImage"></app-product-image>
 
-                  <app-product-image [imagePath]="currentImage"></app-product-image>
+                  <app-product-image [imagePath]="selected.currentImage"></app-product-image>
 
-                  <app-product-image [imagePath]="nextImage"></app-product-image>
+                  <app-product-image (click)="forward()" [imagePath]="selected.nextImage"></app-product-image>
                 </div>
 
                 <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
@@ -74,24 +77,24 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 
                   <div class="text-center">
                     <div class="text-center">
-                      <span>{{ product.color_name }}</span>
+                      <span>{{ selected.color_name }}</span>
                     </div>
                   </div>
                   <div class="text-center">
-                    <span>{{ selectedSize }}</span>
+                    <span>{{ selected.size }}</span>
                   </div>
                   <div class="text-center">
-                    <span>{{ price }} €</span>
+                    <span>{{ selected.price }} €</span>
                   </div>
                 </div>
 
                 <div id="size-selector" class=" grid place-items-center gap-1  w-[90%]">
-                  <ng-container *ngFor="let item of sizes">
+                  <ng-container *ngFor="let item of selected.sizes">
                     <button
                       *ngIf="item.available"
                       (click)="selectSize(item)"
                       [ngClass]="{
-                        'selected-button': selectedSize === item.size && item.available
+                        'selected-button': selected.size === item.size && item.available
                       }"
                       class=" border-x-2 border-y-2 768:flex-row 768:place-content-around  rounded-none  flex flex-col place-items-center justify-center h-10 w-full  border-slate-400 "
                     >
@@ -110,20 +113,23 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 
               <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
                 <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
-                  <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{'invalid-text': !emailValidated && email}">
-                    <span class="text-red-600"> &nbsp;{{ validationMessage }}</span>
+                  <label
+                    for="email"
+                    class="block text-sm 768:text-xs mb-2"
+                    [ngClass]="{'invalid-text': !user.emailValidated && user.email}"
+                  >
+                    <span class="text-red-600"> &nbsp;{{ user.validationMessage }}</span>
                   </label>
                   <input
                     id="email"
                     type="email"
-                    [(ngModel)]="email"
+                    [(ngModel)]="user.email"
                     name="emailInput"
-                    [ngClass]="{'invalid-border': !emailValidated && email}"
+                    [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
                     class="border rounded py-2 px-3 mb-4"
                     placeholder="Tavs e-pasts pasūtījumu veikšanai.."
-                    (input)="validateEmail(email)"
+                    (input)="validateEmail(user.email)"
                   />
-
                   <label for="nickname" class="block  mb-2 text-lg text-black">
                     Visiem Rojālajiem
                     <span class="text-red-600 ">-15% ATLAIDE</span>
@@ -139,12 +145,13 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
                   <button
                     (click)="processOrder()"
                     id="order-button"
-                    [ngClass]="{'shake-animation': !emailValidated}"
+                    [ngClass]="{'shake-animation': !user.emailValidated}"
                     class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif"
                   >
                     Pasūtīt
                   </button>
                 </form>
+                -
               </div>
             </div>
           </div>
@@ -152,7 +159,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
       </div>
     </div>
 
-    <app-other-products [otherProducts]="products" (productClick)="scrollToProductContainer()"></app-other-products>
+    <app-other-products [otherProducts]="products" (productClick)="scrollToProductContainer($event)"></app-other-products>
   `,
   styles: [
     `
@@ -254,45 +261,93 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ],
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
-  @Input() product: Product = {} as Product;
-  products: Product[] = [];
-  sizes: Size[] = [];
-  images: string[] = ['assets/dod-naudu-dauni/dod-naudu-dauni-1'];
-  lastImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
-  currentImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
-  nextImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
-  currentImageIndex: number = 0;
-  selectedSize: string = '';
-  price: number = 0;
-  email: string = '';
-  emailValidated: boolean = false;
-  shakeTimeout: any;
-  isShaking: boolean = false;
-  validationMessage: string = '';
-
-  swipeStart: number = 0;
-  swipeEnd: number = 0;
-  swipeTreshold: number = 50;
-  animationState = 'default';
-
-
-  async ngOnInit() {
-this.products = await this.productService.getAllProducts();  
-this.product = this.products[0];
-}
-
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router,
     private productService: ProductService,
     private routeStateService: RouteStateService,
-  ) {
+  ) {}
 
+  @Input() id = 0;
+  @Input() products: Product[] = [];
 
+  product: Product = {} as Product;
 
-    this.forward();
+  private productClickSubject = new Subject<number>(); //
+
+  selected = {
+    name: '',
+    price: 0,
+    currency: '',
+    category: '',
+    sizes: [] as Size[],
+    color_name: '',
+
+    size: '',
+    images: [] as string[],
+    previousImage: '',
+    currentImage: '',
+    currentImageIndex: 0,
+    nextImage: '',
+  };
+
+  private initializeProduct(product: Product) {
+    this.product = product;
+    this.selected = {
+      name: product.name || 'ss',
+      price: product.sizes[0].price,
+      size: product.sizes[0].size,
+      images: product.images,
+      currentImageIndex: 0,
+      currentImage: product.images[0] || '',
+      nextImage: product.images[1] || '', // Check for the next image or default to empty string
+      previousImage: product.images[product.images.length - 1] || '', // Check for the previous image or default to empty string
+      sizes: product.sizes,
+      currency: product.currency,
+      category: product.category,
+      color_name: product.color_name,
+    };
   }
+
+  user = {
+    email: '',
+    nickname: '',
+    emailValidated: false,
+    validationMessage: '',
+  };
+
+  swipe = {
+    start: 0,
+    end: 0,
+    treshold: 50,
+  };
+
+  animation: {state: string; isShaking: boolean; shakeTimeout: number} = {
+    state: 'default',
+    isShaking: false,
+    shakeTimeout: 300,
+  };
+  ngOnInit() {
+    this.productService.getAllProducts().then((products) => {
+      if (products && products.length > 0) {
+        this.initializeProduct(products[0]);
+      }
+    }).catch((error) => {
+      // Handle any errors here
+    });
+  
+    // Listen for product selection changes
+    this.productClickSubject.subscribe({
+      next: (productId: number) => {
+        const product = this.products.find(p => p.id === productId);
+        if (product) {
+          this.initializeProduct(product);
+        }
+      }
+    });
+  }
+  
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
   ngAfterViewInit() {}
@@ -306,107 +361,114 @@ this.product = this.products[0];
     }
   }
 
-  scrollToProductContainer() {
-    const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
+  scrollToProductContainer(id: number) {
+    this.productClickSubject.next(id);
+    const productElement = document.getElementById(`product-${id}`); // Ensure your product elements have corresponding ids
+    const yOffset = productElement ? productElement.getBoundingClientRect().top + window.scrollY : 0;
     window.scrollTo({top: yOffset, behavior: 'smooth'});
+    this.product = this.products.find((p) => p.id === id) || this.product;
   }
 
   changeImage(index: number): void {
-    this.currentImageIndex = index;
-    this.currentImage = this.images[index];
-    const imageCount = this.images.length;
-    if (index === 0) {
-      this.lastImage = this.images[imageCount - 1];
-      this.nextImage = this.images[index + 1];
-    } else if (index === imageCount - 1) {
-      this.lastImage = this.images[index - 1];
-      this.nextImage = this.images[0];
-    } else {
-      this.lastImage = this.images[index - 1];
-      this.nextImage = this.images[index + 1];
-    }
+    // First, check if there are products and the first product has images.
+    if (!this.products.length || !this.products[0].images) return;
+
+    // Use this.products[0] instead of this.product[0] because this.products is the array.
+    let images = this.products[0].images;
+    let imageCount = images.length;
+
+    // Ensure the index is within the bounds of the images array.
+    if (index < 0 || index >= imageCount) return;
+
+    // Set the current image based on the provided index.
+    this.selected.currentImageIndex = index;
+    this.selected.currentImage = images[index];
+
+    // Adjust the previous and next images based on the current index.
+    this.selected.previousImage = index === 0 ? images[imageCount - 1] : images[index - 1];
+    this.selected.nextImage = index === imageCount - 1 ? images[0] : images[index + 1];
   }
 
   selectSize(item: Size) {
-    this.price = item.price;
-    this.selectedSize = item.size;
+    this.selected.size = item.size;
+    this.selected.price = item.price;
   }
-
-
 
   onSwipeStart(e: TouchEvent) {
     const touch = e.changedTouches[0];
-    this.swipeStart = touch.clientX;
+    this.swipe.start = touch.clientX;
   }
 
   onSwipeEnd(e: TouchEvent) {
-    if (!this.images) return;
     const touch = e.changedTouches[0];
-    this.swipeEnd = touch.clientX;
-    const swipe_distance = this.swipeEnd - this.swipeStart;
+    this.swipe.end = touch.clientX;
+    const swipe_distance = this.swipe.end - this.swipe.start;
     const abs_swipeDistance = Math.abs(swipe_distance);
-    if (swipe_distance > 0 && abs_swipeDistance > this.swipeTreshold) {
+    if (swipe_distance > 0 && abs_swipeDistance > this.swipe.treshold) {
       this.forward();
-    } else if (swipe_distance < 0 && abs_swipeDistance > this.swipeTreshold) {
+    } else if (swipe_distance < 0 && abs_swipeDistance > this.swipe.treshold) {
       this.back();
     }
   }
 
   forward() {
-    this.animationState = 'out';
-    let imageCount = this.images.length;
-    let forwardIndex = this.currentImageIndex + 1;
+    this.animation.state = 'out';
+    // Ensure there's at least one product and it has images.
+    if (!this.products.length || !this.products[0].images) return;
+    let imageCount = this.products[0].images.length; // Corrected to this.products[0]
+    let forwardIndex = this.selected.currentImageIndex + 1;
     if (forwardIndex >= imageCount) {
-      forwardIndex = 0;
+      forwardIndex = 0; // If it exceeds the array length, loop back to the first image.
     }
     this.changeImage(forwardIndex);
     setTimeout(() => {
-      this.animationState = 'default';
-    }, 300); // Reset the state back to 'default' after 1 second
+      this.animation.state = 'default';
+    }, 300); // Reset the animation state after the transition.
   }
 
   back() {
-    this.animationState = 'out';
-    let imageCount = this.images.length;
-    let nextIndex = this.currentImageIndex - 1;
+    this.animation.state = 'out';
+
+    // Ensure that there are products and images available to go back through.
+    if (!this.products.length || !this.products[0].images) return;
+    let imageCount = this.products[0].images.length; // Corrected to this.products[0]
+
+    // Calculate the index for the previous image.
+    let nextIndex = this.selected.currentImageIndex - 1;
     if (nextIndex < 0) {
-      nextIndex = imageCount - 1;
+      nextIndex = imageCount - 1; // If it goes below 0, loop to the last image.
     }
     this.changeImage(nextIndex);
+
+    // Reset the animation state after a short delay to allow for the 'out' animation to play.
     setTimeout(() => {
-      this.animationState = 'default';
-    }, 300); // Reset the state back to 'default' after 1 second
+      this.animation.state = 'default';
+    }, 300);
   }
-
-
 
   validateEmail(email: string) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const trimmedEmail = email.trim();
-    this.emailValidated = emailPattern.test(trimmedEmail);
-    this.validationMessage = this.emailValidated ? '' : 'lūdzu ievadi derīgu e-pastu';
+    this.user.emailValidated = emailPattern.test(trimmedEmail);
+    this.user.validationMessage = this.user.emailValidated ? '' : 'lūdzu ievadi derīgu e-pastu';
   }
 
   shakeButton(invalidEmail: boolean) {
     const buttonEl = this.el.nativeElement.querySelector('#order-button');
-
-    if (invalidEmail && !this.isShaking) {
-      this.isShaking = true;
-
+    if (invalidEmail && !this.animation.isShaking) {
+      this.animation.isShaking = true;
       this.renderer.addClass(buttonEl, 'shake-animation');
-
-      this.shakeTimeout = setTimeout(() => {
+      this.animation.shakeTimeout = setTimeout(() => {
         this.renderer.removeClass(buttonEl, 'shake-animation');
-
-        this.isShaking = false;
+        this.animation.isShaking = false;
       }, 1000);
     }
   }
 
   processOrder() {
-    this.validateEmail(this.email);
-    this.shakeButton(!this.emailValidated);
-    if (!this.emailValidated) return;
+    this.validateEmail(this.user.email);
+    this.shakeButton(!this.user.emailValidated);
+    if (!this.user.emailValidated) return;
     this.routeStateService.allowNavigationToSuccess();
     this.router.navigate(['/success']);
   }

@@ -5,7 +5,7 @@ import {Product} from 'src/app/core/services/product.service';
   selector: 'app-product-card',
   template: `
     <div class="cursor-pointer rounded overflow-hidden shadow-lg" (click)="onClick()">
-      <app-product-image [imagePath]="product.imgages[0]"></app-product-image>
+      <app-product-image [imagePath]="product.images[0]"></app-product-image>
       <div class="px-6 py-4 ">
         <app-product-name [name]="product.name"></app-product-name>
         <app-product-price [price]="product.sizes[0].price" [currency]="product.currency"></app-product-price>

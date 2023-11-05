@@ -8,5 +8,3 @@ import {Component, Input} from '@angular/core';
 export class ProductCategoryComponent {
   @Input() category: string = 'Accessories';
 }
-
-

@@ -15,7 +15,7 @@ export type Product = {
   currency: string;
   gender: string;
   brand: string;
-  imgages: string[];
+  images: string[];
 };
 @Injectable({
   providedIn: 'root',
@@ -33,15 +33,14 @@ export class ProductService {
       .then((response) => response.json())
       .then((data) => {
         this.products.push(...data);
-        
       });
   }
   /**
    * Get all products.
    * @returns {Array} All products
    */
-   async getAllProducts():Promise<Product[]> {
-    return this.products 
+  async getAllProducts(): Promise<Product[]> {
+    return this.products;
   }
 
   /**
@@ -50,7 +49,6 @@ export class ProductService {
    * @returns {Object|null} The product or null if not found
    */
   async getProductById(id: number): Promise<Product> {
-
     const product = this.products.find((product) => product.id === id);
     if (product) {
       return product;
@@ -61,16 +59,13 @@ export class ProductService {
         category: '',
         color_hex: '',
         color_name: '',
-        sizes: [{size: '', price: 0, available: false}], 
+        sizes: [{size: '', price: 0, available: false}],
         currency: '',
-        gender  : '',
+        gender: '',
         brand: '',
-        imgages: ['assets/dod-naudu-dauni/dod-naudu-dauni-1'],
-
-
-      }
+        images: ['assets/dod-naudu-dauni/dod-naudu-dauni-1'],
+      };
     }
-
   }
 
   /**

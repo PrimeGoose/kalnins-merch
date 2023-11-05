@@ -4,7 +4,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   selector: 'app-buy-box',
   template: `
     <div
-      class="order-section flex 768:flex flex-col justify-center place-self-center ml-4 max-w-[320px] bg-gray-100  items-center pt-4 pb-4 768:justify-center"
+      class="order-section flex 768:flex flex-col justify-center place-self-center ml-4  bg-gray-100  items-center pt-4 pb-4 768:justify-center"
     >
       <app-product-category [category]="selected.category"></app-product-category>
       <app-product-name [name]="selected.name"></app-product-name>
@@ -15,6 +15,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
       <app-detail-header [selected]="selected"></app-detail-header>
 
       <!-- size selector -->
+
+      
       <app-size-selector [selected]="selected" [onSelectSize]="onSelectSize" (onSelectSize)="selectSize($event)"></app-size-selector>
 
       <!-- order form -->

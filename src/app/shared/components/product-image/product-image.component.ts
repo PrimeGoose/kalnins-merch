@@ -9,15 +9,10 @@ import {Component, Input} from '@angular/core';
       <!-- WebP format -->
       <source [srcset]="imagePath + '.webp'" type="image/webp" />
       <!-- Fallback PNG format -->
-      <img class="w-full" loading="lazy" [src]="imagePath + '.png'" alt="Product image" />
+      <img   loading="lazy" [src]="imagePath + '.png'" alt="Product image" />
     </picture>
   `,
-  styles: [
-    `
-      :host {
-      }
-    `,
-  ],
+  styleUrls: ['./product-image.component.scss']
 })
 export class ProductImageComponent {
   @Input() imagePath!: string;

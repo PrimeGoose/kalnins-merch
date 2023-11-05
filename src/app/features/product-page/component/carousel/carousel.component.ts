@@ -34,9 +34,10 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 
         <app-product-image [imagePath]="selected.currentImage"></app-product-image>
       </div>
+      <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images>
     </div>
   `,
-  styles: [],
+  styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent {
   @Input() selected: any;

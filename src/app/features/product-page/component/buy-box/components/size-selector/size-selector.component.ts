@@ -3,9 +3,9 @@ import {Component, EventEmitter, Input} from '@angular/core';
 @Component({
   selector: 'app-size-selector',
   template: `
-    <div id="size-selector" class="grid place-items-center gap-1 w-[90%] max-w-[320px]">
+    <div id="size-selector" class="grid place-items-center gap-1  max-w-[320px]">
       <ng-container *ngFor="let item of selected.sizes">
-        <button
+        <button class="transition duration-500 ease-in-out w-full"
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
@@ -18,7 +18,7 @@ import {Component, EventEmitter, Input} from '@angular/core';
 
         <button
           *ngIf="!item.available"
-          class="border-x-2 border-y-2 768:flex-row 768:place-content-around rounded-none flex flex-col place-items-center justify-center h-10 w-full text-slate-300 border-slate-300"
+          class="border-x-2 border-y-2 768:flex-row 768:place-content-around rounded-none flex flex-col place-items-center justify-center h-10 w-full text-slate-300 border-slate-300 "
         >
           {{ item.size }}
         </button>
@@ -26,8 +26,9 @@ import {Component, EventEmitter, Input} from '@angular/core';
     </div>
   `,
   styles: [
-    `
-      /* other */
+    `:host{
+        @apply w-[333px];
+    }
       button {
         transition:
           background-color 0.3s,
@@ -35,9 +36,10 @@ import {Component, EventEmitter, Input} from '@angular/core';
           border-color 0.3s,
           font-size 0.3s,
           font-weight 0.3s,
-          opacity 0.3s; /* transition added */
-      }
-
+          opacity 0.3s; 
+          
+        } 
+       
       .selected-button {
         background-color: #d45d90; /* deeper shade of pink */
         color: white;
@@ -45,7 +47,24 @@ import {Component, EventEmitter, Input} from '@angular/core';
         font-size: x-large;
         font-weight: bold;
         opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
-        transform: scale(1.05); /* slightly larger size for a popping effect */
+        transform: scale(1.0); /* slightly larger size for a popping effect */
+        transition:
+          background-color 0.3s,
+          color 0.3s,
+          border-color 0.3s,
+          font-size 0.3s,
+          font-weight 0.3s,
+          opacity 0.3s,
+          transform 0.3s; /* transition added */
+      }
+      .selected-button:hover {
+        background-color: #d45d90; /* deeper shade of pink */
+        color: white;
+        border: 2px solid #d45d90;
+        font-size: x-large;
+        font-weight: bold;
+        opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
+        transform: scale(1.1); /* slightly larger size for a popping effect */
         transition:
           background-color 0.3s,
           color 0.3s,

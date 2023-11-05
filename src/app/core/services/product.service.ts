@@ -33,6 +33,7 @@ export class ProductService {
       .then((response) => response.json())
       .then((data) => {
         this.products.push(...data);
+
       });
   }
   /**
@@ -40,7 +41,7 @@ export class ProductService {
    * @returns {Array} All products
    */
   async getAllProducts(): Promise<Product[]> {
-    return this.products;
+  return this.products;
   }
 
   /**
@@ -49,23 +50,11 @@ export class ProductService {
    * @returns {Object|null} The product or null if not found
    */
   async getProductById(id: number): Promise<Product> {
-    const product = this.products.find((product) => product.id === id);
-    if (product) {
-      return product;
-    } else {
-      return {
-        id: 0,
-        name: 'Not found',
-        category: '',
-        color_hex: '',
-        color_name: '',
-        sizes: [{size: '', price: 0, available: false}],
-        currency: '',
-        gender: '',
-        brand: '',
-        images: ['assets/dod-naudu-dauni/dod-naudu-dauni-1'],
-      };
-    }
+    const essponse = await fetch('assets/products.json');
+    const data = await essponse.json();
+    const product = data.find((item: { id: number; }) => item.id === id);
+    return product;
+
   }
 
   /**

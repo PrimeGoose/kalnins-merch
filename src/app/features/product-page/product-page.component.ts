@@ -31,11 +31,11 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   product: Product = {} as Product;
 
-  private productClickSubject = new Subject<number>(); //
+  private productClickSubject = new Subject<number>(); 
 
   selected = {
-    name: '',
-    price: 0,
+    name: 'ss',
+    price:20,
     currency: '',
     category: '',
     sizes: [] as Size[],
@@ -53,7 +53,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.product = product;
     const hasSizes = product.sizes && product.sizes.length > 0;
     const hasImages = product.images && product.images.length > 0;
-  
+
     this.selected = {
       name: product.name || '',
       price: hasSizes ? product.sizes[0].price : 0,
@@ -61,9 +61,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       images: hasImages ? product.images : [],
       currentImageIndex: 0,
       currentImage: hasImages ? product.images[0] : '',
-      nextImage: hasImages && product.images.length > 1 ? product.images[1] : '',
-      previousImage: hasImages ? product.images[product.images.length - 1] : '',
-      sizes: hasSizes ? product.sizes : [],
+      nextImage: hasImages && product.images.length > 1 ? product.images[1] : product.images[0],
+      previousImage: hasImages ? product.images[product.images.length - 1] : product.images[0],
+      sizes: product.sizes || [],
       currency: product.currency || '',
       category: product.category || '',
       color_name: product.color_name || '',
@@ -94,6 +94,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.productService.getProductById(this.id).then((product) => {
+      console.log(product);
       this.initializeProduct(product);
     });
     this.productClickSubject.subscribe((id) => {

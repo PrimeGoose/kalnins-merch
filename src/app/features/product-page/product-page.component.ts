@@ -5,8 +5,6 @@ import {Product, Size, ProductService} from '../../core/services/product.service
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
-import {Subject} from 'rxjs';
-
 @Component({
   selector: 'app-product-page',
   animations: [
@@ -28,8 +26,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   @Input() products: Product[] = [];
 
   product: Product = {} as Product;
-
-  private productClickSubject = new Subject<number>();
 
   selected = {
     name: 'ss',
@@ -87,16 +83,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     shakeTimeout: 300,
   };
 
-  ngOnInit() {
-    this.productService.getProductById(this.id).then((product) => {
-      console.log(product);
-      this.initializeProduct(product);
-    });
-    this.productClickSubject.subscribe((id) => {
-      this.productService.getProductById(id).then((product) => {
-        this.initializeProduct(product);
-      });
-    });
+  async ngOnInit() {
+    const product = await this.productService.getProductById(this.id);
+    this.initializeProduct(product);
   }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
@@ -111,20 +100,26 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  scrollToProductContainer(id: number) {
-    this.productClickSubject.next(id);
+  async scrollToProductContainer(id: number) {
+    this.product = {} as Product;
+    this.id = id;
+
     const productElement = document.getElementById(`product-${id}`); // Ensure your product elements have corresponding ids
     const yOffset = productElement ? productElement.getBoundingClientRect().top + window.scrollY : 0;
     window.scrollTo({top: yOffset, behavior: 'smooth'});
-    this.product = this.products.find((p) => p.id === id) || this.product;
+
+    const product = await this.productService.getProductById(this.id);
+    this.initializeProduct(product);
+    console.log(this.product, 'product');
+    console.log(this.selected, 'selected');
   }
 
   changeImage(index: number): void {
     // First, check if there are products and the first product has images.
-    if (!this.products.length || !this.products[0].images) return;
+    if (!this.product || !this.product.images) return;
 
     // Use this.products[0] instead of this.product[0] because this.products is the array.
-    let images = this.products[0].images;
+    let images = this.product.images;
     let imageCount = images.length;
 
     // Ensure the index is within the bounds of the images array.
@@ -164,8 +159,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   forward() {
     this.animation.state = 'out';
     // Ensure there's at least one product and it has images.
-    if (!this.products.length || !this.products[0].images) return;
-    let imageCount = this.products[0].images.length; // Corrected to this.products[0]
+    if (!this.product || !this.product.images) return;
+    let imageCount = this.product.images.length; // Corrected to this.products[0]
     let forwardIndex = this.selected.currentImageIndex + 1;
     if (forwardIndex >= imageCount) {
       forwardIndex = 0; // If it exceeds the array length, loop back to the first image.
@@ -180,8 +175,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.animation.state = 'out';
 
     // Ensure that there are products and images available to go back through.
-    if (!this.products.length || !this.products[0].images) return;
-    let imageCount = this.products[0].images.length; // Corrected to this.products[0]
+    if (!this.product || !this.product.images) return;
+    let imageCount = this.product.images.length; // Corrected to this.products[0]
 
     // Calculate the index for the previous image.
     let nextIndex = this.selected.currentImageIndex - 1;

@@ -30,8 +30,8 @@ import {ProductService} from '../../core/services/product.service';
 export class HomePageComponent implements OnInit {
   products: Product[] = [];
   constructor(private productService: ProductService) {}
-  ngOnInit(): void {
-    this.products = this.productService.getAllProducts();
+  async ngOnInit() {
+    this.products = await this.productService.getAllProducts();
   }
 
   storeProductID(id: number) {

@@ -1,7 +1,7 @@
-import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
-import {Product, Size} from '../../core/services/product.service';
-import {ProductService} from '../../core/services/product.service';
+import {Product, Size, ProductService} from '../../core/services/product.service';
+
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
@@ -17,9 +17,9 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
       >
         <!-- pruduct title -->
         <div id="product-title" class="flex flex-col  items-center 768:hidden">
-          <h1 class="text-2xl font-bold mb-2">{{ category }}</h1>
-          <h2 class="product-name text-2xl">{{ name }}</h2>
-          <p class="text-lg text-gray-700 mb-2">{{ price }}€</p>
+          <app-product-category [category]="product.category"></app-product-category>
+          <app-product-name [name]="product.name"></app-product-name>
+          <app-product-price [price]="price" [currency]="product.currency"></app-product-price>
         </div>
 
         <div
@@ -33,39 +33,17 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
               (click)="back()"
               class="chevron-left justify-start hidden 450:flex w-9 h-16 left-0 absolute items-center hover:bg-gradient-to-r from-neutral-50 to-transparent"
             >
-              <svg class="h-6 w-6 ml-4 text-slate-900 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                <path
-                  d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
-                />
-              </svg>
+              <app-chevron-left></app-chevron-left>
             </div>
             <div
               (click)="forward()"
               class="chevron-right justify-end w-9 h-16 right-0 absolute items-center hidden 450:flex hover:bg-gradient-to-r to-neutral-50 from-transparent"
             >
-              <svg class="h-6 w-6 mr-4 text-slate-900" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                <path
-                  d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
-                />
-              </svg>
+              <app-chevron-right></app-chevron-right>
             </div>
           </div>
 
-          <picture class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover">
-            <!-- AVIF format -->
-            <source [srcset]="currentImage + '.avif'" type="image/avif" />
-            <!-- WebP format -->
-            <source [srcset]="currentImage + '.webp'" type="image/webp" />
-            <!-- Fallback PNG format -->
-            <img
-              loading="lazy"
-              [src]="currentImage + '.png'"
-              alt="Product Thumbnail"
-              class="w-full swipable-image relative overflow-hidden cursor-pointer object-cover"
-            />
-          </picture>
+          <app-product-image [imagePath]="currentImage"></app-product-image>
         </div>
 
         <div class="order-section block 768:flex flex-col items-center justify-center  place-self-center ml-4 min-w-[320px]">
@@ -77,48 +55,16 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
                   class="768:flex flex-col  hidden
                items-center 1024:flex w-80 pt-3  "
                 >
-                  <h1 class="text-2xl font-bold mb-2 flex ">{{ category }}</h1>
-                  <h2 class="product-name text-2xl flex ">{{ name }}</h2>
+                  <app-product-category [category]="product.category"></app-product-category>
+                  <app-product-name [name]="product.name"></app-product-name>
                 </div>
 
                 <div class="flex flex-row ">
-                  <!-- Last Image -->
-                  <picture *ngIf="lastImage">
-                    <source [srcset]="lastImage + '.avif'" type="image/avif" />
-                    <source [srcset]="lastImage + '.webp'" type="image/webp" />
-                    <img
-                      (click)="forward()"
-                      [@fadeInOut]="animationState"
-                      [src]="lastImage + '.png'"
-                      alt="Product color preview"
-                      class="h-16"
-                    />
-                  </picture>
+                  <app-product-image [imagePath]="lastImage"></app-product-image>
 
-                  <!-- Current Image -->
-                  <picture>
-                    <source [srcset]="currentImage + '.avif'" type="image/avif" />
-                    <source [srcset]="currentImage + '.webp'" type="image/webp" />
-                    <img
-                      [@fadeInOut]="animationState"
-                      [src]="currentImage + '.png'"
-                      alt="Product color preview"
-                      class="h-16 border border-red-300 rounded-sm border-x-2 border-y-2 border-spacing-4"
-                    />
-                  </picture>
+                  <app-product-image [imagePath]="currentImage"></app-product-image>
 
-                  <!-- Next Image -->
-                  <picture *ngIf="nextImage">
-                    <source [srcset]="nextImage + '.avif'" type="image/avif" />
-                    <source [srcset]="nextImage + '.webp'" type="image/webp" />
-                    <img
-                      (click)="back()"
-                      [@fadeInOut]="animationState"
-                      [src]="nextImage + '.png'"
-                      alt="Product color preview"
-                      class="h-16"
-                    />
-                  </picture>
+                  <app-product-image [imagePath]="nextImage"></app-product-image>
                 </div>
 
                 <div id="product-tag-grid" class="grid grid-cols-3 gap-4 border border-gray-400 p-4 rounded">
@@ -128,7 +74,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 
                   <div class="text-center">
                     <div class="text-center">
-                      <span>{{ color_name }}</span>
+                      <span>{{ product.color_name }}</span>
                     </div>
                   </div>
                   <div class="text-center">
@@ -206,7 +152,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
       </div>
     </div>
 
-    <app-other-products [otherProducts]="otherProducts" (productClick)="getOtherProduct($event)"></app-other-products>
+    <app-other-products [otherProducts]="products" (productClick)="scrollToProductContainer()"></app-other-products>
   `,
   styles: [
     `
@@ -308,16 +254,45 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
   ],
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
-  id: number = 0;
-  product: Product[] = [];
-  otherProducts: Product[] = [];
+  @Input() product: Product = {} as Product;
+  products: Product[] = [];
+  sizes: Size[] = [];
+  images: string[] = ['assets/dod-naudu-dauni/dod-naudu-dauni-1'];
+  lastImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
+  currentImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
+  nextImage: string = 'assets/dod-naudu-dauni/dod-naudu-dauni-1';
+  currentImageIndex: number = 0;
+  selectedSize: string = '';
+  price: number = 0;
+  email: string = '';
+  emailValidated: boolean = false;
+  shakeTimeout: any;
+  isShaking: boolean = false;
+  validationMessage: string = '';
+
+  swipeStart: number = 0;
+  swipeEnd: number = 0;
+  swipeTreshold: number = 50;
+  animationState = 'default';
+
+
+  async ngOnInit() {
+this.products = await this.productService.getAllProducts();  
+this.product = this.products[0];
+}
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router,
     private productService: ProductService,
     private routeStateService: RouteStateService,
-  ) {}
+  ) {
+
+
+
+    this.forward();
+  }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
   ngAfterViewInit() {}
@@ -335,64 +310,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     const yOffset = this.el.nativeElement.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({top: yOffset, behavior: 'smooth'});
   }
-
-  ngOnInit(): void {
-    this.otherProducts = this.productService.getAllProducts();
-    this.id = this.productService.getProductID();
-
-    const _product = this.productService.getProductById(this.id);
-    if (_product) {
-      this.product = [_product];
-      this.category = _product.category;
-      this.name = _product.name;
-      this.color_name = _product.color_name;
-      this.color_hex = _product.color_hex;
-      this.sizes = _product.sizes;
-      this.price = _product.sizes[0].price;
-      const availableSize = _product.sizes.find((item: Size) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : '';
-
-      this.images = _product.imgages;
-    } else {
-      this.router.navigate(['404']);
-    }
-    this.forward();
-  }
-
-  getOtherProduct(id: number) {
-    this.scrollToProductContainer();
-    this.otherProducts = this.productService.getAllProducts();
-    // this.otherProducts = this.otherProducts.filter((item) => item.id !== id);
-    const _product = this.productService.getProductById(id);
-    if (_product) {
-      this.product = [_product];
-      this.category = _product.category;
-      this.name = _product.name;
-      this.color_name = _product.color_name;
-      this.color_hex = _product.color_hex;
-      this.sizes = _product.sizes;
-      this.price = _product.sizes[0].price;
-      const availableSize = _product.sizes.find((item) => item.available);
-      this.selectedSize = availableSize ? availableSize.size : '';
-
-      this.images = _product.imgages;
-    } else {
-      this.router.navigate(['404']);
-    }
-    this.forward();
-  }
-  category: string = '';
-  name: string = '';
-  price: number = 0;
-  color_name: string = '';
-  color_hex: string = '';
-  selectedSize: string = '';
-  sizes: {size: string; price: number; available: boolean}[] = [];
-  images: string[] = [];
-  currentImage: string = this.images[0];
-  lastImage: string = '';
-  nextImage: string = '';
-  currentImageIndex: number = 0;
 
   changeImage(index: number): void {
     this.currentImageIndex = index;
@@ -415,10 +332,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.selectedSize = item.size;
   }
 
-  swipeStart: number = 0;
-  swipeEnd: number = 0;
 
-  swipeTreshold: number = 50;
+
   onSwipeStart(e: TouchEvent) {
     const touch = e.changedTouches[0];
     this.swipeStart = touch.clientX;
@@ -429,7 +344,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     const touch = e.changedTouches[0];
     this.swipeEnd = touch.clientX;
     const swipe_distance = this.swipeEnd - this.swipeStart;
-
     const abs_swipeDistance = Math.abs(swipe_distance);
     if (swipe_distance > 0 && abs_swipeDistance > this.swipeTreshold) {
       this.forward();
@@ -437,11 +351,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.back();
     }
   }
-  animationState = 'default';
 
   forward() {
     this.animationState = 'out';
-
     let imageCount = this.images.length;
     let forwardIndex = this.currentImageIndex + 1;
     if (forwardIndex >= imageCount) {
@@ -466,11 +378,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     }, 300); // Reset the state back to 'default' after 1 second
   }
 
-  email: string = '';
-  emailValidated: boolean = false;
-  shakeTimeout: any;
-  isShaking: boolean = false;
-  validationMessage: string = '';
+
 
   validateEmail(email: string) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

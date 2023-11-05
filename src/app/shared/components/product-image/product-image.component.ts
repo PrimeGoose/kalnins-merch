@@ -21,4 +21,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ProductImageComponent {
   @Input() imagePath!: string;
+  @Input() altText!: string;
 }

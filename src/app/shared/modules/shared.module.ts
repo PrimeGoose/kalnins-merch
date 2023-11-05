@@ -13,6 +13,9 @@ import {XShareBtnComponent} from '../components/social-share/x-share-btn/x-share
 import {SvgIconFbComponent} from '../components/svg/svg-icon-fb/svg-icon-fb.component';
 import {SvgIconXComponent} from '../components/svg/svg-icon-x/svg-icon-x.component';
 import {OtherProductsComponent} from '../components/other-products/other-products.component';
+import {ChevronLeftComponent} from '../components/svg/chevron-left/chevron-left.component';
+import {ChevronRightComponent} from '../components/svg/chevron-right/chevron-right.component';
+import {ProductCategoryComponent} from '../components/product-category/product-category.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import {OtherProductsComponent} from '../components/other-products/other-product
     SvgIconXComponent,
     SocialShareComponent,
     OtherProductsComponent,
+    ChevronLeftComponent,
+    ChevronRightComponent,
+    ProductCategoryComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -44,6 +50,9 @@ import {OtherProductsComponent} from '../components/other-products/other-product
     SvgIconXComponent,
     SocialShareComponent,
     OtherProductsComponent,
+    ChevronLeftComponent,
+    ChevronRightComponent,
+    ProductCategoryComponent,
   ],
 })
 export class SharedModule {}

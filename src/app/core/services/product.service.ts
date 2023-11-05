@@ -6,23 +6,16 @@ export type Size = {
   available: boolean;
 };
 export type Product = {
+  sizes: Size[];
+  id: number;
   category: string;
   name: string;
   color_hex: string;
   color_name: string;
   currency: string;
-  sizes: Size[];
-  id: number;
-
   gender: string;
   brand: string;
   imgages: string[];
-  available?: boolean;
-  preorder?: boolean;
-  description?: string;
-  rating?: number;
-  reviews?: number;
-  material?: string;
 };
 @Injectable({
   providedIn: 'root',
@@ -40,14 +33,15 @@ export class ProductService {
       .then((response) => response.json())
       .then((data) => {
         this.products.push(...data);
+        
       });
   }
   /**
    * Get all products.
    * @returns {Array} All products
    */
-  getAllProducts(): Product[] {
-    return this.products;
+   async getAllProducts():Promise<Product[]> {
+    return this.products 
   }
 
   /**
@@ -55,9 +49,28 @@ export class ProductService {
    * @param {number} id - The product ID
    * @returns {Object|null} The product or null if not found
    */
-  getProductById(id: number) {
-    const product = this.products.find((p) => p.id === id);
-    return product ? product : null;
+  async getProductById(id: number): Promise<Product> {
+
+    const product = this.products.find((product) => product.id === id);
+    if (product) {
+      return product;
+    } else {
+      return {
+        id: 0,
+        name: 'Not found',
+        category: '',
+        color_hex: '',
+        color_name: '',
+        sizes: [{size: '', price: 0, available: false}], 
+        currency: '',
+        gender  : '',
+        brand: '',
+        imgages: ['assets/dod-naudu-dauni/dod-naudu-dauni-1'],
+
+
+      }
+    }
+
   }
 
   /**

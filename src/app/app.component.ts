@@ -16,9 +16,9 @@ export class AppComponent implements OnInit {
   products: Product[] = [];
 
   async ngOnInit() {
-    const product = await this.productService.getAllProducts();
-    if (product) {
-      this.products = product;
+    const products = await this.productService.getAllProducts();
+    if (products) {
+      this.products = products;
       console.log(this.products, 'productsss');
     } else {
       // Handle the case when the product is not found (maybe assign a default product or show an error)

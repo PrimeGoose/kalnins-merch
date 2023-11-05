@@ -5,8 +5,7 @@ import {Product, Size, ProductService} from '../../core/services/product.service
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
-import { Subject } from 'rxjs';
-
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -15,7 +14,6 @@ import { Subject } from 'rxjs';
   ],
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
-  
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
   constructor(
@@ -31,11 +29,11 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   product: Product = {} as Product;
 
-  private productClickSubject = new Subject<number>(); 
+  private productClickSubject = new Subject<number>();
 
   selected = {
     name: 'ss',
-    price:20,
+    price: 20,
     currency: '',
     category: '',
     sizes: [] as Size[],
@@ -70,7 +68,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     };
   }
 
-
   user = {
     email: '',
     nickname: '',
@@ -90,8 +87,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     shakeTimeout: 300,
   };
 
-
-
   ngOnInit() {
     this.productService.getProductById(this.id).then((product) => {
       console.log(product);
@@ -103,7 +98,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
   ngAfterViewInit() {}

@@ -21,47 +21,38 @@ export type Product = {
   providedIn: 'root',
 })
 export class ProductService {
+  public productID = 0;
+
   products: Product[] = [];
 
-  constructor() {
-    this.fetchProductsJson();
-  }
+  constructor() {}
 
-  fetchProductsJson() {
-    // assets/products.json
-    fetch('assets/products.json')
-      .then((response) => response.json())
-      .then((data) => {
-        this.products.push(...data);
-
-      });
-  }
   /**
    * Get all products.
    * @returns {Array} All products
    */
   async getAllProducts(): Promise<Product[]> {
-  return this.products;
+    const response = await fetch('assets/products.json');
+    const data = await response.json();
+    return data;
   }
 
   /**
    * Get product by its ID.
    * @param {number} id - The product ID
-   * @returns {Object|null} The product or null if not found
+   * @returns {Object} The product
    */
   async getProductById(id: number): Promise<Product> {
-    const essponse = await fetch('assets/products.json');
-    const data = await essponse.json();
-    const product = data.find((item: { id: number; }) => item.id === id);
+    const response = await fetch('assets/products.json');
+    const data = await response.json();
+    const product = data.find((item: {id: number}) => item.id === id);
     return product;
-
   }
 
   /**
    * Get product by its ID.
    * @param {number} id - The product ID
    */
-  public productID = 0;
   storeProductID(id: number): void {
     this.productID = id;
   }

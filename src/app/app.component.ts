@@ -4,9 +4,9 @@ import {Product, ProductService} from './core/services/product.service';
 @Component({
   selector: 'app-root',
   template: `
-    <!-- <app-merch-header></app-merch-header> -->
-    <!-- <router-outlet></router-outlet> -->
-    <app-product-page [products]="products"></app-product-page>
+    <app-merch-header></app-merch-header>
+    <router-outlet></router-outlet>
+    <!-- <app-product-page [products]="products"></app-product-page> -->
   `,
   styles: [],
 })

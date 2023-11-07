@@ -7,23 +7,23 @@
 
 .product-card {
   font-family: 'Arial', sans-serif;
-  background: radial-gradient(circle at center, lightgray, transparent);
+  // background: radial-gradient(circle at center, lightgray, transparent);
   padding: 15px;
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;
 }
 
 .product-name {
-  color: gray; /* Light gray */
+  // color: gray; /* Light gray */
   font-size: 1.3em;
   margin-bottom: 10px;
-  text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
+  // text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
 }
 
 .product-price {
   color: #0077b6;
   font-weight: bold;
-  text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
+  // text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
 }
 
 .hover-effect {

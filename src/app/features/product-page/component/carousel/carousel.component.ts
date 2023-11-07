@@ -32,7 +32,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
           </div>
         </div>
 
-        <!-- <app-product-image [imagePath]="selected.currentImage"></app-product-image> -->
+        <app-product-image class="max-h-[768px]" [imagePath]="selected.currentImage"></app-product-image>
       </div>
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>

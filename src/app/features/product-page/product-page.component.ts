@@ -22,7 +22,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private routeStateService: RouteStateService,
   ) {}
 
-  @Input() id = 0;
+   id = 0;
   @Input() products: Product[] = [];
 
   product: Product = {} as Product;
@@ -44,6 +44,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   private initializeProduct(product: Product) {
+    
     this.product = product;
     const hasSizes = product.sizes && product.sizes.length > 0;
     const hasImages = product.images && product.images.length > 0;
@@ -84,6 +85,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   async ngOnInit() {
+    this.id = this.productService.getProductID();
     const product = await this.productService.getProductById(this.id);
     this.initializeProduct(product);
   }

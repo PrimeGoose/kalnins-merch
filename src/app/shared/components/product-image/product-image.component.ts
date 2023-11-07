@@ -9,7 +9,7 @@ import {Component, Input} from '@angular/core';
       <!-- WebP format -->
       <source [srcset]="imagePath + '.webp'" type="image/webp" />
       <!-- Fallback PNG format -->
-      <img loading="lazy" [src]="imagePath + '.png'" alt="Product image" />
+      <img class="max-h-[768px]" loading="lazy" [src]="imagePath + '.png'" alt="Product image" />
     </picture>
   `,
   styleUrls: ['./product-image.component.scss'],

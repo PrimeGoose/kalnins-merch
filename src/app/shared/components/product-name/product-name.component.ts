@@ -3,15 +3,11 @@ import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-product-name',
-  template: ` <p>{{ name }}</p> `,
+  template: ` <p class="font-[900] [text-shadow:_0px_1px_2px_rgb(0_0_0_/_20%)]">{{ name }}</p> `,
   styles: [
     `
       :host {
-        color: gray;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-        text-shadow: 0.5px 0.5px 1px pink;
-        font-weight: bold;
+        /* text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
       }
     `,
   ],

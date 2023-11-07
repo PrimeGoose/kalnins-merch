@@ -9,6 +9,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -68,6 +73,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -110,7 +120,10 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "images": ["../assets/disraik/disraik-blue-1", "../assets/disraik/disraik-blue-2"]
+    "images": [
+      "../assets/disraik/disraik-blue-1",
+      "../assets/disraik/disraik-blue-2"
+    ]
   },
   {
     "category": "T-krekls",
@@ -122,6 +135,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -164,7 +182,9 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "images": ["../assets/disraik/disraik-white-1"]
+    "images": [
+      "../assets/disraik/disraik-white-1"
+    ]
   },
   {
     "category": "Soma",
@@ -176,6 +196,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -218,7 +243,10 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "images": ["../assets/bag/eco-tote-bag-black-1", "../assets/bag/eco-tote-bag-black-2"]
+    "images": [
+      "../assets/bag/eco-tote-bag-black-1",
+      "../assets/bag/eco-tote-bag-black-2"
+    ]
   },
   {
     "category": "krekliņš",
@@ -230,6 +258,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -272,7 +305,10 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "images": ["../assets/tank-top/tank-top-vemj-1", "../assets/tank-top/tank-top-vemj-2"]
+    "images": [
+      "../assets/tank-top/tank-top-vemj-1",
+      "../assets/tank-top/tank-top-vemj-2"
+    ]
   },
   {
     "category": "T-krekls",
@@ -284,6 +320,11 @@
     "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
     "sizes": [
       {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
         "size": "S",
         "price": 8.99,
         "available": true
@@ -326,6 +367,10 @@
     ],
     "gender": "unisex",
     "brand": "",
-    "images": ["../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-3"]
+    "images": [
+      "../assets/fact/lasa-faktus-par-sevi-1",
+      "../assets/fact/lasa-faktus-par-sevi-1",
+      "../assets/fact/lasa-faktus-par-sevi-3"
+    ]
   }
 ]

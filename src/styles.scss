@@ -20,8 +20,14 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: pink;
+  // background-color: pink;
+  // background-color: #f4e2e7;
+  @apply bg-background
+  
+  text-primary;
 
   user-select: none;
   -webkit-user-select: none;
 }
+
+

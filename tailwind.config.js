@@ -22,7 +22,37 @@ module.exports = {
       5760: '5760px', // @media(min - width: 5760px) { ... }
       7680: '7680px', // @media(min - width: 7680px) { ... }
     },
-    extend: {},
+    extend: {
+      colors: {
+        // Base colors
+        'primary': '#334155', // Dark Blue-Gray for primary text and elements
+        'secondary': '#64748b', // Light Blue-Gray for secondary text and elements
+        'accent': '#10b981', // Emerald for accents and call-to-actions
+
+        // Background colors
+        'background': '#f9fafb', // Very light gray for main background
+        'foreground': '#ffffff', // Pure white for card and raised element backgrounds
+
+        // Border colors
+        'border-primary': '#e2e8f0', // Light Blue-Gray for primary borders and dividers
+        'border-secondary': '#cbd5e1', // Slightly darker shade for secondary borders and outlines
+
+        // Button colors
+        'button-primary': '#3b82f6', // Blue for primary buttons
+        'button-primary-hover': '#2563eb', // Darker blue for primary button hover state
+        'button-secondary': '#d1d5db', // Lighter gray for secondary buttons
+
+        // Utility colors
+        'info': '#60a5fa', // Information messages
+        'success': '#22c55e', // Success states
+        'warning': '#facc15', // Warning states
+        'error': '#ef4444', // Error states
+
+        // Interactive colors for links, etc.
+        'interactive': '#0ea5e9', // Bright blue for interactive links or elements
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+  ],
 };

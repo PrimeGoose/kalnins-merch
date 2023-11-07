@@ -13,7 +13,7 @@ import {AngularMaterialModule} from './shared/modules/angular-material.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 // Shared module
 import {SharedModule} from './shared/modules/shared.module';
-import {ProductPageModule} from './features/product-page/product-page/product-page.module';
+import {ProductPageModule} from './features/product-page/product-page.module';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],

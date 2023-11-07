@@ -3,22 +3,26 @@ import {Component, EventEmitter, Input} from '@angular/core';
 @Component({
   selector: 'app-size-selector',
   template: `
-    <div id="size-selector" class="grid place-items-center gap-1  max-w-[320px]">
+    <div id="size-selector" class="grid grid-cols-4 place-items-center gap-1 text-[#727272]  my-4">
       <ng-container *ngFor="let item of selected.sizes">
-        <button class="transition duration-500 ease-in-out w-full"
+        <!-- Button with conditional styling based on availability and selection -->
+        <!-- Button with conditional styling based on availability and selection -->
+        <button
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
-            'selected-button': selected.size === item.size && item.available
+            'bg-pink-600 text-white border-pink-600 text-lg opacity-90 scale-100 duration-1000': selected.size === item.size && item.available,
+            ' font-[900] hover:scale-y-105 text-base  ': selected.size === item.size && item.available
           }"
-          class="border-x-2 border-y-2 768:flex-row 768:place-content-around rounded-none flex flex-col place-items-center justify-center h-10 w-full border-slate-400"
+          class=" duration-1000 font-[600]  ease-in-out border-2 rounded-none flex items-center justify-center h-11 w-11 stroke-[#ee0000]  border-[#7d7d7d52] "
         >
           {{ item.size }}
         </button>
 
+        <!-- Button when the item is not available -->
         <button
           *ngIf="!item.available"
-          class="border-x-2 border-y-2 768:flex-row 768:place-content-around rounded-none flex flex-col place-items-center justify-center h-10 w-full text-slate-300 border-slate-300 "
+          class="border-2 rounded-none flex items-center justify-center h-11 w-11 text-slate-300 border-slate-300 "
         >
           {{ item.size }}
         </button>
@@ -26,53 +30,12 @@ import {Component, EventEmitter, Input} from '@angular/core';
     </div>
   `,
   styles: [
-    `:host{
-        @apply w-[333px];
-    }
-      button {
-        transition:
-          background-color 0.3s,
-          color 0.3s,
-          border-color 0.3s,
-          font-size 0.3s,
-          font-weight 0.3s,
-          opacity 0.3s; 
-          
-        } 
-       
-      .selected-button {
-        background-color: #d45d90; /* deeper shade of pink */
-        color: white;
-        border: 2px solid #d45d90;
-        font-size: x-large;
-        font-weight: bold;
-        opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
-        transform: scale(1.0); /* slightly larger size for a popping effect */
-        transition:
-          background-color 0.3s,
-          color 0.3s,
-          border-color 0.3s,
-          font-size 0.3s,
-          font-weight 0.3s,
-          opacity 0.3s,
-          transform 0.3s; /* transition added */
-      }
-      .selected-button:hover {
-        background-color: #d45d90; /* deeper shade of pink */
-        color: white;
-        border: 2px solid #d45d90;
-        font-size: x-large;
-        font-weight: bold;
-        opacity: 0.9; /* slightly less than 1 for a subtle fade-in effect */
-        transform: scale(1.1); /* slightly larger size for a popping effect */
-        transition:
-          background-color 0.3s,
-          color 0.3s,
-          border-color 0.3s,
-          font-size 0.3s,
-          font-weight 0.3s,
-          opacity 0.3s,
-          transform 0.3s; /* transition added */
+    `
+      :host {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
       }
     `,
   ],

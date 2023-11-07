@@ -5,11 +5,11 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   template: `
     <div class="image-section flex flex-col content-center 768:justify-center  768:max-w-none 768:grid 768:grid-rows-1">
       <!-- pruduct title -->
-      <div id="product-title" class="flex flex-col items-center">
+      <!-- <div id="product-title" class="flex flex-col items-center">
         <app-product-category [category]="selected.category"></app-product-category>
         <app-product-name [name]="selected.name"></app-product-name>
         <app-product-price [price]="selected.price" [currency]="selected.currency"></app-product-price>
-      </div>
+      </div> -->
 
       <div
         id="product-images"
@@ -32,12 +32,12 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
           </div>
         </div>
 
-        <app-product-image [imagePath]="selected.currentImage"></app-product-image>
+        <!-- <app-product-image [imagePath]="selected.currentImage"></app-product-image> -->
       </div>
-      <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images>
+      <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>
   `,
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent {
   @Input() selected: any;

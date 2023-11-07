@@ -1,22 +1,22 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {style} from '@angular/animations';
 
 @Component({
   selector: 'app-buy-box',
   template: `
     <div
-      class="order-section flex 768:flex flex-col justify-center place-self-center ml-4  bg-gray-100  items-center pt-4 pb-4 768:justify-center"
+      class="order-section px-4 flex flex-col items-center justify-center place-self-center  bg-gray-100  pb-4 pt-4 768:flex 768:justify-center"
     >
       <app-product-category [category]="selected.category"></app-product-category>
       <app-product-name [name]="selected.name"></app-product-name>
 
-      <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images>
+      <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
 
       <!-- detail header -->
       <app-detail-header [selected]="selected"></app-detail-header>
 
       <!-- size selector -->
 
-      
       <app-size-selector [selected]="selected" [onSelectSize]="onSelectSize" (onSelectSize)="selectSize($event)"></app-size-selector>
 
       <!-- order form -->
@@ -24,6 +24,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
     </div>
   `,
   styleUrls: ['./buy-box.component.scss'],
+  styles: [``],
 })
 export class BuyBoxComponent {
   @Input() selected: any;

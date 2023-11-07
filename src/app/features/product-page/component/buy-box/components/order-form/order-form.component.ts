@@ -3,10 +3,11 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-order-form',
   template: `
-    <div id="order-actions" class="order-commit-container flex flex-col pt-4 items-center w-full pb-4">
-      <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-[90%] max-w-[320px] 768:text-xs">
-        <label for="email" class="block text-sm 768:text-xs mb-2" [ngClass]="{'invalid-text': !user.emailValidated && user.email}">
-          <span class="text-red-600"> &nbsp;{{ user.validationMessage }}</span>
+    <div id="order-actions" class="order-commit-container flex flex-col items-center w-full">
+      <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-full text-xs text-center">
+        <label for="email" class="block   mb-2" [ngClass]="{'invalid-text': !user.emailValidated && user.email}">
+          <span *ngIf="user.validationMessage" class="text-red-600">{{ user.validationMessage }}</span>
+          <span *ngIf="!user.validationMessage" class=" text-center"> Tavs e-pasts pasūtījumu veikšanai..</span>
         </label>
         <input
           id="email"
@@ -14,11 +15,11 @@ import {Component, Input} from '@angular/core';
           [(ngModel)]="user.email"
           name="emailInput"
           [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
-          class="border rounded py-2 px-3 mb-4"
-          placeholder="Tavs e-pasts pasūtījumu veikšanai.."
+          class="border rounded py-2 text-center"
+          placeholder="Ievadi e-pastu lai pasūtītu.."
           (input)="validateEmail(user.email)"
         />
-        <label for="nickname" class="block mb-2 text-lg text-black">
+        <label for="nickname" class="block  text-black py-1">
           Visiem Rojālajiem
           <span class="text-red-600">-15% ATLAIDE</span>
         </label>
@@ -26,7 +27,7 @@ import {Component, Input} from '@angular/core';
           id="nickname"
           name="nickname"
           type="text"
-          class="border rounded py-2 px-3 mb-4"
+          class="border rounded py-2 mb-2 text-center"
           placeholder="Tavs Rojālais segvārds šeit.."
         />
 
@@ -34,12 +35,11 @@ import {Component, Input} from '@angular/core';
           (click)="processOrder()"
           id="order-button"
           [ngClass]="{'shake-animation': !user.emailValidated}"
-          class="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded h-20 text-3xl font-black font-serif"
+          class="bg-orange-400 hover:bg-orange-500 text-white py-2  rounded  text-xl font-black font-serif"
         >
           Pasūtīt
         </button>
       </form>
-      -
     </div>
   `,
   styles: [],

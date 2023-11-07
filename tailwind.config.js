@@ -7,6 +7,7 @@ module.exports = {
       375: '375px', // @media(min - width: 375px) { ... }
       450: '450px', // @media(min - width: 450px) { ... }
       640: '640px', //	@media(min - width: 640px) { ... }
+      720: '720px', // @media(min - width: 720px) { ... }
       768: '768px', // @media(min - width: 768px) { ... }
       860: '860px', // @media(min - width: 860px) { ... }
       960: '960px', // @media(min - width: 860px) { ... }

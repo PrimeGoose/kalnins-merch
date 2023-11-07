@@ -26,6 +26,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   @Input() products: Product[] = [];
 
   product: Product = {} as Product;
+  otherProducts: Product[] = [];
 
   selected = {
     name: 'ss',
@@ -85,6 +86,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   async ngOnInit() {
+    this.otherProducts = await this.productService.getAllProducts();
     this.id = this.productService.getProductID();
     const product = await this.productService.getProductById(this.id);
     this.initializeProduct(product);

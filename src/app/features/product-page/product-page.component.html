@@ -1,15 +1,26 @@
 <div
   #productContainer
-  class="product-container flex flex-col justify-center mt-1   768:grid grid-cols-[1fr,320px]"
+  class="  768:grid grid-cols-[1fr,320px] max-w-[1000px]"
 >
   <!-- image section -->
-  <app-carousel class="max-h-[768px]"
+
+ 
+  <app-carousel class="max-h-[768px] bg-foreground"
     [selected]="selected"
     (onBack)="back()"
     (onForward)="forward()"
     (onSwipeEnd)="swipeEnd($event)"
     (onSwipeStart)="swipeStart($event)"
   ></app-carousel>
+
+
+   <app-other-products class=" grid 768:hidden p-10 mb-10  bg-foreground
+  "
+  [currentProductId]="id"
+  (productClick)="scrollToProductContainer($event)"
+  ></app-other-products>
+
+
   <!-- order section -->
   <app-buy-box class="place-self-center"
     [user]="user"
@@ -20,10 +31,11 @@
     (onSelectSize)="selectSize($event)"
     (onValidateEmail)="validateEmail($event)"
   ></app-buy-box>
-</div>
-
-<app-other-products
+  
+   <app-other-products class=" hidden 768:grid p-10 bg-foreground
+  "
   [currentProductId]="id"
-  [otherProducts]="products"
   (productClick)="scrollToProductContainer($event)"
-></app-other-products>
+  ></app-other-products>
+  
+</div>

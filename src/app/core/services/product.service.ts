@@ -34,6 +34,7 @@ export class ProductService {
   async getAllProducts(): Promise<Product[]> {
     const response = await fetch('assets/products.json');
     const data = await response.json();
+    console.log(data,'ffffffff');
     return data;
   }
 

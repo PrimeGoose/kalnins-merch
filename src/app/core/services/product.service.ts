@@ -15,6 +15,7 @@ export type Product = {
   currency: string;
   gender: string;
   brand: string;
+  description: string;
   images: string[];
 };
 @Injectable({

@@ -23,15 +23,17 @@
   ></app-buy-box>
 </div>
 
-<app-description class="mt-20 flex"></app-description>
+<div class="max-w-screen-1024">
+  <app-description class="mt-20 flex"></app-description>
 
-<app-product-details></app-product-details>
+  <app-product-details></app-product-details>
 
-<!--  -->
-<app-reviews></app-reviews>
+  <!--  -->
+  <app-reviews></app-reviews>
 
-<app-other-products
-  class="grid p-10 mb-10"
-  [currentProductId]="id"
-  (productClick)="scrollToProductContainer($event)"
-></app-other-products>
+  <app-other-products
+    class="grid p-10 mb-10"
+    [currentProductId]="id"
+    (productClick)="scrollToProductContainer($event)"
+  ></app-other-products>
+</div>

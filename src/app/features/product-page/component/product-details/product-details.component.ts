@@ -3,58 +3,25 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-product-details',
   template: `
-    <div class="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto my-8">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Produkta Detaļas</h2>
-
-      <div class="space-y-2">
-        <!-- Product Dimensions -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Izmēri:</h3>
-          <p class="text-gray-600">8 x 7.49 x 6.99 cm; 70 Grami</p>
+    <!-- Product Details -->
+    <div class="bg-[#F7F7F7] p-6 rounded-lg shadow-sm mt-4">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Product Details</h2>
+      <div class="flex flex-wrap -mx-2">
+        <div class="w-full md:w-1/2 px-2 mb-4">
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Produkta Detaļas</h3>
+          <ul class="list-disc pl-5 text-gray-600">
+            <li>Izmēri: 8 x 7.49 x 6.99 cm; 70 Grami</li>
+            <li>Pieejams No: 2023. gada 25. Oktobris</li>
+            <li>Ražotājs: Mēneļa Latvijas Tirgūšies Mēmi Zvaigznes</li>
+            <!-- Add more details here -->
+          </ul>
         </div>
-
-        <!-- Date First Available -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Pieejams No:</h3>
-          <p class="text-gray-600">2022. gada 12. decembris</p>
-        </div>
-
-        <!-- Manufacturer -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Ražotājs:</h3>
-          <p class="text-gray-600">Melnie Latvijas Traģiskie Mēmi Zvaigznes</p>
-        </div>
-
-        <!-- Item Model Number -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Preces Modelis:</h3>
-          <p class="text-gray-600">dodnauduXL</p>
-        </div>
-
-        <!-- Country of Origin -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Ražošanas Valsts:</h3>
+        <div class="w-full md:w-1/2 px-2 mb-4">
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">Precēs Modelis</h3>
+          <p class="text-gray-600">doanoduaXXL</p>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2 mt-4">Ražošanas Valsts</h3>
           <p class="text-gray-600">Latvija</p>
-        </div>
-
-        <!-- Best Sellers Rank -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Labāko Pārdevēju Rangs:</h3>
-          <p class="text-gray-600">
-            1 vietā Rīgā
-            <br />
-            1 vietā starp T-krekliem
-          </p>
-        </div>
-
-        <!-- Customer Reviews -->
-        <div>
-          <h3 class="font-semibold text-gray-700">Klientu Atsauksmes:</h3>
-          <p class="flex items-center text-gray-600">
-            4.2 no 5 zvaigznēm
-            <span class="ml-2 text-sm text-yellow-400">★★★★☆</span>
-            <span class="ml-1 text-gray-500 text-sm">15 atsauksmes</span>
-          </p>
+          <!-- Add more details here -->
         </div>
       </div>
     </div>

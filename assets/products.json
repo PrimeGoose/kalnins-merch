@@ -1,346 +1,361 @@
 [
-    {
-        "category": "T-krekls",
-        "id": 0,
-        "name": "DOD NAUDU DAUNI",
-        "color_name": "melns",
-        "color_hex": "#000000",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": false
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": false
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/dod-naudu-dauni/dod-naudu-dauni-1",
-            "../assets/dod-naudu-dauni/dod-naudu-dauni-2",
-            "../assets/dod-naudu-dauni/dod-naudu-dauni-3",
-            "../assets/dod-naudu-dauni/dod-naudu-dauni-4"
-        ]
-    },
-    {
-        "category": "T-krekls",
-        "id": 1,
-        "name": "Vai TU disraiku jau iepisi?!",
-        "color_name": "zils",
-        "color_hex": "#0000ff",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": true
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": true
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/disraik/disraik-blue-1",
-            "../assets/disraik/disraik-blue-2"
-        ]
-    },
-    {
-        "category": "T-krekls",
-        "id": 2,
-        "name": "Vai TU disraiku jau iepisi?!",
-        "color_name": "balta",
-        "color_hex": "#ffffff",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": false
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": true
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/disraik/disraik-white-1"
-        ]
-    },
-    {
-        "category": "Soma",
-        "id": 3,
-        "name": "rēkmīte",
-        "color_name": "zils",
-        "color_hex": "#000000",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": true
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": false
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/bag/eco-tote-bag-black-1",
-            "../assets/bag/eco-tote-bag-black-2"
-        ]
-    },
-    {
-        "category": "krekliņš",
-        "id": 4,
-        "name": "Pūtiens",
-        "color_name": "zils",
-        "color_hex": "#008080",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": true
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": true
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/tank-top/tank-top-vemj-1",
-            "../assets/tank-top/tank-top-vemj-2"
-        ]
-    },
-    {
-        "category": "T-krekls",
-        "id": 5,
-        "name": "Lasa Faktus par sevīm",
-        "color_name": "zils",
-        "color_hex": "#0000ff",
-        "currency": "EUR",
-        "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
-        "sizes": [
-            {
-                "size": "S",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "M",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "L",
-                "price": 8.99,
-                "available": true
-            },
-            {
-                "size": "XL",
-                "price": 9.99,
-                "available": true
-            },
-            {
-                "size": "XXL",
-                "price": 10.99,
-                "available": true
-            },
-            {
-                "size": "3XL",
-                "price": 11.99,
-                "available": true
-            },
-            {
-                "size": "4XL",
-                "price": 12.99,
-                "available": true
-            },
-            {
-                "size": "Juris",
-                "price": 13.99,
-                "available": true
-            }
-        ],
-        "gender": "unisex",
-        "brand": "",
-        "imgages": [
-            "../assets/fact/lasa-faktus-par-sevi-1",
-            "../assets/fact/lasa-faktus-par-sevi-1",
-            "../assets/fact/lasa-faktus-par-sevi-3"
-        ]
-    }
+  {
+    "category": "T-krekls",
+    "id": 0,
+    "name": "DOD NAUDU DAUNI",
+    "color_name": "melns",
+    "color_hex": "#000000",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": false
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": false
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": [
+      "../assets/dod-naudu-dauni/dod-naudu-dauni-1",
+      "../assets/dod-naudu-dauni/dod-naudu-dauni-2",
+      "../assets/dod-naudu-dauni/dod-naudu-dauni-3",
+      "../assets/dod-naudu-dauni/dod-naudu-dauni-4"
+    ]
+  },
+  {
+    "category": "T-krekls",
+    "id": 1,
+    "name": "Vai TU disraiku jau iepisi?!",
+    "color_name": "zils",
+    "color_hex": "#0000ff",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": true
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": true
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": ["../assets/disraik/disraik-blue-1", "../assets/disraik/disraik-blue-2"]
+  },
+  {
+    "category": "T-krekls",
+    "id": 2,
+    "name": "Vai TU disraiku jau iepisi?!",
+    "color_name": "balta",
+    "color_hex": "#ffffff",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": false
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": true
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": ["../assets/disraik/disraik-white-1"]
+  },
+  {
+    "category": "Soma",
+    "id": 3,
+    "name": "rēkmīte",
+    "color_name": "zils",
+    "color_hex": "#000000",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": true
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": false
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": ["../assets/bag/eco-tote-bag-black-1", "../assets/bag/eco-tote-bag-black-2"]
+  },
+  {
+    "category": "krekliņš",
+    "id": 4,
+    "name": "Pūtiens",
+    "color_name": "zils",
+    "color_hex": "#008080",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": true
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": true
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": ["../assets/tank-top/tank-top-vemj-1", "../assets/tank-top/tank-top-vemj-2"]
+  },
+  {
+    "category": "T-krekls",
+    "id": 5,
+    "name": "Lasa Faktus par sevīm",
+    "color_name": "zils",
+    "color_hex": "#0000ff",
+    "currency": "EUR",
+    "description": " Jura Kalniņa merč oficiālā mājas lapa un veikals, 15% Atlaides visiem Rojālajiem!!!",
+    "sizes": [
+      {
+        "size": "XS",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "S",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "M",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "L",
+        "price": 8.99,
+        "available": true
+      },
+      {
+        "size": "XL",
+        "price": 9.99,
+        "available": true
+      },
+      {
+        "size": "XXL",
+        "price": 10.99,
+        "available": true
+      },
+      {
+        "size": "3XL",
+        "price": 11.99,
+        "available": true
+      },
+      {
+        "size": "4XL",
+        "price": 12.99,
+        "available": true
+      },
+      {
+        "size": "Juris",
+        "price": 13.99,
+        "available": true
+      }
+    ],
+    "gender": "unisex",
+    "brand": "",
+    "images": ["../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-1", "../assets/fact/lasa-faktus-par-sevi-3"]
+  }
 ]

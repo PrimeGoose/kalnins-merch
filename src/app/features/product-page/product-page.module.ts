@@ -10,6 +10,7 @@ import {DetailHeaderComponent} from './component/buy-box/components/detail-heade
 import {OrderFormComponent} from './component/buy-box/components/order-form/order-form.component';
 import {PreviewImagesComponent} from './component/buy-box/components/preview-images/preview-images.component';
 import {SizeSelectorComponent} from './component/buy-box/components/size-selector/size-selector.component';
+import { DescriptionComponent } from './component/description/description.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {SizeSelectorComponent} from './component/buy-box/components/size-selecto
     OrderFormComponent,
     PreviewImagesComponent,
     SizeSelectorComponent,
+    DescriptionComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import {SizeSelectorComponent} from './component/buy-box/components/size-selecto
     OrderFormComponent,
     PreviewImagesComponent,
     SizeSelectorComponent,
+    DescriptionComponent
   ],
 })
 export class ProductPageModule {}

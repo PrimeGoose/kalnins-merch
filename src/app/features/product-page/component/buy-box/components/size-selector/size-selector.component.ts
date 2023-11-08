@@ -14,7 +14,7 @@ import {Component, EventEmitter, Input} from '@angular/core';
             'bg-pink-600 text-white border-pink-600 text-lg opacity-90 scale-100 duration-1000': selected.size === item.size && item.available,
             ' font-[900] hover:scale-y-105 text-base  ': selected.size === item.size && item.available
           }"
-          class=" duration-1000 font-[600]  ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16"        >
+          class=" duration-1000   ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16"        >
           {{ item.size }}
         </button>
 

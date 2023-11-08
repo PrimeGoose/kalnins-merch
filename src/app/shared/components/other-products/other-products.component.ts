@@ -5,14 +5,10 @@ import { ProductService } from '../../../core/services/product.service';
 @Component({
   selector: 'app-other-products',
   template: `
-    <div class="text-center text-sm font-bold text-gray-800  flex  gap-2 w-full  ">
+    <div class="grid grid-cols-3    ">
       <ng-container *ngFor="let product of otherProducts">
-        <!-- <div *ngIf="product.id !== currentProductId"> -->
-          <!-- <app-product-card [product]="product" (productClicked)="getOtherProduct($event)"></app-product-card> -->
-
-          <div class="cursor-pointer rounded overflow-hidden  " (click)="getOtherProduct(product.id)">
-            <app-product-image class="" [imagePath]="product.images[0]"></app-product-image>
-          <!-- </div> -->
+        <div class="cursor-pointer rounded overflow-hidden bottom-row  " (click)="getOtherProduct(product.id)">
+          <app-product-image class="" [imagePath]="product.images[0]"></app-product-image>
         </div>
       </ng-container>
     </div>
@@ -21,8 +17,15 @@ import { ProductService } from '../../../core/services/product.service';
     `
       :host {
         @apply place-self-center
-        w-full
-        ;
+        w-full;
+      }
+      .bottom-row {
+        background-color: #f8f9fa; /* Light grey for contrast */
+        padding: 1rem; /* More space inside the container */
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+        margin-top: 2rem; /* Adds space between the carousel/box and the bottom row */
       }
     `,
   ],

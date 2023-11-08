@@ -4,7 +4,9 @@ import {style} from '@angular/animations';
 @Component({
   selector: 'app-buy-box',
   template: `
-    <div class="px-4 flex flex-col items-center justify-center place-self-center  shadow-md bg-foreground  pb-4 pt-4 768:flex 768:justify-center">
+    <div
+      class="px-4 flex flex-col items-center justify-center place-self-center  shadow-md bg-foreground  pb-4 pt-4 768:flex 768:justify-center"
+    >
       <app-product-category [category]="selected.category"></app-product-category>
       <app-product-name [name]="selected.name"></app-product-name>
 

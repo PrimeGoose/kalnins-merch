@@ -35,7 +35,6 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
         <app-product-image class="max-h-[768px]" [imagePath]="selected.currentImage"></app-product-image>
       </div>
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
-      
     </div>
   `,
   styleUrls: ['./carousel.component.scss'],

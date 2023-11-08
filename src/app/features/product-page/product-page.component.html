@@ -1,36 +1,37 @@
-<div
-  #productContainer
-  class="  768:grid grid-cols-[1fr,320px] max-w-[1000px]">
+<div #productContainer class="768:grid grid-cols-[1fr,320px] max-w-[1000px]">
   <!-- image section -->
 
-  <app-carousel class="max-h-[768px] "
+  <app-carousel
+    class="max-h-[768px]"
     [selected]="selected"
     (onBack)="back()"
     (onForward)="forward()"
     (onSwipeEnd)="swipeEnd($event)"
-    (onSwipeStart)="swipeStart($event)"></app-carousel>
-
-  <app-other-products class=" grid 768:hidden p-10 mb-10"
-    [currentProductId]="id"
-    (productClick)="scrollToProductContainer($event)"></app-other-products>
+    (onSwipeStart)="swipeStart($event)"
+  ></app-carousel>
 
   <!-- order section -->
-  <app-buy-box class="place-self-center"
+  <app-buy-box
+    class="place-self-center"
     [user]="user"
     [selected]="selected"
     (onBack)="back()"
     (onForward)="forward()"
     (onProcessOrder)="processOrder()"
     (onSelectSize)="selectSize($event)"
-    (onValidateEmail)="validateEmail($event)"></app-buy-box>
+    (onValidateEmail)="validateEmail($event)"
+  ></app-buy-box>
+</div>
 
-   
+<app-description class="mt-20 flex"></app-description>
 
-    
-  </div>
+<app-product-details></app-product-details>
 
-   <app-description class="mt-20"></app-description>
-  <app-other-products class=" hidden 768:grid p-10 
-  "
-    [currentProductId]="id"
-    (productClick)="scrollToProductContainer($event)"></app-other-products>
+<!--  -->
+<app-reviews></app-reviews>
+
+<app-other-products
+  class="grid p-10 mb-10"
+  [currentProductId]="id"
+  (productClick)="scrollToProductContainer($event)"
+></app-other-products>

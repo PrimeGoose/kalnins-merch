@@ -22,7 +22,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private routeStateService: RouteStateService,
   ) {}
 
-   id = 0;
+  id = 0;
   @Input() products: Product[] = [];
 
   product: Product = {} as Product;
@@ -45,7 +45,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   private initializeProduct(product: Product) {
-    
     this.product = product;
     const hasSizes = product.sizes && product.sizes.length > 0;
     const hasImages = product.images && product.images.length > 0;

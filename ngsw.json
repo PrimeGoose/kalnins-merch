@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1699883541523,
+  "timestamp": 1699883708855,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -47,6 +47,7 @@
         "/assets/disraik/disraik-white-1.avif",
         "/assets/disraik/disraik-white-1.png",
         "/assets/disraik/disraik-white-1.webp",
+        "/assets/dod-naudu-dauni/4g_twitter_large_image.png",
         "/assets/dod-naudu-dauni/dod-naudu-dauni-1.avif",
         "/assets/dod-naudu-dauni/dod-naudu-dauni-1.png",
         "/assets/dod-naudu-dauni/dod-naudu-dauni-1.webp",
@@ -60,7 +61,6 @@
         "/assets/dod-naudu-dauni/dod-naudu-dauni-4.png",
         "/assets/dod-naudu-dauni/dod-naudu-dauni-4.webp",
         "/assets/dod-naudu-dauni/twitter_large_image-4.avif",
-        "/assets/dod-naudu-dauni/twitter_large_image-4.png",
         "/assets/dod-naudu-dauni/twitter_large_image-4.webp",
         "/assets/fact/lasa-faktus-par-sevi-1.avif",
         "/assets/fact/lasa-faktus-par-sevi-1.png",
@@ -123,6 +123,7 @@
     "/assets/disraik/disraik-white-1.avif": "2e08b1a6fbd8f78492a89cf6a47fcbd509c2687a",
     "/assets/disraik/disraik-white-1.png": "70e0856057e36c160844bbedcde37e13c43e4d06",
     "/assets/disraik/disraik-white-1.webp": "f3c94775196532eb510067fb0de524fb583cd3f6",
+    "/assets/dod-naudu-dauni/4g_twitter_large_image.png": "44eebccadc1622f56ace92f7b184e45693c937aa",
     "/assets/dod-naudu-dauni/dod-naudu-dauni-1.avif": "dbbdcb65e24b5b242525d42c8929aeca426a757b",
     "/assets/dod-naudu-dauni/dod-naudu-dauni-1.png": "0ebcd039a73b3ee1f7a0086ac9a90e541d3dae39",
     "/assets/dod-naudu-dauni/dod-naudu-dauni-1.webp": "08ea91a11a59fcdffe5af66956a9b4d3de2c5e09",
@@ -136,7 +137,6 @@
     "/assets/dod-naudu-dauni/dod-naudu-dauni-4.png": "a9dc001f4604455b0e9552ec2773f777d9ad1f27",
     "/assets/dod-naudu-dauni/dod-naudu-dauni-4.webp": "6efdfe8a140edfd119108653050c927ca840ee65",
     "/assets/dod-naudu-dauni/twitter_large_image-4.avif": "a5e53f72edd8518961609b11032cb68e447c5c56",
-    "/assets/dod-naudu-dauni/twitter_large_image-4.png": "44eebccadc1622f56ace92f7b184e45693c937aa",
     "/assets/dod-naudu-dauni/twitter_large_image-4.webp": "538638bbe211fd2b0a56bfe5e5063e6ef5ffff45",
     "/assets/fact/lasa-faktus-par-sevi-1.avif": "2491c01a9892fb0264a7a95e9a81c3d137547f2d",
     "/assets/fact/lasa-faktus-par-sevi-1.png": "406909e8f3865dd2f4f370545aa62b0a780c2ea0",
@@ -164,7 +164,7 @@
     "/assets/tank-top/tank-top-vemj-2.png": "561d5bf0fd17b4bc202aa955ec71f755ffef5aa9",
     "/assets/tank-top/tank-top-vemj-2.webp": "59b50c280367075d0860c1f7da60b3bacdf35851",
     "/favicon.ico": "cbfe0b9409fb98a8142638d7bc49f896aba715d5",
-    "/index.html": "d2f6a6cc0125f3259c5d5935dd9a448ded5131f2",
+    "/index.html": "d9db04b4031d24c4c3a68b6d81b25483b6f5320e",
     "/main.cd102cb0c53fdefc.js": "fc1b15ad56bff80c7c17434a959c559d46ae72ac",
     "/manifest.webmanifest": "96a92fe124d28c724d5f2f5f9c08d636b6ab3b48",
     "/polyfills.6304d4481deefcdf.js": "ea4c05979d151a907315b0f8cdff604e020b84b5",

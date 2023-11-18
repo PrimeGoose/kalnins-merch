@@ -1,8 +1,7 @@
-<div #productContainer class="768:grid grid-cols-[1fr,320px] max-w-[1000px]">
+<div #productContainer class="768:grid grid-cols-[500px,234px] max-w-[734px]">
   <!-- image section -->
 
   <app-carousel
-    class="max-h-[768px]"
     [selected]="selected"
     (onBack)="back()"
     (onForward)="forward()"
@@ -12,7 +11,7 @@
 
   <!-- order section -->
   <app-buy-box
-    class="place-self-center"
+    class="place-self-center mt-8"
     [user]="user"
     [selected]="selected"
     (onBack)="back()"
@@ -32,7 +31,7 @@
   <!-- <app-reviews></app-reviews> -->
 
   <app-other-products
-    class="grid p-10 mb-10"
+    class="grid mt-10"
     [currentProductId]="id"
     (productClick)="scrollToProductContainer($event)"
   ></app-other-products>

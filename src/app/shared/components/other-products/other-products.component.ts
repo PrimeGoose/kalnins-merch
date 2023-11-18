@@ -8,7 +8,11 @@ import {ProductService} from '../../../core/services/product.service';
     <h1 class="text-3xl font-semibold text-gray-900 mb-4">Citi Produkti</h1>
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
       <ng-container *ngFor="let product of otherProducts">
-        <div class="cursor-pointer bg-white product-card rounded overflow-hidden flex gap-1" (click)="getOtherProduct(product.id)">
+        <div
+          class="cursor-pointer  product-card bg-white  
+         rounded overflow-hidden flex gap-1"
+          (click)="getOtherProduct(product.id)"
+        >
           <app-product-image class="max-w-[234px] min-w-[150px]" [imagePath]="product.images[0]"></app-product-image>
         </div>
       </ng-container>

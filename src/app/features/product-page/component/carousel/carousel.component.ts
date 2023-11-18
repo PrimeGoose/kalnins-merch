@@ -3,7 +3,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'app-carousel',
   template: `
-    <div class="image-section    flex flex-col content-center 768:justify-center  max-w-[500px] 768:grid 768:grid-rows-1">
+    <div class="image-section flex flex-col content-center 768:justify-center  max-w-[500px] 768:grid 768:grid-rows-1">
       <!-- pruduct title -->
       <!-- <div id="product-title" class="flex flex-col items-center">
         <app-product-category [category]="selected.category"></app-product-category>
@@ -32,7 +32,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
           </div>
         </div>
 
-        <app-product-image class="max-w-[500px]" [imagePath]="selected.currentImage"></app-product-image>
+        <app-product-image class="" [imagePath]="selected.currentImage"></app-product-image>
       </div>
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit, Injectable} from '@angular/core';
 import {Product, ProductService} from './core/services/product.service';
-import {SupabaseAuthService} from './core/authentication/supabase.auth.service';
+import {SupabaseService} from './core/authentication/supabase.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ import {SupabaseAuthService} from './core/authentication/supabase.auth.service';
 export class AppComponent implements OnInit {
   constructor(
     private productService: ProductService,
-    private auth: SupabaseAuthService,
+    private auth: SupabaseService,
   ) {}
 
   products: Product[] = [];

@@ -5,7 +5,7 @@ import {environment} from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class SupabaseAuthService {
+export class SupabaseService {
   private supabase: SupabaseClient;
   private discord_auth_cb_url = environment.supabaseUrl;
 

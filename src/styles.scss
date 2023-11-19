@@ -28,3 +28,11 @@ body {
   user-select: none;
   -webkit-user-select: none;
 }
+
+// set on mobile body heeigth to auto
+@media (max-width: 640px) {
+  html,
+  body {
+    height: auto;
+  }
+}

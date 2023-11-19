@@ -212,7 +212,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     if (invalidEmail && !this.animation.isShaking) {
       this.animation.isShaking = true;
       this.renderer.addClass(buttonEl, 'shake-animation');
-      this.animation.shakeTimeout = setTimeout(() => {
+      this.animation.shakeTimeout = 1000
+      
+         setTimeout(() => {
         this.renderer.removeClass(buttonEl, 'shake-animation');
         this.animation.isShaking = false;
       }, 1000);

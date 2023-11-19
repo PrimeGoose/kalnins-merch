@@ -1,19 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Injectable} from '@angular/core';
 import {Product, ProductService} from './core/services/product.service';
+import {SupabaseAuthService} from './core/authentication/supabase.auth.service';
 
 @Component({
   selector: 'app-root',
   template: `
-    <app-merch-header></app-merch-header>
+    <app-merch-header (click)="login()"></app-merch-header>
     <router-outlet></router-outlet>
     <!-- <app-product-page [products]="products"></app-product-page> -->
   `,
   styles: [],
 })
 export class AppComponent implements OnInit {
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private auth: SupabaseAuthService,
+  ) {}
 
   products: Product[] = [];
+
+  login() {
+    this.auth.loginWithDiscord();
+  }
 
   async ngOnInit() {
     const products = await this.productService.getAllProducts();

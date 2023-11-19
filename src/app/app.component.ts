@@ -1,6 +1,6 @@
 import {Component, OnInit, Injectable} from '@angular/core';
 import {Product, ProductService} from './core/services/product.service';
-import {SupabaseService} from './core/authentication/supabase.service';
+import {SupabaseService} from './core/services/supabase.service';
 
 @Component({
   selector: 'app-root',

@@ -13,7 +13,7 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
   }
 
-  async loginWithDiscord() {
+  async authWithDiscord() {
     const credentials: SignInWithOAuthCredentials = {
       provider: 'discord',
     };

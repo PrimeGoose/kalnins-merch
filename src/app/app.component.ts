@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   products: Product[] = [];
 
   login() {
-    this.auth.loginWithDiscord();
+    this.auth.authWithDiscord();
   }
 
   async ngOnInit() {

@@ -69,10 +69,15 @@
       </ng-container>
     </div>
 
-    <!-- Image Upload -->
+    <!-- Image Upload with Preview -->
     <div>
       <label for="images" class="block text-gray-700 text-sm font-bold mb-2">Images:</label>
-      <input type="file" id="images" (change)="onFileChange($event)" multiple />
+      <input type="file" id="images" (change)="onFileChange($event)" multiple class="mb-4" />
+      <div class="grid grid-cols-3 gap-4">
+        <div *ngFor="let image of product.images; let i = index" class="w-full">
+          <img [src]="image" class="w-full h-auto border rounded" alt="Product Image {{ i + 1 }}" />
+        </div>
+      </div>
     </div>
 
     <!-- Submit Button -->

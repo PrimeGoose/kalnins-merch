@@ -107,15 +107,15 @@ export class AdminDashboardPageComponent {
     // Here, you would add your logic to save data to Supabase
   }
 
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
+  onFileChange(event:any) {
+    if (event.target.files && event.target.files.length) {
       const files = event.target.files;
-      for (let file of files) {
+      for (const file of files) {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          this.product.images.push(reader.result as string);
+        reader.onload = (e: any) => {
+          this.product.images.push(e.target.result);
         };
+        reader.readAsDataURL(file);
       }
     }
   }

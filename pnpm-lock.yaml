@@ -53,6 +53,9 @@ dependencies:
   imagemin-mozjpeg:
     specifier: ^10.0.0
     version: 10.0.0
+  ngx-image-cropper:
+    specifier: ^7.1.2
+    version: 7.1.2(@angular/common@17.0.2)(@angular/core@17.0.2)
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -7441,6 +7444,17 @@ packages:
 
   /next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
+    dev: false
+
+  /ngx-image-cropper@7.1.2(@angular/common@17.0.2)(@angular/core@17.0.2):
+    resolution: {integrity: sha512-xrS01FcMWNyUmLA6zDEQ0wNQMixH3ybHxEP3ip7ldwfaErG7rWatWKBwRaINX/5lLu8ZPNkoM4eNlA5Ry6w3yg==}
+    peerDependencies:
+      '@angular/common': '>=13.0.0'
+      '@angular/core': '>=13.0.0'
+    dependencies:
+      '@angular/common': 17.0.2(@angular/core@17.0.2)(rxjs@7.8.1)
+      '@angular/core': 17.0.2(rxjs@7.8.1)(zone.js@0.14.2)
+      tslib: 2.6.2
     dev: false
 
   /nice-napi@1.0.2:

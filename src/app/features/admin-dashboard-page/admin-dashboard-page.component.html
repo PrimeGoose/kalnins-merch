@@ -1,37 +1,56 @@
-<div class="container mx-auto p-4 bg-white shadow-md rounded">
-  <form (ngSubmit)="onSubmit()" class="space-y-4">
-    <!-- add Product Category -->
+<div class="container mx-auto p-4 bg-white shadow-md rounded max-w-screen-320">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Product Category -->
     <div>
-      <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Product Category:</label>
+      <label
+        for="category"
+        [class.text-red-500]="productForm.controls.category.invalid && productForm.controls.category.touched"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >ievadiet</label
+      >
       <input
         type="text"
         id="category"
-        [(ngModel)]="product.category"
-        name="category"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        formControlName="category"
+        class="input-field"
+        placeholder="kategoriju šeit..."
+        class="border w-full"
       />
     </div>
 
-    <!-- add Product Name -->
+    <!-- Product Name -->
     <div>
-      <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
+      <label
+        for="name"
+        [class.text-red-500]="productForm.controls.name.invalid && productForm.controls.name.touched"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Ievadiet</label
+      >
       <input
         type="text"
         id="name"
-        [(ngModel)]="product.name"
-        name="name"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        formControlName="name"
+        class="input-field"
+        placeholder="nosaukumu te..."
+        class="border w-full"
       />
     </div>
-    <!-- add product color -->
+
+    <!-- Product Color -->
     <div>
-      <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Product Color:</label>
+      <label
+        for="color"
+        [class.text-red-500]="productForm.controls.color.invalid && productForm.controls.color.touched"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Ievadiet</label
+      >
       <input
         type="text"
         id="color"
-        [(ngModel)]="product.color_name"
-        name="color"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        formControlName="color"
+        class="input-field"
+        placeholder="krāsa šiten..."
+        class="border w-full"
       />
     </div>
 
@@ -41,6 +60,7 @@
         <div class="flex flex-row text-center gap-4 items-center place-self-center">
           <!-- Button to display size and toggle availability -->
           <button
+            type="button"
             (click)="toggleAvailable(item)"
             [ngClass]="{
               'bg-pink-600 text-white border-pink-600': item.available,
@@ -58,6 +78,7 @@
               type="text"
               id="price{{ i }}"
               [(ngModel)]="item.price"
+              [ngModelOptions]="{standalone: true}"
               (blur)="formatPrice(item)"
               name="price{{ i }}"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
@@ -72,22 +93,164 @@
     <!-- Image Upload with Preview -->
     <div>
       <label for="images" class="block text-gray-700 text-sm font-bold mb-2">Images:</label>
-      <input type="file" id="images" (change)="onFileChange($event)" multiple class="mb-4" />
+
+      <!-- Hidden file input -->
+      <input
+        type="file"
+        id="images"
+        (change)="onFileChange($event)"
+        multiple
+        [attr.aria-label]="getImagesAriaLabel()"
+        style="display: none"
+        #fileInput
+      />
+
+      <!-- Button to trigger file input -->
+      <button type="button" class="btn btn-primary bg-blue-600 rounded-md p-4 text-white" (click)="fileInput.click()">
+        Upload Images
+      </button>
+
       <div class="grid grid-cols-3 gap-4">
-        <div *ngFor="let image of product.images; let i = index" class="w-full">
-          <img [src]="image" class="w-full h-auto border rounded" alt="Product Image {{ i + 1 }}" />
-        </div>
+        <!-- ... image previews ... -->
+
+        <!-- ng-container display images from product images -->
+        <ng-container *ngFor="let image of product.images; let i = index">
+          <div class="relative">
+            <img class="h-24 w-24 object-cover" [src]="image" alt="product image" />
+            <button
+              type="button"
+              (click)="removeImage(i)"
+              class="absolute top-0 right-0 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </ng-container>
       </div>
     </div>
 
-    <!-- Submit Button -->
+    <!-- Cropper Modal -->
+    <div
+      *ngIf="showCropper"
+      class="absolute flex-col inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center"
+    >
+      <div class="flex flex-col flex-wrap gap-4 p-4 bg-gray-100 max-w-screen-640">
+        <!-- add ing from file -->
+        <div class="flex flex-row content-evenly justify-items-center justify-evenly">
+          <!-- upload image -->
+          <div class="flex text-center px-2 text-white bg-blue-600 rounded-sm h-12">
+            <button
+              id="uploadButton"
+              class="btn text-white bg-blue-600 rounded-sm whitespace-nowrap"
+              onclick="document.getElementById('hiddenFileInput').click();"
+            >
+              Upload Image
+            </button>
+
+            <!-- hidden file input -->
+            <input
+              type="file"
+              id="hiddenFileInput"
+              (change)="fileChangeEvent($event)"
+              accept="image/*"
+              class="btn text-white bg-blue-600 rounded-sm hidden"
+            />
+          </div>
+
+          <!--  add img by url -->
+          <div class="flex text-center">
+            <input
+              [(ngModel)]="imageURL"
+              [ngModelOptions]="{standalone: true}"
+              placeholder="image URL"
+              type="text"
+              class="input-field text-center"
+            />
+          </div>
+        </div>
+        <!-- flip h v -->
+        <div class="flex flex-row justify-evenly">
+          <button (click)="flipHorizontal()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+            <i class="fas fa-arrows-alt-h"></i> Flip H
+          </button>
+          <button (click)="flipVertical()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+            <i class="fas fa-arrows-alt-v"></i> Flip V
+          </button>
+        </div>
+        <!-- zoom -->
+        <div class="flex flex-row justify-evenly">
+          <button (click)="zoomOut()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+            <i class="fas fa-search-minus"></i> Zoom -
+          </button>
+          <button (click)="zoomIn()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+            <i class="fas fa-search-plus"></i> Zoom +
+          </button>
+        </div>
+
+        <!-- control btns -->
+        <div class="flex flex-row justify-evenly">
+          <!-- cancel button -->
+          <button (click)="cancel()" class="btn w-1/4 text-white rounded-b-sm bg-orange-600">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <!-- reset -->
+          <button (click)="resetImage()" class="btn w-1/4 text-white rounded-sm bg-slate-600">
+            <i class="fas fa-sync"></i> Reset
+          </button>
+          <!-- crop -->
+          <button (click)="cropAndAdd()" class="btn w-1/4 text-white rounded-sm bg-blue-600">
+            <i class="fas fa-crop"></i> Crop
+          </button>
+        </div>
+      </div>
+
+      <div class="cropper-wrapper max-w-screen-375">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [imageURL]="imageURL"
+          [maintainAspectRatio]="true"
+          [containWithinAspectRatio]="containWithinAspectRatio"
+          [aspectRatio]="aspectRatio"
+          [cropperMinWidth]="128"
+          [onlyScaleDown]="true"
+          [roundCropper]="false"
+          [canvasRotation]="canvasRotation"
+          [(transform)]="transform"
+          [alignImage]="'center'"
+          [style.display]="showCropper ? null : 'none'"
+          [allowMoveImage]="allowMoveImage"
+          [hidden]="hidden"
+          imageAltText="Alternative image text"
+          backgroundColor="wite"
+          output="base64"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady($event)"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+    </div>
+
+    <!-- Submit Button [disabled]="!productForm.valid" -->
     <div>
-      <button
-        type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        Submit
-      </button>
+      <button type="submit" class="submit-btn rounded-md p-4 text-white border w-36 bg-orange-500">Submit</button>
     </div>
   </form>
+  <!-- warning messages:
+     at least one image needs to be in product.images[],
+      at least one sise needs to be available:true in product.sizes[],
+      category needs a name 
+      product name not set 
+      color not set
+  
+  -->
+  <!-- Warning Messages -->
+  <div *ngIf="!productForm.valid" class="mt-4 text-red-500">
+    <div *ngIf="!productForm.controls['category'].valid">Category is required.</div>
+    <div *ngIf="!productForm.controls['name'].valid">Product name is required.</div>
+    <div *ngIf="!productForm.controls['color'].valid">Color is required.</div>
+    <div *ngIf="!productForm.controls['sizes'].valid">At least one size needs to be available.</div>
+    <div *ngIf="!productForm.controls['images'].valid">At least one image needs to be set.</div>
+  </div>
 </div>

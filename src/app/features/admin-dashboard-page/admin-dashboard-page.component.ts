@@ -139,6 +139,7 @@ export class AdminDashboardPageComponent {
 
   onSubmit() {
     this.productForm.markAllAsTouched();
+    this.toggleAvailable({});
     if (this.productForm.valid) {
       // Form is valid, proceed with submission logic
       console.log('Form Value:', this.productForm.value);

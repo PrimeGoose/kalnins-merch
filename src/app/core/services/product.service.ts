@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {SupabaseService} from './supabase.service';
 
 export type Size = {
   size: string;
@@ -26,7 +27,7 @@ export class ProductService {
 
   products: Product[] = [];
 
-  constructor() {}
+  constructor(private supabaseService: SupabaseService) {}
 
   /**
    * Get all products.
@@ -34,9 +35,7 @@ export class ProductService {
    */
   async getAllProducts(): Promise<Product[]> {
     const response = await fetch('assets/products.json');
-    const data = await response.json();
-    console.log(data, 'ffffffff');
-    return data;
+    return await this.supabaseService.getProducts();
   }
 
   /**

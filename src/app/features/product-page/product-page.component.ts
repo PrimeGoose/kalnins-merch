@@ -4,6 +4,7 @@ import {Product, Size, ProductService} from '../../core/services/product.service
 
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
+import { SupabaseService } from 'src/app/core/services/supabase.service';
 
 @Component({
   selector: 'app-product-page',
@@ -20,6 +21,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private productService: ProductService,
     private routeStateService: RouteStateService,
+    private supabaee:SupabaseService
   ) {}
 
   id = 0;
@@ -85,9 +87,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   async ngOnInit() {
-    this.otherProducts = await this.productService.getAllProducts();
+    this.otherProducts = await this.supabaee.getProducts();
     this.id = this.productService.getProductID();
-    const product = await this.productService.getProductById(this.id);
+    const product = await this.supabaee.getProduct(this.id);
     this.initializeProduct(product);
   }
 
@@ -111,7 +113,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     const yOffset = productElement ? productElement.getBoundingClientRect().top + window.scrollY : 0;
     window.scrollTo({top: yOffset, behavior: 'smooth'});
 
-    const product = await this.productService.getProductById(this.id);
+    const product = await this.supabaee.getProduct(this.id);
     this.initializeProduct(product);
     console.log(this.product, 'product');
     console.log(this.selected, 'selected');

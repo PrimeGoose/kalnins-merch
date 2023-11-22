@@ -6,6 +6,7 @@ import {Dimensions, ImageCroppedEvent, ImageCropperComponent, ImageCropperModule
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormControl, Validators} from '@angular/forms';
 import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
+import {SupabaseService} from 'src/app/core/services/supabase.service';
 
 @Component({
   standalone: true,
@@ -76,6 +77,7 @@ export class AdminDashboardPageComponent {
   };
 
   constructor(
+    private supabaseService: SupabaseService,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
   ) {}
@@ -141,14 +143,37 @@ export class AdminDashboardPageComponent {
     this.productForm.markAllAsTouched();
     this.toggleAvailable({});
     if (this.productForm.valid) {
-      // Form is valid, proceed with submission logic
       console.log('Form Value:', this.productForm.value);
-      // console.log('Images Control Value:', this.productForm.get('images')?.value);
+
+      this.supabaseService.saveProduct({
+        id: this.product.id,
+        category: this.productForm.value.category || '',
+        name: this.productForm.value.name || '',
+        color_hex: this.productForm.value.color || '',
+        color_name: this.productForm.value.color || '',
+        currency: this.product.currency || '',
+        gender: this.product.gender || '',
+        brand: this.product.brand || '',
+        description: this.product.description || '',
+        sizes: this.product.sizes,
+        images: this.productForm.value.images || [],
+      });
     } else {
-      // Form is invalid, show warnings
       console.log('Form Value:', this.productForm.value);
-      console.log('Images Control Value:', this.productForm.get('images')?.value);
     }
+  }
+
+  private getValidSizes(formSizes: Partial<Size>[] | undefined): Size[] {
+    if (!formSizes || formSizes.length === 0) {
+      return [{size: 'xs', price: 9.99, available: true}];
+    }
+    return formSizes
+      .filter((size) => size && size.size && size.price != null && size.available != null)
+      .map((size) => ({
+        size: size.size as string,
+        price: size.price as number,
+        available: size.available as boolean,
+      }));
   }
 
   imageChangedEvent: any = '';

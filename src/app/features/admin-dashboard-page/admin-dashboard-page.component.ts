@@ -16,6 +16,53 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
   styleUrls: ['./admin-dashboard-page.component.css'],
 })
 export class AdminDashboardPageComponent {
+  default_sizes: Size[] = [
+    {
+      size: 'XS',
+      price: 9.99,
+      available: true,
+    },
+    {
+      size: 'S',
+      price: 10.99,
+      available: true,
+    },
+    {
+      size: 'M',
+      price: 11.99,
+      available: true,
+    },
+    {
+      size: 'L',
+      price: 12.99,
+      available: true,
+    },
+    {
+      size: 'XL',
+      price: 13.99,
+      available: true,
+    },
+    {
+      size: 'XXL',
+      price: 14.99,
+      available: true,
+    },
+    {
+      size: '3XL',
+      price: 15.99,
+      available: true,
+    },
+    {
+      size: '4XL',
+      price: 16.99,
+      available: true,
+    },
+    {
+      size: 'Juris',
+      price: 17.99,
+      available: true,
+    },
+  ];
   product: Product = {
     category: '',
     id: 0,
@@ -90,7 +137,7 @@ export class AdminDashboardPageComponent {
       this.product.sizes.map((size) => this.fb.group(size)),
       this.sizeValidator,
     ),
-    images: [[], this.imageValidator],
+    images: [[] as string[], this.imageValidator],
   });
 
   cropAndAdd() {
@@ -145,35 +192,35 @@ export class AdminDashboardPageComponent {
     if (this.productForm.valid) {
       console.log('Form Value:', this.productForm.value);
 
-      this.supabaseService.saveProduct({
-        id: this.product.id,
-        category: this.productForm.value.category || '',
-        name: this.productForm.value.name || '',
-        color_hex: this.productForm.value.color || '',
-        color_name: this.productForm.value.color || '',
-        currency: this.product.currency || '',
-        gender: this.product.gender || '',
-        brand: this.product.brand || '',
-        description: this.product.description || '',
-        sizes: this.product.sizes,
-        images: this.productForm.value.images || [],
-      });
+      this.supabaseService
+        .saveProduct({
+          id: this.product.id,
+          category: this.productForm.value.category || '',
+          name: this.productForm.value.name || '',
+          color_hex: this.productForm.value.color || '',
+          color_name: this.productForm.value.color || '',
+          currency: this.product.currency || '',
+          gender: this.product.gender || '',
+          brand: this.product.brand || '',
+          description: this.product.description || '',
+          sizes: this.product.sizes,
+          images: this.productForm.value.images || [],
+        })
+        .then((result) => {
+          console.log('saveProduct result', result);
+          // remove all form data for new product to be added
+          this.productForm.reset();
+          this.product.sizes = this.default_sizes;
+          this.productForm.get('sizes')?.setValue(this.product.sizes);
+          this.product.images = [];
+          this.productForm.get('images')?.setValue(this.product.images as string[]);
+        })
+        .catch((error) => {
+          console.log('saveProduct error', error);
+        });
     } else {
       console.log('Form Value:', this.productForm.value);
     }
-  }
-
-  private getValidSizes(formSizes: Partial<Size>[] | undefined): Size[] {
-    if (!formSizes || formSizes.length === 0) {
-      return [{size: 'xs', price: 9.99, available: true}];
-    }
-    return formSizes
-      .filter((size) => size && size.size && size.price != null && size.available != null)
-      .map((size) => ({
-        size: size.size as string,
-        price: size.price as number,
-        available: size.available as boolean,
-      }));
   }
 
   imageChangedEvent: any = '';

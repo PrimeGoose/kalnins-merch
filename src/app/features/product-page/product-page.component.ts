@@ -4,7 +4,7 @@ import {Product, Size, ProductService} from '../../core/services/product.service
 
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
-import { SupabaseService } from 'src/app/core/services/supabase.service';
+import {SupabaseService} from 'src/app/core/services/supabase.service';
 
 @Component({
   selector: 'app-product-page',
@@ -21,7 +21,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private productService: ProductService,
     private routeStateService: RouteStateService,
-    private supabaee:SupabaseService
+    private supabaee: SupabaseService,
   ) {}
 
   id = 0;

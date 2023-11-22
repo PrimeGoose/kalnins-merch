@@ -4,7 +4,7 @@ import {Component, Input} from '@angular/core';
   selector: 'app-product-image',
   template: `
     <ng-container *ngIf="isBase64Image(imagePath); else urlImageTemplate">
-      <img class="max-h-[768px]" loading="lazy" [src]="imagePath" [alt]="altText" />
+      <img class="max-h-[768px] " loading="lazy" [src]="imagePath" [alt]="altText" />
     </ng-container>
     <ng-template #urlImageTemplate>
       <picture>

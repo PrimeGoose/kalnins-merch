@@ -22,9 +22,14 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private routeStateService: RouteStateService,
     private supabaee: SupabaseService,
-  ) {}
 
-  id = 0;
+  
+  ) {
+// get id from router url 
+    this.id = parseInt(this.router.url.split('/')[2]);
+  }
+
+  id:number = 0;
   @Input() products: Product[] = [];
 
   product: Product = {} as Product;
@@ -88,7 +93,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     this.otherProducts = await this.supabaee.getProducts();
-    this.id = this.productService.getProductID();
+    
+    console.log(this.id, 'id');
     const product = await this.supabaee.getProduct(this.id);
     this.initializeProduct(product);
   }

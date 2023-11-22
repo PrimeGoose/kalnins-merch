@@ -9,10 +9,9 @@ import {ProductService} from '../../core/services/product.service';
   template: `
     <div class="grid grid-cols-1 640:grid-cols-2 960:grid-cols-3 gap-4 max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]">
       <app-product-card
-        [routerLink]="['/product']"
+        [routerLink]="['/product',product.id]"
         *ngFor="let product of products"
         [product]="product"
-        (productClicked)="storeProductID($event)"
       ></app-product-card>
     </div>
   `,
@@ -34,7 +33,7 @@ export class HomePageComponent implements OnInit {
     this.products = await this.productService.getAllProducts();
   }
 
-  storeProductID(id: number) {
-    this.productService.storeProductID(id);
-  }
+  // storeProductID(id: number) {
+  //   this.productService.storeProductID(id);
+  // }
 }

@@ -7,7 +7,7 @@ import {OrderSuccessComponent} from './shared/components/order-success/order-suc
 import {AdminDashboardPageComponent} from './features/admin-dashboard-page/admin-dashboard-page.component';
 
 const routes: Routes = [
-  {path: 'product', component: ProductPageComponent},
+  {path: 'product/:id', component: ProductPageComponent},
   {path: 'admin', component: AdminDashboardPageComponent},
   {path: 'success', component: OrderSuccessComponent, canActivate: [RouteGuard]},
   {path: '', component: HomePageComponent, pathMatch: 'full'}, // Default route

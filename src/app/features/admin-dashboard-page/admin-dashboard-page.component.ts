@@ -122,7 +122,23 @@ export class AdminDashboardPageComponent {
     brand: '',
     images: [],
   };
-
+  selectedColor: string = '';
+  selectedCategory: string = '';
+  colors: string[] = ['melns', 'balts', 'sarkans', 'zils', 'zaļs', 'dzeltens'];
+  categories: string[] = [
+    'T-Krekla',
+    'Krekliņš',
+    'Soma',
+    'Cepure',
+    'bikses',
+    'uzlīme',
+    'apakšveļa',
+    'džemperis',
+    'zeķes',
+    'pufaika',
+    'gultas veļa',
+  ];
+  supabase_image_Paths: string[] = [];
   constructor(
     private supabaseService: SupabaseService,
     private fb: FormBuilder,
@@ -140,6 +156,45 @@ export class AdminDashboardPageComponent {
     ),
     images: [[] as string[], this.imageValidator],
   });
+
+  selectColor(color: string) {
+    this.selectedColor = color;
+    // You can also update your form control value here if needed
+    this.pForm.controls['color'].setValue(color);
+  }
+  getColorClasses(color: string): string {
+    switch (color) {
+      case 'melns':
+        return 'bg-black';
+      case 'balts':
+        return 'bg-white';
+      case 'sarkans':
+        return 'bg-red-500';
+      case 'zils':
+        return 'bg-blue-500';
+      case 'zaļs':
+        return 'bg-green-500';
+      case 'dzeltens':
+        return 'bg-yellow-500';
+      default:
+        return '';
+    }
+  }
+
+  isSelectedColor(color: string): boolean {
+    return this.selectedColor === color;
+  }
+
+  selectCategory(category: string) {
+    this.selectedCategory = category;
+    // You can also update your form control value here if needed
+    this.pForm.controls['category'].setValue(category);
+    console.log('category', category);
+  }
+
+  isSelectedCategory(category: string): boolean {
+    return this.selectedCategory === category;
+  }
 
   // upload here
   async hanfleimg(blobUrl: string) {
@@ -211,51 +266,59 @@ export class AdminDashboardPageComponent {
   }
 
   async onSubmit() {
-    for (const image of this.product.images) {
+  
+    await(async () => {
+    const images: string[] = this.pForm.value.images || [];
+    for (const image of images) {
       const blobUrl = image;
       await this.hanfleimg(blobUrl);
     }
-    this.pForm.markAllAsTouched();
+    })();
+    // this.pForm.markAllAsTouched();
     this.toggleAvailable({});
-    if (this.pForm.valid) {
-      console.log('Form Value:', this.pForm.value);
+ 
+    
+    //wrap an async await iffe 
+    await(async () => {
+      if (this.pForm.valid) {
+     
 
-      // update form with images from products 
-    this.pForm.get('images')?.setValue(this.product.images as string[]);
-
-      this.supabaseService
-        .saveProduct({
-          id: this.product.id,
-          category: this.pForm.value.category || '',
-          name: this.pForm.value.name || '',
-          color_hex: this.pForm.value.color || '',
-          color_name: this.pForm.value.color || '',
-          currency: this.product.currency || '',
-          gender: this.product.gender || '',
-          brand: this.product.brand || '',
-          description: this.product.description || '',
-          sizes: this.product.sizes,
-          images: this.pForm.value.images || [],
-        })
-        .then((result) => {
-          console.log('saveProduct result', result);
-          // remove all form data for new product to be added
-          this.pForm.reset();
-          this.product.sizes = this.default_sizes;
-          this.pForm.get('sizes')?.setValue(this.product.sizes);
-          this.product.images = [];
-          this.pForm.get('images')?.setValue(this.product.images as string[]);
-        })
-        .catch((error) => {
-          console.log('saveProduct error', error);
-        }).finally(() => {
-          this.pForm.markAsPristine();
-          this.product.images = []; 
-        });
-      
-    } else {
-      console.log('Form Value:', this.pForm.value);
-    }
+        await this.supabaseService
+          .saveProduct({
+            id: this.product.id,
+            category: this.pForm.value.category || '',
+            name: this.pForm.value.name || '',
+            color_hex: this.pForm.value.color || '',
+            color_name: this.pForm.value.color || '',
+            currency: this.product.currency || '',
+            gender: this.product.gender || '',
+            brand: this.product.brand || '',
+            description: this.product.description || '',
+            sizes: this.product.sizes,
+            images: this.pForm.value.images || [],
+          })
+          .then((result) => {
+            console.log('saveProduct result', result);
+            // remove all form data for new product to be added
+            this.pForm.reset();
+            this.product.sizes = this.default_sizes;
+            this.pForm.get('sizes')?.setValue(this.product.sizes);
+            // this.product.images = [];
+            this.pForm.get('images')?.setValue(this.product.images as string[]);
+          })
+          .catch((error) => {
+            console.log('saveProduct error', error);
+          })
+          .finally(() => {
+            // this.pForm.markAsPristine();
+            // this.product.images = [];
+            this.pForm.get('images')?.setValue(this.product.images as string[]);
+            // this.supabase_image_Paths = [];
+          });
+      } else {
+        console.error('Form not valid');
+      }
+    })();
   }
 
   imageChangedEvent: any = '';
@@ -306,15 +369,24 @@ export class AdminDashboardPageComponent {
   }
 
   async uploadConvertedFile(blob: Blob, format: string) {
+    this.pForm.markAllAsTouched();
+    this.pForm.get('images')?.updateValueAndValidity();
+    this.pForm.get('images')?.markAsDirty();
+    this.pForm.get('images')?.markAsTouched();
     if (blob.size > 0) {
       const fileName = `compressed_image_${Date.now()}.${format}`;
-      const file = new File([blob], fileName, {type: `image/${format}`});
+      const file = new File([blob], fileName, { type: `image/${format}` });
 
       // Upload the file
-      const imagePath = await this.supabaseService.uploadImage(file);
-      this.product.images.push(imagePath);
 
-      console.log(`Uploaded ${format} image path:`, imagePath);
+      // await this.supabaseService.createFolder(folderName(folderName(product_name)));
+
+      this.supabaseService.uploadImage(file).then((supabase_image_Path) => {
+        // http://localhost:8000/storage/v1/object/public/kalnins-merch/${this.pForm.control.name}/ + supabase_image_Path
+        const full_supabase_image_Path: string = `http://localhost:8000/storage/v1/object/public/kalnins-merch/${supabase_image_Path}`;
+        this.supabase_image_Paths.push(full_supabase_image_Path);
+        console.log(`Uploaded ${format} image path:`, this.supabase_image_Paths);
+      });
     }
   }
 

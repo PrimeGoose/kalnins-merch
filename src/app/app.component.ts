@@ -14,22 +14,15 @@ import {SupabaseService} from './core/services/supabase.service';
 export class AppComponent implements OnInit {
   constructor(
     private productService: ProductService,
-    private auth: SupabaseService,
+    private supabase: SupabaseService,
   ) {}
 
   products: Product[] = [];
 
   login() {
-    this.auth.authWithDiscord();
+    this.supabase.authWithDiscord();
   }
 
-  async ngOnInit() {
-    const products = await this.productService.getAllProducts();
-    if (products) {
-      this.products = products;
-      console.log(this.products, 'productsss');
-    } else {
-      // Handle the case when the product is not found (maybe assign a default product or show an error)
-    }
-  }
+  async ngOnInit() { }
+ 
 }

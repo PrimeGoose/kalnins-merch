@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {createClient, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
-import {environment} from 'src/environments/environment';
+import {environment} from '../../../environments/enviroment';
 import {Product} from './product.service';
 import {decode} from 'base64-arraybuffer';
 @Injectable({
@@ -82,7 +82,7 @@ export class SupabaseService {
       console.error('Error uploading image:', error);
       return '';
     }
-
+    console.log('Image uploaded:', data);
     return data.path;
   }
 }

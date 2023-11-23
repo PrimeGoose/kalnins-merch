@@ -128,8 +128,9 @@ export class AdminDashboardPageComponent {
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
   ) {}
+  blobUrl: any;
 
-  productForm = this.fb.group({
+  pForm = this.fb.group({
     category: ['', Validators.required],
     name: ['', Validators.required],
     color: ['', Validators.required],
@@ -140,14 +141,37 @@ export class AdminDashboardPageComponent {
     images: [[] as string[], this.imageValidator],
   });
 
-  cropAndAdd() {
+  // upload here
+  async hanfleimg(blobUrl: string) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) return;
+
+    const img: HTMLImageElement = new Image();
+
+    img.onload = async () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      // Compress and upload WebP format
+      const webpBlob = await this.compressImage(canvas, 'image/webp');
+      await this.uploadConvertedFile(webpBlob, 'webp');
+    };
+
+    img.src = blobUrl;
+  }
+  async cropAndAdd() {
     // Add the cropped image to the product images array
-    this.product.images.push(this.croppedImage);
+    console.log('croppedImage', this.blobUrl);
+
+    this.product.images.push(this.blobUrl);
 
     // Update the form control with the new images array
-    const imagesControl = this.productForm.get(['images']);
+    const imagesControl = this.pForm.get(['images']);
     if (imagesControl) {
-      const imagesControl = this.productForm.get(['images']) as FormControl<string[]>;
+      const imagesControl = this.pForm.get(['images']) as FormControl<string[]>;
 
       imagesControl.setValue(this.product.images); // Ensure a new array is set
       imagesControl.updateValueAndValidity(); // Re-validate the updated form control
@@ -161,9 +185,9 @@ export class AdminDashboardPageComponent {
     this.product.images.splice(index, 1);
 
     // update form control with new images array
-    const imagesControl = this.productForm.get(['images']);
+    const imagesControl = this.pForm.get(['images']);
     if (imagesControl) {
-      const imagesControl = this.productForm.get(['images']) as FormControl<string[]>;
+      const imagesControl = this.pForm.get(['images']) as FormControl<string[]>;
 
       imagesControl.setValue(this.product.images); // Ensure a new array is set
       imagesControl.updateValueAndValidity(); // Re-validate the updated form control
@@ -177,7 +201,7 @@ export class AdminDashboardPageComponent {
   }
 
   get sizesControls() {
-    return (this.productForm.get('sizes') as FormArray).controls;
+    return (this.pForm.get('sizes') as FormArray).controls;
   }
 
   imageValidator(control: AbstractControl): ValidationErrors | null {
@@ -186,40 +210,51 @@ export class AdminDashboardPageComponent {
     return isValid ? null : {imageRequired: true};
   }
 
-  onSubmit() {
-    this.productForm.markAllAsTouched();
+  async onSubmit() {
+    for (const image of this.product.images) {
+      const blobUrl = image;
+      await this.hanfleimg(blobUrl);
+    }
+    this.pForm.markAllAsTouched();
     this.toggleAvailable({});
-    if (this.productForm.valid) {
-      console.log('Form Value:', this.productForm.value);
+    if (this.pForm.valid) {
+      console.log('Form Value:', this.pForm.value);
+
+      // update form with images from products 
+    this.pForm.get('images')?.setValue(this.product.images as string[]);
 
       this.supabaseService
         .saveProduct({
           id: this.product.id,
-          category: this.productForm.value.category || '',
-          name: this.productForm.value.name || '',
-          color_hex: this.productForm.value.color || '',
-          color_name: this.productForm.value.color || '',
+          category: this.pForm.value.category || '',
+          name: this.pForm.value.name || '',
+          color_hex: this.pForm.value.color || '',
+          color_name: this.pForm.value.color || '',
           currency: this.product.currency || '',
           gender: this.product.gender || '',
           brand: this.product.brand || '',
           description: this.product.description || '',
           sizes: this.product.sizes,
-          images: this.productForm.value.images || [],
+          images: this.pForm.value.images || [],
         })
         .then((result) => {
           console.log('saveProduct result', result);
           // remove all form data for new product to be added
-          this.productForm.reset();
+          this.pForm.reset();
           this.product.sizes = this.default_sizes;
-          this.productForm.get('sizes')?.setValue(this.product.sizes);
+          this.pForm.get('sizes')?.setValue(this.product.sizes);
           this.product.images = [];
-          this.productForm.get('images')?.setValue(this.product.images as string[]);
+          this.pForm.get('images')?.setValue(this.product.images as string[]);
         })
         .catch((error) => {
           console.log('saveProduct error', error);
+        }).finally(() => {
+          this.pForm.markAsPristine();
+          this.product.images = []; 
         });
+      
     } else {
-      console.log('Form Value:', this.productForm.value);
+      console.log('Form Value:', this.pForm.value);
     }
   }
 
@@ -251,9 +286,36 @@ export class AdminDashboardPageComponent {
     this.imageChangedEvent = event;
   }
 
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.objectUrl || event.base64 || '';
-    console.log(this.croppedImage);
+  async imageCropped(event: ImageCroppedEvent) {
+    this.blobUrl = event.objectUrl || '';
+  }
+
+  async compressImage(canvas: HTMLCanvasElement, format: string): Promise<Blob> {
+    let quality: number = 1; // Start with the highest quality
+    let compressedBlob: Blob | null = null;
+
+    do {
+      compressedBlob = await new Promise<Blob | null>((resolve) => canvas.toBlob((blob) => resolve(blob), format, quality));
+
+      if (!compressedBlob) break;
+
+      quality -= 0.1; // Decrease quality by 10%
+    } while (compressedBlob.size > 128 * 1024 && quality > 0); // Check if the size is more than 128 KB
+
+    return compressedBlob || new Blob();
+  }
+
+  async uploadConvertedFile(blob: Blob, format: string) {
+    if (blob.size > 0) {
+      const fileName = `compressed_image_${Date.now()}.${format}`;
+      const file = new File([blob], fileName, {type: `image/${format}`});
+
+      // Upload the file
+      const imagePath = await this.supabaseService.uploadImage(file);
+      this.product.images.push(imagePath);
+
+      console.log(`Uploaded ${format} image path:`, imagePath);
+    }
   }
 
   imageLoaded() {
@@ -415,9 +477,9 @@ export class AdminDashboardPageComponent {
   }
 
   toggleAvailable(item: any) {
-    this.productForm.markAllAsTouched();
+    this.pForm.markAllAsTouched();
 
-    const sizes = this.productForm.get('sizes');
+    const sizes = this.pForm.get('sizes');
     if (sizes) {
       sizes.updateValueAndValidity();
       // replace the item in product.sizes with item
@@ -430,6 +492,6 @@ export class AdminDashboardPageComponent {
     item.available = !item.available;
     if (!item.available) {
     }
-    this.productForm.get('sizes')?.setValue(this.product.sizes);
+    this.pForm.get('sizes')?.setValue(this.product.sizes);
   }
 }

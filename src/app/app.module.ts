@@ -29,7 +29,7 @@ import {ProductPageModule} from './features/product-page/product-page.module';
     ProductPageModule, // Ensure that ProductPageModule doesn't redeclare SharedModule's components
 
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
+      enabled: true,
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],

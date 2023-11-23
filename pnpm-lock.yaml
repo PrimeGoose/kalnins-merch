@@ -47,6 +47,9 @@ dependencies:
   angular-cli-ghpages:
     specifier: ^1.0.7
     version: 1.0.7(@angular-devkit/architect@0.1601.8)(@angular-devkit/core@16.2.9)(@angular-devkit/schematics@16.2.9)
+  base64-arraybuffer:
+    specifier: ^1.0.2
+    version: 1.0.2
   imagemin-cli:
     specifier: ^7.0.0
     version: 7.0.0
@@ -3819,6 +3822,11 @@ packages:
 
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  /base64-arraybuffer@1.0.2:
+    resolution: {integrity: sha512-I3yl4r9QB5ZRY3XuJVEPfc2XhZO6YweFPI+UovAzn+8/hb3oJ6lnysaFcjVpkCPfVWFUDvoZ8kmVDP7WyRtYtQ==}
+    engines: {node: '>= 0.6.0'}
+    dev: false
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}

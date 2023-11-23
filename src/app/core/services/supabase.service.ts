@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {createClient, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
 import {environment} from 'src/environments/environment';
 import {Product} from './product.service';
-
+import {decode} from 'base64-arraybuffer';
 @Injectable({
   providedIn: 'root',
 })
@@ -72,5 +72,17 @@ export class SupabaseService {
     }
 
     return data[0] || ({} as Product);
+  }
+
+  // storage get bucket nane: kalnins-merch
+  async uploadImage(file: File): Promise<string> {
+    const {data, error} = await this.supabase.storage.from('kalnins-merch').upload(`${file.name}`, file);
+
+    if (error) {
+      console.error('Error uploading image:', error);
+      return '';
+    }
+
+    return data.path;
   }
 }

@@ -23,6 +23,5 @@ export class AppComponent implements OnInit {
     this.supabase.authWithDiscord();
   }
 
-  async ngOnInit() { }
- 
+  async ngOnInit() {}
 }

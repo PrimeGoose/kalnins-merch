@@ -85,7 +85,4 @@ export class SupabaseService {
     console.log('Image uploaded:', data);
     return data.path;
   }
-
- 
-
 }

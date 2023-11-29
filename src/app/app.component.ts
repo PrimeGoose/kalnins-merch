@@ -4,8 +4,12 @@ import {SupabaseService} from './core/services/supabase.service';
 
 @Component({
   selector: 'app-root',
+  // standalone: true,
   template: `
-    <app-merch-header (click)="login()"></app-merch-header>
+    <app-toolbar class="">
+      <app-login class=""></app-login>
+    </app-toolbar>
+    <app-merch-header></app-merch-header>
     <router-outlet></router-outlet>
     <!-- <app-product-page [products]="products"></app-product-page> -->
   `,

@@ -14,9 +14,11 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 // Shared module
 import {SharedModule} from './shared/modules/shared.module';
 import {ProductPageModule} from './features/product-page/product-page.module';
+import {LoginComponent} from './features/auth-mamager/components/login/login.component';
+import {ToolbarComponent} from './features/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
+  declarations: [AppComponent, HomePageComponent, LoginComponent, ToolbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -24,6 +24,10 @@ export class SupabaseService {
     });
   }
 
+  logOutFromDiscord() {
+    this.supabase.auth.signOut();
+  }
+
   getSupabaseToken(): string | null {
     const urlParts = this.discord_auth_cb_url.split('.');
     const ref = urlParts.length > 2 ? urlParts[0].replace('https://', '') : '';

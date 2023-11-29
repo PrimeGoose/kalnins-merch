@@ -1,36 +1,44 @@
-<div class="container mx-auto p-4 bg-white shadow-md rounded max-w-screen-320">
+<div class="container mx-auto p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
   <form [formGroup]="pForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- Product Category -->
     <div class="flex flex-wrap space-x-2">
-      <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Kategorija:</label>
-      <select id="category" formControlName="category" class="border py-2 px-4 rounded">
+      <label for="category" class="block text-gray-300 text-sm font-bold mb-2">Kategorija:</label>
+      <select
+        id="category"
+        formControlName="category"
+        class="border py-2 px-4 rounded text-gray-300 bg-slate-700 border-black"
+      >
         <option value="" disabled selected>Izvēlies kategoriju</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
     </div>
 
     <!-- Product Name -->
-    <div>
+    <div class="text-black">
       <label
         for="name"
         [class.text-red-500]="pForm.controls.name.invalid && pForm.controls.name.touched"
-        class="block text-gray-700 text-sm font-bold mb-2"
+        class="block text-gray-300 text-sm font-bold mb-2"
         >Nosaukums:</label
       >
       <input
         type="text"
         id="name"
         formControlName="name"
-        class="input-field border w-full"
+        class="input-field border w-full text-gray-300 bg-slate-700 border-black rounded-md px-2 text-center"
         placeholder="Ievadiet nosaukumu te..."
       />
     </div>
 
     <!-- Product Color -->
     <div class="flex flex-wrap space-x-2">
-      <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Krāsa:</label>
-      <select id="color" formControlName="color" class="border py-2 px-4 rounded">
-        <option value="" disabled selected>Izvēlies krāsu</option>
+      <label for="color" class="block text-gray-300 text-sm font-bold mb-2">Krāsa:</label>
+      <select
+        id="color"
+        formControlName="color"
+        class="border py-2 px-4 rounded text-gray-300 border-black bg-slate-700"
+      >
+        <option classList="bg-black" value="" disabled selected>Izvēlies krāsu</option>
         <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
       </select>
     </div>
@@ -38,23 +46,23 @@
     <!-- Sizes Grid -->
     <div id="size-selector" class="grid grid-cols-1 place-items-start">
       <ng-container *ngFor="let item of product.sizes; let i = index">
-        <div class="flex flex-row text-center gap-4 items-center place-self-center">
+        <div class="flex flex-row text-center gap-4 items-center place-self-center border-black">
           <!-- Button to display size and toggle availability -->
           <button
             type="button"
             (click)="toggleAvailable(item)"
             [ngClass]="{
-              'bg-pink-600 text-white border-pink-600': item.available,
-              'text-slate-300 border-slate-300': !item.available
+              'bg-pink-700 border-slate-800  text-gray-200': item.available,
+              'bg-pink-600 border-slate-700 text-gray-100': !item.available
             }"
-            class="text-lg font-[900] hover:scale-105 duration-300 ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16 transition"
+            class="bg-slate-700 border-black text-gray-300 text-lg font-[900] hover:scale-105 duration-300 ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16 transition"
           >
             {{ item.size }}
           </button>
 
           <!-- Price -->
           <div class="flex flex-row text-center items-center gap-4">
-            <label for="price{{ i }}" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
+            <label for="price{{ i }}" class="block text-gray-300 text-sm font-bold mb-2">Price</label>
             <input
               type="text"
               id="price{{ i }}"
@@ -62,10 +70,10 @@
               [ngModelOptions]="{standalone: true}"
               (blur)="formatPrice(item)"
               name="price{{ i }}"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+              class="shadow appearance-none border rounded w-full py-2 px-3 bg-slate-700 border-black text-gray-300 leading-tight focus:outline-none focus:shadow-outline text-center"
               placeholder="0.00"
             />
-            <span class="text-gray-700">{{ product.currency }}</span>
+            <span class="text-gray-300">{{ product.currency }}</span>
           </div>
         </div>
       </ng-container>
@@ -73,7 +81,7 @@
 
     <!-- Image Upload with Preview -->
     <div>
-      <label for="images" class="block text-gray-700 text-sm font-bold mb-2">Images:</label>
+      <label for="images" class="block text-gray-300 text-sm font-bold mb-2">Images:</label>
 
       <!-- Hidden file input -->
       <input

@@ -1,9 +1,10 @@
 export const environment = {
   production: false,
+  // ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzAwODcwNDAwLAogICJleHAiOiAxODU4NzIzMjAwCn0.27nXMRUosm-XVTZ--GhgKrHpUd3vJY4XkOyFUBG5_Zw
 
-  supabaseUrl: 'http://localhost:8000',
+  supabaseUrl: 'https://islbmwzkwwjkjvbsalcp.reysweek.com',
   supabaseAnonKey:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzAwODcwNDAwLAogICJleHAiOiAxODU4NzIzMjAwCn0.27nXMRUosm-XVTZ--GhgKrHpUd3vJY4XkOyFUBG5_Zw',
 };
 
 // export const environment = {

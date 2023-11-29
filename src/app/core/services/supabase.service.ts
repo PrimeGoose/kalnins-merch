@@ -59,8 +59,9 @@ export class SupabaseService {
       console.error('Error getting products:', error);
       return [];
     }
+    const sortById = (a: Product, b: Product) => a.id - b.id;
 
-    return data || [];
+    return data.sort(sortById);
   }
 
   async getProduct(id: number): Promise<Product> {

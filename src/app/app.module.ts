@@ -18,8 +18,10 @@ import {LoginComponent} from './features/auth-mamager/components/login/login.com
 import {ToolbarComponent} from './features/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, LoginComponent, ToolbarComponent],
+  declarations: [AppComponent, HomePageComponent, ToolbarComponent],
+
   imports: [
+    LoginComponent,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

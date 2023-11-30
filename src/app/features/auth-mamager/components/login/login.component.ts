@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import {Component} from '@angular/core';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-0  absolute" (click)="login()">
       <svg class="hover:visible " xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512">

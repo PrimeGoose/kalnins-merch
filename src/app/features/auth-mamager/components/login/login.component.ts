@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component} from '@angular/core';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 @Component({
@@ -6,7 +6,11 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-0  absolute" (click)="login()">
+    <button
+      class=" flex flex-row items-center gap-1  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded right-0  absolute"
+      (click)="login()"
+    >
+      <span>Login</span>
       <svg class="hover:visible " xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512">
         <!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
         <path
@@ -30,4 +34,5 @@ export class LoginComponent {
   login() {
     this.supabase.authWithDiscord();
   }
+  
 }

@@ -7,7 +7,7 @@ import {decode} from 'base64-arraybuffer';
   providedIn: 'root',
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  public supabase: SupabaseClient;
   private discord_auth_cb_url = environment.supabaseUrl;
 
   constructor() {
@@ -24,9 +24,33 @@ export class SupabaseService {
     });
   }
 
+  /**
+   * Tests access to a specified table in Supabase and logs the result.
+   *
+   * @param {string} table - The name of the table to access in Supabase.
+   * @returns {Promise<any>} The data from the table if successful, or an error object if the access fails.
+   */
+  async testAccessToTable(table: string) {
+    const {data, error} = await this.supabase.from(table).select();
+
+    if (error) {
+      console.log('error', error);
+      return error;
+    }
+    console.log('data', data);
+    return data;
+  }
+
+ 
+
   logOutFromDiscord() {
     this.supabase.auth.signOut();
+    this.supabase.auth
   }
+  getSession() {
+    this.supabase.auth.getSession();
+  }
+
 
   getSupabaseToken(): string | null {
     const urlParts = this.discord_auth_cb_url.split('.');
@@ -34,6 +58,7 @@ export class SupabaseService {
     const tokenKey = `sb-${ref}-auth-token`;
     const token = localStorage.getItem(tokenKey);
     return token;
+    
   }
 
   async saveProduct(product: Product): Promise<void> {
@@ -68,7 +93,7 @@ export class SupabaseService {
     return data.sort(sortById);
   }
 
-  async getProduct(id: number): Promise<Product> {
+  async getProduct(id: number) {
     const {data, error} = await this.supabase.from('products').select('*').eq('id', id);
 
     if (error) {

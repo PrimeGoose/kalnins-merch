@@ -8,7 +8,7 @@
       <select
         id="category"
         formControlName="category"
-        class="border py-2 px-4 rounded text-gray-300 bg-slate-700 border-black"
+        class="border py-2 px-4 rounded text-gray-300 bg-slate-700 border-black focus:outline-none"
       >
         <option value="" disabled selected>Izvēlies kategoriju</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
@@ -27,7 +27,7 @@
         type="text"
         id="name"
         formControlName="name"
-        class="input-field border w-full text-gray-300 bg-slate-700 border-black rounded-md px-2 text-center"
+        class="input-field border w-full text-gray-300 bg-slate-700 border-black rounded-md px-2 text-center focus:outline-none"
         placeholder="Ievadiet nosaukumu te..."
       />
     </div>
@@ -38,7 +38,7 @@
       <select
         id="color"
         formControlName="color"
-        class="border py-2 px-4 rounded text-gray-300 border-black bg-slate-700"
+        class="border py-2 px-4 rounded text-gray-300 border-black bg-slate-700 focus:outline-none"
       >
         <option classList="bg-black" value="" disabled selected>Izvēlies krāsu</option>
         <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
@@ -54,10 +54,10 @@
             type="button"
             (click)="toggleAvailable(item)"
             [ngClass]="{
-              'bg-pink-700 border-slate-800  text-gray-200': item.available,
-              'bg-pink-600 border-slate-700 text-gray-100': !item.available
+              'bg-pink-700 border-slate-900  text-gray-200': item.available,
+              'bg-slate-600 border-slate-700 text-gray-100': !item.available
             }"
-            class="bg-slate-700 border-black text-gray-300 text-lg font-[900] hover:scale-105 duration-300 ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16 transition"
+            class="border-black text-gray-300 text-lg font-[900] hover:scale-101 duration-200 ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16 transition"
           >
             {{ item.size }}
           </button>

@@ -35,7 +35,7 @@ import {NavigationEnd, Router} from '@angular/router';
   `,
   styles: [],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private supabase: SupabaseService,
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     this.isAuthenticated = await this.checkIfAuthenticated();
     this.getIsAdminRoute();
   }
-  OnDestroy() {
+  ngOnDestroy() {
     this.isManager = false;
     this.isAuthenticated = false;
     this.isAdminRouteSubscription.unsubscribe();

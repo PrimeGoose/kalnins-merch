@@ -2,6 +2,7 @@ import {Component, OnInit, Injectable, OnDestroy} from '@angular/core';
 import {Product, ProductService} from './core/services/product.service';
 import {SupabaseService} from './core/services/supabase.service';
 import {NavigationEnd, Router} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   result: any;
   user: any;
   userId: any;
-  isAdminRouteSubscription: any;
+  isAdminRouteSubscription: Subscription = new Subscription();
 
   login() {
     this.supabase.authWithDiscord();

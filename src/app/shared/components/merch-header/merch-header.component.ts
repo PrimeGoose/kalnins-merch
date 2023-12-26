@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   template: `
     <div
       [routerLink]="['/kalnins-merch']"
-      class="flex flex-col relative text-center font-serif font-black my-10 kalnins-merch-header h1-shadow gradient-text h1-hover"
+      class="flex flex-col relative text-center font-serif font-black my-20 kalnins-merch-header h1-shadow gradient-text h1-hover"
     >
       <h1 class="text-6xl leading-[4.5rem]">Kalniņš Merch</h1>
       <h2 class="text-xl text-sky-400 mt-6">Jura Kalniņa merch veikals</h2>

@@ -33,7 +33,13 @@ import {SupabaseService} from '../../../../core/services/supabase.service';
       <span>Log out </span>
     </button>
   `,
-  styles: ``,
+  styles: `:host{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  }`,
 })
 export class LogoutComponent {
   constructor(private supabase: SupabaseService) {}

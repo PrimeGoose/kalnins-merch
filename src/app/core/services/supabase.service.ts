@@ -31,7 +31,6 @@ export class SupabaseService {
     }
     console.log('store manager data', [...data]);
     return [...data];
-
   }
 
   async getUserService(): Promise<any> {
@@ -42,25 +41,23 @@ export class SupabaseService {
     return data;
   }
 
-  async getIsStoreManager(): Promise<boolean>
-    {
-    let isManager = false
+  async getIsStoreManager(): Promise<boolean> {
+    let isManager = false;
     let user: any;
-        await this.getUserService().then((data) => {
-          console.log('user', data?.user?.id);
-          user = data.user;
-        });
+    await this.getUserService().then((data) => {
+      console.log('user', data?.user?.id);
+      user = data.user;
+    });
 
-        await this.getStoreManagerService().then((data) => {
-          data.filter((manager: any) => {
-            if (manager.user_id === user?.id) {
-              isManager = true;
-            }
-          });
-        })
-    
+    await this.getStoreManagerService().then((data) => {
+      data.filter((manager: any) => {
+        if (manager.user_id === user?.id) {
+          isManager = true;
+        }
+      });
+    });
+
     return isManager;
-    
   }
 
   /**
@@ -110,7 +107,6 @@ export class SupabaseService {
       console.error('Error saving product:', error);
       return;
     }
-
   }
 
   async getProducts(): Promise<Product[]> {

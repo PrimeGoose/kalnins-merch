@@ -11,7 +11,7 @@ import {ProductService} from '../../../core/services/product.service';
         <div
           class="cursor-pointer  product-card bg-white  
          rounded overflow-hidden flex gap-1"
-          (click)="getOtherProduct(product.id)"
+          (click)="getOtherProduct(product.product_id)"
         >
           <app-product-image class="max-w-[234px] min-w-[150px]" [imagePath]="product.images[0]"></app-product-image>
         </div>

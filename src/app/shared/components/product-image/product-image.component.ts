@@ -10,9 +10,9 @@ export class ProductImageComponent {
   @Input() altText!: string;
 
   setBaseURL(imagePath: string): string {
-    const localhost8000 = 'http://localhost:8000/';
+    const localhost8000 = '';
     if (isDevMode()) {
-      return `${localhost8000}${imagePath}`;
+      return imagePath;
     } else {
       return imagePath;
     }

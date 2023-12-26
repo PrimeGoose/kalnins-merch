@@ -36,6 +36,6 @@ export class ProductCardComponent {
   @Output() productClicked = new EventEmitter<number>();
 
   onClick() {
-    this.productClicked.emit(this.product.id);
+    this.productClicked.emit(this.product.product_id);
   }
 }

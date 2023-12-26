@@ -45,13 +45,13 @@ export class SupabaseService {
     let isManager = false;
     let user: any;
     await this.getUserService().then((data) => {
-      console.log('user', data?.user?.id);
+      console.log('user', data?.user?.product_id);
       user = data.user;
     });
 
     await this.getStoreManagerService().then((data) => {
       data.filter((manager: any) => {
-        if (manager.user_id === user?.id) {
+        if (manager.user_id === user?.product_id) {
           isManager = true;
         }
       });
@@ -116,13 +116,13 @@ export class SupabaseService {
       console.error('Error getting products:', error);
       return [];
     }
-    const sortById = (a: Product, b: Product) => a.id - b.id;
+    const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
 
     return data.sort(sortById);
   }
 
   async getProduct(id: number) {
-    const {data, error} = await this.supabase.from('products').select('*').eq('id', id);
+    const {data, error} = await this.supabase.from('products').select('*').eq('product_id', id);
 
     if (error) {
       console.error('Error getting products:', error);
@@ -133,13 +133,20 @@ export class SupabaseService {
   }
 
   // storage get bucket nane: kalnins-merch
-  async uploadImage(file: File): Promise<string> {
-    const {data, error} = await this.supabase.storage.from('kalnins-merch').upload(`${file.name}`, file);
+  async uploadImage(file: File, bucketId: string): Promise<Object> {
+    const {data, error} = await this.supabase.storage.from(`${bucketId}`).upload(`${file.name}`, file);
+    console.log('data', data);
 
     if (error) {
       console.error('Error uploading image:', error);
-      return '';
+      return {
+        path: '',
+        url: '',
+      };
     }
-    return data.path;
+    return {
+      path: data.path,
+      url: `https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/${bucketId}/${data.path}`,
+    };
   }
 }

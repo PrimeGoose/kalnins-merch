@@ -32,7 +32,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
   product: Product = {
     category: '',
-    id: 0,
+    product_id: 0,
     name: '',
     color_name: '',
     color_hex: '',
@@ -242,7 +242,7 @@ export class AdminDashboardPageComponent implements OnInit {
       this.pForm.get('images')?.setValue(uploadedImagePaths);
 
       const saveProductResult = await this.supabase.saveProduct({
-        id: this.product.id,
+        product_id: this.product.product_id,
         category: this.pForm.value.category || '',
         name: this.pForm.value.name || '',
         color_hex: this.pForm.value.color || '',
@@ -327,9 +327,8 @@ export class AdminDashboardPageComponent implements OnInit {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      // Upload the file and return the path
-      return this.supabase.uploadImage(file).then((supabase_image_Path) => {
-        const full_supabase_image_Path: string = `http://localhost:8000/storage/v1/object/public/kalnins-merch/${supabase_image_Path}`;
+      return this.supabase.uploadImage(file, 'kalnins-merch').then((supabase_image_Path: any) => {
+        const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
         console.log(`Uploaded ${format} image path:`, full_supabase_image_Path);
         return full_supabase_image_Path; // This will be used in Promise.all
       });

@@ -24,6 +24,45 @@ export class SupabaseService {
     });
   }
 
+  async getStoreManagerService() {
+    const {data, error} = await this.supabase.from('store_managers').select('*');
+    if (error) {
+      return [];
+    }
+    console.log('store manager data', [...data]);
+    return [...data];
+
+  }
+
+  async getUserService(): Promise<any> {
+    const {data, error} = await this.supabase.auth.getUser();
+    if (error) {
+      return error;
+    }
+    return data;
+  }
+
+  async getIsStoreManager(): Promise<boolean>
+    {
+    let isManager = false
+    let user: any;
+        await this.getUserService().then((data) => {
+          console.log('user', data?.user?.id);
+          user = data.user;
+        });
+
+        await this.getStoreManagerService().then((data) => {
+          data.filter((manager: any) => {
+            if (manager.user_id === user?.id) {
+              isManager = true;
+            }
+          });
+        })
+    
+    return isManager;
+    
+  }
+
   /**
    * Tests access to a specified table in Supabase and logs the result.
    *
@@ -34,23 +73,18 @@ export class SupabaseService {
     const {data, error} = await this.supabase.from(table).select();
 
     if (error) {
-      console.log('error', error);
       return error;
     }
-    console.log('data', data);
     return data;
   }
 
- 
-
   logOutFromDiscord() {
     this.supabase.auth.signOut();
-    this.supabase.auth
+    this.supabase.auth;
   }
   getSession() {
     this.supabase.auth.getSession();
   }
-
 
   getSupabaseToken(): string | null {
     const urlParts = this.discord_auth_cb_url.split('.');
@@ -58,7 +92,6 @@ export class SupabaseService {
     const tokenKey = `sb-${ref}-auth-token`;
     const token = localStorage.getItem(tokenKey);
     return token;
-    
   }
 
   async saveProduct(product: Product): Promise<void> {
@@ -78,7 +111,6 @@ export class SupabaseService {
       return;
     }
 
-    console.log('Product saved:', data);
   }
 
   async getProducts(): Promise<Product[]> {
@@ -112,7 +144,6 @@ export class SupabaseService {
       console.error('Error uploading image:', error);
       return '';
     }
-    console.log('Image uploaded:', data);
     return data.path;
   }
 }

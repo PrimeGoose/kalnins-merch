@@ -1,5 +1,5 @@
 import {CommonModule, NgFor} from '@angular/common';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
 import {Product, Size} from 'src/app/core/services/product.service';
 import {Dimensions, ImageCroppedEvent, ImageCropperComponent, ImageCropperModule, LoadedImage, ImageTransform} from 'ngx-image-cropper';
@@ -16,7 +16,16 @@ import {colors, default_sizes, categories} from './constants';
   templateUrl: './admin-dashboard-page.component.html',
   styleUrls: ['./admin-dashboard-page.component.css'],
 })
-export class AdminDashboardPageComponent {
+export class AdminDashboardPageComponent implements OnInit {
+  user: any;
+  isManager: boolean = false;
+
+  async ngOnInit() {
+    this.supabase.getIsStoreManager().then((isManager) => {
+      this.isManager = isManager;
+    });
+  }
+
   colors = colors;
   categories = categories;
   default_sizes = default_sizes;
@@ -85,7 +94,7 @@ export class AdminDashboardPageComponent {
 
   supabase_image_Paths: string[] = [];
   constructor(
-    private supabaseService: SupabaseService,
+    private supabase: SupabaseService,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
   ) {}
@@ -232,7 +241,7 @@ export class AdminDashboardPageComponent {
       // All images are uploaded at this point, and paths are collected
       this.pForm.get('images')?.setValue(uploadedImagePaths);
 
-      const saveProductResult = await this.supabaseService.saveProduct({
+      const saveProductResult = await this.supabase.saveProduct({
         id: this.product.id,
         category: this.pForm.value.category || '',
         name: this.pForm.value.name || '',
@@ -319,7 +328,7 @@ export class AdminDashboardPageComponent {
       const file = new File([blob], fileName, {type: `image/${format}`});
 
       // Upload the file and return the path
-      return this.supabaseService.uploadImage(file).then((supabase_image_Path) => {
+      return this.supabase.uploadImage(file).then((supabase_image_Path) => {
         const full_supabase_image_Path: string = `http://localhost:8000/storage/v1/object/public/kalnins-merch/${supabase_image_Path}`;
         console.log(`Uploaded ${format} image path:`, full_supabase_image_Path);
         return full_supabase_image_Path; // This will be used in Promise.all

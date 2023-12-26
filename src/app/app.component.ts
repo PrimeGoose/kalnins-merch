@@ -8,20 +8,24 @@ import {SupabaseService} from './core/services/supabase.service';
   template: `
     <app-toolbar class="">
       <!-- link to /admin -->
-      <a class="text-white hover:text-gray-200 hover:underline" routerLink="/admin">Admin</a>
-      <app-login class=""></app-login>
-      <div id="toolbar" class="">
+      <button *ngIf="isManager" class="text-white hover:text-gray-200 hover:underline" routerLink="/admin">
+        <a class="text-white hover:text-gray-200 hover:underline" routerLink="/admin">Admin</a>
+      </button>
+      @if(isAuthenticated){
+
+      <app-logout (click)="checkIfAuthenticated()" class=""></app-logout>
+      } @if(!isAuthenticated) {
+      <app-login (click)="checkIfAuthenticated()" class=""></app-login>
+      }
+
+      <!-- <div id="toolbar" class="">
         <input type="text" [(ngModel)]="testAccessToTableInput" placeholder="test access to table kalnins merch products" />
-        <!-- button  -->
         <button style="margin: 10px;" (click)="testAccessToTable(testAccessToTableInput)">Test</button>
-        <!-- getuser btn -->
         <button style="margin: 10px;" (click)="getUser()">getuser</button>
-        <!-- get store manager table btn -->
         <button style="margin: 10px;" (click)="getStoreManagerTable()">getStoreManagerTable</button>
-        <!-- inset random data btn  -->
         <button style="margin: 10px;" (click)="insertRandomData()">insertRandomData</button>
         <pre>{{ result | json }}</pre>
-      </div>
+      </div> -->
     </app-toolbar>
     <app-merch-header></app-merch-header>
     <router-outlet></router-outlet>
@@ -35,6 +39,7 @@ export class AppComponent implements OnInit {
     private supabase: SupabaseService,
   ) {}
 
+  isManager: boolean = false;
   products: Product[] = [];
   isAuthenticated: boolean = false;
   testAccessToTableInput: string = '';
@@ -52,42 +57,28 @@ export class AppComponent implements OnInit {
     });
   }
 
-  checkIfAuthenticated() {
-    localStorage.getItem('supabase.auth.token') ? (this.isAuthenticated = true) : (this.isAuthenticated = false);
+  async checkIfAuthenticated() {
+    const {data, error} = await this.supabase.supabase.auth.getSession();
+    if (error) {
+      console.log('error', error);
+      return false;
+    }
+    console.log('data', data.session?.user.aud);
+    if (data.session?.user.aud == 'authenticated') {
+      this.isAuthenticated = true;
+      return true;
+    } else {
+      this.isAuthenticated = false;
+      return false;
+    }
   }
 
-  async getUser() {
-    const {data} = await this.supabase.supabase.auth.getUser();
-    console.log('user', data);
-    this.userId = data.user?.id;
 
-    this.user = data;
+ 
+
+
+  async ngOnInit() {
+    this.isManager = await this.supabase.getIsStoreManager();
+    this.isAuthenticated = await this.checkIfAuthenticated();
   }
-
-  async getStoreManagerTable() {
-    const {data, error} = await this.supabase.supabase.from('store_managers').select('*').eq('user_id', this.userId);
-
-    console.log('store manager table', data);
-  }
-
-  async insertRandomData() {
-    /**
-       * create table
-  public.products (
-    product_id serial,
-    name character varying(255) not null,
-    description text null,
-    category character varying(100) null,
-    constraint products_pkey primary key (product_id)
-  ) tablespace pg_default;
-       * */
-  await this.supabase.supabase.from('products').insert([
-      {name: 'Product 1', description: 'Product 1 description', category: 'Category 1'}
-    ]).then((result) => {
-      console.log('insert result', result);
-    });
-
-  }
-
-  async ngOnInit() {}
 }

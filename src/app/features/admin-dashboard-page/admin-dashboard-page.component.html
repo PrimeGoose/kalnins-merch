@@ -1,247 +1,252 @@
-<div class="container mx-auto p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
-  <form [formGroup]="pForm" (ngSubmit)="onSubmit()" class="space-y-4">
-    <!-- Product Category -->
-    <div class="flex flex-wrap space-x-2">
-      <label for="category" class="block text-gray-300 text-sm font-bold mb-2">Kategorija:</label>
-      <select
+@if (isManager) {
+
+  
+  <div class="container mx-auto p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
+    <form [formGroup]="pForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Product Category -->
+      <div class="flex flex-wrap space-x-2">
+        <label for="category" class="block text-gray-300 text-sm font-bold mb-2">Kategorija:</label>
+        <select
         id="category"
         formControlName="category"
         class="border py-2 px-4 rounded text-gray-300 bg-slate-700 border-black"
-      >
+        >
         <option value="" disabled selected>Izvēlies kategoriju</option>
         <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
       </select>
     </div>
-
+    
     <!-- Product Name -->
     <div class="text-black">
       <label
-        for="name"
-        [class.text-red-500]="pForm.controls.name.invalid && pForm.controls.name.touched"
-        class="block text-gray-300 text-sm font-bold mb-2"
-        >Nosaukums:</label
+      for="name"
+      [class.text-red-500]="pForm.controls.name.invalid && pForm.controls.name.touched"
+      class="block text-gray-300 text-sm font-bold mb-2"
+      >Nosaukums:</label
       >
       <input
-        type="text"
-        id="name"
-        formControlName="name"
-        class="input-field border w-full text-gray-300 bg-slate-700 border-black rounded-md px-2 text-center"
-        placeholder="Ievadiet nosaukumu te..."
+      type="text"
+      id="name"
+      formControlName="name"
+      class="input-field border w-full text-gray-300 bg-slate-700 border-black rounded-md px-2 text-center"
+      placeholder="Ievadiet nosaukumu te..."
       />
     </div>
-
+    
     <!-- Product Color -->
     <div class="flex flex-wrap space-x-2">
       <label for="color" class="block text-gray-300 text-sm font-bold mb-2">Krāsa:</label>
       <select
-        id="color"
-        formControlName="color"
-        class="border py-2 px-4 rounded text-gray-300 border-black bg-slate-700"
+      id="color"
+      formControlName="color"
+      class="border py-2 px-4 rounded text-gray-300 border-black bg-slate-700"
       >
-        <option classList="bg-black" value="" disabled selected>Izvēlies krāsu</option>
-        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-      </select>
-    </div>
-
-    <!-- Sizes Grid -->
-    <div id="size-selector" class="grid grid-cols-1 place-items-start">
-      <ng-container *ngFor="let item of product.sizes; let i = index">
-        <div class="flex flex-row text-center gap-4 items-center place-self-center border-black">
-          <!-- Button to display size and toggle availability -->
-          <button
-            type="button"
-            (click)="toggleAvailable(item)"
-            [ngClass]="{
-              'bg-pink-700 border-slate-800  text-gray-200': item.available,
-              'bg-pink-600 border-slate-700 text-gray-100': !item.available
-            }"
+      <option classList="bg-black" value="" disabled selected>Izvēlies krāsu</option>
+      <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+    </select>
+  </div>
+  
+  <!-- Sizes Grid -->
+  <div id="size-selector" class="grid grid-cols-1 place-items-start">
+    <ng-container *ngFor="let item of product.sizes; let i = index">
+      <div class="flex flex-row text-center gap-4 items-center place-self-center border-black">
+        <!-- Button to display size and toggle availability -->
+        <button
+        type="button"
+        (click)="toggleAvailable(item)"
+        [ngClass]="{
+          'bg-pink-700 border-slate-800  text-gray-200': item.available,
+          'bg-pink-600 border-slate-700 text-gray-100': !item.available
+        }"
             class="bg-slate-700 border-black text-gray-300 text-lg font-[900] hover:scale-105 duration-300 ease-in-out border-2 rounded-none flex items-center justify-center h-9 w-16 transition"
-          >
+            >
             {{ item.size }}
           </button>
-
+          
           <!-- Price -->
           <div class="flex flex-row text-center items-center gap-4">
             <label for="price{{ i }}" class="block text-gray-300 text-sm font-bold mb-2">Price</label>
             <input
-              type="text"
-              id="price{{ i }}"
-              [(ngModel)]="item.price"
-              [ngModelOptions]="{standalone: true}"
-              (blur)="formatPrice(item)"
-              name="price{{ i }}"
-              class="shadow appearance-none border rounded w-full py-2 px-3 bg-slate-700 border-black text-gray-300 leading-tight focus:outline-none focus:shadow-outline text-center"
-              placeholder="0.00"
+            type="text"
+            id="price{{ i }}"
+            [(ngModel)]="item.price"
+            [ngModelOptions]="{standalone: true}"
+            (blur)="formatPrice(item)"
+            name="price{{ i }}"
+            class="shadow appearance-none border rounded w-full py-2 px-3 bg-slate-700 border-black text-gray-300 leading-tight focus:outline-none focus:shadow-outline text-center"
+            placeholder="0.00"
             />
             <span class="text-gray-300">{{ product.currency }}</span>
           </div>
         </div>
       </ng-container>
     </div>
-
+    
     <!-- Image Upload with Preview -->
     <div>
       <label for="images" class="block text-gray-300 text-sm font-bold mb-2">Images:</label>
-
+      
       <!-- Hidden file input -->
       <input
-        type="file"
-        id="images"
-        (change)="onFileChange($event)"
-        multiple
-        [attr.aria-label]="getImagesAriaLabel()"
-        style="display: none"
-        accept="image/png, image/webp,image/jpg, inage/jpeg"
-        #fileInput
+      type="file"
+      id="images"
+      (change)="onFileChange($event)"
+      multiple
+      [attr.aria-label]="getImagesAriaLabel()"
+      style="display: none"
+      accept="image/png, image/webp,image/jpg, inage/jpeg"
+      #fileInput
       />
-
+      
       <!-- Button to trigger file input -->
       <button type="button" class="btn btn-primary bg-blue-600 rounded-md p-4 text-white" (click)="fileInput.click()">
         Upload Images
       </button>
-
+      
       <div class="grid grid-cols-3 gap-4">
         <!-- ... image previews ... -->
-
+        
         <!-- ng-container display images from product images -->
         <ng-container *ngFor="let image of pForm.controls.images.value; let i = index">
           <div class="relative">
             <img class="h-24 w-24 object-cover" [src]="image" alt="product image" />
             <button
-              type="button"
-              (click)="removeImage(i)"
-              class="absolute top-0 right-0 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
+            type="button"
+            (click)="removeImage(i)"
+            class="absolute top-0 right-0 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
             >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </ng-container>
-      </div>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </ng-container>
     </div>
-
-    <!-- Cropper Modal -->
-    <div
-      *ngIf="showCropper"
-      class="absolute flex-col inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center"
-    >
-      <div class="flex flex-col flex-wrap gap-4 p-4 bg-gray-100 max-w-screen-640">
-        <!-- add ing from file -->
-        <div class="flex flex-row justify-center w-[320px]">
-          <!-- upload image -->
-          <div class="flex text-center px-2 text-white bg-blue-600 rounded-sm h-12">
-            <button
-              id="uploadButton"
-              class="btn text-white bg-blue-600 rounded-sm whitespace-nowrap"
-              onclick="document.getElementById('hiddenFileInput').click();"
-            >
-              Upload Image
-            </button>
-
-            <!-- hidden file input -->
-            <input
-              type="file"
-              id="hiddenFileInput"
-              (change)="fileChangeEvent($event)"
-              accept="image/*"
-              class="btn text-white bg-blue-600 rounded-sm hidden"
-            />
-          </div>
-
-          <!--  add img by url -->
-          <!-- <div class="flex text-center">
-            <input
-              [(ngModel)]="imageURL"
-              [ngModelOptions]="{standalone: true}"
-              placeholder="image URL"
-              type="text"
-              class="input-field text-center"
-            />
-          </div> -->
-        </div>
-        <!-- flip h v -->
-        <div class="flex flex-row justify-evenly">
-          <button (click)="flipHorizontal()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
-            <i class="fas fa-arrows-alt-h"></i> Flip H
-          </button>
-          <button (click)="flipVertical()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
-            <i class="fas fa-arrows-alt-v"></i> Flip V
-          </button>
-        </div>
-        <!-- zoom -->
-        <div class="flex flex-row justify-evenly">
-          <button (click)="zoomOut()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
-            <i class="fas fa-search-minus"></i> Zoom -
-          </button>
-          <button (click)="zoomIn()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
-            <i class="fas fa-search-plus"></i> Zoom +
-          </button>
-        </div>
-
-        <!-- control btns -->
-        <div class="flex flex-row justify-evenly">
-          <!-- cancel button -->
-          <button (click)="cancel()" class="btn w-1/4 text-white rounded-b-sm bg-orange-600">
-            <i class="fas fa-times"></i> Cancel
-          </button>
-          <!-- reset -->
-          <button (click)="resetImage()" class="btn w-1/4 text-white rounded-sm bg-slate-600">
-            <i class="fas fa-sync"></i> Reset
-          </button>
-          <!-- crop -->
-          <button (click)="cropAndAdd()" class="btn w-1/4 text-white rounded-sm bg-blue-600">
-            <i class="fas fa-crop"></i> Crop
-          </button>
-        </div>
-      </div>
-
-      <div class="cropper-wrapper max-w-screen-375 pt-12">
-        <image-cropper
-          [imageChangedEvent]="imageChangedEvent"
-          [imageURL]="imageURL"
-          [maintainAspectRatio]="true"
-          [containWithinAspectRatio]="containWithinAspectRatio"
-          [aspectRatio]="aspectRatio"
-          [cropperMinWidth]="500"
-          [onlyScaleDown]="false"
-          [backgroundColor]="'#FFFFFF00'"
-          [roundCropper]="false"
-          [canvasRotation]="canvasRotation"
-          [(transform)]="transform"
-          [alignImage]="'center'"
-          [style.display]="showCropper ? null : 'none'"
-          [allowMoveImage]="allowMoveImage"
-          [hidden]="hidden"
-          imageAltText="Alternative image text"
-          backgroundColor="wite"
-          output="blob"
-          format="png"
-          (imageCropped)="imageCropped($event)"
-          (imageLoaded)="imageLoaded()"
-          (cropperReady)="cropperReady($event)"
-          (loadImageFailed)="loadImageFailed()"
-        ></image-cropper>
-      </div>
-    </div>
-
-    <!-- Submit Button [disabled]="!pForm.valid" -->
-    <div>
-      <button type="submit" class="submit-btn rounded-md p-4 text-white border w-36 bg-orange-500">Submit</button>
-    </div>
-  </form>
-  <!-- warning messages:
-     at least one image needs to be in product.images[],
-      at least one sise needs to be available:true in product.sizes[],
-      category needs a name 
-      product name not set 
-      color not set
+  </div>
   
-  -->
-  <!-- Warning Messages -->
-  <div *ngIf="!pForm.valid" class="mt-4 text-red-500">
-    <div *ngIf="!pForm.controls['category'].valid">Category is required.</div>
-    <div *ngIf="!pForm.controls['name'].valid">Product name is required.</div>
-    <div *ngIf="!pForm.controls['color'].valid">Color is required.</div>
-    <div *ngIf="!pForm.controls['sizes'].valid">At least one size needs to be available.</div>
-    <div *ngIf="!pForm.controls['images'].valid">At least one image needs to be set.</div>
+  <!-- Cropper Modal -->
+  <div
+  *ngIf="showCropper"
+  class="absolute flex-col inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center"
+  >
+  <div class="flex flex-col flex-wrap gap-4 p-4 bg-gray-100 max-w-screen-640">
+    <!-- add ing from file -->
+    <div class="flex flex-row justify-center w-[320px]">
+      <!-- upload image -->
+      <div class="flex text-center px-2 text-white bg-blue-600 rounded-sm h-12">
+        <button
+        id="uploadButton"
+        class="btn text-white bg-blue-600 rounded-sm whitespace-nowrap"
+        onclick="document.getElementById('hiddenFileInput').click();"
+        >
+        Upload Image
+      </button>
+      
+      <!-- hidden file input -->
+      <input
+      type="file"
+      id="hiddenFileInput"
+      (change)="fileChangeEvent($event)"
+      accept="image/*"
+      class="btn text-white bg-blue-600 rounded-sm hidden"
+      />
+    </div>
+    
+    <!--  add img by url -->
+    <!-- <div class="flex text-center">
+      <input
+      [(ngModel)]="imageURL"
+      [ngModelOptions]="{standalone: true}"
+      placeholder="image URL"
+      type="text"
+      class="input-field text-center"
+      />
+    </div> -->
+  </div>
+  <!-- flip h v -->
+  <div class="flex flex-row justify-evenly">
+    <button (click)="flipHorizontal()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+      <i class="fas fa-arrows-alt-h"></i> Flip H
+    </button>
+    <button (click)="flipVertical()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+      <i class="fas fa-arrows-alt-v"></i> Flip V
+    </button>
+  </div>
+  <!-- zoom -->
+  <div class="flex flex-row justify-evenly">
+    <button (click)="zoomOut()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+      <i class="fas fa-search-minus"></i> Zoom -
+    </button>
+    <button (click)="zoomIn()" class="btn w-1/3 h-12 text-white rounded-sm bg-slate-600">
+      <i class="fas fa-search-plus"></i> Zoom +
+    </button>
+  </div>
+  
+  <!-- control btns -->
+  <div class="flex flex-row justify-evenly">
+    <!-- cancel button -->
+    <button (click)="cancel()" class="btn w-1/4 text-white rounded-b-sm bg-orange-600">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+    <!-- reset -->
+    <button (click)="resetImage()" class="btn w-1/4 text-white rounded-sm bg-slate-600">
+      <i class="fas fa-sync"></i> Reset
+    </button>
+    <!-- crop -->
+    <button (click)="cropAndAdd()" class="btn w-1/4 text-white rounded-sm bg-blue-600">
+      <i class="fas fa-crop"></i> Crop
+    </button>
   </div>
 </div>
+
+<div class="cropper-wrapper max-w-screen-375 pt-12">
+  <image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  [imageURL]="imageURL"
+  [maintainAspectRatio]="true"
+  [containWithinAspectRatio]="containWithinAspectRatio"
+  [aspectRatio]="aspectRatio"
+  [cropperMinWidth]="500"
+  [onlyScaleDown]="false"
+  [backgroundColor]="'#FFFFFF00'"
+  [roundCropper]="false"
+  [canvasRotation]="canvasRotation"
+  [(transform)]="transform"
+  [alignImage]="'center'"
+  [style.display]="showCropper ? null : 'none'"
+  [allowMoveImage]="allowMoveImage"
+  [hidden]="hidden"
+  imageAltText="Alternative image text"
+  backgroundColor="wite"
+  output="blob"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+  (imageLoaded)="imageLoaded()"
+  (cropperReady)="cropperReady($event)"
+  (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+</div>
+</div>
+
+<!-- Submit Button [disabled]="!pForm.valid" -->
+<div>
+  <button type="submit" class="submit-btn rounded-md p-4 text-white border w-36 bg-orange-500">Submit</button>
+</div>
+</form>
+<!-- warning messages:
+  at least one image needs to be in product.images[],
+  at least one sise needs to be available:true in product.sizes[],
+  category needs a name 
+  product name not set 
+  color not set
+  
+-->
+<!-- Warning Messages -->
+<div *ngIf="!pForm.valid" class="mt-4 text-red-500">
+  <div *ngIf="!pForm.controls['category'].valid">Category is required.</div>
+  <div *ngIf="!pForm.controls['name'].valid">Product name is required.</div>
+  <div *ngIf="!pForm.controls['color'].valid">Color is required.</div>
+  <div *ngIf="!pForm.controls['sizes'].valid">At least one size needs to be available.</div>
+  <div *ngIf="!pForm.controls['images'].valid">At least one image needs to be set.</div>
+</div>
+</div>
+
+}

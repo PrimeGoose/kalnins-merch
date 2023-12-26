@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminDashboardPageComponent},
   {path: 'success', component: OrderSuccessComponent, canActivate: [RouteGuard]},
   {path: '', component: HomePageComponent, pathMatch: 'full'}, // Default route
-  {path: '**', redirectTo: '', pathMatch: 'full'}, // Catch-all route
+  { path: '**', redirectTo: '', pathMatch: 'full' }, // Catch-all route
 ];
 
 @NgModule({

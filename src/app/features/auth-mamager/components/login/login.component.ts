@@ -33,6 +33,7 @@ export class LoginComponent {
 
   login() {
     this.supabase.authWithDiscord();
+    
   }
   
 }

@@ -22,7 +22,6 @@ export class PreviewImagesComponent {
   @Input() onForward = new EventEmitter();
 
   back() {
-    console.log('back');
     this.onBack.emit();
   }
 

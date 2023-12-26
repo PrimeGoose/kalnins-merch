@@ -143,7 +143,6 @@ export class AdminDashboardPageComponent implements OnInit {
     this.selectedCategory = category;
     // You can also update your form control value here if needed
     this.pForm.controls['category'].setValue(category);
-    console.log('category', category);
   }
 
   isSelectedCategory(category: string): boolean {
@@ -173,7 +172,6 @@ export class AdminDashboardPageComponent implements OnInit {
   }
   async cropAndAdd() {
     // Add the cropped image to the product images array
-    console.log('croppedImage', this.blobUrl);
 
     this.product.images.push(this.blobUrl);
 
@@ -255,7 +253,6 @@ export class AdminDashboardPageComponent implements OnInit {
         images: uploadedImagePaths, // Use the uploaded image paths
       });
 
-      console.log('Product saved:', saveProductResult);
       this.resetFormAndProduct();
     } catch (error) {
       console.error('Error during the upload or save process:', error);
@@ -327,9 +324,8 @@ export class AdminDashboardPageComponent implements OnInit {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      return this.supabase.uploadImage(file, 'kalnins-merch').then((supabase_image_Path: any) => {
+      return this.supabase.uploadPublicImage(file, 'kalnins-merch').then((supabase_image_Path: any) => {
         const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
-        console.log(`Uploaded ${format} image path:`, full_supabase_image_Path);
         return full_supabase_image_Path; // This will be used in Promise.all
       });
     }
@@ -338,11 +334,9 @@ export class AdminDashboardPageComponent implements OnInit {
 
   imageLoaded() {
     this.showCropper = true;
-    console.log('Image loaded');
   }
 
   cropperReady(sourceImageDimensions: Dimensions) {
-    console.log('Cropper ready', sourceImageDimensions);
     this.loading = false;
   }
 

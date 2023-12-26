@@ -30,9 +30,7 @@ export class HomePageComponent implements OnInit {
   products: Product[] = [];
   constructor(private productService: ProductService) {}
   async ngOnInit() {
-    const res = await this.productService.getAllProducts();
-    this.products = [...res];
-    console.log(this.products[0], 'proddd');
+    this.products = await this.productService.getAllProducts();
   }
 
   // storeProductID(id: number) {

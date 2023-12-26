@@ -92,7 +92,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.otherProducts = await this.supabaee.getProducts();
 
-    console.log(this.id, 'id');
     const product = await this.supabaee.getProduct(this.id);
     this.initializeProduct(product);
   }
@@ -119,8 +118,6 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
     const product = await this.supabaee.getProduct(this.id);
     this.initializeProduct(product);
-    console.log(this.product, 'product');
-    console.log(this.selected, 'selected');
   }
 
   changeImage(index: number): void {

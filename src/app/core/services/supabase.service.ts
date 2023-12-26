@@ -29,7 +29,6 @@ export class SupabaseService {
     if (error) {
       return [];
     }
-    console.log('store manager data', [...data]);
     return [...data];
   }
 
@@ -45,7 +44,6 @@ export class SupabaseService {
     let isManager = false;
     let user: any;
     await this.getUserService().then((data) => {
-      console.log('user', data?.user?.id);
       user = data.user;
     });
 
@@ -133,9 +131,8 @@ export class SupabaseService {
   }
 
   // storage get bucket nane: kalnins-merch
-  async uploadImage(file: File, bucketId: string): Promise<Object> {
+  async uploadPublicImage(file: File, bucketId: string): Promise<Object> {
     const {data, error} = await this.supabase.storage.from(`${bucketId}`).upload(`${file.name}`, file);
-    console.log('data', data);
 
     if (error) {
       console.error('Error uploading image:', error);

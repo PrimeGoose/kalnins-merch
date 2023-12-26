@@ -73,10 +73,9 @@ export class AppComponent implements OnInit, OnDestroy {
   async checkIfAuthenticated() {
     const {data, error} = await this.supabase.supabase.auth.getSession();
     if (error) {
-      console.log('error', error);
+      console.log(`error getting session:`, error);
       return false;
     }
-    console.log('data', data.session?.user.aud);
     if (data.session?.user.aud == 'authenticated') {
       this.isAuthenticated = true;
       return true;

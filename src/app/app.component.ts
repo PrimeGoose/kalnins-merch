@@ -8,8 +8,17 @@ import {SupabaseService} from './core/services/supabase.service';
   template: `
     <app-toolbar class="">
       <!-- link to /admin -->
-      <button *ngIf="isManager" class="text-white hover:text-gray-200 hover:underline" routerLink="/admin">
-        <a class="text-white hover:text-gray-200 hover:underline" routerLink="/admin">Admin</a>
+
+      <button
+        *ngIf="isManager"
+        routerLink="/admin"
+        class="h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+      >
+        <span
+          class="h-[24px] 
+        "
+          >Admin
+        </span>
       </button>
       @if(isAuthenticated){
 
@@ -72,10 +81,6 @@ export class AppComponent implements OnInit {
       return false;
     }
   }
-
-
- 
-
 
   async ngOnInit() {
     this.isManager = await this.supabase.getIsStoreManager();

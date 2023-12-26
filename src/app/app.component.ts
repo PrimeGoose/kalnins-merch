@@ -2,7 +2,7 @@ import {Component, OnInit, Injectable, OnDestroy} from '@angular/core';
 import {Product, ProductService} from './core/services/product.service';
 import {SupabaseService} from './core/services/supabase.service';
 import {NavigationEnd, Router} from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',

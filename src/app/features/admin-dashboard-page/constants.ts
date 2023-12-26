@@ -2,17 +2,17 @@ import {Size} from 'src/app/core/services/product.service';
 
 export const colors: string[] = ['melns', 'balts', 'sarkans', 'zils', 'zaļs', 'dzeltens'];
 export const categories: string[] = [
-  'T-Krekla',
+  'T-Krekls',
   'Krekliņš',
   'Soma',
   'Cepure',
-  'bikses',
-  'uzlīme',
-  'apakšveļa',
-  'džemperis',
-  'zeķes',
-  'pufaika',
-  'gultas veļa',
+  'Bikses',
+  'Uzlīme',
+  'Apakšveļa',
+  'Džemperis',
+  'Zeķes',
+  'Pufaika',
+  'Gultas veļa',
 ];
 
 export const default_sizes: Size[] = [

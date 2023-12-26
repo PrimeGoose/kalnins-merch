@@ -1,6 +1,6 @@
 import {Size} from 'src/app/core/services/product.service';
 
-export const colors: string[] = ['melns', 'balts', 'sarkans', 'zils', 'zaļs', 'dzeltens'];
+export const colors: string[] = ['Melns', 'Balts', 'Sarkans', 'Zils', 'Zaļs', 'Dzeltens'];
 export const categories: string[] = [
   'T-Krekls',
   'Krekliņš',

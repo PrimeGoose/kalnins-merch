@@ -45,13 +45,13 @@ export class SupabaseService {
     let isManager = false;
     let user: any;
     await this.getUserService().then((data) => {
-      console.log('user', data?.user?.product_id);
+      console.log('user', data?.user?.id);
       user = data.user;
     });
 
     await this.getStoreManagerService().then((data) => {
       data.filter((manager: any) => {
-        if (manager.user_id === user?.product_id) {
+        if (manager.user_id === user?.id) {
           isManager = true;
         }
       });

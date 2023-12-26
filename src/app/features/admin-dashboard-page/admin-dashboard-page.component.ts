@@ -21,7 +21,7 @@ export class AdminDashboardPageComponent implements OnInit {
   isManager: boolean = false;
 
   async ngOnInit() {
-    this.supabase.getIsStoreManager().then((isManager) => {
+    await this.supabase.getIsStoreManager().then((isManager) => {
       this.isManager = isManager;
     });
   }

@@ -14,7 +14,7 @@ import {colors, default_sizes, categories} from './constants';
   imports: [CommonModule, NgFor, FormsModule, ImageCropperModule, ReactiveFormsModule],
   selector: 'app-admin-dashboard-page',
   templateUrl: './admin-dashboard-page.component.html',
-  styleUrls: ['./admin-dashboard-page.component.css'],
+  styleUrls: ['./admin-dashboard-page.component.scss'],
 })
 export class AdminDashboardPageComponent implements OnInit {
   user: any;
@@ -24,11 +24,60 @@ export class AdminDashboardPageComponent implements OnInit {
     await this.supabase.getIsStoreManager().then((isManager) => {
       this.isManager = isManager;
     });
+    this.get_all_images_from_kalnins_merch_bucket();
+    this.fetchAllProductImages();
+  }
+
+  filteredImages: any[] = [];
+
+  filterAvailableImages() {
+    this.all_images_from_kalnins_merch_bucket.map((image: any) => {
+      if (!this.all_active_images.includes(image.url)) {
+        this.filteredImages.push(image);
+      }
+    });
   }
 
   colors = colors;
   categories = categories;
   default_sizes = default_sizes;
+
+  uploadedImagePaths: string[] = [];
+  all_images_from_kalnins_merch_bucket: any = [];
+
+  get_all_images_from_kalnins_merch_bucket() {
+    this.all_images_from_kalnins_merch_bucket = [];
+
+    this.supabase.supabase.storage
+      .from('kalnins-merch')
+      .list()
+      .then((data) => {
+        // console.log(data.data, 'ddddddd');
+
+        data.data?.map((image: any) => {
+          this.all_images_from_kalnins_merch_bucket.push({
+            name: image.name,
+            url: 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name,
+          });
+        });
+        this.filterAvailableImages();
+        console.log(this.all_images_from_kalnins_merch_bucket, 'all images from kalnins merch bucket');
+        console.log(this.all_active_images, 'all active images');
+      });
+  }
+  all_active_images: string[] = [];
+
+  async fetchAllProductImages() {
+    let {data: products, error} = await this.supabase.supabase.from('products').select('images');
+
+    if (error) {
+      console.error('Error fetching products', error);
+      return;
+    }
+
+    // Assuming 'images' is an array of image URLs
+    this.all_active_images = products?.flatMap((product) => product.images) || [];
+  }
 
   product: Product = {
     category: '',
@@ -100,7 +149,7 @@ export class AdminDashboardPageComponent implements OnInit {
   ) {}
   blobUrl: any;
 
-  pForm = this.fb.group({
+  pForm: any = this.fb.group({
     category: ['', Validators.required],
     name: ['', Validators.required],
     color: ['', Validators.required],
@@ -225,19 +274,19 @@ export class AdminDashboardPageComponent implements OnInit {
     }
 
     // Handle the images and wait for all to be uploaded
-    const images: string[] = this.pForm.value.images || [];
+    // const images: string[] = this.pForm.value.images || [];
     try {
       // Assuming `uploadConvertedFile` is the method to upload images
-      const uploadedImagePaths = await Promise.all(
-        images.map(async (blobUrl) => {
-          const response = await fetch(blobUrl);
-          const blob = await response.blob();
-          return this.uploadConvertedFile(blob, 'webp');
-        }),
-      );
+      // this.uploadedImagePaths = await Promise.all(
+      //   images.map(async (blobUrl) => {
+      //     const response = await fetch(blobUrl);
+      //     const blob = await response.blob();
+      //     return this.uploadConvertedFile(blob, 'webp');
+      //   }),
+      // );
 
       // All images are uploaded at this point, and paths are collected
-      this.pForm.get('images')?.setValue(uploadedImagePaths);
+      // this.pForm.get('images')?.setValue(this.uploadedImagePaths);
 
       const saveProductResult = await this.supabase.saveProduct({
         product_id: this.product.product_id,
@@ -250,13 +299,33 @@ export class AdminDashboardPageComponent implements OnInit {
         brand: this.product.brand || '',
         description: this.product.description || '',
         sizes: this.product.sizes,
-        images: uploadedImagePaths, // Use the uploaded image paths
+        images: this.uploadedImagePaths, // Use the uploaded image paths
       });
 
       this.resetFormAndProduct();
     } catch (error) {
       console.error('Error during the upload or save process:', error);
     }
+  }
+
+  toggleImageSelection(image: any): void {
+    const imageUrl = 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name;
+
+    if (this.uploadedImagePaths.includes(imageUrl)) {
+      // here we remove the image from uploadedImagePaths
+      this.uploadedImagePaths = this.uploadedImagePaths.filter((url) => url !== imageUrl);
+      this.pForm.get('images')?.updateValueAndValidity();
+    } else {
+      // heer we add the image to uploadedImagePaths
+      this.uploadedImagePaths.push(imageUrl);
+      this.pForm.get('images')?.setErrors(null);
+      console.log(this.uploadedImagePaths);
+    }
+  }
+
+  isSelected(image: any): boolean {
+    const imageUrl = 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name;
+    return this.uploadedImagePaths.includes(imageUrl);
   }
 
   resetFormAndProduct() {
@@ -320,11 +389,14 @@ export class AdminDashboardPageComponent implements OnInit {
     this.pForm.get('images')?.updateValueAndValidity();
     this.pForm.get('images')?.markAsDirty();
     this.pForm.get('images')?.markAsTouched();
+
+    const product_name = this.pForm.value.name;
+
     if (blob.size > 0) {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      return this.supabase.uploadPublicImage(file, 'kalnins-merch').then((supabase_image_Path: any) => {
+      return this.supabase.uploadPublicImage(file, `kalnins-merch/${product_name}`).then((supabase_image_Path: any) => {
         const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
         return full_supabase_image_Path; // This will be used in Promise.all
       });

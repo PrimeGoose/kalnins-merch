@@ -1,6 +1,6 @@
 @if (isManager) {
 
-<div class="container mx-auto p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
+<div class="container p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
   <form [formGroup]="pForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- Product Category -->
     <div class="flex flex-wrap space-x-2">
@@ -230,14 +230,7 @@
       <button type="submit" class="submit-btn rounded-md p-4 text-white border w-36 bg-orange-500">Submit</button>
     </div>
   </form>
-  <!-- warning messages:
-  at least one image needs to be in product.images[],
-  at least one sise needs to be available:true in product.sizes[],
-  category needs a name 
-  product name not set 
-  color not set
-  
--->
+
   <!-- Warning Messages -->
   <div *ngIf="!pForm.valid" class="mt-4 text-red-500">
     <div *ngIf="!pForm.controls['category'].valid">Category is required.</div>
@@ -245,6 +238,34 @@
     <div *ngIf="!pForm.controls['color'].valid">Color is required.</div>
     <div *ngIf="!pForm.controls['sizes'].valid">At least one size needs to be available.</div>
     <div *ngIf="!pForm.controls['images'].valid">At least one image needs to be set.</div>
+  </div>
+</div>
+
+<!-- <div class="storage_images">
+  <div class="grid grid-cols-3 gap-1 border-black border">
+    <ng-container *ngFor="let image of all_images_from_kalnins_merch_bucket">
+      <img
+        *ngIf="!image.name.includes('emptyFolderPlaceholder')"
+        class="max-h-28 max-w-28 border-gray-700 border-opacity-30 border-[8px]"
+        [src]="'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name"
+        [alt]="image.name"
+      />
+    </ng-container>
+  </div>
+</div> -->
+
+<div class="storage_images">
+  <div class="grid grid-cols-3 gap-1 border-black border">
+    <ng-container *ngFor="let image of filteredImages">
+      <img
+        *ngIf="!image.name.includes('.emptyFolderPlaceholder')"
+        [ngClass]="{'selected-border': isSelected(image)}"
+        class="max-h-28 max-w-28 border-gray-700 border-opacity-30 border-[8px]"
+        [src]="image.url"
+        [alt]="image.name"
+        (click)="toggleImageSelection(image)"
+      />
+    </ng-container>
   </div>
 </div>
 

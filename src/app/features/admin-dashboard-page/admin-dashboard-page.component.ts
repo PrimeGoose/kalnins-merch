@@ -231,6 +231,22 @@ export class AdminDashboardPageComponent implements OnInit {
 
       imagesControl.setValue(this.product.images); // Ensure a new array is set
       imagesControl.updateValueAndValidity(); // Re-validate the updated form control
+      // this.supabase.uploadPublicImage(this.blobUrl, 'kalnins-merch');
+
+      // Handle the images and wait for all to be uploaded
+      const images: string[] = this.pForm.value.images || [];
+      try {
+        // Assuming `uploadConvertedFile` is the method to upload images
+        this.uploadedImagePaths = await Promise.all(
+          images.map(async (blobUrl) => {
+            const response = await fetch(blobUrl);
+            const blob = await response.blob();
+            return this.uploadConvertedFile(blob, 'webp');
+          }),
+        );
+      } catch (error) {
+        console.error('Error during the upload or save process:', error);
+      }
     }
 
     this.showCropper = false;

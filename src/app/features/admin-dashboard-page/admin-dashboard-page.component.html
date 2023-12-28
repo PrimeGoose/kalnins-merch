@@ -98,9 +98,9 @@
       />
 
       <!-- Button to trigger file input -->
-      <button type="button" class="btn btn-primary bg-blue-600 rounded-md p-4 text-white" (click)="fileInput.click()">
-        Upload Images
-      </button>
+      <!-- <button type="button" class="btn btn-primary bg-blue-600 rounded-md p-4 text-white" (click)="fileInput.click()">
+        Add Images
+      </button> -->
 
       <div class="grid grid-cols-3 gap-4">
         <!-- ... image previews ... -->
@@ -130,24 +130,24 @@
         <!-- add ing from file -->
         <div class="flex flex-row justify-center w-[320px]">
           <!-- upload image -->
-          <div class="flex text-center px-2 text-white bg-blue-600 rounded-sm h-12">
-            <button
+          <!-- <div class="flex text-center px-2 text-white bg-blue-600 rounded-sm h-12"> -->
+          <!-- <button
               id="uploadButton"
               class="btn text-white bg-blue-600 rounded-sm whitespace-nowrap"
               onclick="document.getElementById('hiddenFileInput').click();"
             >
-              Upload Image
-            </button>
+              Add  Image
+            </button> -->
 
-            <!-- hidden file input -->
-            <input
+          <!-- hidden file input -->
+          <!-- <input
               type="file"
               id="hiddenFileInput"
               (change)="fileChangeEvent($event)"
               accept="image/*"
               class="btn text-white bg-blue-600 rounded-sm hidden"
-            />
-          </div>
+            /> -->
+          <!-- </div> -->
 
           <!--  add img by url -->
           <!-- <div class="flex text-center">
@@ -254,8 +254,8 @@
   </div>
 </div> -->
 
-<div class="storage_images">
-  <div class="grid grid-cols-3 gap-1 border-black border">
+<div class="storage_images flex flex-col w-[320px] h-[782px] justify-end">
+  <div class="grid grid-cols-3 gap-1">
     <ng-container *ngFor="let image of filteredImages">
       <img
         *ngIf="!image.name.includes('.emptyFolderPlaceholder')"
@@ -267,6 +267,10 @@
       />
     </ng-container>
   </div>
+
+  <button type="button" class="btn btn-primary ml-4 bg-blue-600 rounded-md p-4 text-white" (click)="fileInput.click()">
+    Add Images
+  </button>
 </div>
 
 }

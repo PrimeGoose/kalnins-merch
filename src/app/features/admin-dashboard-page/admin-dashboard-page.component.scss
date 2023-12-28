@@ -9,3 +9,19 @@
   border-color: blue; /* or any color you prefer */
   border-width: 8px; /* adjust as needed */
 }
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 5px;
+}

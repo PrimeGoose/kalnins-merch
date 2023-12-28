@@ -8,6 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {colors, default_sizes, categories} from './constants';
+import {SupabaseClient} from '@supabase/supabase-js';
 
 @Component({
   standalone: true,
@@ -237,11 +238,36 @@ export class AdminDashboardPageComponent implements OnInit {
       const images: string[] = this.pForm.value.images || [];
       try {
         // Assuming `uploadConvertedFile` is the method to upload images
-        this.uploadedImagePaths = await Promise.all(
+        await Promise.all(
           images.map(async (blobUrl) => {
             const response = await fetch(blobUrl);
             const blob = await response.blob();
-            return this.uploadConvertedFile(blob, 'webp');
+
+            //
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            if (!ctx) return;
+
+            const img: HTMLImageElement = new Image();
+
+            img.onload = async () => {
+              canvas.width = img.width;
+              canvas.height = img.height;
+              ctx.drawImage(img, 0, 0);
+
+              // Compress and upload WebP format
+              const webpBlob = await this.compressImage(canvas, 'image/webp');
+              await this.uploadConvertedFile(webpBlob, 'webp');
+              this.filteredImages = [];
+              this.uploadedImagePaths = [];
+              await this.get_all_images_from_kalnins_merch_bucket();
+              await this.fetchAllProductImages();
+            };
+
+            img.src = blobUrl;
+
+            //
           }),
         );
       } catch (error) {
@@ -264,6 +290,17 @@ export class AdminDashboardPageComponent implements OnInit {
       imagesControl.setValue(this.product.images); // Ensure a new array is set
       imagesControl.updateValueAndValidity(); // Re-validate the updated form control
     }
+  }
+
+  async deleteImageFromBucket() {
+    const selectdNames: any = this.uploadedImagePaths.map((path) => path.split('/').pop());
+
+    if (selectdNames) {
+      await this.supabase.supabase.storage.from('kalnins-merch').remove(selectdNames); // remove from bucket
+    }
+
+    this.filteredImages = [];
+    this.get_all_images_from_kalnins_merch_bucket(); // refresh images
   }
 
   sizeValidator(control: AbstractControl): ValidationErrors | null {
@@ -574,6 +611,12 @@ export class AdminDashboardPageComponent implements OnInit {
       item.price = '100.00';
       item.available = false;
     }
+  }
+
+  removeImageFromBucket() {
+    const name = this.uploadedImagePaths[0].split('/').pop() || '';
+    this.supabase.supabase.storage.from('kalnins-merch').remove([name]); // remove from bucket
+    this.get_all_images_from_kalnins_merch_bucket(); // refresh images
   }
 
   toggleAvailable(item: any) {

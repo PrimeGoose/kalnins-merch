@@ -220,8 +220,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
     img.src = blobUrl;
   }
-  async cropAndAdd() {
-    // Add the cropped image to the product images array
+  async cropAndUpload() {
 
     this.product.images.push(this.blobUrl);
 
@@ -293,6 +292,9 @@ export class AdminDashboardPageComponent implements OnInit {
   }
 
   async deleteImageFromBucket() {
+    if (!this.isSelectedImage) {
+      return;
+    }
     const selectdNames: any = this.uploadedImagePaths.map((path) => path.split('/').pop());
 
     if (selectdNames) {
@@ -374,10 +376,17 @@ export class AdminDashboardPageComponent implements OnInit {
       this.pForm.get('images')?.setErrors(null);
       console.log(this.uploadedImagePaths);
     }
+    if (this.uploadedImagePaths.length > 0) {
+      this.isSelectedImage = true;
+    } else {
+      this.isSelectedImage = false;
+    }
   }
 
+  isSelectedImage: boolean = false;
   isSelected(image: any): boolean {
     const imageUrl = 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name;
+
     return this.uploadedImagePaths.includes(imageUrl);
   }
 

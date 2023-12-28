@@ -25,3 +25,19 @@
   cursor: pointer;
   padding: 5px;
 }
+
+// disabled btn
+.disabled{
+
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+
+
+}

@@ -31,7 +31,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
   filteredImages: any[] = [];
 
-  filterAvailableImages() {
+  async filterAvailableImages() {
     this.all_images_from_kalnins_merch_bucket.map((image: any) => {
       if (!this.all_active_images.includes(image.url)) {
         this.filteredImages.push(image);
@@ -46,10 +46,10 @@ export class AdminDashboardPageComponent implements OnInit {
   uploadedImagePaths: string[] = [];
   all_images_from_kalnins_merch_bucket: any = [];
 
-  get_all_images_from_kalnins_merch_bucket() {
+  async get_all_images_from_kalnins_merch_bucket() {
     this.all_images_from_kalnins_merch_bucket = [];
 
-    this.supabase.supabase.storage
+    await this.supabase.supabase.storage
       .from('kalnins-merch')
       .list()
       .then((data) => {
@@ -62,8 +62,6 @@ export class AdminDashboardPageComponent implements OnInit {
           });
         });
         this.filterAvailableImages();
-        console.log(this.all_images_from_kalnins_merch_bucket, 'all images from kalnins merch bucket');
-        console.log(this.all_active_images, 'all active images');
       });
   }
   all_active_images: string[] = [];
@@ -220,58 +218,47 @@ export class AdminDashboardPageComponent implements OnInit {
 
     img.src = blobUrl;
   }
+
   async cropAndUpload() {
+    // Assuming 'this.blobUrl' holds the current image to be cropped and uploaded
+    if (!this.blobUrl) {
+      console.error('No image selected for cropping and uploading.');
+      return;
+    }
 
-    this.product.images.push(this.blobUrl);
+    try {
+      const response = await fetch(this.blobUrl);
+      const blob = await response.blob();
 
-    // Update the form control with the new images array
-    const imagesControl = this.pForm.get(['images']);
-    if (imagesControl) {
-      const imagesControl = this.pForm.get(['images']) as FormControl<string[]>;
-
-      imagesControl.setValue(this.product.images); // Ensure a new array is set
-      imagesControl.updateValueAndValidity(); // Re-validate the updated form control
-      // this.supabase.uploadPublicImage(this.blobUrl, 'kalnins-merch');
-
-      // Handle the images and wait for all to be uploaded
-      const images: string[] = this.pForm.value.images || [];
-      try {
-        // Assuming `uploadConvertedFile` is the method to upload images
-        await Promise.all(
-          images.map(async (blobUrl) => {
-            const response = await fetch(blobUrl);
-            const blob = await response.blob();
-
-            //
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            if (!ctx) return;
-
-            const img: HTMLImageElement = new Image();
-
-            img.onload = async () => {
-              canvas.width = img.width;
-              canvas.height = img.height;
-              ctx.drawImage(img, 0, 0);
-
-              // Compress and upload WebP format
-              const webpBlob = await this.compressImage(canvas, 'image/webp');
-              await this.uploadConvertedFile(webpBlob, 'webp');
-              this.filteredImages = [];
-              this.uploadedImagePaths = [];
-              await this.get_all_images_from_kalnins_merch_bucket();
-              await this.fetchAllProductImages();
-            };
-
-            img.src = blobUrl;
-
-            //
-          }),
-        );
-      } catch (error) {
-        console.error('Error during the upload or save process:', error);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        throw new Error('Failed to create canvas context');
       }
+
+      const img = new Image();
+      img.onload = async () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        // Compress and upload in WebP format
+        const webpBlob = await this.compressImage(canvas, 'image/webp');
+        await this.uploadConvertedFile(webpBlob, 'webp');
+
+        // Clear the blobUrl and any related memory
+        this.blobUrl = '';
+        this.filteredImages = [];
+        this.uploadedImagePaths = [];
+
+        // Update the UI with new images
+        await this.get_all_images_from_kalnins_merch_bucket();
+        await this.fetchAllProductImages();
+      };
+
+      img.src = this.blobUrl;
+    } catch (error) {
+      console.error('Error during the crop and upload process:', error);
     }
 
     this.showCropper = false;
@@ -299,10 +286,10 @@ export class AdminDashboardPageComponent implements OnInit {
 
     if (selectdNames) {
       await this.supabase.supabase.storage.from('kalnins-merch').remove(selectdNames); // remove from bucket
+      this.filteredImages = [];
+      await this.get_all_images_from_kalnins_merch_bucket(); // refresh images
+      this.isSelectedImage = false;
     }
-
-    this.filteredImages = [];
-    this.get_all_images_from_kalnins_merch_bucket(); // refresh images
   }
 
   sizeValidator(control: AbstractControl): ValidationErrors | null {

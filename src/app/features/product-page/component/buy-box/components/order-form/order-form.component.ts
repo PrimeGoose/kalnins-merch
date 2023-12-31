@@ -15,11 +15,12 @@ import {Component, Input} from '@angular/core';
           [(ngModel)]="user.email"
           name="emailInput"
           [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
-          class="border rounded py-2 text-center"
+          class="border rounded py-2 text-center dark:bg-slate-600 dark:border-slate-500
+          "
           placeholder="Ievadi e-pastu lai pasūtītu.."
           (input)="validateEmail(user.email)"
         />
-        <label for="nickname" class="block  text-black py-1">
+        <label for="nickname" class="block  text-black dark:text-white py-1">
           Visiem Rojālajiem
           <span class="text-red-600">-15% ATLAIDE</span>
         </label>
@@ -27,7 +28,7 @@ import {Component, Input} from '@angular/core';
           id="nickname"
           name="nickname"
           type="text"
-          class="border rounded py-2 mb-2 text-center"
+          class="border rounded py-2 mb-2 text-center dark:bg-slate-600 dark:border-slate-500"
           placeholder="Tavs Rojālais segvārds šeit.."
         />
 

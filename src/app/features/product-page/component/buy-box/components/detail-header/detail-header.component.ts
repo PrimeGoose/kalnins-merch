@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-detail-header',
   template: `
-    <div id="product-tag-grid" class="grid grid-cols-3 gap-1 mt-4 border border-[#dedede]     rounded ">
+    <div id="product-tag-grid" class="grid grid-cols-3 gap-1 mt-4 border  dark:border-slate-600 border-[#dedede]     rounded ">
       <div class="text-center w-16  text-sm uppercase">krāsa</div>
       <div class="text-center w-16  text-sm uppercase">Izmērs</div>
       <div class="text-center w-16  text-sm uppercase">Cena</div>

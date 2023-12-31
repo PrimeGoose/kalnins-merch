@@ -1,5 +1,6 @@
 @if (isManager) {
 
+<!-- returnFilteredImagesLength()  -->
 <div class="container p-4 bg-slate-900 shadow-md rounded max-w-screen-320 border-black">
   <form [formGroup]="pForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- Product Category -->
@@ -155,7 +156,13 @@
 
     <!-- Submit Button [disabled]="!pForm.valid" -->
     <div>
-      <button type="submit" class="submit-btn rounded-md p-4 text-white border w-36 bg-orange-500">Submit</button>
+      <button
+        [ngClass]="{disabled: !pForm.valid}"
+        type="submit"
+        class="submit-btn rounded-md p-4 text-white border w-full bg-orange-500"
+      >
+        Publish Product
+      </button>
     </div>
   </form>
 

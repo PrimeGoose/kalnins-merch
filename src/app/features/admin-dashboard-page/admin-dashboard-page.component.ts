@@ -9,6 +9,7 @@ import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {colors, default_sizes, categories} from './constants';
 import {SupabaseClient} from '@supabase/supabase-js';
+import {Observable} from 'rxjs';
 
 @Component({
   standalone: true,
@@ -25,8 +26,9 @@ export class AdminDashboardPageComponent implements OnInit {
     await this.supabase.getIsStoreManager().then((isManager) => {
       this.isManager = isManager;
     });
-    this.get_all_images_from_kalnins_merch_bucket();
-    this.fetchAllProductImages();
+    await this.getAllUploadedImagesTo();
+    await this.getAllProductImages();
+    await this.filterAvailableImages();
   }
 
   filteredImages: any[] = [];
@@ -39,6 +41,10 @@ export class AdminDashboardPageComponent implements OnInit {
     });
   }
 
+  returnFilteredImagesLength() {
+    return this.filteredImages.length;
+  }
+
   colors = colors;
   categories = categories;
   default_sizes = default_sizes;
@@ -46,13 +52,14 @@ export class AdminDashboardPageComponent implements OnInit {
   uploadedImagePaths: string[] = [];
   all_images_from_kalnins_merch_bucket: any = [];
 
-  async get_all_images_from_kalnins_merch_bucket() {
+  async getAllUploadedImagesTo() {
     this.all_images_from_kalnins_merch_bucket = [];
+    this.filteredImages = [];
 
     await this.supabase.supabase.storage
       .from('kalnins-merch')
       .list()
-      .then((data) => {
+      .then(async (data) => {
         // console.log(data.data, 'ddddddd');
 
         data.data?.map((image: any) => {
@@ -61,12 +68,11 @@ export class AdminDashboardPageComponent implements OnInit {
             url: 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/' + image.name,
           });
         });
-        this.filterAvailableImages();
       });
   }
   all_active_images: string[] = [];
 
-  async fetchAllProductImages() {
+  async getAllProductImages() {
     let {data: products, error} = await this.supabase.supabase.from('products').select('images');
 
     if (error) {
@@ -252,8 +258,9 @@ export class AdminDashboardPageComponent implements OnInit {
         this.uploadedImagePaths = [];
 
         // Update the UI with new images
-        await this.get_all_images_from_kalnins_merch_bucket();
-        await this.fetchAllProductImages();
+        await this.getAllUploadedImagesTo();
+        await this.getAllProductImages();
+        await this.filterAvailableImages();
       };
 
       img.src = this.blobUrl;
@@ -287,7 +294,7 @@ export class AdminDashboardPageComponent implements OnInit {
     if (selectdNames) {
       await this.supabase.supabase.storage.from('kalnins-merch').remove(selectdNames); // remove from bucket
       this.filteredImages = [];
-      await this.get_all_images_from_kalnins_merch_bucket(); // refresh images
+      await this.getAllUploadedImagesTo(); // refresh images
       this.isSelectedImage = false;
     }
   }
@@ -445,7 +452,7 @@ export class AdminDashboardPageComponent implements OnInit {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      return this.supabase.uploadPublicImage(file, `kalnins-merch/${product_name}`).then((supabase_image_Path: any) => {
+      return this.supabase.uploadPublicImage(file, `kalnins-merch`).then((supabase_image_Path: any) => {
         const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
         return full_supabase_image_Path; // This will be used in Promise.all
       });
@@ -612,7 +619,7 @@ export class AdminDashboardPageComponent implements OnInit {
   removeImageFromBucket() {
     const name = this.uploadedImagePaths[0].split('/').pop() || '';
     this.supabase.supabase.storage.from('kalnins-merch').remove([name]); // remove from bucket
-    this.get_all_images_from_kalnins_merch_bucket(); // refresh images
+    this.getAllUploadedImagesTo(); // refresh images
   }
 
   toggleAvailable(item: any) {

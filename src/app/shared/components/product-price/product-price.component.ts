@@ -9,7 +9,6 @@ import {Component, Input} from '@angular/core';
       :host {
         color: #0077b6;
         font-weight: bold;
-        text-shadow: 0.5px 0.5px 1px pink; /* Optional: for better readability */
       }
     `,
   ],

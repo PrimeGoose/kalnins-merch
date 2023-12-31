@@ -17,6 +17,7 @@ import {ProductPageModule} from './features/product-page/product-page.module';
 import {LoginComponent} from './features/auth-mamager/components/login/login.component';
 import {ToolbarComponent} from './features/toolbar/toolbar.component';
 import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
+import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.module';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ToolbarComponent],
@@ -31,6 +32,7 @@ import {LogoutComponent} from './features/auth-mamager/components/logout/logout.
 
     FormsModule,
     AngularMaterialModule,
+    MyOrdersPageModule,
 
     ProductPageModule, // Ensure that ProductPageModule doesn't redeclare SharedModule's components
 

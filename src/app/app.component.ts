@@ -28,6 +28,12 @@ import {Subscription} from 'rxjs';
       </button>
 
       } @if(isAuthenticated){
+      <!-- btn for my orders tailwind css -->
+      <button
+        class="absolute right-0  h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
+      >
+        <span class="h-[24px]" [routerLink]="['/orders']">My Orders</span>
+      </button>
 
       <app-logout (click)="checkIfAuthenticated()" class=""></app-logout>
       } @if(!isAuthenticated) {

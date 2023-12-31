@@ -36,3 +36,16 @@ body {
     height: auto;
   }
 }
+
+.holo-bg {
+  background: linear-gradient(to right, rgba(0, 255, 255, 0.5) 0%, rgba(0, 0, 255, 0.75) 50%, rgba(64, 224, 208, 0.5) 100%);
+  background-size: 200% 200%;
+  animation: shine 2s linear infinite;
+  // min-height: 100vh;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}

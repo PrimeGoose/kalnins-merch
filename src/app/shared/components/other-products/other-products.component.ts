@@ -5,11 +5,12 @@ import {ProductService} from '../../../core/services/product.service';
 @Component({
   selector: 'app-other-products',
   template: `
-    <h1 class="text-3xl font-semibold text-gray-900 mb-4">Citi Produkti</h1>
+    <h1 class="text-3xl font-semibold  mb-4">Citi Produkti</h1>
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
       <ng-container *ngFor="let product of otherProducts">
         <div
-          class="cursor-pointer  product-card bg-white  
+          class="cursor-pointer  product-card    dark:border-slate-800 dark:border
+
          rounded overflow-hidden flex gap-1"
           (click)="getOtherProduct(product.product_id)"
         >

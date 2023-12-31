@@ -5,7 +5,7 @@ import {style} from '@angular/animations';
   selector: 'app-buy-box',
   template: `
     <div
-      class="px-4 flex flex-col items-center justify-center place-self-center  shadow-md dark:bg-slate-800   pb-4 pt-4 768:flex 768:justify-center"
+      class="px-4 flex flex-col items-center justify-center place-self-center  shadow-md dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900   pb-4 pt-4 768:flex 768:justify-center"
     >
       <app-product-category [category]="selected.category"></app-product-category>
       <app-product-name [name]="selected.name"></app-product-name>

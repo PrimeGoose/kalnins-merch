@@ -5,7 +5,7 @@ import {ProductService} from '../../../core/services/product.service';
 @Component({
   selector: 'app-other-products',
   template: `
-    <h1 class="text-3xl font-semibold  mb-4">Citi Produkti</h1>
+    <h1 class="text-3xl font-semibold  mb-4 gradient-text">Citi Produkti</h1>
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
       <ng-container *ngFor="let product of otherProducts">
         <div
@@ -21,6 +21,14 @@ import {ProductService} from '../../../core/services/product.service';
   `,
   styles: [
     `
+      .gradient-text {
+        background: linear-gradient(to right, #0ea5e9, #7f9cf5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+      }
+
       :host {
         display: flex;
         flex-direction: column;

@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
     <!-- toolbar full wifth   one row hight contains loggin account menu-->
     <div
       class="w-full h-16 fixed hover:z-50 flex items-center
-     bg-slate-900"
+     "
     >
       <ng-content> </ng-content>
     </div>

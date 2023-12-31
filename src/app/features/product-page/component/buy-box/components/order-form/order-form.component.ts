@@ -15,7 +15,7 @@ import {Component, Input} from '@angular/core';
           [(ngModel)]="user.email"
           name="emailInput"
           [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
-          class="border rounded py-2 text-center dark:bg-slate-600 dark:border-slate-500
+          class="border rounded py-2 text-center dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 dark:border-gray-700
           "
           placeholder="Ievadi e-pastu lai pasūtītu.."
           (input)="validateEmail(user.email)"
@@ -28,7 +28,7 @@ import {Component, Input} from '@angular/core';
           id="nickname"
           name="nickname"
           type="text"
-          class="border rounded py-2 mb-2 text-center dark:bg-slate-600 dark:border-slate-500"
+          class="border rounded py-2 mb-2 text-center dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 dark:border-gray-700"
           placeholder="Tavs Rojālais segvārds šeit.."
         />
 
@@ -36,7 +36,10 @@ import {Component, Input} from '@angular/core';
           (click)="processOrder()"
           id="order-button"
           [ngClass]="{'shake-animation': !user.emailValidated}"
-          class="bg-orange-400 hover:bg-orange-500 text-white py-2  rounded  text-xl font-black font-serif"
+          class="bg-orange-400 hover:bg-orange-500 text-white py-2  rounded  text-xl font-black font-serif
+          dark:bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
+          
+          "
         >
           Pasūtīt
         </button>

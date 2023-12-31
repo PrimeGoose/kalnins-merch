@@ -7,7 +7,9 @@ import {ProductService} from '../../core/services/product.service';
 @Component({
   selector: 'app-home-page',
   template: `
-    <div class="grid grid-cols-1 640:grid-cols-2 960:grid-cols-3 gap-4 max-w-[320px] 640:max-w-[640px] 960:max-w-[960px]">
+    <div
+      class="grid grid-cols-1 640:grid-cols-2 960:grid-cols-3 gap-4 max-w-[320px] 640:max-w-[640px] 960:max-w-[960px] dark:bg-slate-950 dark:text-white"
+    >
       <app-product-card
         [routerLink]="['/product', product.product_id]"
         *ngFor="let product of products"

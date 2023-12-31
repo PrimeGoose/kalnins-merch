@@ -9,9 +9,8 @@ import {ProductService} from '../../../core/services/product.service';
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
       <ng-container *ngFor="let product of otherProducts">
         <div
-          class="cursor-pointer  product-card    dark:border-slate-800 dark:border
-
-         rounded overflow-hidden flex gap-1"
+          class="cursor-pointer  product-card    dark:border-slate-800 dark:border rounded overflow-hidden flex gap-1"
+          [routerLink]="['/product', product.product_id]"
           (click)="getOtherProduct(product.product_id)"
         >
           <app-product-image class="max-w-[234px] min-w-[150px]" [imagePath]="product.images[0]"></app-product-image>

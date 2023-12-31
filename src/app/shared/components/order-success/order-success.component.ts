@@ -5,7 +5,11 @@ import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
 
   template: `
     <div class="grid h-screen place-items-center content-between text-center px-4 md:px-0">
-      <div class="flex flex-col p-4 md:p-8 bg-white rounded-lg shadow-xl max-w-xl mx-auto w-full">
+      <div
+        class="flex flex-col p-4 md:p-8 rounded-lg shadow-xl max-w-xl mx-auto w-full
+      dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 dark:border-gray-700
+      "
+      >
         <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-pink-600">PALDIES!</h1>
         <p class="text-lg md:text-xl mb-3 md:mb-4">Tavs pieteikums ir pieņemts.</p>
         <p class="text-md md:text-lg mb-4 md:mb-6">

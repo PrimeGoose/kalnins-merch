@@ -23,7 +23,7 @@ export class AdminDashboardPageComponent implements OnInit {
   isManager: boolean = false;
 
   async ngOnInit() {
-    await this.supabase.getIsStoreManager().then((isManager) => {
+    await this.db.getIsStoreManager().then((isManager) => {
       this.isManager = isManager;
     });
     await this.getAllUploadedImagesTo();
@@ -56,7 +56,7 @@ export class AdminDashboardPageComponent implements OnInit {
     this.all_images_from_kalnins_merch_bucket = [];
     this.filteredImages = [];
 
-    await this.supabase.supabase.storage
+    await this.db.supabase.storage
       .from('kalnins-merch')
       .list()
       .then(async (data) => {
@@ -73,7 +73,7 @@ export class AdminDashboardPageComponent implements OnInit {
   all_active_images: string[] = [];
 
   async getAllProductImages() {
-    let {data: products, error} = await this.supabase.supabase.from('products').select('images');
+    let {data: products, error} = await this.db.supabase.from('products').select('images');
 
     if (error) {
       console.error('Error fetching products', error);
@@ -148,7 +148,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
   supabase_image_Paths: string[] = [];
   constructor(
-    private supabase: SupabaseService,
+    private db: SupabaseService,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
   ) {}
@@ -292,7 +292,7 @@ export class AdminDashboardPageComponent implements OnInit {
     const selectdNames: any = this.uploadedImagePaths.map((path) => path.split('/').pop());
 
     if (selectdNames) {
-      await this.supabase.supabase.storage.from('kalnins-merch').remove(selectdNames); // remove from bucket
+      await this.db.supabase.storage.from('kalnins-merch').remove(selectdNames); // remove from bucket
       this.filteredImages = [];
       await this.getAllUploadedImagesTo(); // refresh images
       this.isSelectedImage = false;
@@ -337,7 +337,7 @@ export class AdminDashboardPageComponent implements OnInit {
       // All images are uploaded at this point, and paths are collected
       // this.pForm.get('images')?.setValue(this.uploadedImagePaths);
 
-      const saveProductResult = await this.supabase.saveProduct({
+      const saveProductResult = await this.db.saveProduct({
         product_id: this.product.product_id,
         category: this.pForm.value.category || '',
         name: this.pForm.value.name || '',
@@ -452,7 +452,7 @@ export class AdminDashboardPageComponent implements OnInit {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      return this.supabase.uploadPublicImage(file, `kalnins-merch`).then((supabase_image_Path: any) => {
+      return this.db.uploadPublicImage(file, `kalnins-merch`).then((supabase_image_Path: any) => {
         const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
         return full_supabase_image_Path; // This will be used in Promise.all
       });
@@ -618,7 +618,7 @@ export class AdminDashboardPageComponent implements OnInit {
 
   removeImageFromBucket() {
     const name = this.uploadedImagePaths[0].split('/').pop() || '';
-    this.supabase.supabase.storage.from('kalnins-merch').remove([name]); // remove from bucket
+    this.db.supabase.storage.from('kalnins-merch').remove([name]); // remove from bucket
     this.getAllUploadedImagesTo(); // refresh images
   }
 

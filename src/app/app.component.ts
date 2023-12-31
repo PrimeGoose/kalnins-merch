@@ -39,7 +39,7 @@ import {Subscription} from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
-    private supabase: SupabaseService,
+    private db: SupabaseService,
     private router: Router,
   ) {}
   isAdminRoute: boolean = false;
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isAdminRouteSubscription: Subscription = new Subscription();
 
   login() {
-    this.supabase.authWithDiscord();
+    this.db.authWithDiscord();
   }
   getIsAdminRoute() {
     this.isAdminRoute = this.router.url.includes('admin');
@@ -65,13 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   testAccessToTable(table: string) {
-    this.supabase.testAccessToTable(table).then((result) => {
+    this.db.testAccessToTable(table).then((result) => {
       this.result = result;
     });
   }
 
   async checkIfAuthenticated() {
-    const {data, error} = await this.supabase.supabase.auth.getSession();
+    const {data, error} = await this.db.supabase.auth.getSession();
     if (error) {
       console.log(`error getting session:`, error);
       return false;
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.isManager = await this.supabase.getIsStoreManager();
+    this.isManager = await this.db.getIsStoreManager();
     this.isAuthenticated = await this.checkIfAuthenticated();
     this.getIsAdminRoute();
   }

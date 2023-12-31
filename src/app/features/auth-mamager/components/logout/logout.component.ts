@@ -42,9 +42,9 @@ import {SupabaseService} from '../../../../core/services/supabase.service';
   }`,
 })
 export class LogoutComponent {
-  constructor(private supabase: SupabaseService) {}
+  constructor(private db: SupabaseService) {}
 
   async logout() {
-    await this.supabase.logOutFromDiscord();
+    await this.db.logOutFromDiscord();
   }
 }

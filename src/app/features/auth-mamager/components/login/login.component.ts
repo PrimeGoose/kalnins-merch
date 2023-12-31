@@ -41,9 +41,9 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
   }`,
 })
 export class LoginComponent {
-  constructor(private supabase: SupabaseService) {}
+  constructor(private db: SupabaseService) {}
 
   login() {
-    this.supabase.authWithDiscord();
+    this.db.authWithDiscord();
   }
 }

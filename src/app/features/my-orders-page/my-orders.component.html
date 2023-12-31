@@ -1,7 +1,19 @@
-<!-- // profile -->
-<!-- name -->
-<!-- avatar -->
+<div class="profile">
+  <h2>{{ (user$ | async)?.custom_claims?.global_name }}</h2>
+  <img [src]="(user$ | async)?.avatar_url" alt="User Avatar" />
+</div>
 
-<!-- list of orders -->
-
-<!-- product_id, ordr_status[ordered,dipatched, delivered, reviewed]  orderId  product img ,price, size, quantity. -->
+<div class="orders">
+  <h2>Orders</h2>
+  <div *ngFor="let order of orders">
+    <div class="order">
+      <img src="{{ order.productImg }}" alt="Product Image" />
+      <p>Product ID: {{ order.productId }}</p>
+      <p>Order ID: {{ order.orderId }}</p>
+      <p>Status: {{ order.status }}</p>
+      <p>Price: {{ order.price }}</p>
+      <p>Size: {{ order.size }}</p>
+      <p>Quantity: {{ order.quantity }}</p>
+    </div>
+  </div>
+</div>

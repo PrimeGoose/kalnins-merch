@@ -11,7 +11,9 @@ import {Subject} from 'rxjs';
     <div class=" p-6 rounded-lg shadow-sm w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 border-black">
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-semibold  mb-4">Apraksts</h2>
+
         <button
+          *ngIf="isManager"
           (click)="editDescription()"
           class="px-4 py-2 text-sm font-medium text-white bg-gray-500 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
         >
@@ -46,8 +48,9 @@ export class DescriptionComponent implements OnInit {
     private db: SupabaseService,
     private route: ActivatedRoute,
   ) {}
-
-  ngOnInit() {
+  isManager = false;
+  async ngOnInit() {
+    this.isManager = await this.db.getIsStoreManager();
     this.routeSubscription = this.route.params
       .pipe(
         switchMap((params) => {

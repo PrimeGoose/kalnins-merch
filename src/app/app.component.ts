@@ -16,6 +16,9 @@ import {Subscription} from 'rxjs';
       >
         <span class="h-[24px]">Home</span>
       </button>
+
+      @if(isManager){
+
       <button
         *ngIf="!isAdminRoute"
         routerLink="/admin"
@@ -24,7 +27,7 @@ import {Subscription} from 'rxjs';
         <span class="h-[24px]">Admin</span>
       </button>
 
-      @if(isAuthenticated){
+      } @if(isAuthenticated){
 
       <app-logout (click)="checkIfAuthenticated()" class=""></app-logout>
       } @if(!isAuthenticated) {
@@ -78,9 +81,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     if (data.session?.user.aud == 'authenticated') {
       this.isAuthenticated = true;
+
       return true;
     } else {
       this.isAuthenticated = false;
+      this.isManager = false;
       return false;
     }
   }

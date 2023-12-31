@@ -22,7 +22,7 @@ import {Subject} from 'rxjs';
       </div>
       <textarea
         *ngIf="isEditing"
-        class=" mb-4 border border-gray-300 rounded p-2 w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 border-black"
+        class=" mb-4 border border-gray-300 rounded p-2 w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 "
         [(ngModel)]="description"
         appAutoResize
         rows="15"

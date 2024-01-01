@@ -1,24 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SupabaseService} from './supabase.service';
+import {Product} from '../models/product.model';
 
-export type Size = {
-  size: string;
-  price: number;
-  available: boolean;
-};
-export type Product = {
-  sizes: Size[];
-  product_id: number;
-  category: string;
-  name: string;
-  color_hex: string;
-  color_name: string;
-  currency: string;
-  gender: string;
-  brand: string;
-  description: string;
-  images: string[];
-};
 @Injectable({
   providedIn: 'root',
 })

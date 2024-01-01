@@ -5,6 +5,6 @@ export const initialState: Record<string, any> = {items: [], error: null};
 
 export const appReducer = createReducer(
   initialState,
-  on(AppActions.loadItemsSuccess, (state, {items}) => ({...state, items})),
-  on(AppActions.loadItemsFailure, (state, {error}) => ({...state, error})),
+  on(AppActions.loadProductsSuccess, (state, {items}) => ({...state, items})),
+  on(AppActions.loadProductsFailure, (state, {error}) => ({...state, error})),
 );

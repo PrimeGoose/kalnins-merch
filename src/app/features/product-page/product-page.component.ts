@@ -1,6 +1,7 @@
 import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
-import {Product, Size, ProductService} from '../../core/services/product.service';
+import {ProductService} from '../../core/services/product.service';
+import {Product, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';

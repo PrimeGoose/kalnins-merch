@@ -1,15 +1,13 @@
 import {CommonModule, NgFor} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
-import {Product, Size} from 'src/app/core/services/product.service';
-import {Dimensions, ImageCroppedEvent, ImageCropperComponent, ImageCropperModule, LoadedImage, ImageTransform} from 'ngx-image-cropper';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Product} from 'src/app/core/models/product.model';
+import {Dimensions, ImageCroppedEvent, ImageCropperModule, ImageTransform} from 'ngx-image-cropper';
 import {DomSanitizer} from '@angular/platform-browser';
 import {FormControl, Validators} from '@angular/forms';
 import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {colors, default_sizes, categories} from './constants';
-import {SupabaseClient} from '@supabase/supabase-js';
-import {Observable} from 'rxjs';
 
 @Component({
   standalone: true,

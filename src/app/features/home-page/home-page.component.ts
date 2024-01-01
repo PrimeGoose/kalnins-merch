@@ -1,7 +1,7 @@
 // home-page.component.ts
 
 import {Component, OnInit} from '@angular/core';
-import {Product} from '../../core/services/product.service';
+import {Product} from '../../core/models/product.model';
 import {ProductService} from '../../core/services/product.service';
 
 @Component({

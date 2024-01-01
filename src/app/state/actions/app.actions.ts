@@ -1,5 +1,8 @@
 import {createAction, props} from '@ngrx/store';
+import {Product} from 'src/app/core/models/product.model';
 
-export const loadItems = createAction('[App] Load Items');
-export const loadItemsSuccess = createAction('[App] Load Items Success', props<{items: any[]}>());
-export const loadItemsFailure = createAction('[App] Load Items Failure', props<{error: any}>());
+export const loadProducts = createAction('[Product] Load Products');
+
+export const loadProductsSuccess = createAction('[Product] Load Products Success', props<{items: Product[]}>());
+
+export const loadProductsFailure = createAction('[Product] Load Products Failure', props<{error: any}>());

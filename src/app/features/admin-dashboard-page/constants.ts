@@ -1,4 +1,4 @@
-import {Size} from 'src/app/core/services/product.service';
+import {Size} from '../../core/models/product.model';
 
 export const colors: string[] = ['Melns', 'Balts', 'Sarkans', 'Zils', 'Zaļs', 'Dzeltens'];
 export const categories: string[] = [

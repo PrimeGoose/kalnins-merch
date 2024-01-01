@@ -1,9 +1,9 @@
 import {Component, OnInit, Injectable, OnDestroy} from '@angular/core';
-import {Product, ProductService} from './core/services/product.service';
+import {ProductService} from './core/services/product.service';
 import {SupabaseService} from './core/services/supabase.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-
+import {Product} from './core/models/product.model';
 @Component({
   selector: 'app-root',
   // standalone: true,

@@ -90,7 +90,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   async ngOnInit() {
-    this.otherProducts = await this.supabaee.getProductsService();
+    this.otherProducts = await this.supabaee.getAllProductsService();
 
     const product = await this.supabaee.getProductService(this.id);
     this.initializeProduct(product);

@@ -63,7 +63,7 @@ export class SupabaseService {
     this.supabase.auth.getSession();
   }
 
-  async getProductsService(): Promise<Product[]> {
+  async getAllProductsService(): Promise<Product[]> {
     const {data, error} = await this.supabase.from('products').select('*');
 
     if (error) {

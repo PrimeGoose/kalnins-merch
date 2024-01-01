@@ -35,7 +35,7 @@ export class ProductService {
    */
   async getAllProducts(): Promise<Product[]> {
     const response = await fetch('assets/products.json');
-    return await this.supabaseService.getProductsService();
+    return await this.supabaseService.getAllProductsService();
   }
 
   /**

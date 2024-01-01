@@ -93,7 +93,7 @@ export class SupabaseService {
     }
   }
 
-  async getProductService(id: number) {
+  async getProductByIDService(id: number) {
     const {data, error} = await this.supabase.from('products').select('*').eq('product_id', id);
 
     if (error) {
@@ -101,7 +101,22 @@ export class SupabaseService {
       return {} as Product;
     }
 
-    return data[0] || ({} as Product);
+    return (
+      data[0] ||
+      ({
+        sizes: [],
+        product_id: 0,
+        category: '',
+        name: '',
+        color_hex: '',
+        color_name: '',
+        currency: '',
+        gender: '',
+        brand: '',
+        description: '',
+        images: [],
+      } as Product)
+    );
   }
 
   // storage get bucket nane: kalnins-merch

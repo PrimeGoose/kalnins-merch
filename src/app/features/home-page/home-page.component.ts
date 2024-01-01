@@ -32,8 +32,4 @@ export class HomePageComponent implements OnInit {
   async ngOnInit() {
     this.products = await this.productService.getAllProducts();
   }
-
-  // storeProductID(id: number) {
-  //   this.productService.storeProductID(id);
-  // }
 }

@@ -13,14 +13,21 @@ import {AngularMaterialModule} from './shared/modules/angular-material.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 // Shared module
 import {SharedModule} from './shared/modules/shared.module';
+// Product page module
 import {ProductPageModule} from './features/product-page/product-page.module';
+// components
 import {LoginComponent} from './features/auth-mamager/components/login/login.component';
 import {ToolbarComponent} from './features/toolbar/toolbar.component';
 import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
+
+// My Orders Page Module
 import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.module';
+
+// state management
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {appReducer} from './state/products/reducers/product.reducer';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ToolbarComponent],

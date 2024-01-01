@@ -1,23 +1,22 @@
+// product.service.ts
 import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {SupabaseService} from './supabase.service';
+import {loadProducts, loadProductsSuccess} from '../../state/products/actions/product.actions';
 import {Product} from '../models/product.model';
-
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  public productID = 0;
+  constructor(
+    private db: SupabaseService,
+    private store: Store,
+  ) {}
 
-  products: Product[] = [];
-
-  constructor(private supabaseService: SupabaseService) {}
-
-  async getAllProducts(): Promise<Product[]> {
-    return await this.supabaseService.getAllProductsService();
-  }
-
-  async getProductById(id: number): Promise<Product> {
-    const product = await this.supabaseService.getProductByIDService(id);
-    return product;
+  public async loadProducts() {
+    const items: Product[] = await this.db.getAllProductsService();
+    console.log(items);
+    this.store.dispatch(loadProductsSuccess({items}));
+    return items;
   }
 }

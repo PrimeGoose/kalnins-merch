@@ -34,8 +34,10 @@ export class SupabaseService {
     const {data, error} = await this.supabase.auth.getUser();
     if (error) {
       return error;
+    } else {
+      console.log(data.user);
+      return data.user;
     }
-    return data;
   }
 
   async getIsStoreManager(): Promise<boolean> {

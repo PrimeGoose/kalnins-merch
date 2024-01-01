@@ -1,5 +1,5 @@
 import {StoreModule} from '@ngrx/store';
-import {appReducer} from '../reducers/app.reducer';
+import {appReducer} from '../products/reducers/product.reducer';
 import {NgModule} from '@angular/core';
 
 @NgModule({

@@ -54,15 +54,10 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
 })
 export class OrderFormComponent implements OnInit {
   isAuthenticated = false;
-  data: any = ['ddddddddd'];
+  data: any = [];
   constructor(private db: SupabaseService) {}
   async ngOnInit() {
-    this.data = await this.db.supabase.auth.getUser();
-    console.log(this.data.data.user.email);
-    if (this.data.data.user.aud) {
-      this.isAuthenticated = true;
-      this.validateEmail(this.data.data.user.email);
-    }
+    await this.db.getUserService();
   }
   @Input() user: any;
   @Input() onValidateEmail: any;

@@ -49,7 +49,7 @@ export class OtherProductsComponent implements OnInit {
   @Output() productClick = new EventEmitter<number>();
 
   async ngOnInit() {
-    this.otherProducts = await this.ProductService.getAllProducts();
+    // this.otherProducts = await this.ProductService.getAllProducts();
   }
 
   getOtherProduct(productId: number) {

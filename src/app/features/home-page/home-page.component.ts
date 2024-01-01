@@ -1,9 +1,8 @@
-// home-page.component.ts
-
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {ProductService} from 'src/app/core/services/product.service';
 import {Product} from '../../core/models/product.model';
-import {ProductService} from '../../core/services/product.service';
-
 @Component({
   selector: 'app-home-page',
   template: `
@@ -27,9 +26,12 @@ import {ProductService} from '../../core/services/product.service';
   ],
 })
 export class HomePageComponent implements OnInit {
-  products: Product[] = [];
+  products: any[] = [];
   constructor(private productService: ProductService) {}
+
   async ngOnInit() {
-    this.products = await this.productService.getAllProducts();
+    // this.productService.loadProducts();
+    this.products = (await this.productService.loadProducts()) as any;
+    // console.log(this.products)
   }
 }

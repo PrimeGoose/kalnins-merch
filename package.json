@@ -24,6 +24,7 @@
     "@angular/service-worker": "^17.0.2",
     "@ngrx/effects": "17.0.1",
     "@ngrx/store": "17.0.1",
+    "@ngrx/store-devtools": "17.0.1",
     "@schematics/angular": "^16.2.9",
     "@supabase/supabase-js": "^2.38.4",
     "angular-cli-ghpages": "^1.0.7",

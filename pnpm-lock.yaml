@@ -44,6 +44,9 @@ dependencies:
   '@ngrx/store':
     specifier: 17.0.1
     version: 17.0.1(@angular/core@17.0.2)(rxjs@7.8.1)
+  '@ngrx/store-devtools':
+    specifier: 17.0.1
+    version: 17.0.1(@ngrx/store@17.0.1)(rxjs@7.8.1)
   '@schematics/angular':
     specifier: ^16.2.9
     version: 16.2.9
@@ -2935,6 +2938,17 @@ packages:
     peerDependencies:
       rxjs: ^6.5.3 || ^7.4.0
     dependencies:
+      rxjs: 7.8.1
+      tslib: 2.6.2
+    dev: false
+
+  /@ngrx/store-devtools@17.0.1(@ngrx/store@17.0.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-1/BrHmd1KnjEvZtUkmMeOAhftzTLCBxpk0KoVSnl7BFr0LGQZrYUTXHI3b6tzJ2igGuj0d9hk/JRMOXmYn/5WA==}
+    peerDependencies:
+      '@ngrx/store': 17.0.1
+      rxjs: ^6.5.3 || ^7.5.0
+    dependencies:
+      '@ngrx/store': 17.0.1(@angular/core@17.0.2)(rxjs@7.8.1)
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false

@@ -90,9 +90,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   };
 
   async ngOnInit() {
-    this.otherProducts = await this.supabaee.getProducts();
+    this.otherProducts = await this.supabaee.getProductsService();
 
-    const product = await this.supabaee.getProduct(this.id);
+    const product = await this.supabaee.getProductService(this.id);
     this.initializeProduct(product);
   }
 
@@ -116,7 +116,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     const yOffset = productElement ? productElement.getBoundingClientRect().top + window.scrollY : 0;
     window.scrollTo({top: yOffset, behavior: 'smooth'});
 
-    const product = await this.supabaee.getProduct(this.id);
+    const product = await this.supabaee.getProductService(this.id);
     this.initializeProduct(product);
   }
 

@@ -2,26 +2,24 @@ import {Injectable} from '@angular/core';
 import {createClient, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
 import {environment} from '../../../environments/enviroment';
 import {Product} from './product.service';
-import {decode} from 'base64-arraybuffer';
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
   public supabase: SupabaseClient;
-  private discord_auth_cb_url = environment.supabaseUrl;
 
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
   }
 
-  async authWithDiscord() {
-    const credentials: SignInWithOAuthCredentials = {
-      provider: 'discord',
-    };
-
+  async authWithDiscord(): Promise<SignInWithOAuthCredentials | any> {
     const {data, error} = await this.supabase.auth.signInWithOAuth({
       provider: 'discord',
     });
+    if (error) {
+      return error;
+    }
+    return data;
   }
 
   async getStoreManagerService() {
@@ -58,38 +56,26 @@ export class SupabaseService {
     return isManager;
   }
 
-  /**
-   * Tests access to a specified table in Supabase and logs the result.
-   *
-   * @param {string} table - The name of the table to access in Supabase.
-   * @returns {Promise<any>} The data from the table if successful, or an error object if the access fails.
-   */
-  async testAccessToTable(table: string) {
-    const {data, error} = await this.supabase.from(table).select();
-
-    if (error) {
-      return error;
-    }
-    return data;
-  }
-
-  logOutFromDiscord() {
+  logOutService() {
     this.supabase.auth.signOut();
-    this.supabase.auth;
   }
-  getSession() {
+  getSessionService() {
     this.supabase.auth.getSession();
   }
 
-  getSupabaseToken(): string | null {
-    const urlParts = this.discord_auth_cb_url.split('.');
-    const ref = urlParts.length > 2 ? urlParts[0].replace('https://', '') : '';
-    const tokenKey = `sb-${ref}-auth-token`;
-    const token = localStorage.getItem(tokenKey);
-    return token;
+  async getProductsService(): Promise<Product[]> {
+    const {data, error} = await this.supabase.from('products').select('*');
+
+    if (error) {
+      console.error('Error getting products:', error);
+      return [];
+    }
+    const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
+
+    return data.sort(sortById);
   }
 
-  async saveProduct(product: Product): Promise<void> {
+  async saveProductService(product: Product): Promise<void> {
     const {data, error} = await this.supabase.from('products').insert({
       category: product.category,
       name: product.name,
@@ -107,19 +93,7 @@ export class SupabaseService {
     }
   }
 
-  async getProducts(): Promise<Product[]> {
-    const {data, error} = await this.supabase.from('products').select('*');
-
-    if (error) {
-      console.error('Error getting products:', error);
-      return [];
-    }
-    const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
-
-    return data.sort(sortById);
-  }
-
-  async getProduct(id: number) {
+  async getProductService(id: number) {
     const {data, error} = await this.supabase.from('products').select('*').eq('product_id', id);
 
     if (error) {
@@ -131,7 +105,7 @@ export class SupabaseService {
   }
 
   // storage get bucket nane: kalnins-merch
-  async uploadPublicImage(file: File, bucketId: string): Promise<Object> {
+  async uploadPublicImageServive(file: File, bucketId: string): Promise<Object> {
     const {data, error} = await this.supabase.storage.from(`${bucketId}`).upload(`${file.name}`, file);
 
     if (error) {

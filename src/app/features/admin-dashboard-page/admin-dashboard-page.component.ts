@@ -337,7 +337,7 @@ export class AdminDashboardPageComponent implements OnInit {
       // All images are uploaded at this point, and paths are collected
       // this.pForm.get('images')?.setValue(this.uploadedImagePaths);
 
-      const saveProductResult = await this.db.saveProduct({
+      const saveProductServiceResult = await this.db.saveProductService({
         product_id: this.product.product_id,
         category: this.pForm.value.category || '',
         name: this.pForm.value.name || '',
@@ -452,7 +452,7 @@ export class AdminDashboardPageComponent implements OnInit {
       const fileName = `compressed_image_${Date.now()}.${format}`;
       const file = new File([blob], fileName, {type: `image/${format}`});
 
-      return this.db.uploadPublicImage(file, `kalnins-merch`).then((supabase_image_Path: any) => {
+      return this.db.uploadPublicImageServive(file, `kalnins-merch`).then((supabase_image_Path: any) => {
         const full_supabase_image_Path: string = `${supabase_image_Path.url}`;
         return full_supabase_image_Path; // This will be used in Promise.all
       });

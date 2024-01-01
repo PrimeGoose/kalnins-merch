@@ -18,9 +18,9 @@ import {LoginComponent} from './features/auth-mamager/components/login/login.com
 import {ToolbarComponent} from './features/toolbar/toolbar.component';
 import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
 import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ToolbarComponent],
@@ -42,7 +42,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
-    }), StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    }),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
   ],
   providers: [],
   bootstrap: [AppComponent],

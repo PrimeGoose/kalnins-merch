@@ -45,6 +45,6 @@ export class LogoutComponent {
   constructor(private db: SupabaseService) {}
 
   async logout() {
-    await this.db.logOutFromDiscord();
+    await this.db.logOutService();
   }
 }

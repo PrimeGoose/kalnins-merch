@@ -73,12 +73,6 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  testAccessToTable(table: string) {
-    this.db.testAccessToTable(table).then((result) => {
-      this.result = result;
-    });
-  }
-
   async checkIfAuthenticated() {
     const {data, error} = await this.db.supabase.auth.getSession();
     if (error) {

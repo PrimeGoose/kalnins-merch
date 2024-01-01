@@ -1,3 +1,4 @@
+// product.actions.ts
 import {createAction, props} from '@ngrx/store';
 import {Product} from 'src/app/core/models/product.model';
 

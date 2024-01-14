@@ -24,15 +24,12 @@ import {LogoutComponent} from './features/auth-mamager/components/logout/logout.
 import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.module';
 
 // state management
-import {StoreModule} from '@ngrx/store';
-import {EffectsModule} from '@ngrx/effects';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {appReducer} from './state/products/reducers/product.reducer';
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ToolbarComponent],
 
   imports: [
+    BrowserModule,
     LoginComponent,
     LogoutComponent,
     BrowserModule,
@@ -50,10 +47,7 @@ import {appReducer} from './state/products/reducers/product.reducer';
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
-  ],
+  ], 
   providers: [],
   bootstrap: [AppComponent],
 })

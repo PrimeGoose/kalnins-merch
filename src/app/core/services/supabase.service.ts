@@ -35,7 +35,7 @@ export class SupabaseService {
     if (error) {
       return error;
     } else {
-      console.log(data.user);
+      // console.log(data.user);
       return data.user;
     }
   }
@@ -65,17 +65,18 @@ export class SupabaseService {
     this.supabase.auth.getSession();
   }
 
-  async getAllProductsService(): Promise<Product[]> {
+  async getAllProductsService():Promise<Product[]>
+  {
     const {data, error} = await this.supabase.from('products').select('*');
 
     if (error) {
       console.error('Error getting products:', error);
-      return [];
+      return [] as Product[];
     }
     const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
 
-    return data.sort(sortById);
-  }
+    return [...data.sort(sortById)] as Product[];
+   }
 
   async saveProductService(product: Product): Promise<void> {
     const {data, error} = await this.supabase.from('products').insert({

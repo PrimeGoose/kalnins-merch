@@ -4,42 +4,48 @@ import {SupabaseService} from './core/services/supabase.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from './core/models/product.model';
-import { AuthService } from './core/authentication/auth.service';
+import {AuthService} from './core/authentication/auth.service';
 @Component({
   selector: 'app-root',
   // standalone: true,
   template: `
     <app-toolbar>
-      <button
-        *ngIf="isAdminRoute"
-        routerLink="/"
-        class="absolute right-0 h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700"
-      >
-        <span class="h-[24px]">Home</span>
-      </button>
+      <div class="flex row  gap-1  max-w-[400px]">
+        <app-logout *ngIf="isAuthenticated" (click)="checkIfAuthenticated()" class=""></app-logout>
 
-      @if(isManager){
+        <app-login *ngIf="!isAuthenticated" (click)="checkIfAuthenticated()" class=""></app-login>
 
-      <button
-        *ngIf="!isAdminRoute"
-        routerLink="/admin"
-        class="absolute right-0  h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
-      >
-        <span class="h-[24px]">Admin</span>
-      </button>
+        <button
+          *ngIf="isAdminRoute"
+          routerLink="/"
+          class=" h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700"
+        >
+          <span class="h-[24px]">Home</span>
+        </button>
 
-      } @if(isAuthenticated){
-      <!-- btn for my orders tailwind css -->
-      <button
-        class="absolute right-0  h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
-      >
-        <span class="h-[24px]" [routerLink]="['/orders']">My Orders</span>
-      </button>
+        <button
+          *ngIf="isOrdersRoute"
+          routerLink="/"
+          class=" h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700"
+        >
+          <span class="h-[24px]">Home</span>
+        </button>
 
-      <app-logout (click)="checkIfAuthenticated()" class=""></app-logout>
-      } @if(!isAuthenticated) {
-      <app-login (click)="checkIfAuthenticated()" class=""></app-login>
-      }
+        <button
+          *ngIf="!isOrdersRoute"
+          class=" flex right-0  h-fit items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
+        >
+          <span class="h-[24px]" [routerLink]="['/orders']">Pasūtījumi</span>
+        </button>
+
+        <button
+          *ngIf="!isAdminRoute"
+          routerLink="/admin"
+          class="   h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
+        >
+          <span class="h-[24px]"></span>
+        </button>
+      </div>
     </app-toolbar>
     <app-merch-header></app-merch-header>
     <router-outlet></router-outlet>
@@ -51,10 +57,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private db: SupabaseService,
     private router: Router,
-    private auth: AuthService
-    ,
+    private auth: AuthService,
   ) {}
   isAdminRoute: boolean = false;
+  isOrdersRoute: boolean = false;
+  isBaseHrefRoute: boolean = false;
+
   isManager: boolean = false;
   products: Product[] = [];
   isAuthenticated: boolean = false;
@@ -63,6 +71,8 @@ export class AppComponent implements OnInit, OnDestroy {
   user: any;
   userId: any;
   isAdminRouteSubscription: Subscription = new Subscription();
+  isOrdersRouteSubscription: Subscription = new Subscription();
+  isBaseHref: boolean = false;
 
   login() {
     this.db.authWithDiscord();
@@ -75,7 +85,23 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  getIsOrdersRoute() {
+    this.isOrdersRoute = this.router.url.includes('orders');
+    this.isOrdersRouteSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isOrdersRoute = this.router.url.includes('orders');
+      }
+    });
+  }
+  getBaseHref() {
+    this.isBaseHref = this.router.url.includes('/');
+    console.log(this.isBaseHref);
+    this.isOrdersRouteSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isBaseHrefRoute = this.router.url.includes('/');
+      }
+    });
+  }
   async checkIfAuthenticated() {
     const {data, error} = await this.db.supabase.auth.getSession();
     if (error) {
@@ -99,6 +125,8 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.isAuthenticated = await this.checkIfAuthenticated();
     this.getIsAdminRoute();
+    this.getIsOrdersRoute();
+    this.getBaseHref();
   }
   ngOnDestroy() {
     this.isManager = false;

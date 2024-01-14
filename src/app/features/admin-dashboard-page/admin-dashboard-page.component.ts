@@ -8,6 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {colors, default_sizes, categories} from './constants';
+import { AuthService } from 'src/app/core/authentication/auth.service';
 
 @Component({
   standalone: true,
@@ -19,11 +20,17 @@ import {colors, default_sizes, categories} from './constants';
 export class AdminDashboardPageComponent implements OnInit {
   user: any;
   isManager: boolean = false;
+  constructor(
+    private db: SupabaseService,
+    private fb: FormBuilder,
+    private auth : AuthService
+  ) {}
 
   async ngOnInit() {
-    await this.db.getIsStoreManager().then((isManager) => {
+     this.auth.isManager$.subscribe((isManager) => {
       this.isManager = isManager;
     });
+    
     await this.getAllUploadedImagesTo();
     await this.getAllProductImages();
     await this.filterAvailableImages();
@@ -145,11 +152,7 @@ export class AdminDashboardPageComponent implements OnInit {
   selectedCategory: string = '';
 
   supabase_image_Paths: string[] = [];
-  constructor(
-    private db: SupabaseService,
-    private fb: FormBuilder,
-    private sanitizer: DomSanitizer,
-  ) {}
+
   blobUrl: any;
 
   pForm: any = this.fb.group({

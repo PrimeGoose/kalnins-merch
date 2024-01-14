@@ -22,36 +22,36 @@ export class SupabaseService {
     return data;
   }
 
-  async getStoreManagerService() {
-    const {data, error} = await this.supabase.from('store_managers').select('*');
-    if (error) {
-      return [];
-    }
-    return [...data];
-  }
+  // async getStoreManagerService() {
+  //   const {data, error} = await this.supabase.from('store_managers').select('*');
+  //   if (error) {
+  //     return [];
+  //   }
+  //   return [...data];
+  // }
 
-  async getUserService(): Promise<any> {
-    const {data, error} = await this.supabase.auth.getUser();
-    if (error) {
-      return 'no user';
-    } else {
-      return data.user.id;
-    }
-  }
+  // async getUserService(): Promise<any> {
+  //   const {data, error} = await this.supabase.auth.getUser();
+  //   if (error) {
+  //     return 'no user';
+  //   } else {
+  //     return data.user.id;
+  //   }
+  // }
 
-  async getIsStoreManager(): Promise<boolean> {
-    let isManager = false;
-    let usr_id: any = await this.getUserService();
+  // async getIsStoreManager(): Promise<boolean> {
+  //   let isManager = false;
+  //   let usr_id: any = await this.getUserService();
 
-    await this.getStoreManagerService().then((data) => {
-      data.filter((manager: any) => {
-        if (manager.user_id == usr_id) {
-          isManager = true;
-        }
-      });
-    });
-    return isManager;
-  }
+  //   await this.getStoreManagerService().then((data) => {
+  //     data.filter((manager: any) => {
+  //       if (manager.user_id == usr_id) {
+  //         isManager = true;
+  //       }
+  //     });
+  //   });
+  //   return isManager;
+  // }
 
   logOutService() {
     this.supabase.auth.signOut();

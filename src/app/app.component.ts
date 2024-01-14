@@ -4,6 +4,7 @@ import {SupabaseService} from './core/services/supabase.service';
 import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from './core/models/product.model';
+import { AuthService } from './core/authentication/auth.service';
 @Component({
   selector: 'app-root',
   // standalone: true,
@@ -50,6 +51,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private db: SupabaseService,
     private router: Router,
+    private auth: AuthService
+    ,
   ) {}
   isAdminRoute: boolean = false;
   isManager: boolean = false;
@@ -91,7 +94,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.isManager = await this.db.getIsStoreManager();
+    this.auth.isManager$.subscribe((data) => {
+      this.isManager = data;
+    });
     this.isAuthenticated = await this.checkIfAuthenticated();
     this.getIsAdminRoute();
   }

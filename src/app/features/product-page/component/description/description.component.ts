@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subscription, switchMap} from 'rxjs';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Subject} from 'rxjs';
+import { AuthService } from 'src/app/core/authentication/auth.service';
 @Component({
   selector: 'app-description',
   template: `
@@ -46,12 +47,14 @@ export class DescriptionComponent implements OnInit {
 
   constructor(
     private db: SupabaseService,
+    private auth:AuthService,
     private route: ActivatedRoute,
   ) {}
-  isManager = false;
+  isManager = true;
   async ngOnInit() {
-    this.isManager = await this.db.getIsStoreManager();
-    console.log(this.isManager);
+    await this.auth.isManager$.subscribe((data) => {
+      this.isManager = data;
+    });
     
     this.routeSubscription = this.route.params
       .pipe(

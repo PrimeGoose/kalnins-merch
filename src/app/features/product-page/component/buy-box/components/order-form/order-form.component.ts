@@ -57,7 +57,6 @@ export class OrderFormComponent implements OnInit {
   data: any = [];
   constructor(private db: SupabaseService) {}
   async ngOnInit() {
-    await this.db.getUserService();
   }
   @Input() user: any;
   @Input() onValidateEmail: any;

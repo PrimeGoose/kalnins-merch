@@ -33,28 +33,23 @@ export class SupabaseService {
   async getUserService(): Promise<any> {
     const {data, error} = await this.supabase.auth.getUser();
     if (error) {
-      return error;
+      return 'no user';
     } else {
-      // console.log(data.user);
-      return data.user;
+      return data.user.id;
     }
   }
 
   async getIsStoreManager(): Promise<boolean> {
     let isManager = false;
-    let user: any;
-    await this.getUserService().then((data) => {
-      user = data.user;
-    });
+    let usr_id: any = await this.getUserService();
 
     await this.getStoreManagerService().then((data) => {
       data.filter((manager: any) => {
-        if (manager.user_id === user?.id) {
+        if (manager.user_id == usr_id) {
           isManager = true;
         }
       });
     });
-
     return isManager;
   }
 
@@ -65,8 +60,7 @@ export class SupabaseService {
     this.supabase.auth.getSession();
   }
 
-  async getAllProductsService():Promise<Product[]>
-  {
+  async getAllProductsService(): Promise<Product[]> {
     const {data, error} = await this.supabase.from('products').select('*');
 
     if (error) {
@@ -76,7 +70,7 @@ export class SupabaseService {
     const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
 
     return [...data.sort(sortById)] as Product[];
-   }
+  }
 
   async saveProductService(product: Product): Promise<void> {
     const {data, error} = await this.supabase.from('products').insert({

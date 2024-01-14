@@ -51,6 +51,8 @@ export class DescriptionComponent implements OnInit {
   isManager = false;
   async ngOnInit() {
     this.isManager = await this.db.getIsStoreManager();
+    console.log(this.isManager);
+    
     this.routeSubscription = this.route.params
       .pipe(
         switchMap((params) => {

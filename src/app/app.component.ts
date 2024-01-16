@@ -41,9 +41,11 @@ import {AuthService} from './core/authentication/auth.service';
         <button
           *ngIf="!isAdminRoute"
           routerLink="/admin"
-          class="   h-fit flex items-center bg-slate-100 dark:bg-slate-800 border border-gray-300 dark:border-black rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-slate-700  "
+          class="     "
         >
-          <span class="h-[24px]"></span>
+          <span class="">
+            <img src="../../../assets/icons/manager.min.svg"  [width]="64" [height]="64" alt="">
+          </span>
         </button>
       </div>
     </app-toolbar>

@@ -22,6 +22,60 @@ import {Product} from '../../core/models/product.model';
         flex-direction: column;
         align-items: center;
       }
+
+      // app-product-card children  1 2 3 slide in from right
+      app-product-card:nth-child(1), app-product-card:nth-child(2), app-product-card:nth-child(3) {
+        animation: slideInFromRight 1s ease-in-out;
+      }
+      @keyframes slideInFromRight {
+        0% {
+          transform: translateX(1000%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      // app-product-card children 4 5 6 slide in from left
+      app-product-card:nth-child(4), app-product-card:nth-child(5), app-product-card:nth-child(6) {
+        animation: slideInFromLeft 1s ease-in-out;
+      }
+      @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-1000%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      // app-product-card children 7 8 9 slide in from right
+      app-product-card:nth-child(7), app-product-card:nth-child(8), app-product-card:nth-child(9) {
+        animation: slideInFromRight 1s ease-in-out;
+      }
+      @keyframes slideInFromRight {
+        0% {
+          transform: translateX(1000%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      // app-product-card everything  thats left slide from bottom
+      app-product-card {
+        animation: slideInFromBottom 1s ease-in-out;
+      }
+      @keyframes slideInFromBottom {
+        0% {
+          transform: translateY(1000%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+       
+
+      
+    
+      
     `,
   ],
 })

@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class ProductService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public product$: Observable<Product[]> = this.productsSubject.asObservable();
-  private dataLoaded = false;
+  public dataLoaded = false;
 
   constructor(private db: SupabaseService) {}
 

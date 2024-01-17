@@ -43,8 +43,7 @@ import {Component} from '@angular/core';
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: uppercase;
-        animation: center_from_left 0.2s backwards;
-        animation-delay: 0.1s;
+        animation: center_from_left 1s backwards;
       }
 
       @keyframes center_from_left {

@@ -4,6 +4,7 @@ import {Subscription, switchMap} from 'rxjs';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Subject} from 'rxjs';
 import {AuthService} from 'src/app/core/authentication/auth.service';
+import {ProductService} from 'src/app/core/services/product.service';
 @Component({
   selector: 'app-description',
   template: `
@@ -47,6 +48,7 @@ export class DescriptionComponent implements OnInit {
 
   constructor(
     private db: SupabaseService,
+    private ps: ProductService,
     private auth: AuthService,
     private route: ActivatedRoute,
   ) {}
@@ -60,11 +62,16 @@ export class DescriptionComponent implements OnInit {
       .pipe(
         switchMap((params) => {
           this.id = params['id'];
-          return this.getDescriptionById(this.id);
+
+          return this.ps.product$;
         }),
       )
-      .subscribe((description) => {
-        this.description = description;
+      .subscribe((products) => {
+        products.forEach((product) => {
+          if (product.product_id == this.id) {
+            this.description = product.description;
+          }
+        });
       });
   }
 
@@ -74,14 +81,14 @@ export class DescriptionComponent implements OnInit {
     }
   }
 
-  async getDescriptionById(id: any): Promise<any> {
-    const {data, error} = await this.db.supabase.from('products').select('description, product_id').eq('product_id', id);
-    if (error) {
-      console.error(error);
-      return '';
-    }
-    return data[0].description;
-  }
+  // async getDescriptionById(id: any): Promise<any> {
+  //   const {data, error} = await this.db.supabase.from('products').select('description, product_id').eq('product_id', id);
+  //   if (error) {
+  //     console.error(error);
+  //     return '';
+  //   }
+  //   return data[0].description;
+  // }
 
   async editDescription() {
     if (this.isEditing) {

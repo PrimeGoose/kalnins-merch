@@ -95,6 +95,6 @@ export class HomePageComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   async ngOnInit() {
-    from(await this.productService.loadProducts());
+    await this.productService.loadProducts();
   }
 }

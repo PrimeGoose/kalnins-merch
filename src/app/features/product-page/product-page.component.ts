@@ -6,6 +6,7 @@ import {Product, Size} from '../../core/models/product.model';
 import {RouteStateService} from '../../route-state.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -89,12 +90,17 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     isShaking: false,
     shakeTimeout: 300,
   };
+  products$: Observable<Product[]> = this.productService.product$;
 
   async ngOnInit() {
-    // this.otherProducts = await this.supabaee.getAllProductsService();
+    await this.productService.loadProducts();
 
-    const product = await this.supabaee.getProductByIDService(this.id);
-    this.initializeProduct(product);
+    await this.products$.subscribe((data) => {
+      //  get the product from product$ by id and asign it to product
+      this.product = data.find((product) => product.product_id === this.id) || ({} as Product);
+    });
+
+    this.initializeProduct(this.product);
   }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;

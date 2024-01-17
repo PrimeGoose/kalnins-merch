@@ -13,14 +13,11 @@ export class ProductService {
 
   constructor(private db: SupabaseService) {}
 
-  public async loadProducts() {
+  public async loadProducts(): Promise<void> {
     if (!this.dataLoaded) {
       const products = (await this.db.getAllProductsService()) as Product[];
       this.productsSubject.next(products);
       this.dataLoaded = true;
-      return this.product$;
-    } else {
-      return this.product$;
     }
   }
 }

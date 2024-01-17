@@ -29,7 +29,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   }
 
   id: number = 0;
-  @Input() products: Product[] = []; 
+  @Input() products: Product[] = [];
 
   product: Product = {} as Product;
   // otherProducts: Product[] = [];

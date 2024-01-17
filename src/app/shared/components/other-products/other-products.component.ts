@@ -1,13 +1,14 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Product} from '../../../core/models/product.model';
 import {ProductService} from '../../../core/services/product.service';
+import {Observable, from} from 'rxjs';
 
 @Component({
   selector: 'app-other-products',
   template: `
     <h1 class="text-3xl font-semibold  mb-4 gradient-text">Citi Produkti</h1>
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
-      <ng-container *ngFor="let product of otherProducts">
+      <ng-container *ngFor="let product of otherProducts$ | async">
         <div
           class="cursor-pointer  product-card    dark:border-slate-800 dark:border rounded overflow-hidden flex gap-1"
           [routerLink]="['/product', product.product_id]"
@@ -42,15 +43,15 @@ import {ProductService} from '../../../core/services/product.service';
   ],
 })
 export class OtherProductsComponent implements OnInit {
-  constructor(private ProductService: ProductService) {}
+  constructor(private productService: ProductService) {}
 
   @Input() currentProductId: number = 0;
-  otherProducts: Product[] = [];
+
   @Output() productClick = new EventEmitter<number>();
 
-  async ngOnInit() {
-    this.otherProducts = await this.ProductService.loadProducts();
-  }
+  otherProducts$: Observable<Product[]> = this.productService.product$;
+
+  async ngOnInit() {}
 
   getOtherProduct(productId: number) {
     this.productClick.emit(productId);

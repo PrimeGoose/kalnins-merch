@@ -56,8 +56,7 @@ export class OrderFormComponent implements OnInit {
   isAuthenticated = false;
   data: any = [];
   constructor(private db: SupabaseService) {}
-  async ngOnInit() {
-  }
+  async ngOnInit() {}
   @Input() user: any;
   @Input() onValidateEmail: any;
   @Input() onProcessOrder: any;

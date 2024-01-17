@@ -47,7 +47,7 @@ import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.modul
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
-  ], 
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

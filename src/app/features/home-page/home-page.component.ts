@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, from} from 'rxjs';
 import {ProductService} from 'src/app/core/services/product.service';
 import {Product} from '../../core/models/product.model';
+// import { Product } from '../../shared/models/product.types';
 @Component({
   selector: 'app-home-page',
   template: `
@@ -21,7 +22,7 @@ import {Product} from '../../core/models/product.model';
         place-items: center;
         flex-direction: column;
         align-items: center;
-        animation: blur_foe_2_seconds 1s linear;
+        animation: blur_foe_2_seconds 0.1s linear;
       }
       @keyframes blur_foe_2_seconds {
         0% {
@@ -89,7 +90,7 @@ import {Product} from '../../core/models/product.model';
   ],
 })
 export class HomePageComponent implements OnInit {
-  products$: Observable<Product[]> = from(this.productService.loadProducts());
+  products$: Observable<Product[]> = this.productService.product$;
 
   constructor(private productService: ProductService) {}
 

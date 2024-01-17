@@ -5,7 +5,7 @@ export type Size = {
 };
 export type Product = {
   sizes: Size[];
-  id: number;
+  product_id: number;
   category: string;
   name: string;
   color_hex: string;
@@ -13,5 +13,6 @@ export type Product = {
   currency: string;
   gender: string;
   brand: string;
+  description: string;
   images: string[];
 };

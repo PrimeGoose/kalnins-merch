@@ -8,7 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AbstractControl, ValidationErrors, FormArray} from '@angular/forms';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {colors, default_sizes, categories} from './constants';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import {AuthService} from 'src/app/core/authentication/auth.service';
 
 @Component({
   standalone: true,
@@ -23,14 +23,14 @@ export class AdminDashboardPageComponent implements OnInit {
   constructor(
     private db: SupabaseService,
     private fb: FormBuilder,
-    private auth : AuthService
+    private auth: AuthService,
   ) {}
 
   async ngOnInit() {
-     this.auth.isManager$.subscribe((isManager) => {
+    this.auth.isManager$.subscribe((isManager) => {
       this.isManager = isManager;
     });
-    
+
     await this.getAllUploadedImagesTo();
     await this.getAllProductImages();
     await this.filterAvailableImages();

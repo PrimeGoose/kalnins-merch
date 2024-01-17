@@ -38,13 +38,9 @@ import {AuthService} from './core/authentication/auth.service';
           <span class="h-[24px]" [routerLink]="['/orders']">Pasūtījumi</span>
         </button>
 
-        <button
-          *ngIf="!isAdminRoute"
-          routerLink="/admin"
-          class="     "
-        >
+        <button *ngIf="!isAdminRoute" routerLink="/admin" class="     ">
           <span class="">
-            <img src="../../../assets/icons/manager.min.svg"  [width]="64" [height]="64" alt="">
+            <img src="../../../assets/icons/manager.min.svg" [width]="64" [height]="64" alt="" />
           </span>
         </button>
       </div>

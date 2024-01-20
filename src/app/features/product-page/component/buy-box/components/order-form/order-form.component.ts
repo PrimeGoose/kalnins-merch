@@ -17,8 +17,7 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
           [(ngModel)]="user.email"
           name="emailInput"
           [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
-          class="border rounded py-2 text-center dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 dark:border-gray-700
-          "
+          class="border dark:border-none rounded  text-center dark:bg-gray-800 py-2 mb-2"
           placeholder="Ievadi e-pastu lai pasūtītu.."
           (input)="validateEmail(this.data.data.user.email)"
         />
@@ -31,7 +30,7 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
           id="nickname"
           name="nickname"
           type="text"
-          class="border rounded py-2 mb-2 text-center dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 dark:border-gray-700"
+          class="border dark:border-none rounded  text-center dark:bg-gray-800 py-2 mb-2"
           placeholder="Tavs Rojālais segvārds šeit.."
         />
 

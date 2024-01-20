@@ -93,7 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   getBaseHref() {
     this.isBaseHref = this.router.url.includes('/');
-    console.log(this.isBaseHref);
+    // console.log(this.isBaseHref);
     this.isOrdersRouteSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isBaseHrefRoute = this.router.url.includes('/');

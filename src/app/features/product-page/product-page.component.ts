@@ -4,15 +4,11 @@ import {ProductService} from '../../core/services/product.service';
 import {Product, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
-import {trigger, state, style, animate, transition} from '@angular/animations';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
-  animations: [
-    trigger('fadeInOut', [state('default', style({opacity: 1})), state('out', style({opacity: 0})), transition('* <=> *', animate(500))]),
-  ],
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
 })

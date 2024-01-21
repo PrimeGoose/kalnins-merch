@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {style} from '@angular/animations';
 
 @Component({
   selector: 'app-buy-box',

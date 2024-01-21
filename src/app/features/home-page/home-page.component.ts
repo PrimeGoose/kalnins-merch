@@ -2,46 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ProductService} from 'src/app/core/services/product.service';
 import {Product} from '../../core/models/product.model';
-import {trigger, state, style, transition, animate, query, stagger, animateChild} from '@angular/animations';
+import {slideInFromRight} from 'src/app/core/animations/slideInFromRight';
 
 @Component({
   selector: 'app-home-page',
-  animations: [
-    trigger('slideInFromRight', [
-      transition('* => *', [
-        // each time the products change
-        query(
-          'app-product-card',
-          style({
-            transform: 'translateX( 100%)',
-            opacity: 0,
-
-            filter: 'blur(50px)',
-          }),
-          {
-            optional: true,
-          },
-        ),
-
-        query(
-          'app-product-card',
-          stagger('200ms', [
-            animate(
-              '1s ease-out',
-              style({
-                transform: 'translateY(0)',
-                opacity: 1,
-                filter: 'blur(0px)',
-              }),
-            ),
-          ]),
-          {
-            optional: true,
-          },
-        ),
-      ]),
-    ]),
-  ],
+  animations: [slideInFromRight],
   template: `
     <div
       [@slideInFromRight]="pruducts_count ? 'loaded' : 'loading'"

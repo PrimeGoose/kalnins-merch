@@ -59,4 +59,17 @@ export class AuthService {
       this.userSubject.next(null); // Reset the user data in case of an error
     }
   }
+
+  public async getIsAuthenticated() {
+    const {data, error} = await this.db.supabase.auth.getSession();
+    if (error) {
+      console.log(`error getting session:`, error);
+      return false;
+    }
+    if (data.session?.user.aud == 'authenticated') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

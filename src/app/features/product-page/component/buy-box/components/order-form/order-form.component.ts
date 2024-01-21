@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SupabaseService} from 'src/app/core/services/supabase.service';
+import {AuthService} from 'src/app/core/authentication/auth.service';
 
 @Component({
   selector: 'app-order-form',
@@ -21,7 +21,6 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
           placeholder="Ievadi e-pastu lai pasūtītu.."
           (input)="validateEmail(this.data.data.user.email)"
         />
-        }
         <label for="nickname" class="block  text-black dark:text-white py-1">
           Visiem Rojālajiem
           <span class="text-red-600">-15% ATLAIDE</span>
@@ -34,29 +33,47 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
           placeholder="Tavs Rojālais segvārds šeit.."
         />
 
-        <button
-          [routerLink]="'/success'"
-          (click)="processOrder()"
-          id="order-button"
-          [ngClass]="{'shake-animation': !user.emailValidated}"
-          class=" text-white py-2  rounded  text-xl font-black font-serif
-          dark:bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
-          
-          
-          "
-        >
-          Pasūtīt
-        </button>
+        }@else{
+        <!-- ...existing code... -->
+        <ng-container *ngIf="isAuthenticated">
+          <div class="p-4 text-center bg-gray-800 border border-gray-700 text-white">
+            <h2 class="font-bold text-xl mb-2 text-pink-600">Apsveicam!</h2>
+            <p class="text-gray-300">
+              Tu esi kvalificējies kā <span class="font-semibold  text-pink-500">"Rojālais"</span> un saņemsi
+              <span class="font-semibold text-pink-500">15% atlaidi</span> savam pasūtījumam!
+            </p>
+            <p class="mt-2 text-gray-400">Priecājamies Tevi redzēt mūsu lojālo klientu pulkā.</p>
+          </div>
+        </ng-container>
+
+        }
       </form>
     </div>
+
+    <button
+      [routerLink]="'/success'"
+      (click)="processOrder()"
+      id="order-button"
+      [ngClass]="{'shake-animation': !user.emailValidated}"
+      class=" text-white py-2  rounded  text-xl font-black font-serif w-[200px]
+        dark:bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
+        
+        
+        "
+    >
+      Pasūtīt
+    </button>
   `,
   styles: [],
 })
 export class OrderFormComponent implements OnInit {
-  isAuthenticated = false;
+  isAuthenticated: any = false;
+
   data: any = [];
-  constructor(private db: SupabaseService) {}
-  async ngOnInit() {}
+  constructor(private auth: AuthService) {}
+  async ngOnInit() {
+    this.isAuthenticated = await this.auth.getIsAuthenticated();
+  }
   @Input() user: any;
   @Input() onValidateEmail: any;
   @Input() onProcessOrder: any;

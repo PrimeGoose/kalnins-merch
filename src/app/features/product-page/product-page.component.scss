@@ -1,3 +1,20 @@
+.product-container {
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.product-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* If you have a specific class for the image and order menu, you can replace .product-container with that class */
+
 :host {
   text-align: -webkit-center;
   // max-width: 1000px;

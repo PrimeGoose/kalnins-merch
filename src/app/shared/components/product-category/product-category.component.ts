@@ -4,7 +4,7 @@ import {Component, Input} from '@angular/core';
   selector: 'app-product-category',
   template: `
     <div class="product-category">
-      <span class="product-category__text">{{ category }}</span>
+      <span class="product-category__text text-xl ">{{ category }}</span>
     </div>
   `,
   styles: [],

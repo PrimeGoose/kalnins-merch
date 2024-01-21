@@ -1,12 +1,12 @@
 :host {
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s;
+  // transition: transform 0.2s;
+  // transform: scale(1.1);
 }
 :host:hover {
   cursor: pointer;
-  transform: scale(1.03);
-  transition: transform 0.2s;
+  // transition: transform 0.2s;
 }
 
 .shake-animation {

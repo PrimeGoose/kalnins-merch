@@ -62,58 +62,58 @@ import {trigger, state, style, transition, animate, query, stagger, animateChild
         align-items: center;
       }
 
-      // // app-product-card children  1 2 3 slide in from right
-      // app-product-card:nth-child(1),
-      // app-product-card:nth-child(2),
-      // app-product-card:nth-child(3) {
-      //   animation: slideInFromLeft 0.5s ease-in-out;
-      // }
+      // app-product-card children  1 2 3 slide in from right
+      app-product-card:nth-child(1),
+      app-product-card:nth-child(2),
+      app-product-card:nth-child(3) {
+        animation: slideInFromLeft 0.25s ease-in-out;
+      }
 
-      // // app-product-card children 4 5 6 slide in from left
-      // app-product-card:nth-child(4),
-      // app-product-card:nth-child(5),
-      // app-product-card:nth-child(6) {
-      //   animation: slideInFromLeft 0.75s ease-in-out;
-      // }
+      // app-product-card children 4 5 6 slide in from left
+      app-product-card:nth-child(4),
+      app-product-card:nth-child(5),
+      app-product-card:nth-child(6) {
+        animation: slideInFromLeft 0.25s ease-in-out;
+      }
 
-      // // app-product-card children 7 8 9 slide in from right
-      // app-product-card:nth-child(7),
-      // app-product-card:nth-child(8),
-      // app-product-card:nth-child(9) {
-      //   animation: slideInFromRight 1s ease-in-out;
-      // }
-      // // app-product-card everything  thats left slide from bottom
-      // app-product-card {
-      //   animation: slideInFromBottom 1.25s ease-in-out;
-      // }
+      // app-product-card children 7 8 9 slide in from right
+      app-product-card:nth-child(7),
+      app-product-card:nth-child(8),
+      app-product-card:nth-child(9) {
+        animation: slideInFromRight 0.25s ease-in-out;
+      }
+      // app-product-card everything  thats left slide from bottom
+      app-product-card {
+        animation: slideInFromBottom 0.25s ease-in-out;
+      }
 
-      // // app-product-card everything  thats left slide from bottom
-      // @keyframes slideInFromLeft {
-      //   0% {
-      //     transform: translateX(-1000%);
-      //   }
-      //   100% {
-      //     transform: translateX(0);
-      //   }
-      // }
-      // // app-product-card everything  thats left slide from bottom
-      // @keyframes slideInFromRight {
-      //   0% {
-      //     transform: translateX(1000%);
-      //   }
-      //   100% {
-      //     transform: translateX(0);
-      //   }
-      // }
-      // // app-product-card everything  thats left slide from bottom
-      // @keyframes slideInFromBottom {
-      //   0% {
-      //     transform: translateY(1000%);
-      //   }
-      //   100% {
-      //     transform: translateY(0);
-      //   }
-      // }
+      // app-product-card everything  thats left slide from bottom
+      @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      // app-product-card everything  thats left slide from bottom
+      @keyframes slideInFromRight {
+        0% {
+          transform: translateX(1000%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      // app-product-card everything  thats left slide from bottom
+      @keyframes slideInFromBottom {
+        0% {
+          transform: translateY(1000%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
     `,
   ],
 })

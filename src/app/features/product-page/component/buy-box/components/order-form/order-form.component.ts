@@ -39,8 +39,9 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
           (click)="processOrder()"
           id="order-button"
           [ngClass]="{'shake-animation': !user.emailValidated}"
-          class="bg-orange-400 hover:bg-orange-500 text-white py-2  rounded  text-xl font-black font-serif
+          class=" text-white py-2  rounded  text-xl font-black font-serif
           dark:bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
+          
           
           "
         >

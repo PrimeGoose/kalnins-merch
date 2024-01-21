@@ -1,13 +1,15 @@
 import {Component, OnInit, Injectable, OnDestroy} from '@angular/core';
 import {ProductService} from './core/services/product.service';
 import {SupabaseService} from './core/services/supabase.service';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Product} from './core/models/product.model';
 import {AuthService} from './core/authentication/auth.service';
+import {fadeAnimation} from './core/animations/fadeAnimation';
 @Component({
   selector: 'app-root',
   // standalone: true,
+  animations: [fadeAnimation],
   template: `
     <app-toolbar>
       <div class="flex row  gap-1  max-w-[400px]">
@@ -46,7 +48,9 @@ import {AuthService} from './core/authentication/auth.service';
       </div>
     </app-toolbar>
     <app-merch-header></app-merch-header>
-    <router-outlet></router-outlet>
+    <main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </main>
   `,
   styles: [],
 })

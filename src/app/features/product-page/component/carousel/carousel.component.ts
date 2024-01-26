@@ -32,7 +32,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
           </div>
         </div>
 
-        <app-product-image class="" [imagePath]="selected.currentImage"></app-product-image>
+        <app-product-image class="" [imagePath]="selectedProductObject.currentImage"></app-product-image>
       </div>
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>
@@ -40,7 +40,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent {
-  @Input() selected: any;
+  @Input() selectedProductObject: any;
 
   @Output() onSwipeStart = new EventEmitter();
   @Output() onSwipeEnd = new EventEmitter();

@@ -5,7 +5,7 @@
   <!-- image section -->
 
   <app-carousel
-    [selected]="selected"
+    [selectedProductObject]="selectedProductObject"
     (onBack)="back()"
     (onForward)="forward()"
     (onSwipeEnd)="swipeEnd($event)"
@@ -16,10 +16,12 @@
   <app-buy-box
     class="place-self-center"
     [user]="user"
-    [selected]="selected"
+    [selectedProductObject]="selectedProductObject"
     (onBack)="back()"
     (onForward)="forward()"
     (onProcessOrder)="processOrder()"
+  
+
     (onSelectSize)="selectSize($event)"
     (onValidateEmail)="validateEmail($event)"
   ></app-buy-box>

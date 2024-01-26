@@ -1,11 +1,12 @@
 import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../core/services/product.service';
-import {Product, Size} from '../../core/models/product.model';
+import {Product, Selected, SelectedProductObject, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Observable} from 'rxjs';
+import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-page',
@@ -13,6 +14,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
+  [x: string]: any;
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -20,6 +22,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private productService: ProductService,
     private routeStateService: RouteStateService,
     private supabaee: SupabaseService,
+    private shoppingCart: ShoppingCartService,
   ) {
     // get id from router url
     this.id = parseInt(this.router.url.split('/')[2]);
@@ -30,15 +33,14 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   product: Product = {} as Product;
   // otherProducts: Product[] = [];
-
-  selected = {
+  selectedProductObject: SelectedProductObject = {
     name: 'ss',
     price: 20,
     currency: '',
     category: '',
     sizes: [] as Size[],
     color_name: '',
-
+    product_id: 0,
     size: '',
     images: [] as string[],
     previousImage: '',
@@ -51,12 +53,14 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.product = product;
     const hasSizes = product.sizes && product.sizes.length > 0;
     const hasImages = product.images && product.images.length > 0;
+    const product_size_available = product.sizes.filter((size) => size.available === true);
 
-    this.selected = {
+    this.selectedProductObject = {
       name: product.name || '',
-      price: hasSizes ? product.sizes[0].price : 0,
-      size: hasSizes ? product.sizes[0].size : '',
+      price: hasSizes ? product_size_available[0].price : 0,
+      size: hasSizes ? product_size_available[0].size : '',
       images: hasImages ? product.images : [],
+      product_id: product.product_id || 0,
       currentImageIndex: 0,
       currentImage: hasImages ? product.images[0] : '',
       nextImage: hasImages && product.images.length > 1 ? product.images[1] : product.images[0],
@@ -66,6 +70,10 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       category: product.category || '',
       color_name: product.color_name || '',
     };
+
+    this.shoppingCart.updateSelected(this.selectedProductObject);
+
+    // this.shoppingCart.getSelected();
   }
 
   user = {
@@ -97,6 +105,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     });
 
     this.initializeProduct(this.product);
+    // console.log('product page product', this.selectedProductObject);
   }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
@@ -135,17 +144,25 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     if (index < 0 || index >= imageCount) return;
 
     // Set the current image based on the provided index.
-    this.selected.currentImageIndex = index;
-    this.selected.currentImage = images[index];
+    this.selectedProductObject.currentImageIndex = index;
+    this.selectedProductObject.currentImage = images[index];
 
     // Adjust the previous and next images based on the current index.
-    this.selected.previousImage = index === 0 ? images[imageCount - 1] : images[index - 1];
-    this.selected.nextImage = index === imageCount - 1 ? images[0] : images[index + 1];
+    this.selectedProductObject.previousImage = index === 0 ? images[imageCount - 1] : images[index - 1];
+    this.selectedProductObject.nextImage = index === imageCount - 1 ? images[0] : images[index + 1];
   }
 
   selectSize(item: Size) {
-    this.selected.size = item.size;
-    this.selected.price = item.price;
+    console.log('select size', item);
+    this.selectedProductObject.size = item.size;
+    this.selectedProductObject.price = item.price;
+    this.shoppingCart.updateSelected(this.selectedProductObject);
+  }
+
+  selected_count_in_cart = 0;
+  countChanged(count: any) {
+    console.log('countChanged', count);
+    this.selected_count_in_cart = count;
   }
 
   swipeStart(e: TouchEvent) {
@@ -173,7 +190,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     // Ensure there's at least one product and it has images.
     if (!this.product || !this.product.images) return;
     let imageCount = this.product.images.length; // Corrected to this.products[0]
-    let forwardIndex = this.selected.currentImageIndex + 1;
+    let forwardIndex = this.selectedProductObject.currentImageIndex + 1;
     if (forwardIndex >= imageCount) {
       forwardIndex = 0; // If it exceeds the array length, loop back to the first image.
     }
@@ -194,7 +211,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     let imageCount = this.product.images.length; // Corrected to this.products[0]
 
     // Calculate the index for the previous image.
-    let nextIndex = this.selected.currentImageIndex - 1;
+    let nextIndex = this.selectedProductObject.currentImageIndex - 1;
     if (nextIndex < 0) {
       nextIndex = imageCount - 1; // If it goes below 0, loop to the last image.
     }

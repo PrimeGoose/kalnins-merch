@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {SupabaseService} from './supabase.service';
-import {Product} from '../models/product.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Product, Size} from '../models/product.model';
+import {BehaviorSubject, Observable, combineLatest, map} from 'rxjs';
+import {ShoppingCartService} from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,12 @@ export class ProductService {
   public product$: Observable<Product[]> = this.productsSubject.asObservable();
   public dataLoaded = false;
 
-  public selected_product_count :BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public selected_product_count: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private db: SupabaseService) {}
+  constructor(
+    private db: SupabaseService,
+    private shoppingCartService: ShoppingCartService,
+  ) {}
 
   public async loadProducts(): Promise<void> {
     if (!this.dataLoaded) {
@@ -23,19 +27,26 @@ export class ProductService {
     }
   }
 
-  public set_selected_product_count(count: number) { 
+  public set_selected_product_count(count: number) {
     this.selected_product_count.next(count);
   }
 
   public get_selected_product_count(): Observable<number> {
     return this.selected_product_count.asObservable();
-  } 
-  
+  }
 
+  public get_product_sizes(ProductId: number): Observable<Size[]> {
+    return combineLatest([this.productsSubject.asObservable(), this.shoppingCartService.getItems()]).pipe(
+      map(([products, items]) => {
+        const product = products.find((p) => p.product_id === ProductId);
+        if (!product) return [];
 
-
-    
-  
-
-
+        return product.sizes.map((size) => {
+          const inCartCount = items.filter((item) => item.product_id === ProductId && item.size === size.size).length;
+          // console.log({...size, in_cart: inCartCount});
+          return {...size, in_cart: inCartCount};
+        });
+      }),
+    );
+  }
 }

@@ -3,6 +3,7 @@ export type Size = {
   size: string;
   price: number;
   available: boolean;
+  in_cart?: number;
 };
 export type Product = {
   sizes: Size[];

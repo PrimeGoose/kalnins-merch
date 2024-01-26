@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, combineLatest, map} from 'rxjs';
 import {Product, Selected, SelectedProductObject} from '../models/product.model';
 
 @Injectable({
@@ -72,5 +72,41 @@ export class ShoppingCartService {
 
   public getSelected(): Observable<Selected[]> {
     return this.selectedSubject.asObservable();
+  }
+
+  public calculateSelectedCountInCart(): Observable<number> {
+    return combineLatest([this.getItems().asObservable(), this.getSelected()]).pipe(
+      map(([items, selected]) => {
+        const selectedProduct = selected[0];
+        return items.filter((item) => item?.product_id === selectedProduct?.product_id && item?.size === selectedProduct?.size).length;
+      }),
+    );
+  }
+
+  public calculateHowManyItemsInCartForEachSize(): Observable<Record<string, number>> {
+    return combineLatest([this.itemsInCartSubject.asObservable(), this.selectedSubject.asObservable()]).pipe(
+      map(([items, selected]) => {
+        const selectedProductId = selected[0]?.product_id;
+        const sizeCount = {
+          XS: 0,
+          S: 0,
+          M: 0,
+          L: 0,
+          XL: 0,
+          XXL: 0,
+          XXXL: 0,
+          XXXXL: 0,
+          Juris: 0,
+        } as any;
+
+        items.forEach((item) => {
+          if (item.product_id === selectedProductId && sizeCount.hasOwnProperty(item.size)) {
+            sizeCount[item.size]++;
+          }
+        });
+
+        return sizeCount;
+      }),
+    );
   }
 }

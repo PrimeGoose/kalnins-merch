@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthService} from 'src/app/core/authentication/auth.service';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {Selected, SelectedProductObject} from '../../../../../../core/models/product.model';
-import {BehaviorSubject, combineLatest, filter, from, map} from 'rxjs';
-import { SharedService } from 'src/app/shared/shared.service';
+import {BehaviorSubject, Observable, combineLatest, filter, from, map} from 'rxjs';
+import {SharedService} from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-order-form',
@@ -136,7 +136,10 @@ export class OrderFormComponent implements OnInit {
   async ngOnInit() {
     this.isAuthenticated = await this.auth.getIsAuthenticated();
 
-    this.calculateItemsImBasketBySizeAndPrice();
+    // this.calculateItemsImBasketBySizeAndPrice();
+    this.shoppingCart.calculateSelectedCountInCart().subscribe((count) => {
+      this.selected_count_in_cart = count;
+    });
 
     this.shoppingCart.selectedSubject.subscribe((selected) => {
       this.selected = selected[0];
@@ -152,16 +155,13 @@ export class OrderFormComponent implements OnInit {
 
       this.shoppingCart.getSelected().subscribe((selected) => {
         this.selected = selected[0];
-        // console.log(this.itemsInBasket);
 
-        // console.log('selected', this.selected);
         const basket = this.itemsInBasket;
         const selected_product_id = this.selected?.product_id;
         const selected_size = this.selected?.size;
         this.selected_count_in_cart = basket.filter(
           (item: any) => item?.product_id === selected_product_id && item?.size === selected_size,
         ).length;
-        // console.log('selected_count_in_cart', this.selected_count_in_cart);
       });
     });
   }
@@ -169,7 +169,7 @@ export class OrderFormComponent implements OnInit {
   processOrder() {
     this.onProcessOrder.emit();
   }
- 
+
   validateEmail(email: string) {
     this.onValidateEmail.emit(email);
   }

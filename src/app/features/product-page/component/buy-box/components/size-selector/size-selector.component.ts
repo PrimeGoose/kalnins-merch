@@ -79,7 +79,8 @@ export class SizeSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.productService.get_product_sizes(2).subscribe((sizes) => {
       this.sizes = sizes;
-      console.log(sizes);
+      // console.log(sizes); 
+      console.log(this.selected)
     });
   }
   @Input() selected: any;

@@ -14,7 +14,6 @@ import {ShoppingCartService} from '../../core/services/shopping-cart.service';
   styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
-  [x: string]: any;
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -99,7 +98,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     await this.productService.loadProducts();
 
-    await this.products$.subscribe((data) => {
+     this.products$.subscribe((data) => {
       //  get the product from product$ by id and asign it to product
       this.product = data.find((product) => product.product_id === this.id) || ({} as Product);
     });

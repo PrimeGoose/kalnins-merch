@@ -7,17 +7,14 @@
   overflow: hidden;
 }
 
-.bg-gradient {
-  background: linear-gradient(to bottom, rgba(53, 64, 79) 10%, rgba(30, 40, 54) 50%, rgba(22, 31, 46) 90%);
+.bg-gradient-animation {
   background-size: 10% 10000%;
   animation: shine 2s linear infinite alternate;
-  // filter brigtthnes
   filter: brightness(0.9);
 }
 
-:host:hover .bg-gradient {
+.bg-gradient-animation:hover {
   opacity: 1;
-  background: linear-gradient(to bottom, rgba(53, 64, 79, 0.5) 10%, rgba(30, 40, 54) 50%, rgba(22, 31, 46, 0.5) 90%);
   filter: brightness(1);
 }
 

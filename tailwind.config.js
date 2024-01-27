@@ -24,6 +24,8 @@ module.exports = {
       7680: '7680px', // @media(min - width: 7680px) { ... }
     },
     extend: {
+      
+
       colors: {
         // Base colors
         primary: '#334155', // Dark Blue-Gray for primary text and elements

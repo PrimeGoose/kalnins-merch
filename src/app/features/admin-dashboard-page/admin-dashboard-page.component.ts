@@ -97,7 +97,7 @@ export class AdminDashboardPageComponent implements OnInit {
     color_hex: '',
     currency: 'EUR',
     description: '',
-    variants: [
+    sizes: [
       {
         size: 'XS',
         price: 9.99,
@@ -169,7 +169,7 @@ export class AdminDashboardPageComponent implements OnInit {
     name: ['', Validators.required],
     color: ['', Validators.required],
     sizes: this.fb.array(
-      this.product.variants.map((size) => this.fb.group(size)),
+      this.product.sizes.map((size) => this.fb.group(size)),
       this.sizeValidator,
     ),
     images: [[] as string[], this.imageValidator],
@@ -357,7 +357,7 @@ export class AdminDashboardPageComponent implements OnInit {
         gender: this.product.gender || '',
         brand: this.product.brand || '',
         description: this.product.description || '',
-        variants: this.product.variants,
+        sizes: this.product.sizes,
         images: this.uploadedImagePaths, // Use the uploaded image paths
       });
 
@@ -396,8 +396,8 @@ export class AdminDashboardPageComponent implements OnInit {
 
   resetFormAndProduct() {
     this.pForm.reset();
-    this.product.variants = [...this.default_sizes];
-    this.pForm.get('sizes')?.setValue(this.product.variants);
+    this.product.sizes = [...this.default_sizes];
+    this.pForm.get('sizes')?.setValue(this.product.sizes);
     this.product.images = [];
     this.pForm.get('images')?.setValue([]);
     this.supabase_image_Paths = [];
@@ -639,15 +639,15 @@ export class AdminDashboardPageComponent implements OnInit {
     if (sizes) {
       sizes.updateValueAndValidity();
       // replace the item in product.sizes with item
-      const index = this.product.variants.findIndex((size) => size.size === item.size);
+      const index = this.product.sizes.findIndex((size) => size.size === item.size);
       if (index >= 0) {
-        this.product.variants[index] = item;
+        this.product.sizes[index] = item;
       }
       // update product form values
     }
     item.available = !item.available;
     if (!item.available) {
     }
-    this.pForm.get('sizes')?.setValue(this.product.variants);
+    this.pForm.get('sizes')?.setValue(this.product.sizes);
   }
 }

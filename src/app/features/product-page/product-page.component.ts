@@ -1,7 +1,7 @@
 import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../core/services/product.service';
-import {Product, Selected,ProductVariant, SelectedProductObject, Size} from '../../core/models/product.model';
+import {Product, Selected, SelectedProductObject, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
@@ -36,7 +36,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     price: 0,
     currency: '',
     category: '',
-    variants: [] as ProductVariant[],
+    sizes: [] as Size[],
     color_name: '',
     product_id: 0,
     size: '',
@@ -49,9 +49,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   private initializeProduct(product: Product) {
     this.product = product;
-    const hasSizes = product.variants && product.variants.length > 0;
+    const hasSizes = product.sizes && product.sizes.length > 0;
     const hasImages = product.images && product.images.length > 0;
-    const product_size_available = product.variants.filter((size) => size.available === true);
+    const product_size_available = product.sizes.filter((size) => size.available === true);
 
     this.selectedProductObject = {
       name: product.name || '',
@@ -63,7 +63,7 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       currentImage: hasImages ? product.images[0] : '',
       nextImage: hasImages && product.images.length > 1 ? product.images[1] : product.images[0],
       previousImage: hasImages ? product.images[product.images.length - 1] : product.images[0],
-      variants: product.variants || [],
+      sizes: product.sizes || [],
       currency: product.currency || '',
       category: product.category || '',
       color_name: product.color_name || '',

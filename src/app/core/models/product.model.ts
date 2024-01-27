@@ -5,19 +5,14 @@ export type Size = {
   in_cart?: number;
 };
 
-export type ProductVariant = {
-  size: string;
-  price: number;
-  available: boolean;
-  in_cart?: number;
-};
+
 
 export type Product = {
   product_id: number;
   name: string;
   category: string;
   brand: string;
-  variants: ProductVariant[];
+  sizes: Size[];
   color_hex: string;
   color_name: string;
   currency: string;
@@ -31,7 +26,7 @@ export type SelectedProductObject = {
   price: number;
   currency: string;
   category: string;
-  variants: ProductVariant[];
+  sizes:Size[];
   color_name: string;
   size: string; // Represents the selected size
   images: string[];

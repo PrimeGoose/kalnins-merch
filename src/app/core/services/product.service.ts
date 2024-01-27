@@ -43,7 +43,7 @@ export class ProductService {
 
         return product.sizes.map((size) => {
           const inCartCount = items.filter((item) => item.product_id === ProductId && item.size === size.size).length;
-          console.log({...size, in_cart: inCartCount});
+          // console.log({...size, in_cart: inCartCount});
           return {...size, in_cart: inCartCount};
         });
       }),

@@ -10,7 +10,6 @@ import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
       
          pb-4 pt-4 768:flex 768:justify-center dark:text-zinc-400 text-zinc-700"
     >
-    
       <app-product-category [category]="selectedProductObject.category"></app-product-category>
       <app-product-name [name]="selectedProductObject.name"></app-product-name>
 
@@ -21,11 +20,7 @@ import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 
       <!-- size selector -->
 
-      <app-size-selector
-       
-        [selected]="selectedProductObject"
-        [onSelectSize]="onSelectSize"
-      ></app-size-selector>
+      <app-size-selector [selected]="selectedProductObject" [onSelectSize]="onSelectSize"></app-size-selector>
 
       <!-- order form -->
       <app-order-form
@@ -43,7 +38,6 @@ export class BuyBoxComponent {
   constructor(private shoppingCart: ShoppingCartService) {}
   @Input() selectedProductObject: SelectedProductObject = {} as SelectedProductObject;
   @Input() user: any;
- 
 
   @Output() onBack = new EventEmitter();
   @Output() onForward = new EventEmitter();

@@ -9,7 +9,7 @@ import {Product} from '../../../core/models/product.model';
       <app-product-image class="brightness-animation" [imagePath]="product.images[0]"></app-product-image>
       <div class="px-6 py-4 z-10 relative">
         <app-product-name [name]="product.name"></app-product-name>
-        <app-product-price [price]="product.sizes[0].price" [currency]="product.currency"></app-product-price>
+        <app-product-price [price]="product.variants[0].price" [currency]="product.currency"></app-product-price>
       </div>
     </div>
   `,

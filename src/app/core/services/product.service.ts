@@ -41,7 +41,7 @@ export class ProductService {
         const product = products.find((p) => p.product_id === ProductId);
         if (!product) return [];
 
-        return product.sizes.map((size) => {
+        return product.variants.map((size) => {
           const inCartCount = items.filter((item) => item.product_id === ProductId && item.size === size.size).length;
           // console.log({...size, in_cart: inCartCount});
           return {...size, in_cart: inCartCount};

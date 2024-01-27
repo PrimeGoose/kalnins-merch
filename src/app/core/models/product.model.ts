@@ -5,28 +5,26 @@ export type Size = {
   available: boolean;
   in_cart?: number;
 };
+
+type ProductVariant = {
+  size: string;
+  price: number;
+  available: boolean;
+  in_cart?: number;
+};
+
 export type Product = {
-  sizes: Size[];
   product_id: number;
-  category: string;
   name: string;
+  category: string;
+  brand: string;
+  variants: ProductVariant[];
   color_hex: string;
   color_name: string;
   currency: string;
   gender: string;
-  brand: string;
   description: string;
   images: string[];
-};
-
-export type Selected = {
-  category: string;
-  name: string;
-  price: number;
-  size: string;
-  color_name: string;
-  image: string;
-  product_id: number;
 };
 
 export type SelectedProductObject = {
@@ -42,5 +40,15 @@ export type SelectedProductObject = {
   currentImage: string; // URL of the currently displayed image
   currentImageIndex: number; // Index of the currently displayed image
   nextImage: string; // URL of the next image for navigation
+  product_id: number;
+};
+
+export type Selected = {
+  category: string;
+  name: string;
+  price: number;
+  size: string;
+  color_name: string;
+  image: string;
   product_id: number;
 };

@@ -80,7 +80,7 @@ export class SupabaseService {
       color_hex: product.color_hex,
       currency: product.currency,
       description: product.description,
-      sizes: product.sizes,
+      sizes: product.variants,
       images: product.images,
     });
 
@@ -101,7 +101,7 @@ export class SupabaseService {
     return (
       data[0] ||
       ({
-        sizes: [],
+        variants: [],
         product_id: 0,
         category: '',
         name: '',

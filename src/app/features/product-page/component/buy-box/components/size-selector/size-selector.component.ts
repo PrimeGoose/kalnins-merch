@@ -16,9 +16,8 @@ import {SharedService} from 'src/app/shared/shared.service';
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
-            ' border-red-700 bg-gray-700':
-              selected.size === item.size && item.available,
-            ' font-[900]  text-base   ': selected.size === item.size && item.available,
+            ' border-red-700 bg-gray-700': selected.size === item.size && item.available,
+            ' font-[900]  text-base   ': selected.size === item.size && item.available
           }"
           class=" duration-200 hover:scale-125  border-2 rounded-none flex items-center justify-center h-9 w-16 dark:border-none font-black 
           
@@ -79,8 +78,8 @@ export class SizeSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.productService.get_product_sizes(2).subscribe((sizes) => {
       this.sizes = sizes;
-      // console.log(sizes); 
-      console.log(this.selected)
+      // console.log(sizes);
+      // console.log(this.selected)
     });
   }
   @Input() selected: any;

@@ -97,51 +97,60 @@ export class AdminDashboardPageComponent implements OnInit {
     color_hex: '',
     currency: 'EUR',
     description: '',
-    sizes: [
+    variants: [
       {
         size: 'XS',
         price: 9.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'S',
         price: 10.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'M',
         price: 11.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'L',
         price: 12.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'XL',
         price: 13.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'XXL',
         price: 14.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: '3XL',
         price: 15.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: '4XL',
         price: 16.99,
         available: true,
+        in_cart: 0,
       },
       {
         size: 'Juris',
         price: 17.99,
         available: true,
+        in_cart: 0,
       },
     ],
     gender: '',
@@ -160,7 +169,7 @@ export class AdminDashboardPageComponent implements OnInit {
     name: ['', Validators.required],
     color: ['', Validators.required],
     sizes: this.fb.array(
-      this.product.sizes.map((size) => this.fb.group(size)),
+      this.product.variants.map((size) => this.fb.group(size)),
       this.sizeValidator,
     ),
     images: [[] as string[], this.imageValidator],
@@ -348,7 +357,7 @@ export class AdminDashboardPageComponent implements OnInit {
         gender: this.product.gender || '',
         brand: this.product.brand || '',
         description: this.product.description || '',
-        sizes: this.product.sizes,
+        variants: this.product.variants,
         images: this.uploadedImagePaths, // Use the uploaded image paths
       });
 
@@ -387,8 +396,8 @@ export class AdminDashboardPageComponent implements OnInit {
 
   resetFormAndProduct() {
     this.pForm.reset();
-    this.product.sizes = [...this.default_sizes];
-    this.pForm.get('sizes')?.setValue(this.product.sizes);
+    this.product.variants = [...this.default_sizes];
+    this.pForm.get('sizes')?.setValue(this.product.variants);
     this.product.images = [];
     this.pForm.get('images')?.setValue([]);
     this.supabase_image_Paths = [];
@@ -630,15 +639,15 @@ export class AdminDashboardPageComponent implements OnInit {
     if (sizes) {
       sizes.updateValueAndValidity();
       // replace the item in product.sizes with item
-      const index = this.product.sizes.findIndex((size) => size.size === item.size);
+      const index = this.product.variants.findIndex((size) => size.size === item.size);
       if (index >= 0) {
-        this.product.sizes[index] = item;
+        this.product.variants[index] = item;
       }
       // update product form values
     }
     item.available = !item.available;
     if (!item.available) {
     }
-    this.pForm.get('sizes')?.setValue(this.product.sizes);
+    this.pForm.get('sizes')?.setValue(this.product.variants);
   }
 }

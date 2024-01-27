@@ -1,4 +1,3 @@
-import {ProductCardComponent} from '../../shared/components/product-card/product-card.component';
 export type Size = {
   size: string;
   price: number;

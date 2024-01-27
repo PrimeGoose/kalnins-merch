@@ -1,7 +1,7 @@
 import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../core/services/product.service';
-import {Product, Selected, SelectedProductObject, Size} from '../../core/models/product.model';
+import {Product, Selected,ProductVariant, SelectedProductObject, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
@@ -32,11 +32,11 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
 
   // otherProducts: Product[] = [];
   selectedProductObject: SelectedProductObject = {
-    name: 'ss',
-    price: 20,
+    name: '',
+    price: 0,
     currency: '',
     category: '',
-    sizes: [] as Size[],
+    variants: [] as ProductVariant[],
     color_name: '',
     product_id: 0,
     size: '',
@@ -47,32 +47,32 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     nextImage: '',
   };
 
-  // private initializeProduct(product: Product) {
-  //   this.product = product;
-  //   const hasSizes = product.sizes && product.sizes.length > 0;
-  //   const hasImages = product.images && product.images.length > 0;
-  //   const product_size_available = product.sizes.filter((size) => size.available === true);
+  private initializeProduct(product: Product) {
+    this.product = product;
+    const hasSizes = product.variants && product.variants.length > 0;
+    const hasImages = product.images && product.images.length > 0;
+    const product_size_available = product.variants.filter((size) => size.available === true);
 
-  //   this.selectedProductObject = {
-  //     name: product.name || '',
-  //     price: hasSizes ? product_size_available[0].price : 0,
-  //     size: hasSizes ? product_size_available[0].size : '',
-  //     images: hasImages ? product.images : [],
-  //     product_id: product.product_id || 0,
-  //     currentImageIndex: 0,
-  //     currentImage: hasImages ? product.images[0] : '',
-  //     nextImage: hasImages && product.images.length > 1 ? product.images[1] : product.images[0],
-  //     previousImage: hasImages ? product.images[product.images.length - 1] : product.images[0],
-  //     sizes: product.sizes || [],
-  //     currency: product.currency || '',
-  //     category: product.category || '',
-  //     color_name: product.color_name || '',
-  //   };
+    this.selectedProductObject = {
+      name: product.name || '',
+      price: hasSizes ? product_size_available[0].price : 0,
+      size: hasSizes ? product_size_available[0].size : '',
+      images: hasImages ? product.images : [],
+      product_id: product.product_id || 0,
+      currentImageIndex: 0,
+      currentImage: hasImages ? product.images[0] : '',
+      nextImage: hasImages && product.images.length > 1 ? product.images[1] : product.images[0],
+      previousImage: hasImages ? product.images[product.images.length - 1] : product.images[0],
+      variants: product.variants || [],
+      currency: product.currency || '',
+      category: product.category || '',
+      color_name: product.color_name || '',
+    };
 
-  // this.shoppingCart.updateSelected(this.selectedProductObject);
+  this.shoppingCart.updateSelected(this.selectedProductObject);
 
-  // this.shoppingCart.getSelected();
-  // }
+  this.shoppingCart.getSelected();
+  }
 
   user = {
     email: '',
@@ -102,14 +102,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       this.product = data.find((product) => product.product_id === this.id) || ({} as Product);
     });
 
-    // this.initializeProduct(this.product);
-    // console.log('product page product', this.selectedProductObject);
+    this.initializeProduct(this.product);
 
-    // this.selectedProductObject = this.router.routerState.snapshot.root.children[0].children[0].data['product'];
-    // console.log('product', this.product);
-
-    // const productId =+ this.router.snapshot.paramMap.get('product_id');
-    // Fetch the product from the ProductService
   }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;

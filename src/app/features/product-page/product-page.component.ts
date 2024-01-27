@@ -1,11 +1,11 @@
 import {Component, Renderer2, ElementRef, HostListener, OnInit, ViewChild, AfterViewInit, Input} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../core/services/product.service';
 import {Product, Selected, SelectedProductObject, Size} from '../../core/models/product.model';
 
 import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 
 @Component({
@@ -18,16 +18,17 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     private renderer: Renderer2,
     private el: ElementRef,
     private router: Router,
+    private route: ActivatedRoute,
     private productService: ProductService,
     private routeStateService: RouteStateService,
     private supabaee: SupabaseService,
     private shoppingCart: ShoppingCartService,
   ) {
     // get id from router url
-    this.id = parseInt(this.router.url.split('/')[2]);
   }
 
-  id: number = 0;
+  idSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0); // or any default value
+  id: number = parseInt(this.route.snapshot.paramMap.get('id') ?? '0', 10);
   product: Product = {} as Product;
 
   // otherProducts: Product[] = [];
@@ -69,9 +70,9 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
       color_name: product.color_name || '',
     };
 
-  this.shoppingCart.updateSelected(this.selectedProductObject);
+    this.shoppingCart.updateSelected(this.selectedProductObject);
 
-  this.shoppingCart.getSelected();
+    this.shoppingCart.getSelected();
   }
 
   user = {
@@ -100,10 +101,8 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
     this.products$.subscribe((data) => {
       //  get the product from product$ by id and asign it to product
       this.product = data.find((product) => product.product_id === this.id) || ({} as Product);
+      this.initializeProduct(this.product);
     });
-
-    this.initializeProduct(this.product);
-
   }
 
   @ViewChild('productContainer', {static: false}) productContainer: ElementRef | undefined;
@@ -119,15 +118,16 @@ export class ProductPageComponent implements OnInit, AfterViewInit {
   }
 
   async scrollToProductContainer(id: number) {
-    // this.product = {} as Product;
-    // this.id = id;
+    this.route.params.subscribe(async (params) => {
+      const id = parseInt(params['id']);
+      this.idSubject.next(id);
+      const product = await this.supabaee.getProductByIDService(id);
+      await this.initializeProduct(product);
+    });
 
     const productElement = document.getElementById(`product-${id}`); // Ensure your product elements have corresponding ids
     const yOffset = productElement ? productElement.getBoundingClientRect().top + window.scrollY : 0;
-    window.scrollTo({top: yOffset, behavior: 'smooth'});
-
-    const product = await this.supabaee.getProductByIDService(this.id);
-    // this.initializeProduct(product);
+    window.scrollTo({top: yOffset, behavior: 'instant'});
   }
 
   changeImage(index: number): void {

@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ProductService} from 'src/app/core/services/product.service';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {SharedService} from 'src/app/shared/shared.service';
@@ -16,8 +18,8 @@ import {SharedService} from 'src/app/shared/shared.service';
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
-            ' border-red-700 bg-gray-700': selected.size === item.size && item.available,
-            ' font-[900]  text-base   ': selected.size === item.size && item.available
+            ' border-red-700 bg-gray-700': productVariant.size === item.size && item.available,
+            ' font-[900]  text-base   ': productVariant.size === item.size && item.available
           }"
           class=" duration-200 hover:scale-125  border-2 rounded-none flex items-center justify-center h-9 w-16 dark:border-none font-black 
           
@@ -71,18 +73,24 @@ export class SizeSelectorComponent implements OnInit {
   constructor(
     private soppingService: ShoppingCartService,
     private productService: ProductService,
+    private route: ActivatedRoute,
   ) {}
 
   currentCount = 0;
   sizes: any = [];
+  id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0', 10);
+  idSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0); // or any default value
+
   ngOnInit(): void {
-    this.productService.get_product_sizes(2).subscribe((sizes) => {
-      this.sizes = sizes;
-      // console.log(sizes);
-      // console.log(this.selected)
+    this.route.paramMap.subscribe((params) => {
+      this.id = parseInt(params.get('id') ?? '0', 10);
+      this.productService.get_product_sizes(this.id).subscribe((sizes) => {
+        this.sizes = sizes;
+        // console.log('sizes', sizes);
+      });
     });
   }
-  @Input() selected: any;
+  @Input() productVariant: any;
 
   @Input() onSelectSize = new EventEmitter();
 

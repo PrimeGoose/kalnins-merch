@@ -27,13 +27,13 @@ export class ProductService {
     }
   }
 
-  public set_selected_product_count(count: number) {
-    this.selected_product_count.next(count);
-  }
+  // public set_selected_product_count(count: number) {
+  //   this.selected_product_count.next(count);
+  // }
 
-  public get_selected_product_count(): Observable<number> {
-    return this.selected_product_count.asObservable();
-  }
+  // public get_selected_product_count(): Observable<number> {
+  //   return this.selected_product_count.asObservable();
+  // }
 
   public get_product_sizes(ProductId: number): Observable<Size[]> {
     return combineLatest([this.productsSubject.asObservable(), this.shoppingCartService.getItems()]).pipe(
@@ -43,7 +43,7 @@ export class ProductService {
 
         return product.sizes.map((size) => {
           const inCartCount = items.filter((item) => item.product_id === ProductId && item.size === size.size).length;
-          // console.log({...size, in_cart: inCartCount});
+          console.log({...size, in_cart: inCartCount});
           return {...size, in_cart: inCartCount};
         });
       }),

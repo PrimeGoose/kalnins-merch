@@ -20,7 +20,7 @@ import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 
       <!-- size selector -->
 
-      <app-size-selector [selected]="selectedProductObject" [onSelectSize]="onSelectSize"></app-size-selector>
+      <app-size-selector [productVariant]="selectedProductObject" [onSelectSize]="onSelectSize"></app-size-selector>
 
       <!-- order form -->
       <app-order-form

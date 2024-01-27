@@ -2,10 +2,8 @@ export type Size = {
   size: string;
   price: number;
   available: boolean;
-  in_cart?: number;
+  in_cart: number;
 };
-
-
 
 export type Product = {
   product_id: number;
@@ -26,7 +24,7 @@ export type SelectedProductObject = {
   price: number;
   currency: string;
   category: string;
-  sizes:Size[];
+  sizes: Size[];
   color_name: string;
   size: string; // Represents the selected size
   images: string[];

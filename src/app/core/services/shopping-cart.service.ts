@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, combineLatest, map} from 'rxjs';
 import {Product, Selected, SelectedProductObject} from '../models/product.model';
+import {ActivatedRoute} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,9 @@ export class ShoppingCartService {
   private itemsInCartSubject: BehaviorSubject<Selected[]> = new BehaviorSubject<Selected[]>([]);
 
   public selectedSubject: BehaviorSubject<Selected[]> = new BehaviorSubject<Selected[]>([]);
+  public idSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0); // or any default value
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     // Load the cart from localStorage on initialization
     const itemsInCart = this.loadCart();
     this.itemsInCartSubject.next(itemsInCart);
@@ -18,6 +20,19 @@ export class ShoppingCartService {
     // Whenever the cart items change, save to localStorage
     this.itemsInCartSubject.subscribe((items) => {
       this.saveCart(items);
+    });
+
+    this.route.paramMap.subscribe((params) => {
+      const newId = parseInt(params.get('id') ?? '0', 10);
+
+      if (!isNaN(newId)) {
+        this.idSubject.next(newId);
+        this.calculateHowManyItemsInCartForEachSize();
+        this.calculateSelectedCountInCart();
+      } else {
+        // Handle invalid 'id' (e.g., reset the BehaviorSubject or handle error)
+        this.idSubject.next(0); // Reset to default or handle as needed
+      }
     });
   }
 

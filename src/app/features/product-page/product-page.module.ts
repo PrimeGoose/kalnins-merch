@@ -12,10 +12,11 @@ import {PreviewImagesComponent} from './component/buy-box/components/preview-ima
 import {SizeSelectorComponent} from './component/buy-box/components/size-selector/size-selector.component';
 import {DescriptionComponent} from './component/description/description.component';
 import {ProductDetailsComponent} from './component/product-details/product-details.component';
-import {ReviewsComponent} from './component/reviews/reviews.component';
-
+import {EditReviewDirective, ReviewsComponent} from './component/reviews/reviews.component';
 @NgModule({
   declarations: [
+EditReviewDirective
+,
     CarouselComponent,
     ProductPageComponent,
     BuyBoxComponent,

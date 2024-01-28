@@ -1,10 +1,53 @@
-import {Component, OnInit, isDevMode} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, combineLatest, map} from 'rxjs';
 import {AuthService} from 'src/app/core/authentication/auth.service';
 import {ReviewService} from 'src/app/core/services/review.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
-import {Selected} from '../../../../core/models/product.model';
+import {Directive, forwardRef, HostListener} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+
+@Directive({
+  selector: '[editReview]',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => EditReviewDirective),
+      multi: true,
+    },
+  ],
+})
+export class EditReviewDirective implements ControlValueAccessor {
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+  ) {}
+
+  @HostListener('input', ['$event.target.innerText'])
+  onInput(value: string): void {
+    this.onChange(value);
+  }
+
+  @HostListener('blur')
+  onBlur(): void {
+    this.onTouched();
+  }
+
+  writeValue(value: any): void {
+    const normalizedValue = value == null ? '' : value;
+    this.renderer.setProperty(this.el.nativeElement, 'innerText', normalizedValue);
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+}
 
 @Component({
   selector: 'app-reviews',
@@ -22,17 +65,91 @@ import {Selected} from '../../../../core/models/product.model';
     max-w-md
     "
         >
-          <div class="user float-left mr-4">
+          <div class="user">
             <div class="items-center ">
               <span class="text-yellow-500 mb-2 star-shine " [innerHTML]="getStars(review.rating)"></span>
               <h3 class=" user-name-o text name-shine tracking-widest font-mono">{{ review.data.discord_name }}</h3>
             </div>
             <img [src]="review.data.discord_avatar" alt="" class="avatar rounded-full w-24 h-24" />
           </div>
-          <h1 class=" uppercase gap-2 font-black tracking-widest   dark:text-gray-300">{{ review.title }}</h1>
+          <h1 *ngIf="!review.isEditing" class="uppercase gap-2 font-black tracking-widest dark:text-gray-300">
+            {{ review.title }}
+          </h1>
+          <h1
+            *ngIf="review.isEditing"
+            editReview
+            [(ngModel)]="review.editableTitle"
+            [contentEditable]="true"
+            class="uppercase gap-2 font-black tracking-widest dark:text-gray-300 border"
+          ></h1>
+
           <br />
-          <div class="review-text  font-mono">
-            <p class="">{{ review.comment }}</p>
+          <div class="review-text font-mono">
+            <p *ngIf="!review.isEditing" class="">
+              {{ review.comment }}
+            </p>
+            <p *ngIf="review.isEditing" editReview [(ngModel)]="review.editableComment" [contentEditable]="true" class="border"></p>
+          </div>
+
+          <div
+            (click)="toggleEditReview(review)"
+            *ngIf="review.user_id == user_id"
+            class="edit-icon flex flex-row relative pb-4
+          "
+          >
+            <div class="cancel flex left-0  absolute">
+              <span *ngIf="review.isEditing">cancel</span>
+              <svg
+                *ngIf="review.isEditing"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </div>
+
+            <div (click)="SaveReview(review)" class="save flex float-right right-0 absolute">
+              <span *ngIf="review.isEditing"> save </span>
+              <svg
+                *ngIf="review.isEditing"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12"
+                />
+              </svg>
+            </div>
+
+            <!--  -->
+            <div class="edit flex right-0 absolute">
+              <span *ngIf="!review.isEditing"> edit </span>
+              <svg
+                *ngIf="!review.isEditing"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </ng-container>
@@ -118,7 +235,6 @@ import {Selected} from '../../../../core/models/product.model';
           background-position: 200% center;
         }
       }
-  
 
       .star-shine {
         background: linear-gradient(to right, yellow 0%, gold 90%, yellow 100%);
@@ -162,8 +278,8 @@ import {Selected} from '../../../../core/models/product.model';
   ],
 })
 export class ReviewsComponent implements OnInit {
+  public canEditMyReview = false;
   public starsSelected = 5;
-
   public newReviewText: string = '';
   public showReviewForm: boolean = false;
   public data: any = {
@@ -171,11 +287,13 @@ export class ReviewsComponent implements OnInit {
     discord_name: '',
   };
   public reviews: any = [];
+  public editableReviewTitle: string = '';
+  public editableReviewComment: string = '';
   public isAuthenticated: boolean = false;
   public isManager: boolean = false;
   public canWriteReview = false;
-  private user_id: string = '';
-  private productId: number = 0; // current product
+  public user_id: string = '';
+  private product_Id: number = 0; // current product
 
   constructor(
     private reviewService: ReviewService,
@@ -184,21 +302,15 @@ export class ReviewsComponent implements OnInit {
     private auth: AuthService,
   ) {}
   async ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.productId = params['id'];
-    });
-
     this.auth.user$.subscribe(async (data: any) => {
       this.data.discord_name = data.user?.user_metadata.custom_claims.global_name;
       this.data.discord_avatar = data?.user?.user_metadata['avatar_url'];
-      // console.log(data);
       this.user_id = data?.user?.id;
-      // console.log(data?.user?.id);
       await this.loadReviews();
 
       const review_ids = new Set(this.reviews.map((review: any) => review.user_id));
-      console.log(review_ids);
-      console.log(this.user_id, 'user id');
+      // console.log(review_ids);
+      // console.log(this.user_id, 'user id');
       if (review_ids.has(this.user_id)) {
         this.canWriteReview = false;
       } else {
@@ -207,18 +319,51 @@ export class ReviewsComponent implements OnInit {
     });
 
     this.auth.isManager$.subscribe((data) => {
-      // console.log(data, 'manager');
       this.isManager = data;
     });
 
     this.auth.getIsAuthenticated().then((res) => {
-      // console.log(res);
       this.isAuthenticated = res;
     });
   }
 
+  async SaveReview(review: any) {
+    if (review.isEditing) {
+      console.log(review.editableTitle, review.editableComment, this.product_Id);
+      await this.reviewService.editReviewBy(this.product_Id, review.editableTitle, review.editableComment, this.user_id);
+
+      await this.loadReviews();
+      review.isEditing = false;
+    }
+  }
+
+  toggleEditReview(review: any) {
+    review.isEditing = !review.isEditing;
+    if (review.isEditing) {
+      review.editableTitle = review.title;
+      review.editableComment = review.comment;
+    }
+  }
+
+  // async loadReviews() {
+  //   let product_Id = 0;
+  //   this.route.params.subscribe((params) => {
+  //     product_Id = params['id'];
+  //   });
+  //   this.reviews = await this.reviewService.getAllReviewsBy(product_Id);
+  // }
   async loadReviews() {
-    this.reviews = await this.reviewService.getAllReviewsBy(this.productId);
+    this.product_Id = 0;
+    this.route.params.subscribe((params) => {
+      this.product_Id = params['id'];
+    });
+    const fetchedReviews = await this.reviewService.getAllReviewsBy(this.product_Id);
+    this.reviews = fetchedReviews.map((review) => ({
+      ...review,
+      isEditing: false,
+      editableTitle: review.title,
+      editableComment: review.comment,
+    }));
   }
 
   getStars(rating: number): string {
@@ -234,48 +379,26 @@ export class ReviewsComponent implements OnInit {
 
   submitReview() {
     if (!this.newReviewText) {
-      // Handle empty input, possibly with an error message
       return;
     }
 
     const newReview = {
-      productId: this.productId,
+      productId: this.product_Id,
       user_id: this.user_id,
       comment: this.newReviewText,
       rating: this.starsSelected,
       data: this.data,
-      // Add other necessary fields like rating, user_id, etc.
     };
     this.reviewService
       .addReviewBy(newReview)
       .then(() => {
-        // Handle success, such as resetting the form and reloading reviews
         this.newReviewText = '';
         this.showReviewForm = false;
         this.canWriteReview = false;
         this.loadReviews();
       })
       .catch((error) => {
-        // Handle error
         console.error(error);
       });
   }
-
-  // async checkIfUserCanReview() {
-  //   // Check if the user has already reviewed the current product
-  //   setTimeout(() => {
-  //     const userReviewForProduct = this.reviews.find(
-  //       (review: any) => review.userId === this.user_id && review.productId === this.productId,
-  //     );
-
-  //     // If such a review exists, user cannot write another review
-  //     this.canWriteReview = userReviewForProduct
-  //     // if no review from use for this product id exists, allow to write a review
-  //     if (this.canWriteReview) {
-  //       this.canWriteReview = false;
-  //     } else {
-  //       this.canWriteReview = true;
-  //     }
-  //   }, 5000);
-  // }
 }

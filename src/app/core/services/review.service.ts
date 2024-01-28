@@ -32,7 +32,11 @@ create table
 */
   async getAllReviewsBy(id: number) {
     const {data, error} = await this.db.supabase.from('reviews').select('*').eq('product_id', id);
-    return data;
+    if (error) {
+      return [];
+    } else {
+      return data;
+    }
   }
 
   async getReviewBy(id: number) {

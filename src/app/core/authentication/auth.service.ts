@@ -11,8 +11,8 @@ export class AuthService {
   private isManagerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private storeManagerSubject: BehaviorSubject<any> = new BehaviorSubject<any[]>([]);
 
-  user$: Observable<any> = this.userSubject.asObservable();
-  isManager$: Observable<boolean> = this.isManagerSubject.asObservable();
+  public user$: Observable<any> = this.userSubject.asObservable();
+  public isManager$: Observable<boolean> = this.isManagerSubject.asObservable();
   storeManager$: Observable<any> = this.storeManagerSubject.asObservable();
   constructor(private db: SupabaseService) {
     this.getUser(); // Set the initial value on page load
@@ -29,7 +29,7 @@ export class AuthService {
     }
   }
 
-  async getIsStoreManager(): Promise<boolean> {
+  private async getIsStoreManager(): Promise<boolean> {
     let isManager = false;
     let usr_id: any = '';
     this.user$.subscribe((data) => {

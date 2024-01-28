@@ -45,16 +45,16 @@ create table
     return data;
   }
 
-  async editReviewBy(id: number, review: any) {
+  async editReviewBy(product_id: number, review: any, user_id: string) {
     const {data, error} = await this.db.supabase
       .from('reviews')
       .update({
-        rating: review.rating,
         comment: review.comment,
-        active: true,
+        rating: review.rating,
         data: review.data,
       })
-      .eq('review_id', id);
+      .eq('product_id', product_id)
+      .eq('user_id', user_id);
   }
 
   async addReviewBy(review: any) {

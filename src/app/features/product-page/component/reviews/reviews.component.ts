@@ -25,13 +25,13 @@ import {Selected} from '../../../../core/models/product.model';
           <div class="user float-left mr-4">
             <div class="items-center ">
               <span class="text-yellow-500 mb-2 star-shine " [innerHTML]="getStars(review.rating)"></span>
-              <h3 class=" user-name-o text name-shine">{{ review.data.discord_name }}</h3>
+              <h3 class=" user-name-o text name-shine tracking-widest font-mono">{{ review.data.discord_name }}</h3>
             </div>
             <img [src]="review.data.discord_avatar" alt="" class="avatar rounded-full w-24 h-24" />
           </div>
-          <h1 class=" uppercase review-title font-black  dark:text-gray-300">{{ review.title }}</h1>
+          <h1 class=" uppercase gap-2 font-black tracking-widest   dark:text-gray-300">{{ review.title }}</h1>
           <br />
-          <div class="review-text ">
+          <div class="review-text  font-mono">
             <p class="">{{ review.comment }}</p>
           </div>
         </div>
@@ -118,6 +118,7 @@ import {Selected} from '../../../../core/models/product.model';
           background-position: 200% center;
         }
       }
+  
 
       .star-shine {
         background: linear-gradient(to right, yellow 0%, gold 90%, yellow 100%);

@@ -10,10 +10,11 @@ export class AuthService {
   private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>('');
   private isManagerSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private storeManagerSubject: BehaviorSubject<any> = new BehaviorSubject<any[]>([]);
-
+  private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public user$: Observable<any> = this.userSubject.asObservable();
   public isManager$: Observable<boolean> = this.isManagerSubject.asObservable();
-  storeManager$: Observable<any> = this.storeManagerSubject.asObservable();
+  public storeManager$: Observable<any> = this.storeManagerSubject.asObservable();
+  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
   constructor(private db: SupabaseService) {
     this.getUser(); // Set the initial value on page load
     this.getStoreManager();
@@ -62,14 +63,10 @@ export class AuthService {
 
   public async getIsAuthenticated() {
     const {data, error} = await this.db.supabase.auth.getSession();
-    if (error) {
-      console.log(`error getting session:`, error);
-      return false;
-    }
-    if (data.session?.user.aud == 'authenticated') {
-      return true;
-    } else {
-      return false;
+    if (data?.session?.user.aud == 'authenticated') {
+      this.isAuthenticatedSubject.next(true);
+    } else if (error) {
+      this.isAuthenticatedSubject.next(false);
     }
   }
 }

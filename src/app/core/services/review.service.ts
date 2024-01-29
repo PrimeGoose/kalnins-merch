@@ -67,6 +67,7 @@ create table
       product_id: review.productId,
       comment: review.comment,
       rating: review.rating,
+      title: review.title,
       user_id: review.user_id,
       active: true,
       data: review.data,

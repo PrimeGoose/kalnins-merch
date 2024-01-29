@@ -157,7 +157,7 @@ export class EditReviewDirective implements ControlValueAccessor {
       <!-- review write form  -->
 
       <button
-        *ngIf="canWriteReview"
+        *ngIf="canWriteReview && isAuthenticated"
         (click)="toggleReviewForm()"
         class="bg-blue-500 font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors"
       >
@@ -184,7 +184,17 @@ export class EditReviewDirective implements ControlValueAccessor {
           </div>
 
           <!-- Textarea for review text -->
+
           <div class="flex-grow">
+            <h5
+              editReview
+              [(ngModel)]="newReviewTitle"
+              [contentEditable]="true"
+              [class.placeholder]="!newReviewTitle"
+              class="uppercase gap-2  tracking-widest dark:text-gray-300 border"
+            >
+              {{ newReviewTitle || 'Review title...' }}3
+            </h5>
             <textarea
               class="w-full h-32 p-3 text-base text-white bg-transparent border-none focus:ring-0"
               placeholder="Your review..."
@@ -281,14 +291,15 @@ export class ReviewsComponent implements OnInit {
   public canEditMyReview = false;
   public starsSelected = 5;
   public newReviewText: string = '';
+  public newReviewTitle: string = '';
   public showReviewForm: boolean = false;
   public data: any = {
     discord_avatar: 'https://i.pravatar.cc/300?u=3',
     discord_name: '',
   };
   public reviews: any = [];
-  public editableReviewTitle: string = '';
-  public editableReviewComment: string = '';
+  // public editableReviewTitle: string = '';
+  // public editableReviewComment: string = '';
   public isAuthenticated: boolean = false;
   public isManager: boolean = false;
   public canWriteReview = false;
@@ -322,8 +333,9 @@ export class ReviewsComponent implements OnInit {
       this.isManager = data;
     });
 
-    this.auth.getIsAuthenticated().then((res) => {
-      this.isAuthenticated = res;
+    this.auth.isAuthenticated$.subscribe((data) => {
+      console.log(data, 'is auth ');
+      this.isAuthenticated = data;
     });
   }
 
@@ -386,6 +398,7 @@ export class ReviewsComponent implements OnInit {
       productId: this.product_Id,
       user_id: this.user_id,
       comment: this.newReviewText,
+      title: this.newReviewTitle,
       rating: this.starsSelected,
       data: this.data,
     };

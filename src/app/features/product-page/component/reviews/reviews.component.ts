@@ -57,12 +57,13 @@ export class EditReviewDirective implements ControlValueAccessor {
       <!-- Review cards -->
       <ng-container *ngFor="let review of reviews">
         <div
-          class="
-    bg-gradient-to-t from-gray-700 to-gray-800 border border-gray-900 
+          class="dark:bg-gradient-to-t dark:from-gray-700 dark:to-gray-800 border dark:border-gray-900
+   
     p-4 rounded-lg shadow-md mb-4
     overflow-hidden
     320:min-w-xs
     max-w-md
+    
     "
         >
           <div class="user">
@@ -168,7 +169,9 @@ export class EditReviewDirective implements ControlValueAccessor {
       <div
         *ngIf="showReviewForm"
         class="mt-4  320:min-w-xs
-          max-w-md bg-gradient-to-t from-gray-700 to-gray-800 border border-gray-900 p-4 rounded-lg shadow-md mb-4 overflow-hidden"
+          max-w-md dark:bg-gradient-to-t dark:from-gray-700 dark:to-gray-800 border dark:border-gray-900 p-4 rounded-lg shadow-md mb-4 overflow-hidden
+          bg-gradient-to-l from-slate-50 to-slate-100 border-slate-50 
+          "
       >
         <div class="flex items-start">
           <!-- User avatar -->

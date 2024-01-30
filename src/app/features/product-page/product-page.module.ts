@@ -15,8 +15,7 @@ import {ProductDetailsComponent} from './component/product-details/product-detai
 import {EditReviewDirective, ReviewsComponent} from './component/reviews/reviews.component';
 @NgModule({
   declarations: [
-EditReviewDirective
-,
+    EditReviewDirective,
     CarouselComponent,
     ProductPageComponent,
     BuyBoxComponent,

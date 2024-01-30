@@ -59,7 +59,7 @@ import {SharedService} from 'src/app/shared/shared.service';
       id="order-button"
       [ngClass]="{'shake-animation': !user.emailValidated}"
       class=" text-white py-2 mt-2 rounded  text-xl font-black font-serif w-[200px]
-        dark:bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
+        bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
         
         
         "

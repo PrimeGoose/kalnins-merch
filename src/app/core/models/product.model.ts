@@ -44,3 +44,21 @@ export type Selected = {
   image: string;
   product_id: number;
 };
+
+// order data
+// category: 'T-Krekls';
+// color_name: 'Melns';
+// image: 'https://islbmwzkwwjkjvbsalcp.reysweek.com/storage/v1/object/public/kalnins-merch/dod-naudu-dauni-1.webp';
+// name: 'DOD NAUDU DAUNI';
+// price: 9.99;
+// product_id: 2;
+// size: 'XS';
+export type Order = {
+  category: string;
+  color_name: string;
+  image: string;
+  name: string;
+  price: number;
+  product_id: number;
+  size: string;
+};

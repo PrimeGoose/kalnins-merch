@@ -12,6 +12,17 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
   }
 
+  async getRoyals(): Promise<string[]> {
+    const {data, error} = await this.supabase.from('royals').select('name');
+
+    if (error) {
+      console.error('Error getting royals:', error);
+      return [];
+    }
+    const result = data.map((royal: any) => royal.name);
+    return result;
+  }
+
   async authWithDiscord(): Promise<SignInWithOAuthCredentials | any> {
     const {data, error} = await this.supabase.auth.signInWithOAuth({
       provider: 'discord',

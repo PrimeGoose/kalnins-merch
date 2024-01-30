@@ -6,7 +6,7 @@ import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
   selector: 'app-buy-box',
   template: `
     <div
-      class="px-4 flex flex-col items-center justify-center place-self-center border-l-2 border-zinc-200 dark:border-zinc-800
+      class="px-4 flex flex-col items-center justify-center place-self-center 768:border-l-2 border-zinc-200 dark:border-zinc-800
       
          pb-4 pt-4 768:flex 768:justify-center dark:text-zinc-400 text-zinc-700"
     >

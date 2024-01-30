@@ -55,7 +55,9 @@ import {SharedService} from 'src/app/shared/shared.service';
     </div>
 
     <div class="flex flex-col items-center">
+      <!-- router link to /orders -->
       <button
+        [routerLink]="'/orders'"
         (click)="processOrder()"
         id="order-button"
         [ngClass]="{'shake-animation': !user.emailValidated}"

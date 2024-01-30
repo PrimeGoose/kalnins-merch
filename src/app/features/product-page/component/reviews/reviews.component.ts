@@ -162,7 +162,7 @@ export class EditReviewDirective implements ControlValueAccessor {
         (click)="toggleReviewForm()"
         class="bg-blue-500 font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors"
       >
-        Write a customer review
+        Uzraksti Savu Atsauksmi
       </button>
 
       <!-- Review form card -->

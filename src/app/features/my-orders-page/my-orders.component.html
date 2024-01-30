@@ -32,11 +32,11 @@
     <table class="min-w-full border-collapse border border-gray-500 text-center">
       <thead>
         <tr>
-          <th class="border w-16 border-gray-400 px-4 py-2 text-gray-500">Image</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-500">Name</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-500">Size</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-500">Price</th>
-          <th class="border border-gray-400 px-4 py-2 text-gray-500">Action</th>
+          <th class="border w-16 border-gray-400 px-4 py-2 text-gray-500">Produkts</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-500">Nosaukums</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-500">Izmērs</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-500">Cena</th>
+          <th class="border border-gray-400 px-4 py-2 text-gray-500">Darbība</th>
         </tr>
       </thead>
       <tbody>
@@ -54,7 +54,7 @@
           <td class="border border-gray-400 px-4 py-2">{{ order.name }}</td>
           <td class="border border-gray-400 px-4 py-2">{{ order.size }}</td>
           <td class="border border-gray-400 px-4 py-2">{{ order.price }}</td>
-          <td class="border border-gray-400 px-4 py-2 text-blue-800" (click)="removeItem(order)">remove</td>
+          <td class="border border-gray-400 px-4 py-2 text-blue-800" (click)="removeItem(order)">Dzēst</td>
         </tr>
       </tbody>
     </table>

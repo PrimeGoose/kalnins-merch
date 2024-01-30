@@ -28,7 +28,7 @@
   </div>
 
   <div class="orders">
-    <h2 class="text-lg font-semibold mb-4">My Orders</h2>
+    <h2 class="text-lg font-semibold mb-4">Mani Pasūtījumi</h2>
     <table class="min-w-full border-collapse border border-gray-500 text-center">
       <thead>
         <tr>
@@ -48,7 +48,7 @@
               [routerLink]="['/product', order.product_id]"
               [src]="order.image"
               alt="Product Image"
-              class="w-16 h-16"
+              class="w-16 h-16 cursor-pointer"
             />
           </td>
           <td class="border border-gray-400 px-4 py-2">{{ order.name }}</td>
@@ -70,6 +70,7 @@
     </div>
     <!-- router link to /success -->
     <button
+      *ngIf="orders.length"
       [routerLink]="['/success']"
       class="text-white text-center py-2 mt-2 rounded font-black font-serif px-4 bg-gradient-to-r from-orange-900 via-orange-500 to-orange-900 border-gray-700"
     >

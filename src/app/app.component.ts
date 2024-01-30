@@ -117,7 +117,13 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
       <router-outlet #o="outlet"></router-outlet>
     </main>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        padding-bottom: 3rem;
+      }
+    `,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(

@@ -196,6 +196,10 @@ export class OrderFormComponent implements OnInit {
 
   processOrder() {
     this.onProcessOrder.emit();
+    // add current selected item to
+    if (this.selected_count_in_cart == 0) {
+      // this.addToCart() // but onlu if this product id is not in cart with diferent size
+    }
   }
 
   validateEmail(email: string) {

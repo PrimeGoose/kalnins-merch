@@ -17,16 +17,16 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
         (touchstart)="SwipeStart($event)"
         class="place-content-center flex flex-col overflow-hidden relative w-full"
       >
-        <div class="chevron-container z-10 w-full h-full absolute items-center flex">
+        <div class="chevron-container z-10 w-full h-full absolute items-center flex cursor-pointer rounded-xl">
           <div
             (click)="back()"
-            class="chevron-left justify-start hidden 450:flex w-9 h-16 left-0 absolute items-center hover:bg-gradient-to-r from-neutral-50 to-transparent"
+            class="chevron-left justify-start hidden 450:flex w-9 h-16 left-0 absolute items-center dark:hover:bg-gradient-to-r from-slate-500 to-transparent"
           >
             <app-chevron-left></app-chevron-left>
           </div>
           <div
             (click)="forward()"
-            class="chevron-right justify-end w-9 h-16 right-0 absolute items-center hidden 450:flex hover:bg-gradient-to-r to-neutral-50 from-transparent"
+            class="chevron-right justify-end w-9 h-16 right-0 absolute items-center hidden 450:flex dark:hover:bg-gradient-to-r to-slate-500 from-transparent"
           >
             <app-chevron-right></app-chevron-right>
           </div>

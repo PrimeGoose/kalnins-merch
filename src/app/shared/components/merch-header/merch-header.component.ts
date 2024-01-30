@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-merch-header',
   template: `
-    <div [routerLink]="['/kalnins-merch']" class="shop-header flex flex-col text-center  font-serif  my-20 gradient-text">
+    <div [routerLink]="['/kalnins-merch']" class=" cursor-pointer shop-header flex flex-col text-center  font-serif  my-20 gradient-text">
       <h1 class="shop-title text-6xl leading-[4.5rem]">Kalniņš Merch</h1>
       <h2 class="shop-subtitle text-xl  mt-6">Jura Kalniņa merch veikals</h2>
     </div>

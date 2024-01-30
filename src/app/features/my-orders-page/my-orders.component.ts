@@ -34,6 +34,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
     this.cart.getItems().subscribe((items) => {
       this.orders = items;
+      // console.log(items);
     });
   }
 

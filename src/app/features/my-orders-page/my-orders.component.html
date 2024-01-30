@@ -42,7 +42,14 @@
       <tbody>
         <tr *ngFor="let order of orders" class="border-b border-gray-400">
           <td class="border border-gray-400">
-            <img [src]="order.image" alt="Product Image" class="w-16 h-16" />
+            <!-- go to product route with id from product_id from royals -->
+
+            <img
+              [routerLink]="['/product', order.product_id]"
+              [src]="order.image"
+              alt="Product Image"
+              class="w-16 h-16"
+            />
           </td>
           <td class="border border-gray-400 px-4 py-2">{{ order.name }}</td>
           <td class="border border-gray-400 px-4 py-2">{{ order.size }}</td>
@@ -61,11 +68,12 @@
         </span>
       </span>
     </div>
-
+    <!-- router link to /success -->
     <button
-      class="text-white text-center py-2 mt-2 rounded font-black font-serif px-4 bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 border-gray-700"
+      [routerLink]="['/success']"
+      class="text-white text-center py-2 mt-2 rounded font-black font-serif px-4 bg-gradient-to-r from-orange-900 via-orange-500 to-orange-900 border-gray-700"
     >
-      Pasūtīt
+      Apstiprināt Pasūtījumu
     </button>
   </div>
 </div>

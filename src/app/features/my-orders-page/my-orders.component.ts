@@ -4,10 +4,11 @@ import {SupabaseService} from '../../core/services/supabase.service';
 import {BehaviorSubject} from 'rxjs';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {Order} from 'src/app/core/models/product.model';
+import {RouterModule} from '@angular/router';
 @Component({
   selector: 'app-my-orders',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

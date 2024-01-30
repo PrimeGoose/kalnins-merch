@@ -19,6 +19,7 @@ export class AuthService {
     this.getUser(); // Set the initial value on page load
     this.getStoreManager();
     this.getIsStoreManager();
+    this.getIsAuthenticated();
   }
 
   private async getStoreManager() {

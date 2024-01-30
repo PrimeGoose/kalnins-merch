@@ -8,7 +8,7 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
   template: `
     <div class="flex relative ">
       <button (click)="login()" class="">
-        <svg
+        <!-- <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           viewBox="0 -28.5 256 256"
@@ -23,9 +23,16 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
               fill-rule="nonzero"
             ></path>
           </g>
+        </svg> -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="#5865F2" class="w-16 h-16">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+          />
         </svg>
       </button>
-      <p class="absolute top-16 inset-0 flex justify-center items-center">Log Out</p>
+      <!-- <p class="absolute top-16 inset-0 flex justify-center items-center">Log In</p> -->
     </div>
   `,
   styles: `:host{

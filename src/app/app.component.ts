@@ -18,16 +18,10 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
         <app-logout *ngIf="isAuthenticated" (click)="checkIfAuthenticated()" class=""></app-logout>
 
         <app-login *ngIf="!isAuthenticated" (click)="checkIfAuthenticated()" class=""></app-login>
+
         <button *ngIf="!isAdminRoute && isManager" routerLink="/admin" class="">
           <span class="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.2"
-              stroke="currentColor"
-              class="w-16 h-16 "
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="#5865F2" class="w-16 h-16 ">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -39,14 +33,7 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
 
         <button *ngIf="isAdminRoute" routerLink="/" class="">
           <span class="shop">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.2"
-              stroke="currentColor"
-              class="w-16 h-16 "
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="#5865F2" class="w-16 h-16 ">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -65,7 +52,7 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.2"
-                stroke="currentColor"
+                stroke="#5865F2"
                 class="w-16 h-16 "
               >
                 <path
@@ -84,7 +71,7 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.2"
-                stroke="currentColor"
+                stroke="#5865F2"
                 class="w-16 h-16 "
               >
                 <path
@@ -109,8 +96,8 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.1"
-                stroke="currentColor"
+                stroke-width="1.2"
+                stroke="#5865F2"
                 class="w-16 h-16 absolute"
               >
                 <path

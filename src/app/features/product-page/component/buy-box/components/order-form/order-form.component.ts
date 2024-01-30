@@ -134,7 +134,9 @@ export class OrderFormComponent implements OnInit {
     private sharedService: SharedService,
   ) {}
   async ngOnInit() {
-    this.isAuthenticated = await this.auth.getIsAuthenticated();
+    this.isAuthenticated = await this.auth.isAuthenticated$.subscribe((data) => {
+      this.isAuthenticated = data;
+    });
 
     // this.calculateItemsImBasketBySizeAndPrice();
     this.shoppingCart.calculateSelectedCountInCart().subscribe((count) => {

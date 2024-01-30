@@ -24,12 +24,12 @@ import {ProductService} from 'src/app/core/services/product.service';
       </div>
       <textarea
         *ngIf="isEditing"
-        class=" mb-4 border border-gray-300 rounded p-2 w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 "
+        class=" mb-4  rounded p-2 w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 "
         [(ngModel)]="description"
         appAutoResize
         rows="15"
       ></textarea>
-      <p *ngIf="!isEditing" class=" mb-4 border border-gray-300 rounded p-2 overflow-auto">
+      <p *ngIf="!isEditing" class=" mb-4   rounded p-2 overflow-auto">
         {{ description || ' ' }}
       </p>
     </div>

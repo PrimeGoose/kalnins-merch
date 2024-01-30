@@ -26,18 +26,18 @@
 </div>
 
 <div class="max-w-screen-1024">
-  <!-- <app-description class="mt-20 flex"></app-description> -->
+  <app-description class="mt-20 flex"></app-description>
 
   <!-- <app-product-details></app-product-details> -->
 
   <!--  -->
   <app-reviews></app-reviews>
-  <!-- @defer (on timer(1000)) {
+  @defer (on timer(100)) {
 
   <app-other-products
     class="grid mt-10"
     [currentProductId]="id"
     (productClick)="scrollToProductContainer($event)"
   ></app-other-products>
-  } -->
+  }
 </div>

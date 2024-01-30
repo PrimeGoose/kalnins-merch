@@ -18,14 +18,14 @@ import {SharedService} from 'src/app/shared/shared.service';
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
-            ' border-red-700 bg-gray-700': productVariant.size === item.size && item.available,
-            ' font-[900]  text-base   ': productVariant.size === item.size && item.available
+            ' border-red-700 dark:border-none  border dark:bg-gray-700': productVariant.size === item.size && item.available,
+            ' font-[900]  text-base     ': productVariant.size === item.size && item.available
           }"
-          class=" duration-200 hover:scale-125  border-2 rounded-none flex items-center justify-center h-9 w-16 dark:border-none font-black 
+          class=" duration-200 hover:scale-125 border-red-700 bordder   rounded-none flex items-center justify-center h-9 w-16  font-black 
           
           "
         >
-          <span class=" duration-200 flex row items-center gap-0">
+          <span class=" duration-200 flex row items-center  gap-0">
             <span *ngIf="item.in_cart > 0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,9 +48,9 @@ import {SharedService} from 'src/app/shared/shared.service';
 
         <button
           *ngIf="!item.available"
-          class="border-2  rounded-none
+          class="  rounded-none
         
-        items-center justify-center h-9 w-16 text-gray-700 border-none hover:cursor-not-allowed line-through
+        items-center justify-center border-red-700 h-9 w-16 text-gray-700 b  hover:cursor-not-allowed line-through
          "
         >
           {{ item.size }}

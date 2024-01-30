@@ -61,7 +61,7 @@ export class AuthService {
     }
   }
 
-  public async getIsAuthenticated() {
+  private async getIsAuthenticated() {
     const {data, error} = await this.db.supabase.auth.getSession();
     if (data?.session?.user.aud == 'authenticated') {
       this.isAuthenticatedSubject.next(true);

@@ -22,13 +22,15 @@ import {LogoutComponent} from './features/auth-mamager/components/logout/logout.
 
 // My Orders Page Module
 import {MyOrdersPageModule} from './features/my-orders-page/my-orders.page.module';
+import {MerchHeaderComponent} from './shared/components/merch-header/merch-header.component';
 
 // state management
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, ToolbarComponent],
+  declarations: [AppComponent, HomePageComponent],
 
   imports: [
+    MerchHeaderComponent,
     BrowserModule,
     LoginComponent,
     LogoutComponent,

@@ -165,6 +165,15 @@ export class EditReviewDirective implements ControlValueAccessor {
         Uzraksti Savu Atsauksmi
       </button>
 
+      <!-- noth auth -->
+      <button
+        *ngIf="!isAuthenticated"
+        (click)="authWithDiscord()"
+        class="bg-blue-500 font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+      >
+        Uzraksti Savu Atsauksmi
+      </button>
+
       <!-- Review form card -->
       <div
         *ngIf="showReviewForm"
@@ -364,6 +373,15 @@ export class ReviewsComponent implements OnInit {
       review.editableComment = review.comment;
     }
   }
+  authWithDiscord() {
+
+
+
+    this.db.authWithDiscord();
+  }
+
+  
+
 
   // async loadReviews() {
   //   let product_Id = 0;

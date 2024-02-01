@@ -1,12 +1,17 @@
 import {Component} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {ToolbarComponent} from 'src/app/features/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-merch-header',
+  standalone: true,
+  imports: [ToolbarComponent, RouterModule],
   template: `
-    <div [routerLink]="['/kalnins-merch']" class=" cursor-pointer shop-header flex flex-col text-center  font-serif  my-20 gradient-text">
-      <h1 class="shop-title text-6xl leading-[4.5rem]">Kalniņš Merch</h1>
-      <h2 class="shop-subtitle text-xl  mt-6">Jura Kalniņa merch veikals</h2>
+    <div class=" cursor-pointer shop-header flex flex-col text-center  font-serif  my-6 gradient-text">
+      <h1 [routerLink]="['/kalnins-merch']" class="shop-title text-6xl leading-[4.5rem] ">Kalniņš Merch</h1>
+      <h2 [routerLink]="['/kalnins-merch']" class="shop-subtitle text-xl  mt-6">Jura Kalniņa merch veikals</h2>
     </div>
+    <app-toolbar class="flex justify-center m-4"> </app-toolbar>
   `,
   styles: [
     `

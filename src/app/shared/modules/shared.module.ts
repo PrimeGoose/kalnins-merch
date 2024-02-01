@@ -19,7 +19,7 @@ import {ProductCategoryComponent} from '../components/product-category/product-c
 
 @NgModule({
   declarations: [
-    MerchHeaderComponent,
+    // MerchHeaderComponent,
     SocialShareComponent,
     OrderSuccessComponent,
     ProductCardComponent,
@@ -38,7 +38,7 @@ import {ProductCategoryComponent} from '../components/product-category/product-c
   ],
   imports: [CommonModule, RouterModule],
   exports: [
-    MerchHeaderComponent,
+    // MerchHeaderComponent,
     OrderSuccessComponent,
     ProductCardComponent,
     ProductImageComponent,

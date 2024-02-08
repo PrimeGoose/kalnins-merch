@@ -13,6 +13,7 @@ import {ProductImageComponent} from '../product-image/product-image.component';
     dark:bg-[linear-gradient(to_bottom,_rgba(53,_64,_79)_10%,_rgba(30,_40,_54)_50%,_rgba(22,_31,_46)_90%)]
     border-2 border-gray-100 hover:border-gray-300
     dark:border-none
+    text-center w-[320px] h-[372px]
     
 
    

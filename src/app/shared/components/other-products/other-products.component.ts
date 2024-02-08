@@ -33,11 +33,6 @@ import {NgFor, AsyncPipe} from '@angular/common';
         text-fill-color: transparent;
       }
 
-      :host {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
       .product-card {
         box-shadow:
           0 4px 6px -1px rgba(0, 0, 0, 0.1),

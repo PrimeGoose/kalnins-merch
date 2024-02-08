@@ -1,11 +1,4 @@
-:host {
-  text-align: center;
-  display: grid;
-  font-family: 'Arial', sans-serif;
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-}
+
 
 .bg-gradient-animation {
   background-size: 10% 10000%;
@@ -18,9 +11,7 @@
   filter: brightness(1);
 }
 
-:host:not(:hover) .bg-gradient {
-  opacity: 1;
-}
+
 
 @keyframes shine {
   to {

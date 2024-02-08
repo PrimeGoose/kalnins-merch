@@ -234,6 +234,7 @@ export class EditReviewDirective implements ControlValueAccessor {
         min-height: 50vh;
         display: flex;
         justify-content: center;
+        text-align: center;
       }
       .review-title {
         font-family: 'Playfair Display', serif;

@@ -3,7 +3,9 @@ import {input} from '@angular/core';
 
 @Component({
   selector: 'app-product-image',
-  template: ` <img class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath()!)" [alt]="altText()" /> `,
+  template: `
+    <img [width]="309" [height]="309" class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath()!)" [alt]="altText()" />
+  `,
   styleUrls: ['./product-image.component.scss'],
   standalone: true,
 })

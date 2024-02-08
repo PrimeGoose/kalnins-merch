@@ -60,16 +60,7 @@ import {NgFor, NgIf, NgClass} from '@angular/common';
       </ng-container>
     </div>
   `,
-  styles: [
-    `
-      :host {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-    `,
-  ],
+
   standalone: true,
   imports: [NgFor, NgIf, NgClass],
 })

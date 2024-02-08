@@ -15,13 +15,7 @@ import {XShareBtnComponent} from './x-share-btn/x-share-btn.component';
       <app-fb-share-btn></app-fb-share-btn>
     </div>
   `,
-  styles: [
-    `
-      :host {
-        @apply flex flex-row justify-center;
-      }
-    `,
-  ],
+
   standalone: true,
   imports: [XShareBtnComponent, FbShareBtnComponent],
 })

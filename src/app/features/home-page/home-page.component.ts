@@ -11,23 +11,12 @@ import {NgFor, AsyncPipe} from '@angular/common';
   selector: 'app-home-page',
   animations: [slideInFromRight],
   template: `
-    <div
-      [@slideInFromRight]="pruducts_count ? 'loaded' : 'loading'"
-      class=" grid grid-cols-1 640:grid-cols-2 960:grid-cols-3 gap-4 max-w-[320px] 640:max-w-[640px] 960:max-w-[960px] "
-    >
+    <!-- [@slideInFromRight]="pruducts_count ? 'loaded' : 'loading'" -->
+    <div class=" grid grid-cols-1 640:grid-cols-2 960:grid-cols-3 gap-4 max-w-[320px] 640:max-w-[640px] 960:max-w-[960px] ">
       <app-product-card *ngFor="let product of products$ | async" (click)="goToProductPage(product)" [product]="product"></app-product-card>
     </div>
   `,
-  styles: [
-    `
-      :host {
-        display: grid;
-        place-items: center;
-        flex-direction: column;
-        align-items: center;
-      }
-    `,
-  ],
+  styles: [``],
   standalone: true,
   imports: [NgFor, ProductCardComponent, AsyncPipe],
 })

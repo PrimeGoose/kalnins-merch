@@ -16,8 +16,12 @@
 /* If you have a specific class for the image and order menu, you can replace .product-container with that class */
 
 :host {
-  text-align: -webkit-center;
+  // text-align: -webkit-center;
   // max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 /* other */
 

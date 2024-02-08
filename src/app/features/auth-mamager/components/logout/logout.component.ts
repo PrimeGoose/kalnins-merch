@@ -37,13 +37,6 @@ import {SupabaseService} from '../../../../core/services/supabase.service';
       <!-- <p class="absolute top-16 inset-0 flex justify-center items-center">Log Out</p> -->
     </div>
   `,
-  styles: `:host{
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-  }`,
 })
 export class LogoutComponent {
   constructor(private db: SupabaseService) {}

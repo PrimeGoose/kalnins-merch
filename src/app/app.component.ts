@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {fadeAnimation} from './core/animations/fadeAnimation';
-import {MerchHeaderComponent} from './shared/components/merch-header/merch-header.component';
+// import {MerchHeaderComponent} from './shared/components/merch-header/merch-header.component';
 @Component({
   selector: 'app-root',
   // standalone: true,

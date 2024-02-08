@@ -4,26 +4,28 @@ import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {Selected, SelectedProductObject} from '../../../../../../core/models/product.model';
 import {BehaviorSubject, Observable, combineLatest, filter, from, map} from 'rxjs';
 import {SharedService} from 'src/app/shared/shared.service';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-order-form',
+
   template: `
     <div id="order-actions" class="order-commit-container flex flex-col items-center w-full">
       <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-full text-xs text-center">
         @if(!isAuthenticated){
-        <label for="email" class="block   mb-2" [ngClass]="{'invalid-text': !user.emailValidated && user.email}">
-          <span *ngIf="user.validationMessage" class="text-red-600">{{ user.validationMessage }}</span>
-          <span *ngIf="!user.validationMessage" class=" text-center"> Tavs e-pasts pasūtījumu veikšanai..</span>
+        <label for="email" class="block   mb-2" [ngClass]="{'invalid-text': !user().emailValidated && user().email}">
+          <span *ngIf="user().validationMessage" class="text-red-600">{{ user().validationMessage }}</span>
+          <span *ngIf="!user().validationMessage" class=" text-center"> Tavs e-pasts pasūtījumu veikšanai..</span>
         </label>
         <input
           id="email"
           type="email"
-          [(ngModel)]="user.email"
+          [(ngModel)]="user().email"
           name="emailInput"
-          [ngClass]="{'invalid-border': !user.emailValidated && user.email}"
+          [ngClass]="{'invalid-border': !user().emailValidated && user().email}"
           class="border dark:border-none rounded  text-center dark:bg-gray-800 py-2 mb-2"
           placeholder="Ievadi e-pastu lai pasūtītu.."
-          (input)="validateEmail(this.data.data.user.email)"
+          (input)="validateEmail(this.data.data.user().email)"
         />
         <label for="nickname" class="block  text-black dark:text-white py-1">
           Visiem Rojālajiem
@@ -60,7 +62,7 @@ import {SharedService} from 'src/app/shared/shared.service';
         [routerLink]="'/orders'"
         (click)="processOrder()"
         id="order-button"
-        [ngClass]="{'shake-animation': !user.emailValidated}"
+        [ngClass]="{'shake-animation': !user().emailValidated}"
         class=" text-white py-2 mt-2 rounded  text-xl font-black font-serif w-[200px]
       bg-gradient-to-r from-orange-700 via-orange-500 to-orange-800 dark:border-gray-700
       
@@ -150,9 +152,9 @@ export class OrderFormComponent implements OnInit {
   data: any = [];
   selected: any = [];
   selected_count_in_cart = 0;
-  @Input() user: any;
-  @Input() onValidateEmail: any;
-  @Input() onProcessOrder: any;
+  user = input<any | undefined>();
+  onValidateEmail = input<any | undefined>();
+  onProcessOrder = input<any | undefined>();
   @Output() addToCartEvent = new EventEmitter();
   constructor(
     private auth: AuthService,
@@ -195,7 +197,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   processOrder() {
-    this.onProcessOrder.emit();
+    this.onProcessOrder().emit();
     // add current selected item to
     if (this.selected_count_in_cart == 0) {
       // this.addToCart() // but onlu if this product id is not in cart with diferent size
@@ -203,7 +205,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   validateEmail(email: string) {
-    this.onValidateEmail.emit(email);
+    this.onValidateEmail().emit(email);
   }
 
   addToCart() {

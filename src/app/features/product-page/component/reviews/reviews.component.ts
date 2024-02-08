@@ -374,14 +374,8 @@ export class ReviewsComponent implements OnInit {
     }
   }
   authWithDiscord() {
-
-
-
     this.db.authWithDiscord();
   }
-
-  
-
 
   // async loadReviews() {
   //   let product_Id = 0;

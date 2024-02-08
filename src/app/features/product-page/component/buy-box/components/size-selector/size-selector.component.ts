@@ -4,9 +4,11 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {ProductService} from 'src/app/core/services/product.service';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {SharedService} from 'src/app/shared/shared.service';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-size-selector',
+
   template: `
     <div
       id="size-selector"
@@ -18,8 +20,8 @@ import {SharedService} from 'src/app/shared/shared.service';
           *ngIf="item.available"
           (click)="selectSize(item)"
           [ngClass]="{
-            ' border-red-700 dark:border-none  border dark:bg-gray-700': productVariant.size === item.size && item.available,
-            ' font-[900]  text-base     ': productVariant.size === item.size && item.available
+            ' border-red-700 dark:border-none  border dark:bg-gray-700': productVariant().size === item.size && item.available,
+            ' font-[900]  text-base     ': productVariant().size === item.size && item.available
           }"
           class=" duration-200 hover:scale-125 border-red-700 bordder   rounded-none flex items-center justify-center h-9 w-16  font-black 
           
@@ -90,12 +92,12 @@ export class SizeSelectorComponent implements OnInit {
       });
     });
   }
-  @Input() productVariant: any;
+  productVariant = input<any | undefined>();
 
-  @Input() onSelectSize = new EventEmitter();
+  onSelectSize = input(new EventEmitter());
 
   selectSize(item: any) {
-    this.onSelectSize.emit(item);
+    this.onSelectSize().emit(item);
   }
   async ngAfterViewInit() {}
 }

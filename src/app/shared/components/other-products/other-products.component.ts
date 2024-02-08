@@ -1,7 +1,8 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Output, EventEmitter, OnInit} from '@angular/core';
 import {Product} from '../../../core/models/product.model';
 import {ProductService} from '../../../core/services/product.service';
 import {Observable, from} from 'rxjs';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-other-products',
@@ -45,7 +46,7 @@ import {Observable, from} from 'rxjs';
 export class OtherProductsComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
-  @Input() currentProductId: number = 0;
+  currentProductId = input<number>(0);
 
   @Output() productClick = new EventEmitter<number>();
 

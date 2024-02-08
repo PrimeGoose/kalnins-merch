@@ -17,7 +17,7 @@ import {SharedModule} from './shared/modules/shared.module';
 import {ProductPageModule} from './features/product-page/product-page.module';
 // components
 import {LoginComponent} from './features/auth-mamager/components/login/login.component';
-import {ToolbarComponent} from './features/toolbar/toolbar.component';
+// import {ToolbarComponent} from './features/toolbar/toolbar.component';
 import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
 
 // My Orders Page Module

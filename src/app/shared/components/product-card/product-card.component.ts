@@ -1,8 +1,10 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Product} from '../../../core/models/product.model';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
+
   template: `
     <div
       class="cursor-pointer
@@ -16,18 +18,18 @@ import {Product} from '../../../core/models/product.model';
   "
       (click)="onClick()"
     >
-      <app-product-image class=" " [imagePath]="product.images[0]"></app-product-image>
-      <app-product-name [name]="product.name"></app-product-name>
-      <app-product-price [price]="product.sizes[0].price" [currency]="product.currency"></app-product-price>
+      <app-product-image class=" " [imagePath]="product()!.images[0]"></app-product-image>
+      <app-product-name [name]="product()!.name"></app-product-name>
+      <app-product-price [price]="product()!.sizes[0].price" [currency]="product()!.currency"></app-product-price>
     </div>
   `,
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-  @Input() product!: Product;
+  product = input<Product | undefined>();
   @Output() productClicked = new EventEmitter<number>();
 
   onClick() {
-    this.productClicked.emit(this.product.product_id);
+    this.productClicked.emit(this.product()!.product_id);
   }
 }

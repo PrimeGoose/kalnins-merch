@@ -1,9 +1,11 @@
 // ProductPriceComponent
 import {Component, Input} from '@angular/core';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-product-price',
-  template: ` <p>{{ price }} {{ currency }}</p> `,
+
+  template: ` <p>{{ price() }} {{ currency() }}</p> `,
   styles: [
     `
       :host {
@@ -14,6 +16,6 @@ import {Component, Input} from '@angular/core';
   ],
 })
 export class ProductPriceComponent {
-  @Input() price!: number;
-  @Input() currency!: string;
+  price = input<number | undefined>();
+  currency = input<string | undefined>();
 }

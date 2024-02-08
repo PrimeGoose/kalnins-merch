@@ -1,14 +1,16 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-preview-images',
+
   template: `
     <div class="flex flex-row">
-      <app-product-image (click)="back()" [imagePath]="selected.previousImage"></app-product-image>
+      <app-product-image (click)="back()" [imagePath]="selected().previousImage"></app-product-image>
 
-      <app-product-image [imagePath]="selected.currentImage"></app-product-image>
+      <app-product-image [imagePath]="selected().currentImage"></app-product-image>
 
-      <app-product-image (click)="forward()" [imagePath]="selected.nextImage"></app-product-image>
+      <app-product-image (click)="forward()" [imagePath]="selected().nextImage"></app-product-image>
     </div>
   `,
   styles: [],
@@ -16,16 +18,16 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class PreviewImagesComponent {
   constructor() {}
 
-  @Input() selected: any;
+  selected = input<any | undefined>();
 
-  @Input() onBack = new EventEmitter();
-  @Input() onForward = new EventEmitter();
+  onBack = input(new EventEmitter());
+  onForward = input(new EventEmitter());
 
   back() {
-    this.onBack.emit();
+    this.onBack().emit();
   }
 
   forward() {
-    this.onForward.emit();
+    this.onForward().emit();
   }
 }

@@ -1,13 +1,15 @@
 import {Component, Input, isDevMode} from '@angular/core';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-product-image',
-  template: ` <img class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath)" [alt]="altText" /> `,
+
+  template: ` <img class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath()!)" [alt]="altText()" /> `,
   styleUrls: ['./product-image.component.scss'],
 })
 export class ProductImageComponent {
-  @Input() imagePath!: string;
-  @Input() altText!: string;
+  imagePath = input<string | undefined>();
+  altText = input<string | undefined>();
 
   setBaseURL(imagePath: string): string {
     const localhost8000 = '';

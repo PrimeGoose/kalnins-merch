@@ -1,7 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {input} from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
+
   template: `
     <div class="image-section flex flex-col content-center   max-w-[500px] ">
       <!-- pruduct title -->
@@ -32,7 +34,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
           </div>
         </div>
 
-        <app-product-image class="" [imagePath]="selectedProductObject.currentImage"></app-product-image>
+        <app-product-image class="" [imagePath]="selectedProductObject().currentImage"></app-product-image>
       </div>
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>
@@ -40,7 +42,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent {
-  @Input() selectedProductObject: any;
+  selectedProductObject = input<any | undefined>();
 
   @Output() onSwipeStart = new EventEmitter();
   @Output() onSwipeEnd = new EventEmitter();

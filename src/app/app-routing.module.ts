@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RouteGuard} from './core/guards/route.guard';
+// import {RouteGuard} from './core/guards/route.guard';
 import {ProductPageComponent} from './features/product-page/product-page.component';
 import {HomePageComponent} from './features/home-page/home-page.component';
 import {OrderSuccessComponent} from './shared/components/order-success/order-success.component';

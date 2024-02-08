@@ -20,8 +20,10 @@ import {CommonModule} from '@angular/common';
     <!-- <ng-content> </ng-content>
    -->
 
-    <div class="flex justify-center min-w-[250px]
-     ">
+    <div
+      class="flex justify-center min-w-[250px]
+     "
+    >
       <!-- right corner login logout admin -->
       <app-logout *ngIf="isAuthenticated" (click)="checkIfAuthenticated()" class=""></app-logout>
 

@@ -5,9 +5,11 @@ import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Subject} from 'rxjs';
 import {AuthService} from 'src/app/core/authentication/auth.service';
 import {ProductService} from 'src/app/core/services/product.service';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 @Component({
-  selector: 'app-description',
-  template: `
+    selector: 'app-description',
+    template: `
     <!-- Product Description -->
     <!-- Product Description -->
     <div class=" p-6 rounded-lg shadow-sm w-full dark:bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 border-black">
@@ -34,7 +36,9 @@ import {ProductService} from 'src/app/core/services/product.service';
       </p>
     </div>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
+    imports: [NgIf, FormsModule],
 })
 export class DescriptionComponent implements OnInit {
   id: any = 0;

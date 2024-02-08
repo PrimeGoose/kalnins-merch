@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-product-details',
-  template: `
+    selector: 'app-product-details',
+    template: `
     <!-- Product Details -->
     <div class="bg-[#F7F7F7] p-6 rounded-lg shadow-sm mt-4">
       <h2 class="text-xl font-semibold text-gray-800 mb-4">Product Details</h2>
@@ -26,6 +26,7 @@ import {Component} from '@angular/core';
       </div>
     </div>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
 })
 export class ProductDetailsComponent {}

@@ -27,30 +27,27 @@ import {MerchHeaderComponent} from './shared/components/merch-header/merch-heade
 // state management
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent],
-
-  imports: [
-    MerchHeaderComponent,
-    BrowserModule,
-    LoginComponent,
-    LogoutComponent,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule, // Correct this if it's indicated as an error, ensure SharedModule is error-free
-
-    FormsModule,
-    AngularMaterialModule,
-    MyOrdersPageModule,
-
-    ProductPageModule, // Ensure that ProductPageModule doesn't redeclare SharedModule's components
-
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        MerchHeaderComponent,
+        BrowserModule,
+        LoginComponent,
+        LogoutComponent,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        FormsModule,
+        AngularMaterialModule,
+        MyOrdersPageModule,
+        ProductPageModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000',
+        }),
+        HomePageComponent,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

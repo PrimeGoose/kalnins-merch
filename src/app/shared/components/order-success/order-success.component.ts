@@ -1,9 +1,9 @@
 import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
+import { SocialShareComponent } from '../social-share/social-share.component';
 
 @Component({
-  selector: 'app-order-success',
-
-  template: `
+    selector: 'app-order-success',
+    template: `
     <div class="grid h-screen place-items-center content-between text-center px-4 md:px-0">
       <div
         class="flex flex-col p-4 md:p-8 rounded-lg shadow-xl max-w-xl mx-auto w-full
@@ -20,7 +20,9 @@ import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
       </div>
     </div>
   `,
-  styles: [``],
+    styles: [``],
+    standalone: true,
+    imports: [SocialShareComponent],
 })
 export class OrderSuccessComponent implements OnInit, OnDestroy {
   @HostListener('window:scroll', [])

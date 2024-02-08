@@ -4,17 +4,19 @@ import {AuthService} from 'src/app/core/authentication/auth.service';
 import {ReviewService} from 'src/app/core/services/review.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {Directive, forwardRef, HostListener} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Directive({
-  selector: '[editReview]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EditReviewDirective),
-      multi: true,
-    },
-  ],
+    selector: '[editReview]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EditReviewDirective),
+            multi: true,
+        },
+    ],
+    standalone: true,
 })
 export class EditReviewDirective implements ControlValueAccessor {
   private onChange: (value: string) => void = () => {};
@@ -50,8 +52,8 @@ export class EditReviewDirective implements ControlValueAccessor {
 }
 
 @Component({
-  selector: 'app-reviews',
-  template: `
+    selector: 'app-reviews',
+    template: `
     <div class="rounded-lg shadow-sm max-w-md">
       <h2 class="text-xl font-semibold mt-8 mb-4">Klientu Atsauksmes</h2>
       <!-- Review cards -->
@@ -226,8 +228,8 @@ export class EditReviewDirective implements ControlValueAccessor {
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         min-height: 50vh;
         display: flex;
@@ -302,7 +304,14 @@ export class EditReviewDirective implements ControlValueAccessor {
         }
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        NgFor,
+        NgIf,
+        EditReviewDirective,
+        FormsModule,
+    ],
 })
 export class ReviewsComponent implements OnInit {
   public canEditMyReview = false;

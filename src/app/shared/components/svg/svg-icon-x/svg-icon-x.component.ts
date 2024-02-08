@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-svg-icon-x',
-  template: `
+    selector: 'app-svg-icon-x',
+    template: `
     <svg class="ml-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <!-- Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
       <path
@@ -10,6 +10,7 @@ import {Component} from '@angular/core';
       />
     </svg>
   `,
-  styles: [],
+    styles: [],
+    standalone: true,
 })
 export class SvgIconXComponent {}

@@ -2,10 +2,10 @@ import {Component, Input, isDevMode} from '@angular/core';
 import {input} from '@angular/core';
 
 @Component({
-  selector: 'app-product-image',
-
-  template: ` <img class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath()!)" [alt]="altText()" /> `,
-  styleUrls: ['./product-image.component.scss'],
+    selector: 'app-product-image',
+    template: ` <img class="max-h-[768px]" loading="lazy" [src]="setBaseURL(imagePath()!)" [alt]="altText()" /> `,
+    styleUrls: ['./product-image.component.scss'],
+    standalone: true,
 })
 export class ProductImageComponent {
   imagePath = input<string | undefined>();

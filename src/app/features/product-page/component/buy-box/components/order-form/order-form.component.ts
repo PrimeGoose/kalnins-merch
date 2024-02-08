@@ -5,11 +5,13 @@ import {Selected, SelectedProductObject} from '../../../../../../core/models/pro
 import {BehaviorSubject, Observable, combineLatest, filter, from, map} from 'rxjs';
 import {SharedService} from 'src/app/shared/shared.service';
 import {input} from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-order-form',
-
-  template: `
+    selector: 'app-order-form',
+    template: `
     <div id="order-actions" class="order-commit-container flex flex-col items-center w-full">
       <form name="emailForm" #emailForm="ngForm" class="flex flex-col w-full text-xs text-center">
         @if(!isAuthenticated){
@@ -136,15 +138,22 @@ import {input} from '@angular/core';
       </div>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .gradient-text {
         background: linear-gradient(to right, blue, red, purple);
         -webkit-background-clip: text;
         color: transparent;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        FormsModule,
+        NgClass,
+        NgIf,
+        RouterLink,
+    ],
 })
 export class OrderFormComponent implements OnInit {
   isAuthenticated: any = false;

@@ -2,11 +2,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product, Selected, SelectedProductObject} from '../../../../core/models/product.model';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {input} from '@angular/core';
+import { OrderFormComponent } from './components/order-form/order-form.component';
+import { SizeSelectorComponent } from './components/size-selector/size-selector.component';
+import { DetailHeaderComponent } from './components/detail-header/detail-header.component';
+import { ProductNameComponent } from '../../../../shared/components/product-name/product-name.component';
+import { ProductCategoryComponent } from '../../../../shared/components/product-category/product-category.component';
 
 @Component({
-  selector: 'app-buy-box',
-
-  template: `
+    selector: 'app-buy-box',
+    template: `
     <div
       class="px-4 flex flex-col items-center justify-center place-self-center 768:border-l-2 border-zinc-200 dark:border-zinc-800
       
@@ -33,8 +37,16 @@ import {input} from '@angular/core';
       ></app-order-form>
     </div>
   `,
-  styleUrls: ['./buy-box.component.scss'],
-  styles: [``],
+    styleUrls: ['./buy-box.component.scss'],
+    styles: [``],
+    standalone: true,
+    imports: [
+        ProductCategoryComponent,
+        ProductNameComponent,
+        DetailHeaderComponent,
+        SizeSelectorComponent,
+        OrderFormComponent,
+    ],
 })
 export class BuyBoxComponent {
   constructor(private shoppingCart: ShoppingCartService) {}

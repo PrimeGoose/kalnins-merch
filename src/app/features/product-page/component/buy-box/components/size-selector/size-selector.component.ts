@@ -5,11 +5,11 @@ import {ProductService} from 'src/app/core/services/product.service';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {SharedService} from 'src/app/shared/shared.service';
 import {input} from '@angular/core';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-size-selector',
-
-  template: `
+    selector: 'app-size-selector',
+    template: `
     <div
       id="size-selector"
       class="grid grid-cols-3 place-items-center gap-1 
@@ -60,8 +60,8 @@ import {input} from '@angular/core';
       </ng-container>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       :host {
         width: 100%;
         display: flex;
@@ -69,7 +69,13 @@ import {input} from '@angular/core';
         flex-direction: column;
       }
     `,
-  ],
+    ],
+    standalone: true,
+    imports: [
+        NgFor,
+        NgIf,
+        NgClass,
+    ],
 })
 export class SizeSelectorComponent implements OnInit {
   constructor(

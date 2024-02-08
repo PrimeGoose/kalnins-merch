@@ -14,38 +14,35 @@ import {DescriptionComponent} from './component/description/description.componen
 import {ProductDetailsComponent} from './component/product-details/product-details.component';
 import {EditReviewDirective, ReviewsComponent} from './component/reviews/reviews.component';
 @NgModule({
-  declarations: [
-    EditReviewDirective,
-    CarouselComponent,
-    ProductPageComponent,
-    BuyBoxComponent,
-    DetailHeaderComponent,
-    OrderFormComponent,
-    PreviewImagesComponent,
-    SizeSelectorComponent,
-    DescriptionComponent,
-    ProductDetailsComponent,
-    ReviewsComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    SharedModule, // Import SharedModule here instead of individual components
-  ],
-
-  // Do not re-export components from SharedModule, they are already exported by SharedModule
-  exports: [
-    CarouselComponent,
-    ProductPageComponent,
-    BuyBoxComponent,
-    DetailHeaderComponent,
-    OrderFormComponent,
-    PreviewImagesComponent,
-    SizeSelectorComponent,
-    DescriptionComponent,
-    ProductDetailsComponent,
-    ReviewsComponent,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        SharedModule,
+        EditReviewDirective,
+        CarouselComponent,
+        ProductPageComponent,
+        BuyBoxComponent,
+        DetailHeaderComponent,
+        OrderFormComponent,
+        PreviewImagesComponent,
+        SizeSelectorComponent,
+        DescriptionComponent,
+        ProductDetailsComponent,
+        ReviewsComponent,
+    ],
+    // Do not re-export components from SharedModule, they are already exported by SharedModule
+    exports: [
+        CarouselComponent,
+        ProductPageComponent,
+        BuyBoxComponent,
+        DetailHeaderComponent,
+        OrderFormComponent,
+        PreviewImagesComponent,
+        SizeSelectorComponent,
+        DescriptionComponent,
+        ProductDetailsComponent,
+        ReviewsComponent,
+    ],
 })
 export class ProductPageModule {}

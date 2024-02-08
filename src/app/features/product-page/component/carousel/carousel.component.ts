@@ -1,10 +1,12 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {input} from '@angular/core';
+import { ProductImageComponent } from '../../../../shared/components/product-image/product-image.component';
+import { ChevronRightComponent } from '../../../../shared/components/svg/chevron-right/chevron-right.component';
+import { ChevronLeftComponent } from '../../../../shared/components/svg/chevron-left/chevron-left.component';
 
 @Component({
-  selector: 'app-carousel',
-
-  template: `
+    selector: 'app-carousel',
+    template: `
     <div class="image-section flex flex-col content-center   max-w-[500px] ">
       <!-- pruduct title -->
       <!-- <div id="product-title" class="flex flex-col items-center">
@@ -39,7 +41,13 @@ import {input} from '@angular/core';
       <!-- <app-preview-images [selected]="selected" [onBack]="onBack" [onForward]="onForward"></app-preview-images> -->
     </div>
   `,
-  styleUrls: ['./carousel.component.scss'],
+    styleUrls: ['./carousel.component.scss'],
+    standalone: true,
+    imports: [
+        ChevronLeftComponent,
+        ChevronRightComponent,
+        ProductImageComponent,
+    ],
 })
 export class CarouselComponent {
   selectedProductObject = input<any | undefined>();

@@ -24,7 +24,7 @@
     "yoavbls.pretty-ts-errors",
     "christian-kohler.path-intellisense",
     "pmneo.tsimporter",
-    "eliostruyf.vscode-typescript-exportallmodules",
+    // "eliostruyf.vscode-typescript-exportallmodules",
     "teabyii.ayu",
     "oderwat.indent-rainbow",
     "geriyoco.vscode-image-gallery",

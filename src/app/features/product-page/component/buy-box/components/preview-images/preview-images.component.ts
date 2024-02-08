@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {input} from '@angular/core';
-import { ProductImageComponent } from '../../../../../../shared/components/product-image/product-image.component';
+import {ProductImageComponent} from '../../../../../../shared/components/product-image/product-image.component';
 
 @Component({
-    selector: 'app-preview-images',
-    template: `
+  selector: 'app-preview-images',
+  template: `
     <div class="flex flex-row">
       <app-product-image (click)="back()" [imagePath]="selected().previousImage"></app-product-image>
 
@@ -13,9 +13,9 @@ import { ProductImageComponent } from '../../../../../../shared/components/produ
       <app-product-image (click)="forward()" [imagePath]="selected().nextImage"></app-product-image>
     </div>
   `,
-    styles: [],
-    standalone: true,
-    imports: [ProductImageComponent],
+  styles: [],
+  standalone: true,
+  imports: [ProductImageComponent],
 })
 export class PreviewImagesComponent {
   constructor() {}

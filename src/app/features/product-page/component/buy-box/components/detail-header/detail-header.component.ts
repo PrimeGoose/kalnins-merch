@@ -2,8 +2,8 @@ import {Component, Input} from '@angular/core';
 import {input} from '@angular/core';
 
 @Component({
-    selector: 'app-detail-header',
-    template: `
+  selector: 'app-detail-header',
+  template: `
     <div id="product-tag-grid" class="grid grid-cols-3 gap-1 mt-4  text-lg">
       <div class="text-center w-16  text-sm uppercase">krāsa</div>
       <div class="text-center w-16  text-sm uppercase">Izmērs</div>
@@ -22,8 +22,8 @@ import {input} from '@angular/core';
       </div>
     </div>
   `,
-    styles: [],
-    standalone: true,
+  styles: [],
+  standalone: true,
 })
 export class DetailHeaderComponent {
   // @Input() onBack: any;

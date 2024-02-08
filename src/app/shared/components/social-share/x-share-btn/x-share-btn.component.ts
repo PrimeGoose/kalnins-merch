@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {SocialShareService} from '../social-share.service';
-import { SvgIconXComponent } from '../../svg/svg-icon-x/svg-icon-x.component';
+import {SvgIconXComponent} from '../../svg/svg-icon-x/svg-icon-x.component';
 @Component({
-    selector: 'app-x-share-btn',
-    template: `
+  selector: 'app-x-share-btn',
+  template: `
     <button
       (click)="shareOnTwitter()"
       class="inline-flex items-center px-6 py-3 whitespace-nowrap bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700
@@ -13,9 +13,9 @@ import { SvgIconXComponent } from '../../svg/svg-icon-x/svg-icon-x.component';
       <app-svg-icon-x></app-svg-icon-x>
     </button>
   `,
-    styles: [],
-    standalone: true,
-    imports: [SvgIconXComponent],
+  styles: [],
+  standalone: true,
+  imports: [SvgIconXComponent],
 })
 export class XShareBtnComponent {
   constructor(private socialShareService: SocialShareService) {}

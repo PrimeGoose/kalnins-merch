@@ -7,22 +7,17 @@ import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import { ReviewsComponent } from './component/reviews/reviews.component';
-import { DescriptionComponent } from './component/description/description.component';
-import { BuyBoxComponent } from './component/buy-box/buy-box.component';
-import { CarouselComponent } from './component/carousel/carousel.component';
+import {ReviewsComponent} from './component/reviews/reviews.component';
+import {DescriptionComponent} from './component/description/description.component';
+import {BuyBoxComponent} from './component/buy-box/buy-box.component';
+import {CarouselComponent} from './component/carousel/carousel.component';
 
 @Component({
-    selector: 'app-product-page',
-    templateUrl: './product-page.component.html',
-    styleUrls: ['./product-page.component.scss'],
-    standalone: true,
-    imports: [
-        CarouselComponent,
-        BuyBoxComponent,
-        DescriptionComponent,
-        ReviewsComponent,
-    ],
+  selector: 'app-product-page',
+  templateUrl: './product-page.component.html',
+  styleUrls: ['./product-page.component.scss'],
+  standalone: true,
+  imports: [CarouselComponent, BuyBoxComponent, DescriptionComponent, ReviewsComponent],
 })
 export class ProductPageComponent implements OnInit, AfterViewInit {
   constructor(

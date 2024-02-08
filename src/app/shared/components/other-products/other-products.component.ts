@@ -3,13 +3,13 @@ import {Product} from '../../../core/models/product.model';
 import {ProductService} from '../../../core/services/product.service';
 import {Observable, from} from 'rxjs';
 import {input} from '@angular/core';
-import { ProductImageComponent } from '../product-image/product-image.component';
-import { RouterLink } from '@angular/router';
-import { NgFor, AsyncPipe } from '@angular/common';
+import {ProductImageComponent} from '../product-image/product-image.component';
+import {RouterLink} from '@angular/router';
+import {NgFor, AsyncPipe} from '@angular/common';
 
 @Component({
-    selector: 'app-other-products',
-    template: `
+  selector: 'app-other-products',
+  template: `
     <h1 class="text-3xl font-semibold  mb-4 gradient-text">Citi Produkti</h1>
     <div class="grid grid-cols-1 450:grid-cols-2  768:grid-cols-3  gap-4 ">
       <ng-container *ngFor="let product of otherProducts$ | async">
@@ -23,8 +23,8 @@ import { NgFor, AsyncPipe } from '@angular/common';
       </ng-container>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .gradient-text {
         background: linear-gradient(to right, #0ea5e9, #7f9cf5);
         -webkit-background-clip: text;
@@ -44,14 +44,9 @@ import { NgFor, AsyncPipe } from '@angular/common';
           0 2px 4px -1px rgba(0, 0, 0, 0.06);
       }
     `,
-    ],
-    standalone: true,
-    imports: [
-        NgFor,
-        RouterLink,
-        ProductImageComponent,
-        AsyncPipe,
-    ],
+  ],
+  standalone: true,
+  imports: [NgFor, RouterLink, ProductImageComponent, AsyncPipe],
 })
 export class OtherProductsComponent implements OnInit {
   constructor(private productService: ProductService) {}

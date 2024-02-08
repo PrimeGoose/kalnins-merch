@@ -71,7 +71,7 @@ export class EditReviewDirective implements ControlValueAccessor {
           <div class="user">
             <div class="items-center ">
               <span class="text-yellow-500 mb-2 star-shine " [innerHTML]="getStars(review.rating)"></span>
-              <h3 class=" user-name-o text name-shine tracking-widest font-mono">{{ review.data.discord_name }}</h3>
+              <h3 class="  text name-shine tracking-widest font-mono">{{ review.data.discord_name }}</h3>
             </div>
             <img [src]="review.data.discord_avatar" alt="" class="avatar rounded-full w-24 h-24" />
           </div>

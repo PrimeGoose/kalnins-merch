@@ -13,6 +13,7 @@ import {AngularMaterialModule} from './shared/modules/angular-material.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {LoginComponent} from './features/auth-mamager/components/login/login.component';
 import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {MerchHeaderComponent} from './shared/components/merch-header/merch-header.component';
 
@@ -22,6 +23,7 @@ import {MerchHeaderComponent} from './shared/components/merch-header/merch-heade
   declarations: [AppComponent],
   imports: [
     MerchHeaderComponent,
+    FontAwesomeModule, // Add this line
     BrowserModule,
     LoginComponent,
     LogoutComponent,

@@ -21,7 +21,7 @@ import {CommonModule} from '@angular/common';
    -->
 
     <div
-      class="flex justify-center min-w-[250px]
+      class="flex justify-center gap-1
      "
     >
       <!-- right corner login logout admin -->

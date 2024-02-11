@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule, NgIf} from '@angular/common';
-import {SupabaseService} from '../../../../core/services/supabase.service';
+import {SupabaseService} from '../../../../../core/services/supabase.service';
 
 @Component({
   standalone: true,

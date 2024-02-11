@@ -55,6 +55,13 @@ export class ShoppingCartService {
     }
   }
 
+  public removeAllFromCart(product_id: number, size: string) { 
+    const currentItems: Selected[] = this.itemsInCartSubject.getValue();
+    const updatedItems = currentItems.filter((item) => item.product_id !== product_id || item.size !== size);
+    this.itemsInCartSubject.next(updatedItems);
+    
+  }
+
   public getItems(): BehaviorSubject<Selected[]> {
     return this.itemsInCartSubject;
   }

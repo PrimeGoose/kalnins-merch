@@ -7,10 +7,10 @@ import {RouteStateService} from '../../route-state.service';
 import {SupabaseService} from 'src/app/core/services/supabase.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import {ReviewsComponent} from './component/reviews/reviews.component';
-import {DescriptionComponent} from './component/description/description.component';
-import {BuyBoxComponent} from './component/buy-box/buy-box.component';
-import {CarouselComponent} from './component/carousel/carousel.component';
+import {ReviewsComponent} from './features/reviews/reviews.component';
+import {DescriptionComponent} from './features/description/description.component';
+import {BuyBoxComponent} from './features/buy-box/buy-box.component';
+import {CarouselComponent} from './features/carousel/carousel.component';
 
 @Component({
   selector: 'app-product-page',

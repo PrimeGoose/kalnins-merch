@@ -6,13 +6,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 // Feature modules
-import {HomePageComponent} from './features/home-page/home-page.component';
+import {HomePageComponent} from './pages/home-page/home-page.component';
 // Angular material
 import {AngularMaterialModule} from './shared/modules/angular-material.module';
 // Service worker
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {LoginComponent} from './features/auth-mamager/components/login/login.component';
-import {LogoutComponent} from './features/auth-mamager/components/logout/logout.component';
+import {LoginComponent} from './shared/components/auth-mamager/components/login/login.component';
+import {LogoutComponent} from './shared/components/auth-mamager/components/logout/logout.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {MerchHeaderComponent} from './shared/components/merch-header/merch-header.component';

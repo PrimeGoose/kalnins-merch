@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {ToolbarComponent} from 'src/app/features/toolbar/toolbar.component';
+import {ToolbarComponent} from 'src/app/shared/components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-merch-header',

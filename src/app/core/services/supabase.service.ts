@@ -1,13 +1,21 @@
 import {Injectable} from '@angular/core';
-import {createClient, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
+import {createClient, PostgrestError, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
 import {environment} from '../../../environments/enviroment';
 import {Product} from '../models/product.model';
+
+export function logPostgrestError(message: string, error: PostgrestError): void {
+  console.error(`"${message}"
+      ${error.message ? 'Message: ' + error.message : ''}
+      ${error.hint ? 'Hint: ' + error.hint : ''}
+      ${error.code ? 'Error code: ' + error.code : ''}
+      ${error.details ? 'Details: ' + error.details : ''}
+      `);
+}
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
   public readonly supabase: SupabaseClient = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
-  private readonly PRODUCTS_KEY = 'products';
 
   async getRoyals(): Promise<string[]> {
     const {data, error} = await this.supabase.from('royals').select('name');
@@ -30,59 +38,11 @@ export class SupabaseService {
     return data;
   }
 
-  // async getStoreManagerService() {
-  //   const {data, error} = await this.supabase.from('store_managers').select('*');
-  //   if (error) {
-  //     return [];
-  //   }
-  //   return [...data];
-  // }
-
-  // async getUserService(): Promise<any> {
-  //   const {data, error} = await this.supabase.auth.getUser();
-  //   if (error) {
-  //     return 'no user';
-  //   } else {
-  //     return data.user.id;
-  //   }
-  // }
-
-  // async getIsStoreManager(): Promise<boolean> {
-  //   let isManager = false;
-  //   let usr_id: any = await this.getUserService();
-
-  //   await this.getStoreManagerService().then((data) => {
-  //     data.filter((manager: any) => {
-  //       if (manager.user_id == usr_id) {
-  //         isManager = true;
-  //       }
-  //     });
-  //   });
-  //   return isManager;
-  // }
-
   logOutService() {
     this.supabase.auth.signOut();
   }
   getSessionService() {
     this.supabase.auth.getSession();
-  }
-
-  async getAllProductsService(): Promise<Product[]> {
-    const {data, error} = await this.supabase.from('products').select('*').order<string>('product_id');
-    if (data) {
-      // Update cache
-      localStorage.setItem(this.PRODUCTS_KEY, JSON.stringify(data));
-    }
-
-    if (error) {
-      // Fallback to cached data
-      const cachedProducts = localStorage.getItem(this.PRODUCTS_KEY);
-      if (cachedProducts) return JSON.parse(cachedProducts) as Product[];
-      return [];
-    }
-
-    return data;
   }
 
   async saveProductService(product: Product): Promise<void> {

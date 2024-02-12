@@ -1,43 +1,54 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {SupabaseService, logPostgrestError} from './supabase.service';
 import {Product, Size} from '../models/product.model';
 import {BehaviorSubject, Observable, combineLatest, map} from 'rxjs';
 import {ShoppingCartService} from './shopping-cart.service';
-import {PostgrestError} from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class ProductService implements OnDestroy {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public product$: Observable<Product[]> = this.productsSubject.asObservable();
   public dataLoaded = false;
   private readonly PRODUCTS_KEY = 'products';
-
   public selected_product_count: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private productSubscription: any;
 
   constructor(
     private db: SupabaseService,
     private shoppingCartService: ShoppingCartService,
-  ) {}
+  ) {
+    this.subscribeToProductChanges();
+  }
+
+  private subscribeToProductChanges(): void {
+    this.db.supabase.realtime
+      .channel('products')
+      .on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
+        console.log('Product insert detected:', payload);
+        this.loadProducts(); // Assuming loadProducts refetches the product list
+      })
+      .subscribe();
+  }
 
   public async loadProducts(): Promise<void> {
-    if (!this.dataLoaded) {
+    if (!this.dataLoaded || true) {
+      // Always refetch for real-time updates, consider removing dataLoaded check
       const products = (await this.getAllProductsService()) as Product[];
       this.productsSubject.next(products);
       this.dataLoaded = true;
     }
   }
+
   private async getAllProductsService(): Promise<Product[]> {
     const {data, error} = await this.db.supabase.from(this.PRODUCTS_KEY).select('*').order<string>('product_id');
     if (data) {
-      // Update cache
       localStorage.setItem(this.PRODUCTS_KEY, JSON.stringify(data));
     }
 
     if (error) {
       logPostgrestError('Error getting products: ', error);
-      // Fallback to cached data
       const cachedProducts = localStorage.getItem(this.PRODUCTS_KEY);
       if (cachedProducts) {
         console.info('Returning cached products');
@@ -47,6 +58,12 @@ export class ProductService {
     }
 
     return data;
+  }
+
+  ngOnDestroy(): void {
+    if (this.productSubscription) {
+      // this.db.supabase.removeSubscription(this.productSubscription);
+    }
   }
 
   // public set_selected_product_count(count: number) {

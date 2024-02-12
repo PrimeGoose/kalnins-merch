@@ -6,11 +6,8 @@ import {Product} from '../models/product.model';
   providedIn: 'root',
 })
 export class SupabaseService {
-  public supabase: SupabaseClient;
-
-  constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
-  }
+  public readonly supabase: SupabaseClient = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
+  private readonly PRODUCTS_KEY = 'products';
 
   async getRoyals(): Promise<string[]> {
     const {data, error} = await this.supabase.from('royals').select('name');
@@ -72,15 +69,20 @@ export class SupabaseService {
   }
 
   async getAllProductsService(): Promise<Product[]> {
-    const {data, error} = await this.supabase.from('products').select('*');
+    const {data, error} = await this.supabase.from('products').select('*').order<string>('product_id');
+    if (data) {
+      // Update cache
+      localStorage.setItem(this.PRODUCTS_KEY, JSON.stringify(data));
+    }
 
     if (error) {
-      console.error('Error getting products:', error);
-      return [] as Product[];
+      // Fallback to cached data
+      const cachedProducts = localStorage.getItem(this.PRODUCTS_KEY);
+      if (cachedProducts) return JSON.parse(cachedProducts) as Product[];
+      return [];
     }
-    const sortById = (a: Product, b: Product) => a.product_id - b.product_id;
 
-    return [...data.sort(sortById)] as Product[];
+    return data;
   }
 
   async saveProductService(product: Product): Promise<void> {

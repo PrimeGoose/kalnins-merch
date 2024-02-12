@@ -5,9 +5,9 @@ import {BehaviorSubject} from 'rxjs';
 import {ShoppingCartService} from 'src/app/core/services/shopping-cart.service';
 import {Order} from 'src/app/core/models/product.model';
 import {RouterModule} from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import {faRemove,faDeleteLeft,faTrash} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FormsModule} from '@angular/forms';
+import {faRemove, faDeleteLeft, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-my-orders',
   standalone: true,
@@ -146,10 +146,9 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       savings: '0.00', // Ensure savings is a string formatted as a fixed decimal
     };
   }
- 
+
   ngOnDestroy() {}
   removeItem(item: Order) {
-
     this.cart.removeAllFromCart(item.product_id, item.size);
     this.setSingleItemQuantityToOrdersArray();
   }

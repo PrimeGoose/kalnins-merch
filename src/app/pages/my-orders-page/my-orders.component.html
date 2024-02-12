@@ -43,73 +43,70 @@
             <span>{{ order.size }}</span>
             <span>{{ order.price }}</span>
             <!-- <span>{{ order.quantity  }}</span> -->
-            <div
-            class="flex flex-row justify-center align-middle items-center gap-11"
-            >
-
-              
+            <div class="flex flex-row justify-center align-middle items-center gap-11">
               <div
-              class="text-white  py-2 mt-2 rounded text font-black font-serif w-[200px]  border-gray-700 border flex flex-row justify-around"
+                class="text-white py-2 mt-2 rounded text font-black font-serif w-[200px] border-gray-700 border flex flex-row justify-around"
               >
-              <!-- title -->
-              <!-- <span class="flex">Grozā:</span> -->
-              <!-- remove button -->
-              
-              <button>
-                <button class="remove-item flex" (click)="removeItemFromCart(order)">
+                <!-- title -->
+                <!-- <span class="flex">Grozā:</span> -->
+                <!-- remove button -->
+
+                <button>
+                  <button class="remove-item flex" (click)="removeItemFromCart(order)">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                    </svg>
+                  </button>
+                </button>
+
+                <!-- item count -->
+                <span class="item-count flex px-2">
+                  {{ order.quantity }}
+                </span>
+                <!-- add item -->
+                <button class="add-item flex" (click)="addToCart(order)">
                   <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
                   >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-                </svg>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </button>
+              </div>
+              <button class="text-blue-800" (click)="removeItem(order)">
+                Dzēst
+
+                <fa-icon [icon]="faRemove"></fa-icon>
               </button>
-            </button>
-            
-            <!-- item count -->
-            <span class="item-count flex px-2">
-              {{ order.quantity }}
-            </span>
-            <!-- add item -->
-            <button class="add-item flex" (click)="addToCart(order)">
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-              >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
+            </div>
+          </div>
         </div>
-        <button class="text-blue-800" (click)="removeItem(order)">Dzēst
-        
-        <fa-icon [icon]="faRemove"></fa-icon>
-        </button>
       </div>
     </div>
-    </div>
   </div>
-</div>
-</div>
 
-<div class="flex flex-row justify-between text-base whitespace-nowrap">
-  <div class="text-white text-center py-2 mt-2 rounded font-black font-serif w-fit px-4 border-gray-700">
-    <span>
-      <span> Kopā: {{ totalPrice(orders).total }} € </span>
-    </span>
-  </div>
-  <!-- router link to /success -->
-  <button
-  *ngIf="orders.length"
-  [routerLink]="['/success']"
-  class="text-white text-center py-2 mt-2 rounded font-black font-serif px-4 bg-gradient-to-r from-orange-900 via-orange-500 to-orange-900 border-gray-700"
+  <div class="flex flex-row justify-between text-base whitespace-nowrap">
+    <div class="text-white text-center py-2 mt-2 rounded font-black font-serif w-fit px-4 border-gray-700">
+      <span>
+        <span> Kopā: {{ totalPrice(orders).total }} € </span>
+      </span>
+    </div>
+    <!-- router link to /success -->
+    <button
+      *ngIf="orders.length"
+      [routerLink]="['/success']"
+      class="text-white text-center py-2 mt-2 rounded font-black font-serif px-4 bg-gradient-to-r from-orange-900 via-orange-500 to-orange-900 border-gray-700"
     >
       Apstiprināt Pasūtījumu
     </button>

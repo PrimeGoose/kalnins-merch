@@ -6,8 +6,17 @@
       "name": "app",
       "installMode": "prefetch",
       "resources": {
-        "files": ["/favicon.ico", "/index.html", "/manifest.webmanifest", "/*.css", "/*.js"],
-        "urls": ["https://fonts.googleapis.com/**", "https://fonts.gstatic.com/**"]
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**",
+          "https://fonts.gstatic.com/**"
+        ]
       }
     },
     {
@@ -15,14 +24,20 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": ["/assets/**", "/assets/icons/*", "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
+        "files": [
+          "/assets/**",
+          "/assets/icons/*",
+          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+        ]
       }
     }
   ],
   "dataGroups": [
     {
       "name": "api-performance",
-      "urls": ["/api/**"],
+      "urls": [
+        "/api/**"
+      ],
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 100,

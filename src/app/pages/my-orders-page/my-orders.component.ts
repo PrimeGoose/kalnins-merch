@@ -64,7 +64,10 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         }
         return acc;
       }, [])
-      .sort((a, b) => a.product_id - b.product_id); // Sort the array by product_id after reducing
+      .sort((a, b) => a.product_id - b.product_id) // Sort the array by product_id after reducing
+      // by price
+      .sort((a, b) => a.price - b.price);
+
     this.savings = this.totalPrice(this.orders).savings.toString();
     this.total = this.totalPrice(this.orders).total.toString();
 
@@ -114,12 +117,12 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   //   };
   // }
   totalPrice(orders: Order[]) {
-    let full_name = this._user.value.full_name;
+    let full_name = this._user?.value?.full_name;
     let savings;
     let royal: boolean = false;
     // Check if user's full name is in the royals array
     this.royals.forEach((royalName) => {
-      if (full_name.includes(royalName)) {
+      if (full_name?.includes(royalName)) {
         royal = true;
       }
     });

@@ -23,13 +23,11 @@ export class ProductService implements OnDestroy {
   }
 
   private subscribeToProductChanges(): void {
-    this.db.supabase.realtime
-      .channel('products')
-      .on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
-        console.log('Product insert detected:', payload);
-        this.loadProducts(); // Assuming loadProducts refetches the product list
-      })
-      .subscribe();
+    this.db.supabase.channel('products').on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
+      console.log('Product insert detected:', payload);
+      // this.loadProducts(); // Assuming loadProducts refetches the product list
+    });
+    // .subscribe();
   }
 
   public async loadProducts(): Promise<void> {

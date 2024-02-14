@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {SupabaseService, logPostgrestError} from './supabase.service';
 import {Product, Size} from '../models/product.model';
-import {BehaviorSubject, Observable, combineLatest, map} from 'rxjs';
+import {BehaviorSubject, Observable, combineLatest, map, from} from 'rxjs';
 import {ShoppingCartService} from './shopping-cart.service';
 
 @Injectable({
@@ -23,11 +23,12 @@ export class ProductService implements OnDestroy {
   }
 
   private subscribeToProductChanges(): void {
-    this.db.supabase.channel('products').on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
-      console.log('Product insert detected:', payload);
-      // this.loadProducts(); // Assuming loadProducts refetches the product list
-    });
-    // .subscribe();
+    const products = this.db.supabase
+      .channel('custom-all-channel')
+      .on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
+        console.log('Change received!', payload);
+      })
+      .subscribe();
   }
 
   public async loadProducts(): Promise<void> {

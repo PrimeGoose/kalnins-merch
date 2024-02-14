@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {createClient, PostgrestError, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
 import {environment} from '../../../environments/enviroment';
 import {Product} from '../models/product.model';
@@ -29,10 +29,24 @@ export class SupabaseService {
   }
 
   async authWithDiscord(): Promise<SignInWithOAuthCredentials | any> {
+    let redirectTo = 'https://www.kalninsmerch.com';
+    const redirectDev = 'http://localhost:4200';
+    const redirectProd = 'https://www.kalninsmerch.com';
+
+    if (isDevMode()) {
+      redirectTo = redirectDev;
+    } else {
+      redirectTo = redirectProd;
+    }
     const {data, error} = await this.supabase.auth.signInWithOAuth({
       provider: 'discord',
+      options: {
+        redirectTo: redirectTo,
+      },
     });
+
     if (error) {
+      console.error('Authentication error:', error);
       return error;
     }
     return data;

@@ -22,7 +22,6 @@ import {ProductImageComponent} from '../product-image/product-image.component';
       (click)="onClick()"
     >
       <app-product-image class=" " [imagePath]="product()!.images[0]"></app-product-image>
-      <span>{{ product()?.product_id }}</span>
       <app-product-name [name]="product()!.name"></app-product-name>
       <app-product-price [price]="product()!.sizes[0].price" [currency]="product()!.currency"></app-product-price>
     </div>

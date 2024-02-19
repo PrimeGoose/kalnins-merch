@@ -43,18 +43,28 @@ export class ProductService implements OnDestroy {
         .channel('custom-all-channel')
         .on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
           console.log('Change received!', payload);
-          // replace old Product in this.product$ with now product from payload.new
           const newProduct = payload.new as Product;
-          const products = this.productsSubject.getValue();
+          let products = this.productsSubject.getValue();
+
+          // Handle potential product_id change by checking if the old product exists
+          if (payload.old) {
+            const oldProduct = payload.old as Product;
+            products = products.filter((p) => p.product_id !== oldProduct.product_id);
+          }
+
+          // Add or update the product
           const index = products.findIndex((p) => p.product_id === newProduct.product_id);
           if (index !== -1) {
             products[index] = newProduct;
-            this.productsSubject.next(products);
+          } else {
+            products.push(newProduct); // Add new product if it wasn't found
           }
+
+          // Sort and update the subject
+          const sortedProducts = products.sort((a, b) => a.product_id - b.product_id);
+          this.productsSubject.next(sortedProducts);
         })
         .subscribe();
-
-      //
     }
   }
 

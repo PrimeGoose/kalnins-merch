@@ -1,5 +1,5 @@
 import {Injectable, isDevMode} from '@angular/core';
-import {createClient, PostgrestError, SignInWithOAuthCredentials, SupabaseClient} from '@supabase/supabase-js';
+import {createClient, PostgrestError, SignInWithOAuthCredentials, SupabaseClient, navigatorLock} from '@supabase/supabase-js';
 import {environment} from '../../../environments/enviroment';
 import {Product} from '../models/product.model';
 

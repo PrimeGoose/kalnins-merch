@@ -6,6 +6,7 @@ import {slideInFromRight} from 'src/app/core/animations/slideInFromRight';
 import {Router} from '@angular/router';
 import {ProductCardComponent} from '../../shared/components/product-card/product-card.component';
 import {NgFor, AsyncPipe} from '@angular/common';
+import {SupabaseService} from 'src/app/core/services/supabase.service';
 
 @Component({
   selector: 'app-home-page',
@@ -28,6 +29,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     public productService: ProductService,
     private router: Router,
+    private db: SupabaseService,
   ) {
     this.productService.loadProducts();
     this.products$.subscribe((products) => {

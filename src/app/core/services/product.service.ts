@@ -37,6 +37,24 @@ export class ProductService implements OnDestroy {
       const products = (await this.getAllProductsService()) as Product[];
       this.productsSubject.next(products);
       this.dataLoaded = true;
+
+      // SUBSCRIBE TO ALL EVENTS
+      const product = this.db.supabase
+        .channel('custom-all-channel')
+        .on('postgres_changes', {event: '*', schema: 'public', table: 'products'}, (payload) => {
+          console.log('Change received!', payload);
+          // replace old Product in this.product$ with now product from payload.new
+          const newProduct = payload.new as Product;
+          const products = this.productsSubject.getValue();
+          const index = products.findIndex((p) => p.product_id === newProduct.product_id);
+          if (index !== -1) {
+            products[index] = newProduct;
+            this.productsSubject.next(products);
+          }
+        })
+        .subscribe();
+
+      //
     }
   }
 
